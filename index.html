@@ -2,10 +2,10 @@
 <html data-wf-domain="kanchan-portfolio.github.io" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Kanchan Choudhary — Portfolio</title>
-  <meta content="Portfolio of Kanchan Choudhary — Video Editor &amp; Cinematographer. Featuring KIFF celebrity podcasts, commercial brand videos, BTS, photoshoots (Slide 10 &amp; full collection), and Songti still frames." name="description"/>
-  <meta content="Kanchan Choudhary — Portfolio" property="og:title"/>
-  <meta content="Portfolio of Kanchan Choudhary — Video Editor &amp; Cinematographer. Featuring KIFF celebrity podcasts, commercial brand videos, BTS, photoshoots (Slide 10 &amp; full collection), and Songti still frames." property="og:description"/>
+  <title>Kanchan Choudhary — Portfolio &amp; Full Slide Gallery</title>
+  <meta content="Portfolio of Kanchan Choudhary — Video Editor &amp; Cinematographer. Full slide photo archive (55 frames), Slide 10 Edition, KIFF celebrity podcasts, brand films, and Songti stills." name="description"/>
+  <meta content="Kanchan Choudhary — Portfolio &amp; Full Slide Gallery" property="og:title"/>
+  <meta content="Portfolio of Kanchan Choudhary — Video Editor &amp; Cinematographer. Full slide photo archive (55 frames), Slide 10 Edition, KIFF celebrity podcasts, brand films, and Songti stills." property="og:description"/>
   <meta content="assets/slide_10_1.jpg" property="og:image"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
   
@@ -32,22 +32,175 @@
     .contact-link:hover {
       opacity: 0.6;
     }
+
+    /* Friendly Photo Layout - Zero Cropping */
+    .hero-image-wrapper {
+      background-color: #0b0c10 !important;
+      border: 1px solid rgba(0, 0, 0, 0.15) !important;
+      border-radius: 4px !important;
+      height: 600px !important;
+      max-height: 80vh !important;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      position: relative !important;
+      overflow: hidden !important;
+    }
+
+    .hero-image-wrapper .image.bg-image {
+      position: relative !important;
+      width: 100% !important;
+      height: 100% !important;
+      object-fit: contain !important; /* CRITICAL: Never crop photo */
+      inset: auto !important;
+      display: block !important;
+      transition: opacity 0.2s ease;
+    }
+
+    .hero-photo-indicator {
+      position: absolute;
+      bottom: 12px;
+      right: 12px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      font-size: 11px;
+      padding: 3px 8px;
+      border: 1px solid #444;
+      font-family: 'IBM Plex Mono', monospace;
+      pointer-events: none;
+    }
+
+    /* View Tabs */
+    .view-tabs-header {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      padding-bottom: 14px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      background: none;
+      border: 1px solid #000;
+      padding: 7px 16px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active, .tab-btn:hover {
+      background: #000;
+      color: #fff;
+    }
+
+    /* Full Gallery View */
+    .all-photos-section {
+      display: none;
+      margin-top: 20px;
+    }
+
+    .all-photos-section.active {
+      display: block;
+    }
+
+    .selected-works-section {
+      display: block;
+    }
+
+    .selected-works-section.hidden {
+      display: none;
+    }
+
+    .gallery-filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 22px;
+    }
+
+    .filter-pill {
+      background: #f4f4f4;
+      border: 1px solid #ddd;
+      font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+      padding: 5px 11px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.15s;
+    }
+
+    .filter-pill.active, .filter-pill:hover {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    /* Responsive Masonry (Friendly to Vertical & Horizontal Photos) */
+    .gallery-masonry {
+      columns: 3 240px;
+      column-gap: 16px;
+    }
+
+    .photo-card-item {
+      break-inside: avoid;
+      margin-bottom: 16px;
+      background: #0d0e12;
+      border: 1px solid #222;
+      border-radius: 3px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .photo-card-item:hover {
+      transform: translateY(-3px);
+      border-color: #555;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    }
+
+    .photo-card-item img {
+      width: 100%;
+      height: auto;
+      display: block;
+      object-fit: contain; /* Full photo, never cropped */
+      background: #000;
+    }
+
+    .photo-card-caption {
+      padding: 8px 12px;
+      font-size: 11px;
+      font-family: 'IBM Plex Mono', monospace;
+      color: #bbb;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid #1a1a1a;
+      background: #0f1015;
+    }
+
     .gallery-grid-lightbox {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
       max-height: 75vh;
       overflow-y: auto;
-      padding: 10px;
+      padding: 14px;
     }
+
     .gallery-grid-lightbox img {
       width: 100%;
-      height: 280px;
-      object-fit: cover;
+      height: auto;
+      max-height: 420px;
+      object-fit: contain;
+      background: #111;
       border: 1px solid #333;
       transition: transform 0.2s;
       cursor: zoom-in;
     }
+
     .gallery-grid-lightbox img:hover {
       transform: scale(1.02);
       border-color: #fff;
@@ -72,12 +225,12 @@
         <div class="menu-info" id="menu-info">
           <div class="menu-items-wrapper">
             <div class="menu-items">
-              <a href="#works" class="menu-item w-inline-block">
-                <div class="menu-link"><div class="body-font">All Works</div></div>
+              <a href="#works" class="menu-item w-inline-block" id="nav-link-works">
+                <div class="menu-link"><div class="body-font">Work Table</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
-              <a href="#photoshoots" class="menu-item w-inline-block">
-                <div class="menu-link"><div class="body-font">Photoshoots (Slide 10)</div></div>
+              <a href="#view-all" class="menu-item w-inline-block" id="nav-link-all">
+                <div class="menu-link"><div class="body-font">View All (55 Photos)</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
               <a href="#podcasts" class="menu-item w-inline-block">
@@ -102,20 +255,20 @@
     <div class="w-layout-blockcontainer container grow w-container">
       <div class="hero-content">
         
-        <!-- Left Column: Bio & Core Disciplines from Canva -->
+        <!-- Left Column: Bio & Core Disciplines -->
         <div class="hero-blocks">
           <div class="text-block">
             <div class="label-font opacity">Profile</div>
             <h1 class="body-font block-description">
-              I am Kanchan Choudhary, a Video Editor and Visual Storyteller. My work encompasses celebrity interview podcasts, commercial brand films, photoshoot series (Slide 10 Edition), behind-the-scenes cinematography, and Songti still frames.
+              I am Kanchan Choudhary, a Video Editor and Visual Storyteller. My work encompasses celebrity interview podcasts (KIFF), commercial brand films, photoshoot collections (including Slide 10 Edition), behind-the-scenes cinematography, and Songti still frames.
             </h1>
           </div>
 
           <div class="items-block">
-            <div class="label-font opacity">Projects</div>
+            <div class="label-font opacity">Projects &amp; Archive</div>
             <div class="items">
               <div class="body-font">Podcast shoot (KIFF)</div>
-              <div class="body-font">Photoshoot (Slide 10 &amp; Collection)</div>
+              <div class="body-font">Photoshoot (Slide 10 &amp; 50+ Frames)</div>
               <div class="body-font">Brand Video &amp; BTS</div>
               <div class="body-font">Songti Still Frames</div>
               <div class="body-font">Limited Collection 2030</div>
@@ -135,10 +288,10 @@
           <div class="items-block">
             <div class="label-font opacity">Output</div>
             <div class="items">
-              <div class="body-font">Video Editing (4K)</div>
-              <div class="body-font">Color Grading</div>
-              <div class="body-font">High-Res Photoshoots (50+ Frames)</div>
-              <div class="body-font">Audio Post &amp; Finishing</div>
+              <div class="body-font">Video Editing (4K Broadcast)</div>
+              <div class="body-font">Color Grading &amp; Mastering</div>
+              <div class="body-font">Photoshoots (Uncropped High-Res)</div>
+              <div class="body-font">Audio &amp; Sound Post</div>
             </div>
           </div>
 
@@ -154,410 +307,877 @@
         <!-- Right Column: Visual Preview & Selected Works -->
         <div class="hero-info" id="works">
           
-          <!-- Dynamic Hero Image Preview (Default: Slide 10 Photo) -->
+          <!-- Photo-Friendly Hero Layout (100% Uncropped with Matte Frame) -->
           <div class="hero-image-wrapper">
             <img src="assets/slide_10_1.jpg" id="hero-dynamic-img" loading="eager" width="Auto" height="Auto" alt="Slide 10 Photoshoot - Kanchan Choudhary Portfolio" class="image bg-image"/>
+            <div class="hero-photo-indicator" id="hero-caption-indicator">[Slide 10 &bull; Frame 1 &bull; Full Frame]</div>
           </div>
 
-          <!-- Works Table List -->
+          <!-- Section Switcher Tabs -->
           <div class="hero-sections-wrapper">
-            <div class="selected-works">
-              <h2 class="label-font">[Selected Works &bull; Canva Presentation Slides 1&ndash;22]</h2>
-              <div class="block-items-wrapper">
-                <div class="list-works">
-                  
-                  <!-- Table Header -->
-                  <div class="list-works-header">
-                    <div class="horizontal-wrapper">
-                      <div class="label-font fixed-w opacity">Slide/Date</div>
-                      <div class="label-font grow opacity">Project &bull; Title</div>
+            
+            <div class="view-tabs-header" id="view-all">
+              <button class="tab-btn active" id="tab-btn-table">[Selected Works Table]</button>
+              <button class="tab-btn" id="tab-btn-all">[View All Photos &amp; Slides (55)]</button>
+            </div>
+
+            <!-- View 1: Selected Works Table -->
+            <div class="selected-works-section" id="section-table">
+              <div class="selected-works">
+                <div class="block-items-wrapper">
+                  <div class="list-works">
+                    
+                    <!-- Table Header -->
+                    <div class="list-works-header">
+                      <div class="horizontal-wrapper">
+                        <div class="label-font fixed-w opacity">Slide/Date</div>
+                        <div class="label-font grow opacity">Project &bull; Title</div>
+                      </div>
+                      <div class="horizontal-wrapper">
+                        <div class="label-font grow opacity">Type / Category</div>
+                        <div class="label-font fixed-w right opacity">Items</div>
+                      </div>
                     </div>
-                    <div class="horizontal-wrapper">
-                      <div class="label-font grow opacity">Type / Category</div>
-                      <div class="label-font fixed-w right opacity">Items</div>
-                    </div>
-                  </div>
 
-                  <!-- Table Items List -->
-                  <div class="w-dyn-list">
-                    <div role="list" class="collection-list w-dyn-items">
-                      
-                      <!-- Item 1: Slide 10 Photoshoot -->
-                      <div role="listitem" class="w-dyn-item" id="photoshoots">
-                        <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Slide 10 Edition" data-thumb="assets/slide_10_1.jpg" data-photos='["assets/slide_10_1.jpg","assets/slide_10_2.jpg","assets/slide_10_3.jpg","assets/slide_10_4.jpg"]' class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#10</div>
-                              <div class="background list-work-block-bg"></div>
+                    <!-- Table Items List -->
+                    <div class="w-dyn-list">
+                      <div role="list" class="collection-list w-dyn-items">
+                        
+                        <!-- Slide 10 Photoshoot -->
+                        <div role="listitem" class="w-dyn-item" id="photoshoots">
+                          <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Slide 10 Edition" data-thumb="assets/slide_10_1.jpg" data-photos='["assets/slide_10_1.jpg","assets/slide_10_2.jpg","assets/slide_10_3.jpg","assets/slide_10_4.jpg"]' class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#10</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Photoshoot &bull; Slide 10 Edition</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
                             </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Photoshoot &bull; Slide 10 Edition</h3>
-                              <div class="background list-work-block-bg"></div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Fashion &bull; Portraits</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">4</div>
+                                <div class="body-font">]</div>
+                              </div>
                             </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Fashion &bull; Portraits</div>
-                              <div class="background list-work-block-bg"></div>
+                          </a>
+                        </div>
+
+                        <!-- Anupam Kher KIFF -->
+                        <div role="listitem" class="w-dyn-item" id="podcasts">
+                          <a href="https://youtu.be/Sh0jTGE660o" data-video-id="Sh0jTGE660o" data-title="Anupam Kher Unfiltered | Stories, Struggles &amp; Stardom" data-thumb="assets/yt_anupam_kher.jpg" class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#02</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Anupam Kher Unfiltered</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
                             </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">4</div>
-                              <div class="body-font">]</div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Podcast Shoot (KIFF)</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">4K</div>
+                                <div class="body-font">]</div>
+                              </div>
                             </div>
-                          </div>
-                        </a>
+                          </a>
+                        </div>
+
+                        <!-- Saurabh Shukla KIFF -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="https://youtu.be/ojgap437XT8" data-video-id="ojgap437XT8" data-title="Saurabh Shukla Full Interview | Life Story | Bollywood" data-thumb="assets/yt_saurabh_shukla.jpg" class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#02</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Saurabh Shukla Interview</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Podcast Shoot (KIFF)</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">4K</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Subhash Sehgal KIFF -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="https://youtu.be/AWiazyKn8ak" data-video-id="AWiazyKn8ak" data-title="Subhash Sehgal on Editing Ramayan &amp; Working with Gulzar" data-thumb="assets/yt_subhash_sehgal.jpg" class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#02</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Subhash Sehgal on Editing</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Masterclass Interview</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">4K</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Deepshikha Nagpal KIFF -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="https://youtu.be/hcNVkH6HhVk" data-video-id="hcNVkH6HhVk" data-title="Deepshikha Nagpal on Failed Marriage &amp; Film Industry" data-thumb="assets/yt_deepshikha_nagpal.jpg" class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#02</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Deepshikha Nagpal Interview</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Podcast Shoot (KIFF)</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">4K</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Photoshoot Slide 5 Studio -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Studio Series (Slide 5)" data-thumb="assets/slide_5_1.jpg" data-photos='["assets/slide_5_1.jpg","assets/slide_5_2.jpg","assets/slide_5_3.jpg","assets/slide_5_4.jpg","assets/slide_5_5.jpg","assets/slide_5_6.jpg","assets/slide_5_7.jpg","assets/slide_5_8.jpg","assets/slide_5_9.jpg","assets/slide_5_10.jpg","assets/slide_5_11.jpg","assets/slide_5_12.jpg","assets/slide_5_13.jpg"]' class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#05</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Photoshoot Studio Series</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Photoshoot &bull; Studio</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">13</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Photoshoot Slide 6 & 7 Mood -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Mood &amp; Styling (Slides 6 &amp; 7)" data-thumb="assets/slide_6_1.jpg" data-photos='["assets/slide_6_1.jpg","assets/slide_6_2.jpg","assets/slide_6_3.jpg","assets/slide_6_4.jpg","assets/slide_7_1.jpg","assets/slide_7_2.jpg","assets/slide_7_3.jpg","assets/slide_7_4.jpg","assets/slide_7_5.jpg"]' class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#06-7</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Mood &amp; Styling Series</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Editorial &bull; Creative</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">9</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Photoshoot Slide 8 & 9 Ambient -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Ambient Light (Slides 8 &amp; 9)" data-thumb="assets/slide_8_1.jpg" data-photos='["assets/slide_8_1.jpg","assets/slide_8_2.jpg","assets/slide_8_3.jpg","assets/slide_8_4.jpg","assets/slide_9_1.jpg"]' class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#08-9</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Ambient Light Series</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Natural Light Portraits</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">5</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Photoshoot Slide 11 & 12 Character -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Character Studies (Slides 11 &amp; 12)" data-thumb="assets/slide_11_1.jpg" data-photos='["assets/slide_11_1.jpg","assets/slide_11_2.jpg","assets/slide_11_3.jpg","assets/slide_11_4.jpg","assets/slide_11_5.jpg","assets/slide_12_1.jpg","assets/slide_12_2.jpg","assets/slide_12_3.jpg","assets/slide_12_4.jpg","assets/slide_12_5.jpg"]' class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#11-12</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Character Studies Series</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Fashion Styling</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">10</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Photoshoot Slide 13 & 14 Monochromes -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Monochromes (Slides 13 &amp; 14)" data-thumb="assets/slide_13_1.jpg" data-photos='["assets/slide_13_1.jpg","assets/slide_13_2.jpg","assets/slide_13_3.jpg","assets/slide_13_4.jpg","assets/slide_13_5.jpg","assets/slide_14_1.jpg","assets/slide_14_2.jpg","assets/slide_14_3.jpg"]' class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#13-14</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Monochromes &amp; Tone</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Monochrome Photography</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">8</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Limited Collection 2030 (Slide 15) -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="#works" data-type="gallery" data-title="Limited Collection 2030 (Slide 15)" data-thumb="assets/slide_15_1.jpg" data-photos='["assets/slide_15_1.jpg"]' class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#15</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Limited Collection 2030</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Editorial Collection</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">1</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Brand Video & BTS (Slide 3 & 4) -->
+                        <div role="listitem" class="w-dyn-item">
+                          <a href="#works" data-type="gallery" data-title="Brand Video &amp; BTS Productions (Slides 3 &amp; 4)" data-thumb="assets/slide_1_1.jpg" data-photos='["assets/slide_1_1.jpg"]' class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#03-4</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Brand Video &amp; BTS</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Commercial &amp; BTS</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">Film</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
+                        <!-- Songti Still Frames (Slide 21) -->
+                        <div role="listitem" class="w-dyn-item" id="stills">
+                          <a href="#works" data-type="gallery" data-title="Songti Still Frames (Slide 21)" data-thumb="assets/slide_7_1.jpg" data-photos='["assets/slide_7_1.jpg","assets/slide_7_2.jpg","assets/slide_7_3.jpg","assets/slide_7_4.jpg","assets/slide_7_5.jpg"]' class="list-work-block w-inline-block">
+                            <div class="horizontal-wrapper">
+                              <div class="date-wrapper">
+                                <div class="body-font">#21</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="name-wrapper">
+                                <h3 class="body-font grow">Songti Still Frames</h3>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                            </div>
+                            <div class="horizontal-wrapper">
+                              <div class="category-wrapper">
+                                <div class="body-font grow">Cinematic Stills</div>
+                                <div class="background list-work-block-bg"></div>
+                              </div>
+                              <div class="amount-images-wrapper">
+                                <div class="body-font">[</div>
+                                <div class="background list-work-block-bg"></div>
+                                <div class="body-font">5</div>
+                                <div class="body-font">]</div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+
                       </div>
-
-                      <!-- Item 2: Anupam Kher KIFF -->
-                      <div role="listitem" class="w-dyn-item" id="podcasts">
-                        <a href="https://youtu.be/Sh0jTGE660o" data-video-id="Sh0jTGE660o" data-title="Anupam Kher Unfiltered | Stories, Struggles &amp; Stardom" data-thumb="assets/yt_anupam_kher.jpg" class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#02</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Anupam Kher Unfiltered</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Podcast Shoot (KIFF)</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">4K</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 3: Saurabh Shukla KIFF -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="https://youtu.be/ojgap437XT8" data-video-id="ojgap437XT8" data-title="Saurabh Shukla Full Interview | Life Story | Bollywood" data-thumb="assets/yt_saurabh_shukla.jpg" class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#02</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Saurabh Shukla Interview</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Podcast Shoot (KIFF)</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">4K</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 4: Subhash Sehgal KIFF -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="https://youtu.be/AWiazyKn8ak" data-video-id="AWiazyKn8ak" data-title="Subhash Sehgal on Editing Ramayan &amp; Working with Gulzar" data-thumb="assets/yt_subhash_sehgal.jpg" class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#02</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Subhash Sehgal on Editing</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Masterclass Interview</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">4K</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 5: Deepshikha Nagpal KIFF -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="https://youtu.be/hcNVkH6HhVk" data-video-id="hcNVkH6HhVk" data-title="Deepshikha Nagpal on Failed Marriage &amp; Film Industry" data-thumb="assets/yt_deepshikha_nagpal.jpg" class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#02</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Deepshikha Nagpal Interview</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Podcast Shoot (KIFF)</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">4K</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 6: Photoshoot Slide 5 Studio -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Studio Series (Slide 5)" data-thumb="assets/slide_5_1.jpg" data-photos='["assets/slide_5_1.jpg","assets/slide_5_2.jpg","assets/slide_5_3.jpg","assets/slide_5_4.jpg","assets/slide_5_5.jpg","assets/slide_5_6.jpg","assets/slide_5_7.jpg","assets/slide_5_8.jpg","assets/slide_5_9.jpg","assets/slide_5_10.jpg","assets/slide_5_11.jpg","assets/slide_5_12.jpg","assets/slide_5_13.jpg"]' class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#05</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Photoshoot Studio Series</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Photoshoot &bull; Studio</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">13</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 7: Photoshoot Slide 6 & 7 Mood -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Mood &amp; Styling (Slides 6 &amp; 7)" data-thumb="assets/slide_6_1.jpg" data-photos='["assets/slide_6_1.jpg","assets/slide_6_2.jpg","assets/slide_6_3.jpg","assets/slide_6_4.jpg","assets/slide_7_1.jpg","assets/slide_7_2.jpg","assets/slide_7_3.jpg","assets/slide_7_4.jpg","assets/slide_7_5.jpg"]' class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#06-7</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Mood &amp; Styling Series</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Editorial &bull; Creative</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">9</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 8: Photoshoot Slide 8 & 9 Ambient -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Ambient Light (Slides 8 &amp; 9)" data-thumb="assets/slide_8_1.jpg" data-photos='["assets/slide_8_1.jpg","assets/slide_8_2.jpg","assets/slide_8_3.jpg","assets/slide_8_4.jpg","assets/slide_9_1.jpg"]' class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#08-9</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Ambient Light Series</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Natural Light Portraits</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">5</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 9: Photoshoot Slide 11 & 12 Character -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Character Studies (Slides 11 &amp; 12)" data-thumb="assets/slide_11_1.jpg" data-photos='["assets/slide_11_1.jpg","assets/slide_11_2.jpg","assets/slide_11_3.jpg","assets/slide_11_4.jpg","assets/slide_11_5.jpg","assets/slide_12_1.jpg","assets/slide_12_2.jpg","assets/slide_12_3.jpg","assets/slide_12_4.jpg","assets/slide_12_5.jpg"]' class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#11-12</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Character Studies Series</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Fashion Styling</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">10</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 10: Photoshoot Slide 13 & 14 Monochromes -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="#works" data-type="gallery" data-title="Photoshoot &bull; Monochromes (Slides 13 &amp; 14)" data-thumb="assets/slide_13_1.jpg" data-photos='["assets/slide_13_1.jpg","assets/slide_13_2.jpg","assets/slide_13_3.jpg","assets/slide_13_4.jpg","assets/slide_13_5.jpg","assets/slide_14_1.jpg","assets/slide_14_2.jpg","assets/slide_14_3.jpg"]' class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#13-14</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Monochromes &amp; Tone</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Monochrome Photography</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">8</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 11: Limited Collection 2030 (Slide 15) -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="#works" data-type="gallery" data-title="Limited Collection 2030 (Slide 15)" data-thumb="assets/slide_15_1.jpg" data-photos='["assets/slide_15_1.jpg"]' class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#15</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Limited Collection 2030</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Editorial Collection</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">1</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 12: Brand Video & BTS (Slide 3 & 4) -->
-                      <div role="listitem" class="w-dyn-item">
-                        <a href="#works" data-type="gallery" data-title="Brand Video &amp; BTS Productions (Slides 3 &amp; 4)" data-thumb="assets/slide_1_1.jpg" data-photos='["assets/slide_1_1.jpg"]' class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#03-4</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Brand Video &amp; BTS</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Commercial &amp; BTS</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">Film</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
-                      <!-- Item 13: Songti Still Frames (Slide 21) -->
-                      <div role="listitem" class="w-dyn-item" id="stills">
-                        <a href="#works" data-type="gallery" data-title="Songti Still Frames (Slide 21)" data-thumb="assets/slide_7_1.jpg" data-photos='["assets/slide_7_1.jpg","assets/slide_7_2.jpg","assets/slide_7_3.jpg","assets/slide_7_4.jpg","assets/slide_7_5.jpg"]' class="list-work-block w-inline-block">
-                          <div class="horizontal-wrapper">
-                            <div class="date-wrapper">
-                              <div class="body-font">#21</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="name-wrapper">
-                              <h3 class="body-font grow">Songti Still Frames</h3>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                          </div>
-                          <div class="horizontal-wrapper">
-                            <div class="category-wrapper">
-                              <div class="body-font grow">Cinematic Stills</div>
-                              <div class="background list-work-block-bg"></div>
-                            </div>
-                            <div class="amount-images-wrapper">
-                              <div class="body-font">[</div>
-                              <div class="background list-work-block-bg"></div>
-                              <div class="body-font">5</div>
-                              <div class="body-font">]</div>
-                            </div>
-                          </div>
-                        </a>
-                      </div>
-
                     </div>
                   </div>
                 </div>
-
-                <div class="button-wrapper">
-                  <a href="mailto:kanchanc0410@gmail.com" class="button w-inline-block">
-                    <div class="body-font">Let's Collab &rarr; kanchanc0410@gmail.com</div>
-                    <div class="button-line"></div>
-                  </a>
-                </div>
-
               </div>
+            </div>
+
+            <!-- View 2: Dedicated Full Photo Archive Exhibition (All 55 Photos) -->
+            <div class="all-photos-section" id="section-all-photos">
+              <div class="gallery-filter-bar">
+                <button class="filter-pill active" data-cat-filter="all">All Photos (55)</button>
+                <button class="filter-pill" data-cat-filter="slide-10-special">Slide 10 Special (4)</button>
+                <button class="filter-pill" data-cat-filter="slide-5-studio">Slide 5 Studio (13)</button>
+                <button class="filter-pill" data-cat-filter="slides-6-7-mood">Slides 6-7 Mood (9)</button>
+                <button class="filter-pill" data-cat-filter="slides-8-9-ambient">Slides 8-9 Ambient (5)</button>
+                <button class="filter-pill" data-cat-filter="slides-11-12-character">Slides 11-12 Character (10)</button>
+                <button class="filter-pill" data-cat-filter="slides-13-14-monochromes">Slides 13-14 Monochromes (8)</button>
+                <button class="filter-pill" data-cat-filter="slide-15-collection">Slide 15 (1)</button>
+                <button class="filter-pill" data-cat-filter="kiff-podcasts">KIFF Podcasts (4)</button>
+              </div>
+
+              <div class="gallery-masonry" id="masonry-container">
+                
+    <div class="photo-card-item" data-cat="slide-10-special" data-src="assets/slide_10_1.jpg" data-title="Fashion & Portraits (Slide 10)">
+      <img src="assets/slide_10_1.jpg" alt="Fashion & Portraits (Slide 10)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Fashion & Portraits (Slide 10)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-10-special" data-src="assets/slide_10_2.jpg" data-title="Fashion & Portraits (Slide 10)">
+      <img src="assets/slide_10_2.jpg" alt="Fashion & Portraits (Slide 10)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Fashion & Portraits (Slide 10)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-10-special" data-src="assets/slide_10_3.jpg" data-title="Fashion & Portraits (Slide 10)">
+      <img src="assets/slide_10_3.jpg" alt="Fashion & Portraits (Slide 10)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Fashion & Portraits (Slide 10)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-10-special" data-src="assets/slide_10_4.jpg" data-title="Fashion & Portraits (Slide 10)">
+      <img src="assets/slide_10_4.jpg" alt="Fashion & Portraits (Slide 10)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Fashion & Portraits (Slide 10)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_11_1.jpg" data-title="Character Studies (Slide 11)">
+      <img src="assets/slide_11_1.jpg" alt="Character Studies (Slide 11)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 11)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_11_2.jpg" data-title="Character Studies (Slide 11)">
+      <img src="assets/slide_11_2.jpg" alt="Character Studies (Slide 11)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 11)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_11_3.jpg" data-title="Character Studies (Slide 11)">
+      <img src="assets/slide_11_3.jpg" alt="Character Studies (Slide 11)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 11)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_11_4.jpg" data-title="Character Studies (Slide 11)">
+      <img src="assets/slide_11_4.jpg" alt="Character Studies (Slide 11)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 11)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_11_5.jpg" data-title="Character Studies (Slide 11)">
+      <img src="assets/slide_11_5.jpg" alt="Character Studies (Slide 11)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 11)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_12_1.jpg" data-title="Character Studies (Slide 12)">
+      <img src="assets/slide_12_1.jpg" alt="Character Studies (Slide 12)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 12)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_12_2.jpg" data-title="Character Studies (Slide 12)">
+      <img src="assets/slide_12_2.jpg" alt="Character Studies (Slide 12)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 12)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_12_3.jpg" data-title="Character Studies (Slide 12)">
+      <img src="assets/slide_12_3.jpg" alt="Character Studies (Slide 12)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 12)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_12_4.jpg" data-title="Character Studies (Slide 12)">
+      <img src="assets/slide_12_4.jpg" alt="Character Studies (Slide 12)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 12)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-11-12-character" data-src="assets/slide_12_5.jpg" data-title="Character Studies (Slide 12)">
+      <img src="assets/slide_12_5.jpg" alt="Character Studies (Slide 12)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Character Studies (Slide 12)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-13-14-monochromes" data-src="assets/slide_13_1.jpg" data-title="Monochromes & Tone (Slide 13)">
+      <img src="assets/slide_13_1.jpg" alt="Monochromes & Tone (Slide 13)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Monochromes & Tone (Slide 13)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-13-14-monochromes" data-src="assets/slide_13_2.jpg" data-title="Monochromes & Tone (Slide 13)">
+      <img src="assets/slide_13_2.jpg" alt="Monochromes & Tone (Slide 13)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Monochromes & Tone (Slide 13)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-13-14-monochromes" data-src="assets/slide_13_3.jpg" data-title="Monochromes & Tone (Slide 13)">
+      <img src="assets/slide_13_3.jpg" alt="Monochromes & Tone (Slide 13)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Monochromes & Tone (Slide 13)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-13-14-monochromes" data-src="assets/slide_13_4.jpg" data-title="Monochromes & Tone (Slide 13)">
+      <img src="assets/slide_13_4.jpg" alt="Monochromes & Tone (Slide 13)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Monochromes & Tone (Slide 13)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-13-14-monochromes" data-src="assets/slide_13_5.jpg" data-title="Monochromes & Tone (Slide 13)">
+      <img src="assets/slide_13_5.jpg" alt="Monochromes & Tone (Slide 13)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Monochromes & Tone (Slide 13)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-13-14-monochromes" data-src="assets/slide_14_1.jpg" data-title="Monochromes & Tone (Slide 14)">
+      <img src="assets/slide_14_1.jpg" alt="Monochromes & Tone (Slide 14)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Monochromes & Tone (Slide 14)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-13-14-monochromes" data-src="assets/slide_14_2.jpg" data-title="Monochromes & Tone (Slide 14)">
+      <img src="assets/slide_14_2.jpg" alt="Monochromes & Tone (Slide 14)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Monochromes & Tone (Slide 14)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-13-14-monochromes" data-src="assets/slide_14_3.jpg" data-title="Monochromes & Tone (Slide 14)">
+      <img src="assets/slide_14_3.jpg" alt="Monochromes & Tone (Slide 14)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Monochromes & Tone (Slide 14)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-15-collection" data-src="assets/slide_15_1.jpg" data-title="Limited Collection 2030 (Slide 15)">
+      <img src="assets/slide_15_1.jpg" alt="Limited Collection 2030 (Slide 15)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Limited Collection 2030 (Slide 15)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-1-cover" data-src="assets/slide_1_1.jpg" data-title="Portfolio Cover (Slide 1)">
+      <img src="assets/slide_1_1.jpg" alt="Portfolio Cover (Slide 1)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Portfolio Cover (Slide 1)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_1.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_1.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_10.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_10.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_11.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_11.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_12.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_12.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_13.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_13.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_2.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_2.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_3.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_3.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_4.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_4.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_5.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_5.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_6.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_6.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_7.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_7.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_8.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_8.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slide-5-studio" data-src="assets/slide_5_9.jpg" data-title="Studio Series (Slide 5)">
+      <img src="assets/slide_5_9.jpg" alt="Studio Series (Slide 5)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Studio Series (Slide 5)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-6-7-mood" data-src="assets/slide_6_1.jpg" data-title="Mood & Styling Series (Slide 6)">
+      <img src="assets/slide_6_1.jpg" alt="Mood & Styling Series (Slide 6)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Mood & Styling Series (Slide 6)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-6-7-mood" data-src="assets/slide_6_2.jpg" data-title="Mood & Styling Series (Slide 6)">
+      <img src="assets/slide_6_2.jpg" alt="Mood & Styling Series (Slide 6)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Mood & Styling Series (Slide 6)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-6-7-mood" data-src="assets/slide_6_3.jpg" data-title="Mood & Styling Series (Slide 6)">
+      <img src="assets/slide_6_3.jpg" alt="Mood & Styling Series (Slide 6)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Mood & Styling Series (Slide 6)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-6-7-mood" data-src="assets/slide_6_4.jpg" data-title="Mood & Styling Series (Slide 6)">
+      <img src="assets/slide_6_4.jpg" alt="Mood & Styling Series (Slide 6)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Mood & Styling Series (Slide 6)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-6-7-mood" data-src="assets/slide_7_1.jpg" data-title="Mood & Styling Series (Slide 7)">
+      <img src="assets/slide_7_1.jpg" alt="Mood & Styling Series (Slide 7)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Mood & Styling Series (Slide 7)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-6-7-mood" data-src="assets/slide_7_2.jpg" data-title="Mood & Styling Series (Slide 7)">
+      <img src="assets/slide_7_2.jpg" alt="Mood & Styling Series (Slide 7)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Mood & Styling Series (Slide 7)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-6-7-mood" data-src="assets/slide_7_3.jpg" data-title="Mood & Styling Series (Slide 7)">
+      <img src="assets/slide_7_3.jpg" alt="Mood & Styling Series (Slide 7)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Mood & Styling Series (Slide 7)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-6-7-mood" data-src="assets/slide_7_4.jpg" data-title="Mood & Styling Series (Slide 7)">
+      <img src="assets/slide_7_4.jpg" alt="Mood & Styling Series (Slide 7)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Mood & Styling Series (Slide 7)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-6-7-mood" data-src="assets/slide_7_5.jpg" data-title="Mood & Styling Series (Slide 7)">
+      <img src="assets/slide_7_5.jpg" alt="Mood & Styling Series (Slide 7)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Mood & Styling Series (Slide 7)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-8-9-ambient" data-src="assets/slide_8_1.jpg" data-title="Ambient Light Series (Slide 8)">
+      <img src="assets/slide_8_1.jpg" alt="Ambient Light Series (Slide 8)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Ambient Light Series (Slide 8)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-8-9-ambient" data-src="assets/slide_8_2.jpg" data-title="Ambient Light Series (Slide 8)">
+      <img src="assets/slide_8_2.jpg" alt="Ambient Light Series (Slide 8)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Ambient Light Series (Slide 8)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-8-9-ambient" data-src="assets/slide_8_3.jpg" data-title="Ambient Light Series (Slide 8)">
+      <img src="assets/slide_8_3.jpg" alt="Ambient Light Series (Slide 8)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Ambient Light Series (Slide 8)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-8-9-ambient" data-src="assets/slide_8_4.jpg" data-title="Ambient Light Series (Slide 8)">
+      <img src="assets/slide_8_4.jpg" alt="Ambient Light Series (Slide 8)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Ambient Light Series (Slide 8)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="slides-8-9-ambient" data-src="assets/slide_9_1.jpg" data-title="Ambient Light Series (Slide 9)">
+      <img src="assets/slide_9_1.jpg" alt="Ambient Light Series (Slide 9)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Ambient Light Series (Slide 9)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="kiff-podcasts" data-src="assets/yt_anupam_kher.jpg" data-title="Anupam Kher Unfiltered (KIFF)">
+      <img src="assets/yt_anupam_kher.jpg" alt="Anupam Kher Unfiltered (KIFF)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Anupam Kher Unfiltered (KIFF)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="kiff-podcasts" data-src="assets/yt_deepshikha_nagpal.jpg" data-title="Deepshikha Nagpal Unfiltered (KIFF)">
+      <img src="assets/yt_deepshikha_nagpal.jpg" alt="Deepshikha Nagpal Unfiltered (KIFF)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Deepshikha Nagpal Unfiltered (KIFF)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="kiff-podcasts" data-src="assets/yt_saurabh_shukla.jpg" data-title="Saurabh Shukla Interview (KIFF)">
+      <img src="assets/yt_saurabh_shukla.jpg" alt="Saurabh Shukla Interview (KIFF)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Saurabh Shukla Interview (KIFF)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+    <div class="photo-card-item" data-cat="kiff-podcasts" data-src="assets/yt_subhash_sehgal.jpg" data-title="Subhash Sehgal on Editing (KIFF)">
+      <img src="assets/yt_subhash_sehgal.jpg" alt="Subhash Sehgal on Editing (KIFF)" loading="lazy">
+      <div class="photo-card-caption">
+        <span>Subhash Sehgal on Editing (KIFF)</span>
+        <span>&plus;</span>
+      </div>
+    </div>
+    
+              </div>
+            </div>
+
+            <div class="button-wrapper" style="margin-top: 30px;">
+              <a href="mailto:kanchanc0410@gmail.com" class="button w-inline-block">
+                <div class="body-font">Let's Collab &rarr; kanchanc0410@gmail.com | +91 7977667004</div>
+                <div class="button-line"></div>
+              </a>
             </div>
 
             <!-- Footer -->
@@ -591,7 +1211,7 @@
   </section>
 
   <!-- Video & Multi-Photo Lightbox Modal Player -->
-  <div id="video-lightbox" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.94); z-index:99999; align-items:center; justify-content:center; padding:1.5rem;">
+  <div id="video-lightbox" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.95); z-index:99999; align-items:center; justify-content:center; padding:1.5rem;">
     <div style="position:relative; width:100%; max-width:1050px; background:#000; border:1px solid #333; max-height:92vh; display:flex; flex-direction:column;">
       <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 18px; border-bottom:1px solid #222;">
         <span id="lightbox-caption" style="color:#eee; font-size:13px; font-family:'IBM Plex Mono', monospace;">[Project Title]</span>
