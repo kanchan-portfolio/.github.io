@@ -33,28 +33,40 @@
       opacity: 0.6;
     }
 
-    /* Friendly Photo Layout - Zero Cropping */
+    /* Friendly Photo Layout - Zero Cropping Across All Screens */
     .hero-image-wrapper {
-      background-color: #0b0c10 !important;
-      border: 1px solid rgba(0, 0, 0, 0.15) !important;
-      border-radius: 4px !important;
-      height: 600px !important;
-      max-height: 80vh !important;
+      background-color: #0c0d12 !important;
+      border: 1px solid rgba(0, 0, 0, 0.18) !important;
+      border-radius: 3px !important;
+      width: 100% !important;
+      min-height: 460px !important;
+      max-height: 72vh !important;
+      aspect-ratio: 4 / 3 !important;
       display: flex !important;
       align-items: center !important;
       justify-content: center !important;
       position: relative !important;
       overflow: hidden !important;
+      padding: 16px !important;
+      box-sizing: border-box !important;
     }
 
     .hero-image-wrapper .image.bg-image {
       position: relative !important;
-      width: 100% !important;
-      height: 100% !important;
-      object-fit: contain !important; /* CRITICAL: Never crop photo */
+      max-width: 100% !important;
+      max-height: 100% !important;
+      width: auto !important;
+      height: auto !important;
+      object-fit: contain !important; /* CRITICAL: Never crop any part of any photo */
       inset: auto !important;
+      top: auto !important;
+      bottom: auto !important;
+      left: auto !important;
+      right: auto !important;
       display: block !important;
-      transition: opacity 0.2s ease;
+      margin: auto !important;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.55));
     }
 
     .hero-photo-indicator {
@@ -225,19 +237,23 @@
         <div class="menu-info" id="menu-info">
           <div class="menu-items-wrapper">
             <div class="menu-items">
-              <a href="#works" class="menu-item w-inline-block" id="nav-link-works">
-                <div class="menu-link"><div class="body-font">Work Table</div></div>
+              <a href="index.html" class="menu-item w-inline-block">
+                <div class="menu-link"><div class="body-font">Home</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
-              <a href="#view-all" class="menu-item w-inline-block" id="nav-link-all">
-                <div class="menu-link"><div class="body-font">View All (55 Photos)</div></div>
+              <a href="work.html" class="menu-item w-inline-block" id="nav-link-works">
+                <div class="menu-link"><div class="body-font">Work</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
-              <a href="#podcasts" class="menu-item w-inline-block">
+              <a href="work.html" class="menu-item w-inline-block" id="nav-link-all">
+                <div class="menu-link"><div class="body-font">View all (60 Photos)</div></div>
+                <div class="menu-separator"><div class="body-font">,</div></div>
+              </a>
+              <a href="work.html#cat-kiff" class="menu-item w-inline-block">
                 <div class="menu-link"><div class="body-font">KIFF Podcasts</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
-              <a href="#stills" class="menu-item w-inline-block">
+              <a href="work.html#cat-slide-21" class="menu-item w-inline-block">
                 <div class="menu-link"><div class="body-font">Songti Stills</div></div>
               </a>
             </div>
@@ -318,7 +334,7 @@
             
             <div class="view-tabs-header" id="view-all">
               <button class="tab-btn active" id="tab-btn-table">[Selected Works Table]</button>
-              <button class="tab-btn" id="tab-btn-all">[View All Photos &amp; Slides (55)]</button>
+              <a href="work.html" class="tab-btn" id="tab-btn-all" style="text-decoration:none; color:inherit;">[View all &rarr; All Photos &amp; Slides (New Page)]</a>
             </div>
 
             <!-- View 1: Selected Works Table -->
@@ -712,6 +728,14 @@
                   </div>
                 </div>
               </div>
+            </div>
+
+            <!-- Exact Felix Kern "View all" Button (Matches Uploaded Screenshot) -->
+            <div class="button-wrapper" style="margin-top: 28px; margin-bottom: 24px;">
+              <a href="work.html" class="button w-inline-block">
+                <div class="body-font">View all</div>
+                <div class="button-line"></div>
+              </a>
             </div>
 
             <!-- View 2: Dedicated Full Photo Archive Exhibition (All 55 Photos) -->

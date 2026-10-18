@@ -82,16 +82,18 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (tabBtnTable) tabBtnTable.addEventListener('click', showTableTab);
-  if (tabBtnAll) tabBtnAll.addEventListener('click', showAllPhotosTab);
+  if (tabBtnAll && tabBtnAll.tagName === 'BUTTON') tabBtnAll.addEventListener('click', showAllPhotosTab);
 
-  if (navLinkAll) {
+  if (navLinkAll && navLinkAll.getAttribute('href')?.startsWith('#')) {
     navLinkAll.addEventListener('click', (e) => {
+      e.preventDefault();
       showAllPhotosTab();
     });
   }
 
-  if (navLinkWorks) {
+  if (navLinkWorks && navLinkWorks.getAttribute('href')?.startsWith('#')) {
     navLinkWorks.addEventListener('click', (e) => {
+      e.preventDefault();
       showTableTab();
     });
   }

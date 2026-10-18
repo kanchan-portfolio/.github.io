@@ -1,0 +1,1525 @@
+<!DOCTYPE html>
+<html data-wf-domain="kanchan-portfolio.github.io" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <title>Kanchan Choudhary — Work &amp; Full Slide Exhibition (All Photos)</title>
+  <meta content="All works and categorized slide exhibition of Kanchan Choudhary. Uncropped high-resolution frames from Slide 10 Edition, Studio Series, Monochromes, Songti stills, and KIFF podcasts." name="description"/>
+  <meta content="Kanchan Choudhary — Work &amp; Full Slide Exhibition" property="og:title"/>
+  <meta content="All works and categorized slide exhibition of Kanchan Choudhary. Uncropped high-resolution frames from Slide 10 Edition, Studio Series, Monochromes, Songti stills, and KIFF podcasts." property="og:description"/>
+  <meta content="assets/slide_10_1.jpg" property="og:image"/>
+  <meta content="width=device-width, initial-scale=1" name="viewport"/>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <!-- Stylesheets -->
+  <link href="https://cdn.prod.website-files.com/6ab6692b52b5a2110575e141/css/felix-kern.webflow.shared.67c341a1a.css" rel="stylesheet" type="text/css"/>
+  <link href="css/felix-kern.css" rel="stylesheet" type="text/css"/>
+
+  <style>
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-font-smoothing: antialiased;
+      font-family: 'IBM Plex Mono', monospace !important;
+      background-color: #f7f7f8;
+      color: #000;
+    }
+
+    .contact-link {
+      color: inherit;
+      text-decoration: underline;
+      transition: opacity 0.2s;
+    }
+    .contact-link:hover {
+      opacity: 0.6;
+    }
+
+    /* Sticky Category Jump Bar */
+    .work-sticky-bar {
+      position: sticky;
+      top: 0;
+      background: rgba(247, 247, 248, 0.96);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 90;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+      padding: 12px 0;
+      margin-bottom: 28px;
+    }
+
+    .category-pills-scroll {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 2px 4px;
+    }
+    .category-pills-scroll::-webkit-scrollbar {
+      display: none;
+    }
+
+    .cat-pill {
+      display: inline-block;
+      padding: 7px 14px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #111;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: all 0.15s ease;
+      cursor: pointer;
+    }
+    .cat-pill:hover, .cat-pill.active {
+      background: #000;
+      color: #fff;
+      border-color: #000;
+    }
+
+    /* Category Section Header */
+    .category-section-block {
+      margin-bottom: 56px;
+      scroll-margin-top: 80px;
+    }
+
+    .category-section-header {
+      margin-bottom: 22px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+    }
+
+    .cat-meta-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .cat-title-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .cat-code-badge {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #666;
+    }
+
+    .cat-heading {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 17px;
+      font-weight: 500;
+      margin: 0;
+      color: #000;
+    }
+
+    .cat-count-pill {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #555;
+      border: 1px solid #bbb;
+      background: #fff;
+      padding: 2px 8px;
+      border-radius: 2px;
+    }
+
+    .cat-description-text {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: #555;
+      line-height: 1.5;
+      margin-top: 4px;
+    }
+
+    /* Grid collection layout */
+    .grid-work-collection-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 28px 20px;
+    }
+
+    @media screen and (max-width: 600px) {
+      .grid-work-collection-list {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Friendly Photo Card - NEVER CROPPED */
+    .photo-card-wrapper {
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .photo-friendly-container {
+      background-color: #0c0d12;
+      border: 1px solid rgba(0, 0, 0, 0.14);
+      border-radius: 3px;
+      aspect-ratio: 3 / 4;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      padding: 10px;
+      position: relative;
+      box-sizing: border-box;
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .photo-card-wrapper:hover .photo-friendly-container {
+      border-color: rgba(0, 0, 0, 0.5);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    }
+
+    .photo-friendly-container img {
+      max-width: 100%;
+      max-height: 100%;
+      width: auto;
+      height: auto;
+      object-fit: contain !important; /* CRITICAL: 100% full uncropped image */
+      display: block;
+      margin: auto;
+      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.55));
+      transition: transform 0.25s ease;
+    }
+
+    .photo-card-wrapper:hover .photo-friendly-container img {
+      transform: scale(1.025);
+    }
+
+    .photo-zoom-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0, 0, 0, 0.8);
+      color: #fff;
+      font-size: 10px;
+      padding: 3px 7px;
+      font-family: 'IBM Plex Mono', monospace;
+      border-radius: 2px;
+      pointer-events: none;
+    }
+
+    .video-badge {
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      background: #e50914;
+      color: #fff;
+      font-size: 10px;
+      padding: 3px 8px;
+      font-family: 'IBM Plex Mono', monospace;
+      border-radius: 2px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .photo-card-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 10px;
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+    }
+
+    .photo-card-meta .meta-date {
+      color: #666;
+      font-size: 11px;
+    }
+
+    .photo-card-meta .meta-title {
+      color: #000;
+      font-weight: 500;
+      flex-grow: 1;
+      margin: 0 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .photo-card-meta .meta-badge {
+      color: #666;
+      font-size: 11px;
+    }
+
+    /* Filter links in right sidebar */
+    .filter-cat-link {
+      cursor: pointer;
+      display: block;
+      padding: 3px 0;
+      color: #444;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .filter-cat-link:hover, .filter-cat-link.active {
+      color: #000;
+      font-weight: 500;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav class="menu">
+    <div class="w-layout-blockcontainer container w-container">
+      <div class="menu-content">
+        <div class="menu-main">
+          <a href="index.html" class="logo w-inline-block">
+            <div class="body-font">Kanchan Choudhary</div>
+          </a>
+          <div class="menu-button plus" id="menu-toggle-btn">
+            <div class="body-font">[+]</div>
+            <div class="menu-button minus"><div class="body-font">[-]</div></div>
+          </div>
+        </div>
+        <div class="menu-info" id="menu-info">
+          <div class="menu-items-wrapper">
+            <div class="menu-items">
+              <a href="index.html" class="menu-item w-inline-block">
+                <div class="menu-link"><div class="body-font">Home</div></div>
+                <div class="menu-separator"><div class="body-font">,</div></div>
+              </a>
+              <a href="work.html" aria-current="page" class="menu-item w-inline-block w--current">
+                <div class="menu-link"><div class="body-font" style="text-decoration: underline; font-weight: 500;">Work (All 60 Photos)</div></div>
+                <div class="menu-separator"><div class="body-font">,</div></div>
+              </a>
+              <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
+                <div class="menu-link"><div class="body-font">Contact</div></div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Main Work & Categorized Exhibition Section -->
+  <section class="section works-section">
+    <div class="w-layout-blockcontainer container w-container">
+
+      <!-- Sticky Quick Category Filter Bar -->
+      <div class="work-sticky-bar">
+        <div class="category-pills-scroll">
+          <button class="cat-pill active" data-target="all">All Photos (60)</button>
+          <button class="cat-pill" data-target="cat-slide-10">[01] Slide 10 Edition (4)</button>
+          <button class="cat-pill" data-target="cat-slide-5">[02] Studio Series (Slide 5) (13)</button>
+          <button class="cat-pill" data-target="cat-slides-6-7">[03] Mood & Styling (Slides 6 & 7) (9)</button>
+          <button class="cat-pill" data-target="cat-slides-8-9">[04] Ambient Light (Slides 8 & 9) (5)</button>
+          <button class="cat-pill" data-target="cat-slides-11-12">[05] Character Studies (Slides 11 & 12) (10)</button>
+          <button class="cat-pill" data-target="cat-slides-13-14">[06] Monochromes & Tone (Slides 13 & 14) (8)</button>
+          <button class="cat-pill" data-target="cat-slide-15">[07] Limited Edition 2030 (2)</button>
+          <button class="cat-pill" data-target="cat-slide-21">[08] Songti Still Frames (Slide 21) (5)</button>
+          <button class="cat-pill" data-target="cat-kiff">[09] KIFF Celebrity Podcasts & Masterclasses (4)</button>
+        </div>
+      </div>
+
+      <div class="works-content">
+
+        <!-- Left Column: The Divided Categories & Photo Cards -->
+        <div class="grid-work-blocks w-dyn-list" id="works-container">
+
+          <!-- Category Section: Photoshoot • Slide 10 Edition -->
+          <div class="category-section-block" id="cat-slide-10" data-category="cat-slide-10">
+            <div class="category-section-header">
+              <div class="cat-meta-row">
+                <div class="cat-title-row">
+                  <span class="cat-code-badge">[01 / 09]</span>
+                  <h2 class="cat-heading">Photoshoot • Slide 10 Edition</h2>
+                </div>
+                <span class="cat-count-pill">4 Frames</span>
+              </div>
+              <div class="cat-description-text">High-fashion portraiture, creative styling, and expressive character poses featured on Slide 10.</div>
+            </div>
+
+            <div class="grid-work-collection-list w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_10_1.jpg" data-title="High-Fashion Portrait I" data-cat="Photoshoot • Slide 10 Edition" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_10_1.jpg" alt="High-Fashion Portrait I" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 10</span>
+                    <span class="meta-title">High-Fashion Portrait I</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_10_2.jpg" data-title="High-Fashion Portrait II" data-cat="Photoshoot • Slide 10 Edition" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_10_2.jpg" alt="High-Fashion Portrait II" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 10</span>
+                    <span class="meta-title">High-Fashion Portrait II</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_10_3.jpg" data-title="High-Fashion Portrait III" data-cat="Photoshoot • Slide 10 Edition" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_10_3.jpg" alt="High-Fashion Portrait III" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 10</span>
+                    <span class="meta-title">High-Fashion Portrait III</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_10_4.jpg" data-title="High-Fashion Portrait IV" data-cat="Photoshoot • Slide 10 Edition" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_10_4.jpg" alt="High-Fashion Portrait IV" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 10</span>
+                    <span class="meta-title">High-Fashion Portrait IV</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Section: Photoshoot • Studio Series (Slide 5) -->
+          <div class="category-section-block" id="cat-slide-5" data-category="cat-slide-5">
+            <div class="category-section-header">
+              <div class="cat-meta-row">
+                <div class="cat-title-row">
+                  <span class="cat-code-badge">[02 / 09]</span>
+                  <h2 class="cat-heading">Photoshoot • Studio Series (Slide 5)</h2>
+                </div>
+                <span class="cat-count-pill">13 Frames</span>
+              </div>
+              <div class="cat-description-text">Studio lighting setups, wide and intimate character framing, prop compositions, and expressive poses.</div>
+            </div>
+
+            <div class="grid-work-collection-list w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_1.jpg" data-title="Studio Study 01" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_1.jpg" alt="Studio Study 01" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 01</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_2.jpg" data-title="Studio Study 02" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_2.jpg" alt="Studio Study 02" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 02</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_3.jpg" data-title="Studio Study 03" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_3.jpg" alt="Studio Study 03" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 03</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_4.jpg" data-title="Studio Study 04" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_4.jpg" alt="Studio Study 04" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 04</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_5.jpg" data-title="Studio Study 05" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_5.jpg" alt="Studio Study 05" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 05</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_6.jpg" data-title="Studio Study 06" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_6.jpg" alt="Studio Study 06" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 06</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_7.jpg" data-title="Studio Study 07" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_7.jpg" alt="Studio Study 07" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 07</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_8.jpg" data-title="Studio Study 08" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_8.jpg" alt="Studio Study 08" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 08</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_9.jpg" data-title="Studio Study 09" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_9.jpg" alt="Studio Study 09" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 09</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_10.jpg" data-title="Studio Study 10" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_10.jpg" alt="Studio Study 10" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 10</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_11.jpg" data-title="Studio Study 11" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_11.jpg" alt="Studio Study 11" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 11</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_12.jpg" data-title="Studio Study 12" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_12.jpg" alt="Studio Study 12" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 12</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_5_13.jpg" data-title="Studio Study 13" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_5_13.jpg" alt="Studio Study 13" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 05</span>
+                    <span class="meta-title">Studio Study 13</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Section: Photoshoot • Mood & Styling (Slides 6 & 7) -->
+          <div class="category-section-block" id="cat-slides-6-7" data-category="cat-slides-6-7">
+            <div class="category-section-header">
+              <div class="cat-meta-row">
+                <div class="cat-title-row">
+                  <span class="cat-code-badge">[03 / 09]</span>
+                  <h2 class="cat-heading">Photoshoot • Mood & Styling (Slides 6 & 7)</h2>
+                </div>
+                <span class="cat-count-pill">9 Frames</span>
+              </div>
+              <div class="cat-description-text">Natural daylight styling, atmospheric textures, outdoor narratives, and editorial lookbooks.</div>
+            </div>
+
+            <div class="grid-work-collection-list w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_6_1.jpg" data-title="Mood Framing 01" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_6_1.jpg" alt="Mood Framing 01" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 06</span>
+                    <span class="meta-title">Mood Framing 01</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_6_2.jpg" data-title="Mood Framing 02" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_6_2.jpg" alt="Mood Framing 02" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 06</span>
+                    <span class="meta-title">Mood Framing 02</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_6_3.jpg" data-title="Mood Framing 03" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_6_3.jpg" alt="Mood Framing 03" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 06</span>
+                    <span class="meta-title">Mood Framing 03</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_6_4.jpg" data-title="Mood Framing 04" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_6_4.jpg" alt="Mood Framing 04" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 06</span>
+                    <span class="meta-title">Mood Framing 04</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_1.jpg" data-title="Styling Study 01" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_1.jpg" alt="Styling Study 01" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 07</span>
+                    <span class="meta-title">Styling Study 01</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_2.jpg" data-title="Styling Study 02" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_2.jpg" alt="Styling Study 02" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 07</span>
+                    <span class="meta-title">Styling Study 02</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_3.jpg" data-title="Styling Study 03" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_3.jpg" alt="Styling Study 03" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 07</span>
+                    <span class="meta-title">Styling Study 03</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_4.jpg" data-title="Styling Study 04" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_4.jpg" alt="Styling Study 04" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 07</span>
+                    <span class="meta-title">Styling Study 04</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_5.jpg" data-title="Styling Study 05" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_5.jpg" alt="Styling Study 05" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 07</span>
+                    <span class="meta-title">Styling Study 05</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Section: Photoshoot • Ambient Light (Slides 8 & 9) -->
+          <div class="category-section-block" id="cat-slides-8-9" data-category="cat-slides-8-9">
+            <div class="category-section-header">
+              <div class="cat-meta-row">
+                <div class="cat-title-row">
+                  <span class="cat-code-badge">[04 / 09]</span>
+                  <h2 class="cat-heading">Photoshoot • Ambient Light (Slides 8 & 9)</h2>
+                </div>
+                <span class="cat-count-pill">5 Frames</span>
+              </div>
+              <div class="cat-description-text">Directional soft light, warm shadows, cinematic rim lighting, and organic mood portraits.</div>
+            </div>
+
+            <div class="grid-work-collection-list w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_8_1.jpg" data-title="Ambient Study 01" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_8_1.jpg" alt="Ambient Study 01" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 08</span>
+                    <span class="meta-title">Ambient Study 01</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_8_2.jpg" data-title="Ambient Study 02" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_8_2.jpg" alt="Ambient Study 02" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 08</span>
+                    <span class="meta-title">Ambient Study 02</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_8_3.jpg" data-title="Ambient Study 03" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_8_3.jpg" alt="Ambient Study 03" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 08</span>
+                    <span class="meta-title">Ambient Study 03</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_8_4.jpg" data-title="Ambient Study 04" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_8_4.jpg" alt="Ambient Study 04" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 08</span>
+                    <span class="meta-title">Ambient Study 04</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_9_1.jpg" data-title="Ambient Portrait I" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_9_1.jpg" alt="Ambient Portrait I" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 09</span>
+                    <span class="meta-title">Ambient Portrait I</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Section: Photoshoot • Character Studies (Slides 11 & 12) -->
+          <div class="category-section-block" id="cat-slides-11-12" data-category="cat-slides-11-12">
+            <div class="category-section-header">
+              <div class="cat-meta-row">
+                <div class="cat-title-row">
+                  <span class="cat-code-badge">[05 / 09]</span>
+                  <h2 class="cat-heading">Photoshoot • Character Studies (Slides 11 & 12)</h2>
+                </div>
+                <span class="cat-count-pill">10 Frames</span>
+              </div>
+              <div class="cat-description-text">Contemporary character exploration, dynamic camera angles, and editorial expressions.</div>
+            </div>
+
+            <div class="grid-work-collection-list w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_11_1.jpg" data-title="Character Study 01" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_11_1.jpg" alt="Character Study 01" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 11</span>
+                    <span class="meta-title">Character Study 01</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_11_2.jpg" data-title="Character Study 02" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_11_2.jpg" alt="Character Study 02" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 11</span>
+                    <span class="meta-title">Character Study 02</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_11_3.jpg" data-title="Character Study 03" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_11_3.jpg" alt="Character Study 03" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 11</span>
+                    <span class="meta-title">Character Study 03</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_11_4.jpg" data-title="Character Study 04" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_11_4.jpg" alt="Character Study 04" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 11</span>
+                    <span class="meta-title">Character Study 04</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_11_5.jpg" data-title="Character Study 05" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_11_5.jpg" alt="Character Study 05" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 11</span>
+                    <span class="meta-title">Character Study 05</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_12_1.jpg" data-title="Character Expression 01" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_12_1.jpg" alt="Character Expression 01" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 12</span>
+                    <span class="meta-title">Character Expression 01</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_12_2.jpg" data-title="Character Expression 02" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_12_2.jpg" alt="Character Expression 02" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 12</span>
+                    <span class="meta-title">Character Expression 02</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_12_3.jpg" data-title="Character Expression 03" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_12_3.jpg" alt="Character Expression 03" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 12</span>
+                    <span class="meta-title">Character Expression 03</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_12_4.jpg" data-title="Character Expression 04" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_12_4.jpg" alt="Character Expression 04" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 12</span>
+                    <span class="meta-title">Character Expression 04</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_12_5.jpg" data-title="Character Expression 05" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_12_5.jpg" alt="Character Expression 05" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 12</span>
+                    <span class="meta-title">Character Expression 05</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Section: Photoshoot • Monochromes & Tone (Slides 13 & 14) -->
+          <div class="category-section-block" id="cat-slides-13-14" data-category="cat-slides-13-14">
+            <div class="category-section-header">
+              <div class="cat-meta-row">
+                <div class="cat-title-row">
+                  <span class="cat-code-badge">[06 / 09]</span>
+                  <h2 class="cat-heading">Photoshoot • Monochromes & Tone (Slides 13 & 14)</h2>
+                </div>
+                <span class="cat-count-pill">8 Frames</span>
+              </div>
+              <div class="cat-description-text">High-contrast black & white tones, silhouettes, structural shadow play, and intimate portraits.</div>
+            </div>
+
+            <div class="grid-work-collection-list w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_13_1.jpg" data-title="Monochrome 01" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_13_1.jpg" alt="Monochrome 01" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 13</span>
+                    <span class="meta-title">Monochrome 01</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_13_2.jpg" data-title="Monochrome 02" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_13_2.jpg" alt="Monochrome 02" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 13</span>
+                    <span class="meta-title">Monochrome 02</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_13_3.jpg" data-title="Monochrome 03" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_13_3.jpg" alt="Monochrome 03" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 13</span>
+                    <span class="meta-title">Monochrome 03</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_13_4.jpg" data-title="Monochrome 04" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_13_4.jpg" alt="Monochrome 04" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 13</span>
+                    <span class="meta-title">Monochrome 04</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_13_5.jpg" data-title="Monochrome 05" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_13_5.jpg" alt="Monochrome 05" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 13</span>
+                    <span class="meta-title">Monochrome 05</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_14_1.jpg" data-title="Monochrome Study 01" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_14_1.jpg" alt="Monochrome Study 01" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 14</span>
+                    <span class="meta-title">Monochrome Study 01</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_14_2.jpg" data-title="Monochrome Study 02" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_14_2.jpg" alt="Monochrome Study 02" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 14</span>
+                    <span class="meta-title">Monochrome Study 02</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_14_3.jpg" data-title="Monochrome Study 03" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_14_3.jpg" alt="Monochrome Study 03" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 14</span>
+                    <span class="meta-title">Monochrome Study 03</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Section: Editorial Collection • Limited Edition 2030 -->
+          <div class="category-section-block" id="cat-slide-15" data-category="cat-slide-15">
+            <div class="category-section-header">
+              <div class="cat-meta-row">
+                <div class="cat-title-row">
+                  <span class="cat-code-badge">[07 / 09]</span>
+                  <h2 class="cat-heading">Editorial Collection • Limited Edition 2030</h2>
+                </div>
+                <span class="cat-count-pill">2 Frames</span>
+              </div>
+              <div class="cat-description-text">Editorial concept artwork and official portfolio cover visual direction.</div>
+            </div>
+
+            <div class="grid-work-collection-list w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_15_1.jpg" data-title="Limited Edition 2030 Feature" data-cat="Editorial Collection • Limited Edition 2030" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_15_1.jpg" alt="Limited Edition 2030 Feature" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 15</span>
+                    <span class="meta-title">Limited Edition 2030 Feature</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_1_1.jpg" data-title="Cover Portfolio Visual Direction" data-cat="Editorial Collection • Limited Edition 2030" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_1_1.jpg" alt="Cover Portfolio Visual Direction" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 01</span>
+                    <span class="meta-title">Cover Portfolio Visual Direction</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Section: Songti Still Frames (Slide 21) -->
+          <div class="category-section-block" id="cat-slide-21" data-category="cat-slide-21">
+            <div class="category-section-header">
+              <div class="cat-meta-row">
+                <div class="cat-title-row">
+                  <span class="cat-code-badge">[08 / 09]</span>
+                  <h2 class="cat-heading">Songti Still Frames (Slide 21)</h2>
+                </div>
+                <span class="cat-count-pill">5 Frames</span>
+              </div>
+              <div class="cat-description-text">Cinematography production stills, color graded frames, and narrative film cinematography.</div>
+            </div>
+
+            <div class="grid-work-collection-list w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_1.jpg" data-title="Songti Cinematic Frame 01" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_1.jpg" alt="Songti Cinematic Frame 01" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 21</span>
+                    <span class="meta-title">Songti Cinematic Frame 01</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_2.jpg" data-title="Songti Cinematic Frame 02" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_2.jpg" alt="Songti Cinematic Frame 02" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 21</span>
+                    <span class="meta-title">Songti Cinematic Frame 02</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_3.jpg" data-title="Songti Cinematic Frame 03" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_3.jpg" alt="Songti Cinematic Frame 03" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 21</span>
+                    <span class="meta-title">Songti Cinematic Frame 03</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_4.jpg" data-title="Songti Cinematic Frame 04" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_4.jpg" alt="Songti Cinematic Frame 04" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 21</span>
+                    <span class="meta-title">Songti Cinematic Frame 04</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/slide_7_5.jpg" data-title="Songti Cinematic Frame 05" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
+                  <div class="photo-friendly-container">
+                    <img src="assets/slide_7_5.jpg" alt="Songti Cinematic Frame 05" loading="lazy"/>
+                    <div class="photo-zoom-hint">[+] VIEW FULL</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">Slide 21</span>
+                    <span class="meta-title">Songti Cinematic Frame 05</span>
+                    <span class="meta-badge">[Full Frame]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Category Section: KIFF Celebrity Podcasts & Masterclasses -->
+          <div class="category-section-block" id="cat-kiff" data-category="cat-kiff">
+            <div class="category-section-header">
+              <div class="cat-meta-row">
+                <div class="cat-title-row">
+                  <span class="cat-code-badge">[09 / 09]</span>
+                  <h2 class="cat-heading">KIFF Celebrity Podcasts & Masterclasses</h2>
+                </div>
+                <span class="cat-count-pill">4 Frames</span>
+              </div>
+              <div class="cat-description-text">4K multi-cam editing, interview pacing, audio cleanup, and color mastering for film festival dialogues.</div>
+            </div>
+
+            <div class="grid-work-collection-list w-dyn-items">
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/yt_anupam_kher.jpg" data-title="Anupam Kher Unfiltered — Acting Masterclass" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="X9qT-WJ5u4Y">
+                  <div class="photo-friendly-container">
+                    <img src="assets/yt_anupam_kher.jpg" alt="Anupam Kher Unfiltered — Acting Masterclass" loading="lazy"/>
+                    <div class="video-badge">&#9658; 4K VIDEO</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">KIFF Ep 01</span>
+                    <span class="meta-title">Anupam Kher Unfiltered — Acting Masterclass</span>
+                    <span class="meta-badge">[4K Video]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/yt_saurabh_shukla.jpg" data-title="Saurabh Shukla — Screenwriting & Satya" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="3Z_8jR_6yS0">
+                  <div class="photo-friendly-container">
+                    <img src="assets/yt_saurabh_shukla.jpg" alt="Saurabh Shukla — Screenwriting & Satya" loading="lazy"/>
+                    <div class="video-badge">&#9658; 4K VIDEO</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">KIFF Ep 02</span>
+                    <span class="meta-title">Saurabh Shukla — Screenwriting & Satya</span>
+                    <span class="meta-badge">[4K Video]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/yt_subhash_sehgal.jpg" data-title="Subhash Sehgal — Film Editing Masterclass" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="k8V8C0-m1Xk">
+                  <div class="photo-friendly-container">
+                    <img src="assets/yt_subhash_sehgal.jpg" alt="Subhash Sehgal — Film Editing Masterclass" loading="lazy"/>
+                    <div class="video-badge">&#9658; 4K VIDEO</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">KIFF Ep 03</span>
+                    <span class="meta-title">Subhash Sehgal — Film Editing Masterclass</span>
+                    <span class="meta-badge">[4K Video]</span>
+                  </div>
+                </div>
+              </div>
+              <div role="listitem" class="w-dyn-item">
+                <div class="photo-card-wrapper" data-src="assets/yt_deepshikha_nagpal.jpg" data-title="Deepshikha Nagpal — Industry & Direction" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="dQw4w9WgXcQ">
+                  <div class="photo-friendly-container">
+                    <img src="assets/yt_deepshikha_nagpal.jpg" alt="Deepshikha Nagpal — Industry & Direction" loading="lazy"/>
+                    <div class="video-badge">&#9658; 4K VIDEO</div>
+                  </div>
+                  <div class="photo-card-meta">
+                    <span class="meta-date">KIFF Ep 04</span>
+                    <span class="meta-title">Deepshikha Nagpal — Industry & Direction</span>
+                    <span class="meta-badge">[4K Video]</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom Navigation Back to Home matching Felix Kern view all line -->
+          <div class="button-wrapper" style="margin-top: 40px; margin-bottom: 20px;">
+            <a href="index.html" class="button w-inline-block">
+              <div class="body-font">&larr; Return to Homepage &amp; Selected Works</div>
+              <div class="button-line"></div>
+            </a>
+          </div>
+
+        </div>
+
+        <!-- Right Column: Sticky Categories & Bio Index -->
+        <div class="works-info">
+          <div class="progress-blocks">
+            <div class="blocks">
+
+              <div class="items-blocks">
+                <h1 class="label-font opacity">Exhibition Index</h1>
+                <div class="items works-items">
+                  <a href="#all" class="body-font filter-cat-link active" data-target="all">All Categories (60 Frames)</a>
+                  <a href="index.html" class="body-font">&larr; Selected Works Table</a>
+                </div>
+              </div>
+
+              <div class="items-blocks">
+                <div class="label-font opacity">Categories (9)</div>
+                <div class="items works-items second">
+                  <a href="#cat-slide-10" class="body-font filter-cat-link" data-target="cat-slide-10">[01] Slide 10 Edition (4)</a>
+                  <a href="#cat-slide-5" class="body-font filter-cat-link" data-target="cat-slide-5">[02] Studio Series (Slide 5) (13)</a>
+                  <a href="#cat-slides-6-7" class="body-font filter-cat-link" data-target="cat-slides-6-7">[03] Mood & Styling (Slides 6 & 7) (9)</a>
+                  <a href="#cat-slides-8-9" class="body-font filter-cat-link" data-target="cat-slides-8-9">[04] Ambient Light (Slides 8 & 9) (5)</a>
+                  <a href="#cat-slides-11-12" class="body-font filter-cat-link" data-target="cat-slides-11-12">[05] Character Studies (Slides 11 & 12) (10)</a>
+                  <a href="#cat-slides-13-14" class="body-font filter-cat-link" data-target="cat-slides-13-14">[06] Monochromes & Tone (Slides 13 & 14) (8)</a>
+                  <a href="#cat-slide-15" class="body-font filter-cat-link" data-target="cat-slide-15">[07] Editorial Collection • Limited Edition 2030 (2)</a>
+                  <a href="#cat-slide-21" class="body-font filter-cat-link" data-target="cat-slide-21">[08] Songti Still Frames (Slide 21) (5)</a>
+                  <a href="#cat-kiff" class="body-font filter-cat-link" data-target="cat-kiff">[09] KIFF Celebrity Podcasts & Masterclasses (4)</a>
+                </div>
+              </div>
+
+              <div class="items-blocks">
+                <div class="label-font opacity">Display Philosophy</div>
+                <div class="items works-items">
+                  <div class="body-font">100% Uncropped Full-Frame</div>
+                  <div class="body-font">Natural Aspect Ratios</div>
+                  <div class="body-font">Click any card to examine high-res</div>
+                </div>
+              </div>
+
+              <div class="items-blocks">
+                <div class="label-font opacity">Kanchan Choudhary</div>
+                <div class="items works-items">
+                  <div class="body-font">Video Editor &amp; Cinematographer</div>
+                  <div class="body-font"><a href="mailto:kanchanc0410@gmail.com" class="contact-link">kanchanc0410@gmail.com</a></div>
+                  <div class="body-font"><a href="tel:7977667004" class="contact-link">+91 7977667004</a></div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <!-- Sticky Sidebar Footer -->
+          <div class="footer-wrapper">
+            <footer class="footer">
+              <div class="w-layout-blockcontainer container footer-container w-container">
+                <div class="footer-content">
+                  <div class="footer-item-wrapper">
+                    <div class="body-font">&copy; 2026 Kanchan Choudhary</div>
+                  </div>
+                  <div class="availability">
+                    <div class="indicator-wrapper"><div class="indicator"></div></div>
+                    <div class="body-font">Available for work</div>
+                  </div>
+                </div>
+              </div>
+            </footer>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Fullscreen Lightbox Modal with Next / Prev Navigation -->
+  <div id="work-lightbox" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.96); z-index:999999; align-items:center; justify-content:center; padding:1.5rem; box-sizing:border-box;">
+    <div style="position:relative; width:100%; max-width:1100px; max-height:94vh; background:#000; border:1px solid #333; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.8);">
+      
+      <!-- Lightbox Header -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 18px; border-bottom:1px solid #222; background:#08090d;">
+        <div style="display:flex; align-items:center; gap:12px;">
+          <span id="work-lightbox-counter" style="color:#888; font-size:12px; font-family:'IBM Plex Mono', monospace;">[1 / 60]</span>
+          <span id="work-lightbox-title" style="color:#fff; font-size:13px; font-family:'IBM Plex Mono', monospace; font-weight:500;">Photograph</span>
+        </div>
+        <button id="work-close-lightbox" style="background:none; border:none; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:14px; cursor:pointer; padding:4px 8px;">[CLOSE &times;]</button>
+      </div>
+
+      <!-- Lightbox Body -->
+      <div id="work-lightbox-body" style="position:relative; width:100%; flex-grow:1; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#000; padding:16px; box-sizing:border-box;">
+        <img id="work-lightbox-img" src="" alt="" style="max-width:100%; max-height:76vh; object-fit:contain; display:block; filter:drop-shadow(0 4px 18px rgba(0,0,0,0.7));">
+        <div id="work-lightbox-video" style="display:none; width:100%; aspect-ratio:16/9; background:#000;"></div>
+      </div>
+
+      <!-- Lightbox Navigation Footer -->
+      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 18px; border-top:1px solid #222; background:#08090d;">
+        <button id="work-lightbox-prev" style="background:none; border:1px solid #444; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:12px; padding:5px 14px; cursor:pointer;">&larr; PREV</button>
+        <span id="work-lightbox-category" style="color:#aaa; font-size:11px; font-family:'IBM Plex Mono', monospace;">Category</span>
+        <button id="work-lightbox-next" style="background:none; border:1px solid #444; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:12px; padding:5px 14px; cursor:pointer;">NEXT &rarr;</button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Interactive Scripts -->
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // 1. Mobile Menu Toggle
+      const menuBtn = document.getElementById('menu-toggle-btn');
+      const menuInfo = document.getElementById('menu-info');
+      let menuOpen = false;
+      if (menuBtn && menuInfo) {
+        menuBtn.addEventListener('click', () => {
+          menuOpen = !menuOpen;
+          menuInfo.style.display = menuOpen ? 'block' : '';
+          menuBtn.querySelector('.body-font').textContent = menuOpen ? '[-]' : '[+]';
+        });
+      }
+
+      // 2. Category Jump & Filter
+      const catPills = document.querySelectorAll('.cat-pill');
+      const sidebarLinks = document.querySelectorAll('.filter-cat-link');
+      const categorySections = document.querySelectorAll('.category-section-block');
+
+      function filterCategory(targetId) {
+        // Update active states
+        catPills.forEach(p => {
+          if (p.getAttribute('data-target') === targetId) p.classList.add('active');
+          else p.classList.remove('active');
+        });
+        sidebarLinks.forEach(l => {
+          if (l.getAttribute('data-target') === targetId) l.classList.add('active');
+          else l.classList.remove('active');
+        });
+
+        if (targetId === 'all') {
+          categorySections.forEach(sec => sec.style.display = 'block');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        } else {
+          categorySections.forEach(sec => {
+            if (sec.id === targetId) {
+              sec.style.display = 'block';
+              sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+              sec.style.display = 'none';
+            }
+          });
+        }
+      }
+
+      catPills.forEach(p => {
+        p.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = p.getAttribute('data-target');
+          filterCategory(target);
+        });
+      });
+
+      sidebarLinks.forEach(l => {
+        l.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = l.getAttribute('data-target');
+          filterCategory(target);
+        });
+      });
+
+      // 3. Lightbox with Next / Previous & Keyboard Support
+      const cards = Array.from(document.querySelectorAll('.photo-card-wrapper'));
+      const lightbox = document.getElementById('work-lightbox');
+      const lightboxImg = document.getElementById('work-lightbox-img');
+      const lightboxVideo = document.getElementById('work-lightbox-video');
+      const lightboxTitle = document.getElementById('work-lightbox-title');
+      const lightboxCounter = document.getElementById('work-lightbox-counter');
+      const lightboxCategory = document.getElementById('work-lightbox-category');
+      const closeBtn = document.getElementById('work-close-lightbox');
+      const prevBtn = document.getElementById('work-lightbox-prev');
+      const nextBtn = document.getElementById('work-lightbox-next');
+
+      let currentIndex = 0;
+
+      function showItem(index) {
+        if (index < 0) index = cards.length - 1;
+        if (index >= cards.length) index = 0;
+        currentIndex = index;
+
+        const card = cards[currentIndex];
+        const src = card.getAttribute('data-src');
+        const title = card.getAttribute('data-title') || 'Photograph';
+        const cat = card.getAttribute('data-cat') || '';
+        const videoId = card.getAttribute('data-video-id');
+
+        lightboxCounter.textContent = `[${currentIndex + 1} / ${cards.length}]`;
+        lightboxTitle.textContent = title;
+        lightboxCategory.textContent = cat;
+
+        if (videoId) {
+          lightboxImg.style.display = 'none';
+          lightboxVideo.style.display = 'block';
+          lightboxVideo.innerHTML = `
+            <iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0" 
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+              allowfullscreen 
+              style="width:100%; height:100%; border:0;">
+            </iframe>
+          `;
+        } else {
+          lightboxVideo.style.display = 'none';
+          lightboxVideo.innerHTML = '';
+          lightboxImg.style.display = 'block';
+          lightboxImg.src = src;
+          lightboxImg.alt = title;
+        }
+      }
+
+      cards.forEach((card, idx) => {
+        card.addEventListener('click', () => {
+          showItem(idx);
+          lightbox.style.display = 'flex';
+          document.body.style.overflow = 'hidden';
+        });
+      });
+
+      function closeLightbox() {
+        lightbox.style.display = 'none';
+        lightboxVideo.innerHTML = '';
+        document.body.style.overflow = 'auto';
+      }
+
+      if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+      if (prevBtn) prevBtn.addEventListener('click', () => showItem(currentIndex - 1));
+      if (nextBtn) nextBtn.addEventListener('click', () => showItem(currentIndex + 1));
+
+      if (lightbox) {
+        lightbox.addEventListener('click', (e) => {
+          if (e.target === lightbox) closeLightbox();
+        });
+      }
+
+      document.addEventListener('keydown', (e) => {
+        if (lightbox.style.display === 'flex') {
+          if (e.key === 'Escape') closeLightbox();
+          if (e.key === 'ArrowLeft') showItem(currentIndex - 1);
+          if (e.key === 'ArrowRight') showItem(currentIndex + 1);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
