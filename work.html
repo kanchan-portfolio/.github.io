@@ -291,19 +291,7 @@
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
               <a href="work.html" aria-current="page" class="menu-item w-inline-block w--current">
-                <div class="menu-link"><div class="body-font">Work (60 Frames)</div></div>
-                <div class="menu-separator"><div class="body-font">,</div></div>
-              </a>
-              <a href="#cat-editorial" class="menu-item w-inline-block filter-nav-direct" data-target="cat-editorial">
-                <div class="menu-link"><div class="body-font">Editorial</div></div>
-                <div class="menu-separator"><div class="body-font">,</div></div>
-              </a>
-              <a href="#cat-kiff" class="menu-item w-inline-block filter-nav-direct" data-target="cat-kiff">
-                <div class="menu-link"><div class="body-font">KIFF Podcasts</div></div>
-                <div class="menu-separator"><div class="body-font">,</div></div>
-              </a>
-              <a href="#cat-songti" class="menu-item w-inline-block filter-nav-direct" data-target="cat-songti">
-                <div class="menu-link"><div class="body-font">Songti Stills</div></div>
+                <div class="menu-link"><div class="body-font">Work</div></div>
               </a>
             </div>
             <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
@@ -1340,6 +1328,15 @@
                 <div class="footer-content">
                   <div class="footer-item-wrapper">
                     <div class="body-font">&copy; 2026 Kanchan Choudhary</div>
+                    <div class="menu-items">
+                      <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
+                        <div class="menu-link"><div class="body-font">kanchanc0410@gmail.com</div></div>
+                        <div class="menu-separator"><div class="body-font">,</div></div>
+                      </a>
+                      <a href="tel:7977667004" class="menu-item w-inline-block">
+                        <div class="menu-link"><div class="body-font">+91 7977667004</div></div>
+                      </a>
+                    </div>
                   </div>
                   <div class="availability">
                     <div class="indicator-wrapper"><div class="indicator"></div></div>
@@ -1415,7 +1412,6 @@
       // 2. Category Jump & Filter
       const catPills = document.querySelectorAll('.cat-pill');
       const sidebarLinks = document.querySelectorAll('.filter-cat-link');
-      const navDirectLinks = document.querySelectorAll('.filter-nav-direct');
       const categorySections = document.querySelectorAll('.category-section-block');
       const allCards = Array.from(document.querySelectorAll('.photo-card-wrapper'));
 
@@ -1481,19 +1477,6 @@
           e.preventDefault();
           const target = l.getAttribute('data-target');
           filterCategory(target);
-        });
-      });
-
-      navDirectLinks.forEach(nl => {
-        nl.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = nl.getAttribute('data-target');
-          filterCategory(target);
-          if (menuOpen && menuInfo) {
-            menuOpen = false;
-            menuInfo.style.display = '';
-            if (menuBtn) menuBtn.querySelector('.body-font').textContent = '[+]';
-          }
         });
       });
 
