@@ -1,36 +1,24 @@
 // ==========================================================================
-// Felix Kern Portfolio — Interactive Logic
+// Kanchan Choudhary Portfolio — Felix Kern Style Interactivity
 // ==========================================================================
 
 document.addEventListener('DOMContentLoaded', () => {
-  // 1. Project Image Mapping for Interactive Hover Swap
-  const projectImages = {
-    'Scarlet energy': 'https://cdn.prod.website-files.com/6ab6692b52b5a2110575e145/6aba5bf481518bc8071b7636_1%20(3).jpg',
-    'Canal morning': 'https://cdn.prod.website-files.com/6ab6692b52b5a2110575e145/6ab6692b52b5a2110575e231_2.jpg',
-    'Chromatic mood': 'https://cdn.prod.website-files.com/6ab6692b52b5a2110575e145/6ab6692b52b5a2110575e236_3.jpg',
-    'Coastal contrast': 'https://cdn.prod.website-files.com/6ab6692b52b5a2110575e145/6ab6692b52b5a2110575e235_4.jpg',
-    'Architectural motion': 'https://cdn.prod.website-files.com/6ab6692b52b5a2110575e145/6ab6692b52b5a2110575e234_6.jpg',
-    'Thrown moment': 'https://cdn.prod.website-files.com/6ab6692b52b5a2110575e145/6ab6692b52b5a2110575e233_7.jpg',
-    'Pool geometry': 'https://cdn.prod.website-files.com/6ab6692b52b5a2110575e145/6ab6692b52b5a2110575e232_5.jpg',
-    'Classical power': 'https://cdn.prod.website-files.com/6ab6692b52b5a2110575e145/6ab6692b52b5a2110575e237_8.jpg'
-  };
-
-  const heroImg = document.querySelector('.hero-image-wrapper .image.bg-image');
+  const heroImg = document.getElementById('hero-dynamic-img');
   const defaultHeroSrc = heroImg ? heroImg.getAttribute('src') : '';
 
+  // 1. Hover Preview Image Swap
   const workItems = document.querySelectorAll('.list-work-block');
   workItems.forEach(item => {
-    const nameEl = item.querySelector('.name-wrapper h3');
-    const projectName = nameEl ? nameEl.textContent.trim() : '';
+    const thumb = item.getAttribute('data-thumb');
 
     item.addEventListener('mouseenter', () => {
-      if (heroImg && projectImages[projectName]) {
-        heroImg.style.transition = 'opacity 0.2s ease';
-        heroImg.style.opacity = '0.7';
+      if (heroImg && thumb) {
+        heroImg.style.transition = 'opacity 0.15s ease';
+        heroImg.style.opacity = '0.65';
         setTimeout(() => {
-          heroImg.src = projectImages[projectName];
+          heroImg.src = thumb;
           heroImg.style.opacity = '1';
-        }, 100);
+        }, 80);
       }
     });
 
@@ -42,73 +30,77 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
 
-    // Lightbox modal preview on click
+    // 2. Click to Open Video / Lightbox Player
     item.addEventListener('click', (e) => {
       e.preventDefault();
-      if (projectImages[projectName]) {
-        openModal(projectName, projectImages[projectName]);
-      }
+      const videoId = item.getAttribute('data-video-id');
+      const title = item.getAttribute('data-title') || 'Project Preview';
+      const thumb = item.getAttribute('data-thumb');
+
+      openLightbox(videoId, thumb, title);
     });
   });
 
-  // 2. Menu [+] and [-] Toggle
-  const menuButton = document.querySelector('.menu-button.plus');
-  const menuInfo = document.querySelector('.menu-info');
+  // 3. Lightbox Functionality
+  const lightbox = document.getElementById('video-lightbox');
+  const lightboxContainer = document.getElementById('lightbox-embed-container');
+  const lightboxCaption = document.getElementById('lightbox-caption');
+  const closeBtn = document.getElementById('close-lightbox');
+
+  function openLightbox(videoId, thumb, title) {
+    if (videoId) {
+      lightboxContainer.innerHTML = `
+        <iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+          allowfullscreen 
+          style="width:100%; height:100%; border:0;">
+        </iframe>
+      `;
+    } else if (thumb) {
+      lightboxContainer.innerHTML = `
+        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; background:#000;">
+          <img src="${thumb}" alt="${title}" style="max-width:100%; max-height:100%; object-fit:contain;">
+        </div>
+      `;
+    }
+    lightboxCaption.textContent = `[Project] ${title}`;
+    lightbox.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    lightbox.style.display = 'none';
+    lightboxContainer.innerHTML = '';
+    document.body.style.overflow = 'auto';
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox) closeLightbox();
+    });
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // 4. Mobile Menu Toggle
+  const menuToggle = document.getElementById('menu-toggle-btn');
+  const menuInfo = document.getElementById('menu-info');
   let isMenuOpen = false;
 
-  if (menuButton && menuInfo) {
-    menuButton.addEventListener('click', (e) => {
+  if (menuToggle && menuInfo) {
+    menuToggle.addEventListener('click', (e) => {
       e.stopPropagation();
       isMenuOpen = !isMenuOpen;
       if (isMenuOpen) {
         menuInfo.style.display = 'block';
-        menuButton.querySelector('.body-font').textContent = '[-]';
+        menuToggle.querySelector('.body-font').textContent = '[-]';
       } else {
         menuInfo.style.display = '';
-        menuButton.querySelector('.body-font').textContent = '[+]';
+        menuToggle.querySelector('.body-font').textContent = '[+]';
       }
     });
   }
-
-  // 3. Simple Minimalist Lightbox Modal
-  const modal = document.createElement('div');
-  modal.id = 'minimal-modal';
-  modal.style.cssText = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.92);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    cursor: pointer;
-    padding: 2rem;
-  `;
-  modal.innerHTML = `
-    <div style="position: relative; max-width: 900px; width: 100%; text-align: center;">
-      <span style="position: absolute; top: -35px; right: 0; color: #fff; font-family: 'IBM Plex Mono', monospace; font-size: 14px; cursor: pointer;">[ESC / CLOSE]</span>
-      <img id="modal-img" src="" style="max-height: 80vh; max-width: 100%; border: 1px solid #333; display: inline-block;">
-      <div id="modal-caption" style="color: #aaa; font-family: 'IBM Plex Mono', monospace; font-size: 12px; margin-top: 12px;"></div>
-    </div>
-  `;
-  document.body.appendChild(modal);
-
-  function openModal(title, imgSrc) {
-    const modalImg = document.getElementById('modal-img');
-    const modalCaption = document.getElementById('modal-caption');
-    modalImg.src = imgSrc;
-    modalCaption.textContent = `[Project: ${title}]`;
-    modal.style.display = 'flex';
-  }
-
-  modal.addEventListener('click', () => {
-    modal.style.display = 'none';
-  });
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') modal.style.display = 'none';
-  });
 });
