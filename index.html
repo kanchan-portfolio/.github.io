@@ -3,11 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kanchan | Personal Portfolio & Website</title>
-  <meta name="description" content="Welcome to Kanchan's personal website and portfolio. Exploring projects, creative ideas, and technology.">
+  <title>Kanchan | Visual Storyteller, Photography &amp; Videography</title>
+  <meta name="description" content="Portfolio of Kanchan — Cinematographer, Commercial Photographer & Visual Artist. Crafting cinematic films, editorial portraits, and compelling visual narratives.">
+  
+  <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Syne:wght@500;700;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -16,23 +19,29 @@
   <header class="navbar" id="navbar">
     <div class="nav-container">
       <a href="#hero" class="nav-logo">
-        <span class="logo-accent">K</span>anchan
+        <span class="logo-mark">K</span>
+        <div class="logo-text">
+          <span class="logo-name">KANCHAN</span>
+          <span class="logo-sub">VISUALS &bull; FILMS</span>
+        </div>
       </a>
       
       <nav class="nav-links" id="nav-links">
+        <a href="#portfolio" class="nav-link">Portfolio</a>
+        <a href="#videography" class="nav-link">Films &amp; Video</a>
         <a href="#about" class="nav-link">About</a>
-        <a href="#skills" class="nav-link">Skills</a>
-        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#services" class="nav-link">Services</a>
+        <a href="#gear" class="nav-link">Gear</a>
         <a href="#contact" class="nav-link">Contact</a>
       </nav>
 
       <div class="nav-actions">
-        <button id="theme-toggle" class="theme-btn" aria-label="Toggle Dark and Light Mode">
-          <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
-          <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
+        <button id="theme-toggle" class="theme-btn" aria-label="Toggle theme">
+          <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
+          <svg id="sun-icon" class="hidden" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>
         </button>
-        <a href="#contact" class="btn btn-primary nav-cta">Get in Touch</a>
-        <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Open mobile menu">
+        <a href="#contact" class="btn btn-primary nav-cta">Book a Shoot</a>
+        <button class="mobile-menu-btn" id="mobile-toggle" aria-label="Toggle Menu">
           <span></span>
           <span></span>
           <span></span>
@@ -43,42 +52,210 @@
 
   <!-- Hero Section -->
   <section class="hero-section" id="hero">
-    <div class="hero-bg-blobs">
-      <div class="blob blob-1"></div>
-      <div class="blob blob-2"></div>
+    <div class="hero-bg">
+      <img src="https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?auto=format&fit=crop&w=2000&q=80" alt="Cinematic camera setup background" class="hero-bg-img">
+      <div class="hero-overlay"></div>
     </div>
 
     <div class="container hero-content">
-      <div class="hero-badge">
-        <span class="badge-dot"></span> Available for new opportunities
+      <div class="hero-eyebrow">
+        <span class="pulse-indicator"></span> CINEMATOGRAPHER &bull; PHOTOGRAPHER &bull; DIRECTOR
       </div>
+      
       <h1 class="hero-title">
-        Hello, I'm <span class="gradient-text">Kanchan</span>
+        Frames That Breathe.<br>
+        <span class="gold-gradient-text">Stories That Linger.</span>
       </h1>
-      <p class="hero-subtitle">
-        Developer, Creator &amp; Problem Solver passionate about crafting beautiful, high-performance websites and intuitive digital experiences.
+      
+      <p class="hero-desc">
+        Specializing in high-end commercial photography, cinematic visual storytelling, brand films, and editorial portraiture.
       </p>
 
-      <div class="hero-buttons">
-        <a href="#projects" class="btn btn-primary">
-          View My Work
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+      <div class="hero-cta-group">
+        <a href="#videography" class="btn btn-primary">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          Watch Showreel
         </a>
-        <a href="#about" class="btn btn-secondary">Learn More</a>
+        <a href="#portfolio" class="btn btn-glass">
+          Explore Portfolio
+        </a>
       </div>
 
+      <!-- Quick Metrics -->
       <div class="hero-stats">
-        <div class="stat-card">
-          <span class="stat-num">100%</span>
-          <span class="stat-label">Dedication</span>
+        <div class="stat-item">
+          <span class="stat-number">200+</span>
+          <span class="stat-text">Shoots Delivered</span>
         </div>
-        <div class="stat-card">
-          <span class="stat-num">Modern</span>
-          <span class="stat-label">Tech Stack</span>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">45+</span>
+          <span class="stat-text">Commercial Films</span>
         </div>
-        <div class="stat-card">
-          <span class="stat-num">Fast</span>
-          <span class="stat-label">&amp; Responsive</span>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-number">4K / 6K</span>
+          <span class="stat-text">RAW Cinema Pipeline</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio Showcase Section -->
+  <section class="section portfolio-section" id="portfolio">
+    <div class="container">
+      <div class="section-top">
+        <div>
+          <span class="sub-heading">Featured Works</span>
+          <h2 class="section-heading">Curated Visual Gallery</h2>
+        </div>
+        <!-- Category Filters -->
+        <div class="filter-tabs" id="filter-tabs">
+          <button class="filter-tab active" data-filter="all">All</button>
+          <button class="filter-tab" data-filter="photography">Photography</button>
+          <button class="filter-tab" data-filter="videography">Videography</button>
+          <button class="filter-tab" data-filter="portrait">Portrait</button>
+          <button class="filter-tab" data-filter="commercial">Commercial</button>
+        </div>
+      </div>
+
+      <div class="gallery-grid" id="gallery-grid">
+
+        <!-- Item 1: Photography / Portrait -->
+        <div class="gallery-card" data-category="photography portrait" data-title="Chiaroscuro Silhouette" data-meta="Sony FX3 • 85mm f/1.4 GM" data-img="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=1200&q=80">
+          <div class="card-media">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80" alt="Chiaroscuro Silhouette" loading="lazy">
+            <div class="card-overlay">
+              <span class="card-tag">Editorial Portrait</span>
+              <h3 class="card-title">Chiaroscuro Silhouette</h3>
+              <p class="card-meta">Sony FX3 &bull; 85mm f/1.4 GM</p>
+              <span class="view-btn">View Artwork &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 2: Videography / Commercial -->
+        <div class="gallery-card card-wide" data-category="videography commercial" data-title="Neon Drift — Brand Campaign" data-meta="Red Digital Cinema • Anamorphic 50mm" data-img="https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=1600&q=80">
+          <div class="card-media">
+            <img src="https://images.unsplash.com/photo-1518173946687-a4c8a383392e?auto=format&fit=crop&w=1200&q=80" alt="Neon Drift Brand Campaign" loading="lazy">
+            <div class="card-overlay">
+              <span class="card-tag">Commercial Video</span>
+              <h3 class="card-title">Neon Drift — Brand Campaign</h3>
+              <p class="card-meta">Cinema 4K &bull; Anamorphic 50mm &bull; Color Graded</p>
+              <div class="play-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Watch Film
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 3: Photography / Commercial -->
+        <div class="gallery-card" data-category="photography commercial" data-title="Monochrome Architecture" data-meta="Leica M11 • 35mm f/2" data-img="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=1200&q=80">
+          <div class="card-media">
+            <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?auto=format&fit=crop&w=800&q=80" alt="Monochrome Architecture" loading="lazy">
+            <div class="card-overlay">
+              <span class="card-tag">Architecture</span>
+              <h3 class="card-title">Monochrome Architecture</h3>
+              <p class="card-meta">Leica M11 &bull; 35mm f/2</p>
+              <span class="view-btn">View Artwork &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 4: Videography / Documentary -->
+        <div class="gallery-card" data-category="videography" data-title="Echoes of the Highland" data-meta="Sony FX6 • 24-70mm GM • Cine EI S-Log3" data-img="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80">
+          <div class="card-media">
+            <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Echoes of the Highland" loading="lazy">
+            <div class="card-overlay">
+              <span class="card-tag">Documentary Film</span>
+              <h3 class="card-title">Echoes of the Highland</h3>
+              <p class="card-meta">Sony FX6 &bull; S-Log3 &bull; 60fps Slow-mo</p>
+              <div class="play-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Watch Film
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 5: Photography / Portrait -->
+        <div class="gallery-card" data-category="photography portrait" data-title="Golden Hour Solitude" data-meta="Sony A7IV • 50mm f/1.2 GM" data-img="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=1200&q=80">
+          <div class="card-media">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80" alt="Golden Hour Solitude" loading="lazy">
+            <div class="card-overlay">
+              <span class="card-tag">Portrait Study</span>
+              <h3 class="card-title">Golden Hour Solitude</h3>
+              <p class="card-meta">Sony A7IV &bull; 50mm f/1.2 GM</p>
+              <span class="view-btn">View Artwork &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Item 6: Videography / Commercial -->
+        <div class="gallery-card card-wide" data-category="videography commercial" data-title="Midnight Pulse — Music Video" data-meta="Arri Alexa Mini LF • Master Anamorphic" data-img="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1600&q=80">
+          <div class="card-media">
+            <img src="https://images.unsplash.com/photo-1514525253161-7a46d19cd819?auto=format&fit=crop&w=1200&q=80" alt="Midnight Pulse Music Video" loading="lazy">
+            <div class="card-overlay">
+              <span class="card-tag">Music Video</span>
+              <h3 class="card-title">Midnight Pulse — Music Video</h3>
+              <p class="card-meta">Anamorphic 2.39:1 &bull; Dynamic Lighting</p>
+              <div class="play-badge">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                Watch Film
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Videography Showcase / Showreel Spotlight -->
+  <section class="section videography-section" id="videography">
+    <div class="container">
+      <div class="section-center">
+        <span class="sub-heading">Cinematography Reel</span>
+        <h2 class="section-heading">Director &amp; Cinematographer Showcase</h2>
+        <p class="section-lead">
+          A showcase of commercial films, brand documentaries, visual poems, and concert cinematography shot across international locations.
+        </p>
+      </div>
+
+      <!-- Main Showreel Player Simulation -->
+      <div class="cinema-player-box" id="cinema-reel-box">
+        <div class="cinema-thumbnail">
+          <img src="https://images.unsplash.com/photo-1485846234645-a62644f84728?auto=format&fit=crop&w=1800&q=80" alt="Cinema Showreel" class="reel-cover">
+          <div class="cinema-overlay">
+            <button class="reel-play-btn" id="showreel-trigger" aria-label="Play Showreel">
+              <svg width="34" height="34" viewBox="0 0 24 24" fill="currentColor"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </button>
+            <div class="reel-caption">
+              <span class="reel-badge">OFFICIAL 2026 SHOWREEL</span>
+              <h3>Kanchan &mdash; Narrative &amp; Commercial Reel</h3>
+              <p>Runtime: 2m 14s &bull; 4K UHD &bull; Color Graded in DaVinci Resolve</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Video Highlights Grid -->
+      <div class="video-highlights">
+        <div class="highlight-item">
+          <div class="highlight-badge">01</div>
+          <h4>Commercials &amp; Ads</h4>
+          <p>Punchy, high-impact brand commercials designed for web, broadcast, and social campaign launches.</p>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-badge">02</div>
+          <h4>Music &amp; Performance</h4>
+          <p>Atmospheric music videos, live acoustic sessions, and energetic concert visuals with customized lighting design.</p>
+        </div>
+        <div class="highlight-item">
+          <div class="highlight-badge">03</div>
+          <h4>Brand Documentaries</h4>
+          <p>Human-centered storytelling and founder profiles that build genuine emotional connection with audiences.</p>
         </div>
       </div>
     </div>
@@ -87,267 +264,253 @@
   <!-- About Section -->
   <section class="section about-section" id="about">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">About Me</span>
-        <h2 class="section-title">Driven by Curiosity &amp; Code</h2>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-card intro-card">
-          <div class="avatar-box">
-            <div class="avatar-placeholder">K</div>
+      <div class="about-wrapper">
+        <div class="about-image-column">
+          <div class="about-image-card">
+            <img src="https://images.unsplash.com/photo-1552168324-d612d77725e3?auto=format&fit=crop&w=900&q=80" alt="Kanchan with camera" class="photographer-img">
+            <div class="about-floating-badge">
+              <span class="badge-title">KANCHAN</span>
+              <span class="badge-role">Director of Photography</span>
+            </div>
           </div>
-          <h3>Hi! I'm Kanchan.</h3>
-          <p>
-            I love turning ambitious ideas into reality on the web. My focus is on writing clean, scalable code and delivering seamless user interfaces that look great on any screen.
+        </div>
+
+        <div class="about-text-column">
+          <span class="sub-heading">About Kanchan</span>
+          <h2 class="section-heading">Obsessed With Light, Color &amp; Human Emotion</h2>
+          <p class="about-desc">
+            I am a photographer and cinematographer driven by the relentless pursuit of honest visual storytelling. My style balances raw documentary energy with meticulous cinematic lighting.
           </p>
-          <p>
-            Whether designing responsive web layouts, exploring full-stack tools, or collaborating on innovative projects, I bring a keen eye for detail and enthusiasm to every build.
+          <p class="about-desc">
+            With years behind the lens, I partner with forward-thinking brands, musicians, and creators to transform concepts into unforgettable imagery. From remote mountain expeditions to controlled studio stages, every frame is crafted with intention.
           </p>
-        </div>
 
-        <div class="about-card highlights-card">
-          <h3 class="highlight-title">What I Focus On</h3>
-          <div class="focus-list">
-            <div class="focus-item">
-              <div class="focus-icon">🚀</div>
-              <div>
-                <h4>Modern Web Development</h4>
-                <p>Building clean, responsive, and accessible web experiences from scratch.</p>
-              </div>
-            </div>
-            <div class="focus-item">
-              <div class="focus-icon">🎨</div>
-              <div>
-                <h4>Design &amp; Aesthetics</h4>
-                <p>Creating intuitive interfaces with sleek typography, smooth animations, and polish.</p>
-              </div>
-            </div>
-            <div class="focus-item">
-              <div class="focus-icon">⚡</div>
-              <div>
-                <h4>Performance &amp; Quality</h4>
-                <p>Optimizing page speeds, clean structure, and cross-device compatibility.</p>
-              </div>
-            </div>
+          <div class="skills-chips">
+            <span class="chip">Cinematography (S-Log3 / RAW)</span>
+            <span class="chip">Editorial Photography</span>
+            <span class="chip">Lighting &amp; Grip</span>
+            <span class="chip">DaVinci Resolve Color Grading</span>
+            <span class="chip">Creative Direction</span>
+            <span class="chip">Drone Aerial Operations</span>
+          </div>
+
+          <div class="about-actions">
+            <a href="#contact" class="btn btn-primary">Start a Project</a>
+            <a href="#gear" class="btn btn-secondary">Explore Production Gear</a>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Skills Section -->
-  <section class="section skills-section" id="skills">
+  <!-- Services & Specialties -->
+  <section class="section services-section" id="services">
     <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Skills &amp; Expertise</span>
-        <h2 class="section-title">Technologies &amp; Tools</h2>
-      </div>
-
-      <div class="skills-grid">
-        <div class="skill-category">
-          <h3>Frontend Development</h3>
-          <div class="skill-tags">
-            <span class="tag">HTML5</span>
-            <span class="tag">CSS3 / SASS</span>
-            <span class="tag">JavaScript (ES6+)</span>
-            <span class="tag">Responsive Design</span>
-            <span class="tag">Tailwind CSS</span>
-            <span class="tag">React.js</span>
-          </div>
+      <div class="section-top">
+        <div>
+          <span class="sub-heading">What I Offer</span>
+          <h2 class="section-heading">Creative Services</h2>
         </div>
-
-        <div class="skill-category">
-          <h3>Tools &amp; Workflow</h3>
-          <div class="skill-tags">
-            <span class="tag">Git &amp; GitHub</span>
-            <span class="tag">GitHub Pages</span>
-            <span class="tag">VS Code</span>
-            <span class="tag">Figma / UI Design</span>
-            <span class="tag">Command Line</span>
-            <span class="tag">Web Standards &amp; SEO</span>
-          </div>
-        </div>
-
-        <div class="skill-category">
-          <h3>Core Strengths</h3>
-          <div class="skill-tags">
-            <span class="tag">Problem Solving</span>
-            <span class="tag">UI/UX Thinking</span>
-            <span class="tag">Code Cleanliness</span>
-            <span class="tag">Fast Learner</span>
-            <span class="tag">Creative Strategy</span>
-            <span class="tag">Collaboration</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Projects Section -->
-  <section class="section projects-section" id="projects">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Portfolio</span>
-        <h2 class="section-title">Featured Projects</h2>
-      </div>
-
-      <div class="projects-grid">
-        <!-- Project 1 -->
-        <article class="project-card">
-          <div class="project-preview preview-gradient-1">
-            <div class="preview-badge">Featured</div>
-            <span class="preview-icon">🌐</span>
-          </div>
-          <div class="project-body">
-            <span class="project-category">Web Experience</span>
-            <h3 class="project-title">Personal Brand &amp; Portfolio</h3>
-            <p class="project-desc">
-              A responsive, fast-loading personal website featuring a custom theme engine, clean design, and smooth interactive navigation.
-            </p>
-            <div class="project-tech">
-              <span>HTML5</span>
-              <span>Modern CSS</span>
-              <span>JavaScript</span>
-            </div>
-            <div class="project-links">
-              <a href="#hero" class="project-link">View Live &rarr;</a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link-secondary">GitHub</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 2 -->
-        <article class="project-card">
-          <div class="project-preview preview-gradient-2">
-            <div class="preview-badge">Interactive</div>
-            <span class="preview-icon">📱</span>
-          </div>
-          <div class="project-body">
-            <span class="project-category">Application</span>
-            <h3 class="project-title">Modern Web Showcase</h3>
-            <p class="project-desc">
-              An interactive dashboard and showcase platform with responsive cards, dynamic filtering, and mobile-first architecture.
-            </p>
-            <div class="project-tech">
-              <span>JavaScript</span>
-              <span>CSS Grid</span>
-              <span>REST API</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="project-link">Explore Demo &rarr;</a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link-secondary">GitHub</a>
-            </div>
-          </div>
-        </article>
-
-        <!-- Project 3 -->
-        <article class="project-card">
-          <div class="project-preview preview-gradient-3">
-            <div class="preview-badge">Design &amp; Code</div>
-            <span class="preview-icon">⚡</span>
-          </div>
-          <div class="project-body">
-            <span class="project-category">UI/UX Project</span>
-            <h3 class="project-title">Creative Studio Landing Page</h3>
-            <p class="project-desc">
-              High-converting landing page built with micro-animations, glassmorphism accents, and accessible design principles.
-            </p>
-            <div class="project-tech">
-              <span>UI/UX</span>
-              <span>CSS Variables</span>
-              <span>Animation</span>
-            </div>
-            <div class="project-links">
-              <a href="#" class="project-link">Explore Demo &rarr;</a>
-              <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="project-link-secondary">GitHub</a>
-            </div>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section class="section contact-section" id="contact">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-tag">Let's Connect</span>
-        <h2 class="section-title">Get In Touch</h2>
-        <p class="section-subtitle">
-          Have an opportunity, project idea, or just want to say hi? Feel free to send a message!
+        <p class="section-lead-right">
+          Full-cycle visual production from initial moodboarding and script breakdown to filming, editing, and final color mastering.
         </p>
       </div>
 
-      <div class="contact-grid">
-        <div class="contact-info">
-          <div class="contact-info-card">
-            <div class="contact-icon">📧</div>
-            <div>
-              <h4>Email</h4>
-              <p><a href="mailto:contact.kanchan@example.com">contact.kanchan@example.com</a></p>
-            </div>
-          </div>
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon">🎬</div>
+          <h3>Cinematography &amp; Video</h3>
+          <p>4K/6K cinema production for brand films, commercial adverts, music videos, and cinematic event recaps.</p>
+          <ul class="service-list">
+            <li>Camera Operation &amp; Directing</li>
+            <li>Multi-Camera Shoots</li>
+            <li>Gimbal &amp; Anamorphic Rigging</li>
+          </ul>
+        </div>
 
-          <div class="contact-info-card">
-            <div class="contact-icon">📍</div>
-            <div>
-              <h4>Location</h4>
-              <p>Available worldwide / Remote</p>
-            </div>
-          </div>
+        <div class="service-card">
+          <div class="service-icon">📷</div>
+          <h3>Commercial Photography</h3>
+          <p>Striking brand imagery for fashion lookbooks, product campaigns, advertising, and architectural spaces.</p>
+          <ul class="service-list">
+            <li>Editorial &amp; Fashion Campaigns</li>
+            <li>Product &amp; Lifestyle Imagery</li>
+            <li>Lookbooks &amp; E-Commerce</li>
+          </ul>
+        </div>
 
-          <div class="contact-info-card">
-            <div class="contact-icon">💬</div>
-            <div>
-              <h4>Social Presence</h4>
-              <div class="social-pills">
-                <a href="https://github.com" target="_blank" rel="noopener noreferrer" class="social-pill">GitHub</a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="social-pill">LinkedIn</a>
-                <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" class="social-pill">Twitter / X</a>
-              </div>
+        <div class="service-card">
+          <div class="service-icon">👤</div>
+          <h3>Portraits &amp; Artists</h3>
+          <p>Creative personal branding, artist press kits, author portraits, and expressive human character studies.</p>
+          <ul class="service-list">
+            <li>Studio &amp; Environmental Lighting</li>
+            <li>Actor Headshots &amp; Press Kits</li>
+            <li>Creative Editorial Styling</li>
+          </ul>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon">🎨</div>
+          <h3>Post-Production &amp; Grading</h3>
+          <p>High-end color grading, retouching, sound design, and master finishing to give every deliverable that film look.</p>
+          <ul class="service-list">
+            <li>DaVinci Resolve Color Grading</li>
+            <li>High-End Retouching</li>
+            <li>Sound Design &amp; Mastering</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Production Gear & Arsenal -->
+  <section class="section gear-section" id="gear">
+    <div class="container">
+      <div class="section-center">
+        <span class="sub-heading">Equipment</span>
+        <h2 class="section-heading">Production Arsenal</h2>
+        <p class="section-lead">
+          Industry-standard cinema gear selected to deliver uncompromising image quality in any shooting environment.
+        </p>
+      </div>
+
+      <div class="gear-grid">
+        <div class="gear-card">
+          <span class="gear-cat">Cameras &amp; Bodies</span>
+          <h4>Sony FX Cinema &amp; Alpha Series</h4>
+          <p>10-bit 4:2:2 4K 120p, high dynamic range S-Cinetone / S-Log3 sensors for rich color rendition.</p>
+        </div>
+
+        <div class="gear-card">
+          <span class="gear-cat">Glass &amp; Lenses</span>
+          <h4>Sony G-Master Primes &amp; Anamorphic</h4>
+          <p>24mm f/1.4, 35mm f/1.4, 50mm f/1.2, 85mm f/1.4, plus 2.39:1 vintage anamorphic optics.</p>
+        </div>
+
+        <div class="gear-card">
+          <span class="gear-cat">Lighting &amp; Grip</span>
+          <h4>Aputure &amp; Nanlite Studio Units</h4>
+          <p>Bowens mount COB lights, softboxes, fresnels, RGB light tubes, and heavy-duty C-stands.</p>
+        </div>
+
+        <div class="gear-card">
+          <span class="gear-cat">Stabilization &amp; Drone</span>
+          <h4>DJI Ronin RS3 Pro &amp; 4K Drone</h4>
+          <p>Smooth robotic stabilization, car mounts, and high-altitude cinema aerial recording.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact & Booking Section -->
+  <section class="section contact-section" id="contact">
+    <div class="container">
+      <div class="contact-wrapper">
+        <div class="contact-left">
+          <span class="sub-heading">Let's Collaborate</span>
+          <h2 class="section-heading">Have a Project or Shoot in Mind?</h2>
+          <p class="contact-intro">
+            Currently accepting bookings for commercial campaigns, visual films, portraits, and creative commissions worldwide.
+          </p>
+
+          <div class="direct-contacts">
+            <div class="direct-item">
+              <span class="d-label">Email</span>
+              <a href="mailto:hello.kanchanvisuals@gmail.com" class="d-val">hello.kanchanvisuals@gmail.com</a>
+            </div>
+            <div class="direct-item">
+              <span class="d-label">Instagram</span>
+              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" class="d-val">@kanchan.visuals</a>
+            </div>
+            <div class="direct-item">
+              <span class="d-label">Based in</span>
+              <span class="d-val">Available for Travel &amp; Remote Shoots</span>
             </div>
           </div>
         </div>
 
-        <div class="contact-form-container">
-          <form id="contact-form" class="contact-form">
-            <div class="form-group">
-              <label for="name">Your Name</label>
-              <input type="text" id="name" name="name" required placeholder="What's your name?">
+        <div class="contact-right">
+          <form id="booking-form" class="inquiry-form">
+            <h3 class="form-title">Shoot Inquiry Form</h3>
+
+            <div class="form-row">
+              <div class="form-field">
+                <label for="client-name">Your Name / Company</label>
+                <input type="text" id="client-name" name="name" required placeholder="Who is reaching out?">
+              </div>
+              <div class="form-field">
+                <label for="client-email">Email Address</label>
+                <input type="email" id="client-email" name="email" required placeholder="your.name@company.com">
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="email">Your Email</label>
-              <input type="email" id="email" name="email" required placeholder="name@example.com">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="project-type">Project Type</label>
+                <select id="project-type" name="type" required>
+                  <option value="" disabled selected>Select production type</option>
+                  <option value="commercial-film">Commercial / Brand Film</option>
+                  <option value="music-video">Music Video</option>
+                  <option value="editorial-photo">Editorial &amp; Fashion Photography</option>
+                  <option value="portrait-shoot">Personal / Artist Portrait</option>
+                  <option value="event-coverage">Documentary / Event</option>
+                  <option value="other">Other Creative Collaboration</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="shoot-date">Target Timeline / Date</label>
+                <input type="text" id="shoot-date" name="timeline" placeholder="e.g. Next month / Flexible">
+              </div>
             </div>
 
-            <div class="form-group">
-              <label for="message">Your Message</label>
-              <textarea id="message" name="message" rows="5" required placeholder="Tell me about your idea or question..."></textarea>
+            <div class="form-field">
+              <label for="project-details">Project Vision &amp; Requirements</label>
+              <textarea id="project-details" name="details" rows="4" required placeholder="Tell me about the concept, location, deliverables, and estimated budget..."></textarea>
             </div>
 
             <button type="submit" class="btn btn-primary submit-btn">
-              <span>Send Message</span>
-              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+              <span>Send Production Inquiry</span>
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
             </button>
-            <div id="form-feedback" class="form-feedback hidden"></div>
+
+            <div id="booking-feedback" class="feedback-msg hidden"></div>
           </form>
         </div>
       </div>
     </div>
   </section>
 
+  <!-- Fullscreen Lightbox / Video Modal -->
+  <div class="modal-backdrop" id="modal-backdrop">
+    <div class="modal-content" id="modal-content">
+      <button class="modal-close" id="modal-close" aria-label="Close modal">&times;</button>
+      <div class="modal-media-wrap" id="modal-media-wrap">
+        <!-- Injected via JavaScript -->
+      </div>
+      <div class="modal-info">
+        <h3 id="modal-title">Artwork Title</h3>
+        <p id="modal-meta">Details &bull; Camera &bull; Lens</p>
+      </div>
+    </div>
+  </div>
+
   <!-- Footer -->
   <footer class="footer">
-    <div class="container footer-content">
-      <div class="footer-brand">
-        <a href="#hero" class="footer-logo"><span class="logo-accent">K</span>anchan</a>
-        <p>Crafting digital experiences with care and passion.</p>
+    <div class="container footer-grid">
+      <div class="footer-left">
+        <span class="footer-brand">KANCHAN</span>
+        <p>Cinematography &bull; Photography &bull; Creative Direction</p>
       </div>
-      <div class="footer-bottom">
-        <p>&copy; <span id="current-year"></span> Kanchan. Built for the web.</p>
-        <a href="#hero" class="back-to-top">Back to top &uarr;</a>
+      <div class="footer-socials">
+        <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://youtube.com" target="_blank" rel="noopener noreferrer">YouTube</a>
+        <a href="https://vimeo.com" target="_blank" rel="noopener noreferrer">Vimeo</a>
+        <a href="https://behance.net" target="_blank" rel="noopener noreferrer">Behance</a>
+        <a href="https://github.com/kanchan-portfolio" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+      <div class="footer-copy">
+        <p>&copy; <span id="current-year"></span> Kanchan Visuals. All rights reserved.</p>
       </div>
     </div>
   </footer>
