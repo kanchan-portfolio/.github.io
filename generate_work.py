@@ -3,103 +3,103 @@ import os
 
 categories = [
     {
-        'id': 'cat-slide-10',
+        'id': 'cat-editorial',
         'code': '01',
-        'title': 'Photoshoot • Slide 10 Edition',
+        'title': 'Photoshoot • High-Fashion Editorial',
         'subtitle': 'Fashion & Editorial Styling',
-        'desc': 'High-fashion portraiture, creative styling, and expressive character poses featured on Slide 10.',
+        'desc': 'High-fashion portraiture, creative styling, and expressive character poses in contemporary studio aesthetic.',
         'items': [
-            {'src': 'assets/slide_10_1.jpg', 'slide': 'Slide 10', 'num': '01', 'title': 'High-Fashion Portrait I', 'type': 'photo'},
-            {'src': 'assets/slide_10_2.jpg', 'slide': 'Slide 10', 'num': '02', 'title': 'High-Fashion Portrait II', 'type': 'photo'},
-            {'src': 'assets/slide_10_3.jpg', 'slide': 'Slide 10', 'num': '03', 'title': 'High-Fashion Portrait III', 'type': 'photo'},
-            {'src': 'assets/slide_10_4.jpg', 'slide': 'Slide 10', 'num': '04', 'title': 'High-Fashion Portrait IV', 'type': 'photo'},
+            {'src': 'assets/slide_10_1.jpg', 'tag': 'Editorial', 'num': '01', 'title': 'High-Fashion Portrait I', 'type': 'photo'},
+            {'src': 'assets/slide_10_2.jpg', 'tag': 'Editorial', 'num': '02', 'title': 'High-Fashion Portrait II', 'type': 'photo'},
+            {'src': 'assets/slide_10_3.jpg', 'tag': 'Editorial', 'num': '03', 'title': 'High-Fashion Portrait III', 'type': 'photo'},
+            {'src': 'assets/slide_10_4.jpg', 'tag': 'Editorial', 'num': '04', 'title': 'High-Fashion Portrait IV', 'type': 'photo'},
         ]
     },
     {
-        'id': 'cat-slide-5',
+        'id': 'cat-studio',
         'code': '02',
-        'title': 'Photoshoot • Studio Series (Slide 5)',
+        'title': 'Photoshoot • Studio Lighting Series',
         'subtitle': 'Studio Lighting & Form',
         'desc': 'Studio lighting setups, wide and intimate character framing, prop compositions, and expressive poses.',
         'items': [
-            {'src': f'assets/slide_5_{i}.jpg', 'slide': 'Slide 05', 'num': f'{i:02d}', 'title': f'Studio Study {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_5_{i}.jpg', 'tag': 'Studio', 'num': f'{i:02d}', 'title': f'Studio Study {i:02d}', 'type': 'photo'}
             for i in range(1, 14)
         ]
     },
     {
-        'id': 'cat-slides-6-7',
+        'id': 'cat-mood-styling',
         'code': '03',
-        'title': 'Photoshoot • Mood & Styling (Slides 6 & 7)',
+        'title': 'Photoshoot • Mood & Styling Series',
         'subtitle': 'Atmospheric & Visual Narratives',
         'desc': 'Natural daylight styling, atmospheric textures, outdoor narratives, and editorial lookbooks.',
         'items': [
-            {'src': f'assets/slide_6_{i}.jpg', 'slide': 'Slide 06', 'num': f'{i:02d}', 'title': f'Mood Framing {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_6_{i}.jpg', 'tag': 'Mood', 'num': f'{i:02d}', 'title': f'Mood Framing {i:02d}', 'type': 'photo'}
             for i in range(1, 5)
         ] + [
-            {'src': f'assets/slide_7_{i}.jpg', 'slide': 'Slide 07', 'num': f'{i:02d}', 'title': f'Styling Study {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_7_{i}.jpg', 'tag': 'Styling', 'num': f'{i:02d}', 'title': f'Styling Study {i:02d}', 'type': 'photo'}
             for i in range(1, 6)
         ]
     },
     {
-        'id': 'cat-slides-8-9',
+        'id': 'cat-ambient-light',
         'code': '04',
-        'title': 'Photoshoot • Ambient Light (Slides 8 & 9)',
+        'title': 'Photoshoot • Ambient Light Series',
         'subtitle': 'Natural Shadows & Tonal Depth',
         'desc': 'Directional soft light, warm shadows, cinematic rim lighting, and organic mood portraits.',
         'items': [
-            {'src': f'assets/slide_8_{i}.jpg', 'slide': 'Slide 08', 'num': f'{i:02d}', 'title': f'Ambient Study {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_8_{i}.jpg', 'tag': 'Ambient', 'num': f'{i:02d}', 'title': f'Ambient Study {i:02d}', 'type': 'photo'}
             for i in range(1, 5)
         ] + [
-            {'src': 'assets/slide_9_1.jpg', 'slide': 'Slide 09', 'num': '01', 'title': 'Ambient Portrait I', 'type': 'photo'}
+            {'src': 'assets/slide_9_1.jpg', 'tag': 'Ambient', 'num': '01', 'title': 'Ambient Portrait I', 'type': 'photo'}
         ]
     },
     {
-        'id': 'cat-slides-11-12',
+        'id': 'cat-character',
         'code': '05',
-        'title': 'Photoshoot • Character Studies (Slides 11 & 12)',
+        'title': 'Photoshoot • Character Studies',
         'subtitle': 'Dramatic Wardrobe & Angles',
         'desc': 'Contemporary character exploration, dynamic camera angles, and editorial expressions.',
         'items': [
-            {'src': f'assets/slide_11_{i}.jpg', 'slide': 'Slide 11', 'num': f'{i:02d}', 'title': f'Character Study {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_11_{i}.jpg', 'tag': 'Character', 'num': f'{i:02d}', 'title': f'Character Study {i:02d}', 'type': 'photo'}
             for i in range(1, 6)
         ] + [
-            {'src': f'assets/slide_12_{i}.jpg', 'slide': 'Slide 12', 'num': f'{i:02d}', 'title': f'Character Expression {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_12_{i}.jpg', 'tag': 'Character', 'num': f'{i:02d}', 'title': f'Character Expression {i:02d}', 'type': 'photo'}
             for i in range(1, 6)
         ]
     },
     {
-        'id': 'cat-slides-13-14',
+        'id': 'cat-monochrome',
         'code': '06',
-        'title': 'Photoshoot • Monochromes & Tone (Slides 13 & 14)',
+        'title': 'Photoshoot • Monochromes & Tone',
         'subtitle': 'Black & White Cinematography Stills',
         'desc': 'High-contrast black & white tones, silhouettes, structural shadow play, and intimate portraits.',
         'items': [
-            {'src': f'assets/slide_13_{i}.jpg', 'slide': 'Slide 13', 'num': f'{i:02d}', 'title': f'Monochrome {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_13_{i}.jpg', 'tag': 'Monochrome', 'num': f'{i:02d}', 'title': f'Monochrome {i:02d}', 'type': 'photo'}
             for i in range(1, 6)
         ] + [
-            {'src': f'assets/slide_14_{i}.jpg', 'slide': 'Slide 14', 'num': f'{i:02d}', 'title': f'Monochrome Study {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_14_{i}.jpg', 'tag': 'Monochrome', 'num': f'{i:02d}', 'title': f'Monochrome Study {i:02d}', 'type': 'photo'}
             for i in range(1, 4)
         ]
     },
     {
-        'id': 'cat-slide-15',
+        'id': 'cat-limited-2030',
         'code': '07',
         'title': 'Editorial Collection • Limited Edition 2030',
         'subtitle': 'Futuristic Concept & Cover Production',
         'desc': 'Editorial concept artwork and official portfolio cover visual direction.',
         'items': [
-            {'src': 'assets/slide_15_1.jpg', 'slide': 'Slide 15', 'num': '01', 'title': 'Limited Edition 2030 Feature', 'type': 'photo'},
-            {'src': 'assets/slide_1_1.jpg', 'slide': 'Slide 01', 'num': '01', 'title': 'Cover Portfolio Visual Direction', 'type': 'photo'}
+            {'src': 'assets/slide_15_1.jpg', 'tag': 'Edition 2030', 'num': '01', 'title': 'Limited Edition 2030 Feature', 'type': 'photo'},
+            {'src': 'assets/slide_1_1.jpg', 'tag': 'Cover Concept', 'num': '01', 'title': 'Cover Portfolio Visual Direction', 'type': 'photo'}
         ]
     },
     {
-        'id': 'cat-slide-21',
+        'id': 'cat-songti',
         'code': '08',
-        'title': 'Songti Still Frames (Slide 21)',
+        'title': 'Songti Cinematography Still Frames',
         'subtitle': 'Film Stills & Color Grading',
         'desc': 'Cinematography production stills, color graded frames, and narrative film cinematography.',
         'items': [
-            {'src': f'assets/slide_7_{i}.jpg', 'slide': 'Slide 21', 'num': f'{i:02d}', 'title': f'Songti Cinematic Frame {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_7_{i}.jpg', 'tag': 'Songti Still', 'num': f'{i:02d}', 'title': f'Songti Cinematic Frame {i:02d}', 'type': 'photo'}
             for i in range(1, 6)
         ]
     },
@@ -110,10 +110,10 @@ categories = [
         'subtitle': 'Video Editing & Broadcast Sound',
         'desc': '4K multi-cam editing, interview pacing, audio cleanup, and color mastering for film festival dialogues.',
         'items': [
-            {'src': 'assets/yt_anupam_kher.jpg', 'slide': 'KIFF Ep 01', 'num': '01', 'title': 'Anupam Kher Unfiltered — Acting Masterclass', 'type': 'video', 'videoId': 'Sh0jTGE660o'},
-            {'src': 'assets/yt_saurabh_shukla.jpg', 'slide': 'KIFF Ep 02', 'num': '02', 'title': 'Saurabh Shukla — Screenwriting & Satya', 'type': 'video', 'videoId': 'ojgap437XT8'},
-            {'src': 'assets/yt_subhash_sehgal.jpg', 'slide': 'KIFF Ep 03', 'num': '03', 'title': 'Subhash Sehgal — Film Editing Masterclass', 'type': 'video', 'videoId': 'AWiazyKn8ak'},
-            {'src': 'assets/yt_deepshikha_nagpal.jpg', 'slide': 'KIFF Ep 04', 'num': '04', 'title': 'Deepshikha Nagpal — Industry & Direction', 'type': 'video', 'videoId': 'hcNVkH6HhVk'},
+            {'src': 'assets/yt_anupam_kher.jpg', 'tag': 'KIFF Ep 01', 'num': '01', 'title': 'Anupam Kher Unfiltered — Acting Masterclass', 'type': 'video', 'videoId': 'Sh0jTGE660o'},
+            {'src': 'assets/yt_saurabh_shukla.jpg', 'tag': 'KIFF Ep 02', 'num': '02', 'title': 'Saurabh Shukla — Screenwriting & Satya', 'type': 'video', 'videoId': 'ojgap437XT8'},
+            {'src': 'assets/yt_subhash_sehgal.jpg', 'tag': 'KIFF Ep 03', 'num': '03', 'title': 'Subhash Sehgal — Film Editing Masterclass', 'type': 'video', 'videoId': 'AWiazyKn8ak'},
+            {'src': 'assets/yt_deepshikha_nagpal.jpg', 'tag': 'KIFF Ep 04', 'num': '04', 'title': 'Deepshikha Nagpal — Industry & Direction', 'type': 'video', 'videoId': 'hcNVkH6HhVk'},
         ]
     }
 ]
@@ -124,10 +124,10 @@ html = f"""<!DOCTYPE html>
 <html data-wf-domain="kanchan-portfolio.github.io" lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Kanchan Choudhary — Work &amp; Full Slide Exhibition (All Photos)</title>
-  <meta content="All works and categorized slide exhibition of Kanchan Choudhary. Uncropped high-resolution frames from Slide 10 Edition, Studio Series, Monochromes, Songti stills, and KIFF podcasts." name="description"/>
-  <meta content="Kanchan Choudhary — Work &amp; Full Slide Exhibition" property="og:title"/>
-  <meta content="All works and categorized slide exhibition of Kanchan Choudhary. Uncropped high-resolution frames from Slide 10 Edition, Studio Series, Monochromes, Songti stills, and KIFF podcasts." property="og:description"/>
+  <title>Kanchan Choudhary — Work &amp; Full Exhibition (All Works)</title>
+  <meta content="All works and categorized exhibition of Kanchan Choudhary. Uncropped high-resolution frames from High-Fashion Editorials, Studio Series, Monochromes, Songti stills, and KIFF celebrity podcasts." name="description"/>
+  <meta content="Kanchan Choudhary — Work &amp; Full Exhibition" property="og:title"/>
+  <meta content="All works and categorized exhibition of Kanchan Choudhary. Uncropped high-resolution frames from High-Fashion Editorials, Studio Series, Monochromes, Songti stills, and KIFF celebrity podcasts." property="og:description"/>
   <meta content="assets/slide_10_1.jpg" property="og:image"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
@@ -416,15 +416,15 @@ html = f"""<!DOCTYPE html>
                 <div class="menu-link"><div class="body-font">Work ({total_frames} Frames)</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
-              <a href="#cat-slide-10" class="menu-item w-inline-block filter-nav-direct" data-target="cat-slide-10">
-                <div class="menu-link"><div class="body-font">Slide 10</div></div>
+              <a href="#cat-editorial" class="menu-item w-inline-block filter-nav-direct" data-target="cat-editorial">
+                <div class="menu-link"><div class="body-font">Editorial</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
               <a href="#cat-kiff" class="menu-item w-inline-block filter-nav-direct" data-target="cat-kiff">
                 <div class="menu-link"><div class="body-font">KIFF Podcasts</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
-              <a href="#cat-slide-21" class="menu-item w-inline-block filter-nav-direct" data-target="cat-slide-21">
+              <a href="#cat-songti" class="menu-item w-inline-block filter-nav-direct" data-target="cat-songti">
                 <div class="menu-link"><div class="body-font">Songti Stills</div></div>
               </a>
             </div>
@@ -492,7 +492,7 @@ for c in categories:
                     {badge_html}
                   </div>
                   <div class="photo-card-meta">
-                    <span class="meta-date">{item['slide']}</span>
+                    <span class="meta-date">{item['tag']}</span>
                     <span class="meta-title">{item['title']}</span>
                     <span class="meta-badge">{meta_tag}</span>
                   </div>
@@ -616,6 +616,18 @@ html += f"""                </div>
   <!-- Interactive Scripts -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {{
+      // Legacy hash mapping for backwards compatibility
+      const aliasMap = {{
+        'cat-slide-10': 'cat-editorial',
+        'cat-slide-5': 'cat-studio',
+        'cat-slides-6-7': 'cat-mood-styling',
+        'cat-slides-8-9': 'cat-ambient-light',
+        'cat-slides-11-12': 'cat-character',
+        'cat-slides-13-14': 'cat-monochrome',
+        'cat-slide-15': 'cat-limited-2030',
+        'cat-slide-21': 'cat-songti'
+      }};
+
       // 1. Mobile Menu Toggle
       const menuBtn = document.getElementById('menu-toggle-btn');
       const menuInfo = document.getElementById('menu-info');
@@ -643,7 +655,13 @@ html += f"""                </div>
         return visible.length > 0 ? visible : allCards;
       }}
 
-      function filterCategory(targetId, updateUrl = true) {{
+      function resolveTarget(rawId) {{
+        return aliasMap[rawId] || rawId;
+      }}
+
+      function filterCategory(rawTargetId, updateUrl = true) {{
+        const targetId = resolveTarget(rawTargetId);
+
         // Update active states on pills and sidebar links
         catPills.forEach(p => {{
           if (p.getAttribute('data-target') === targetId) p.classList.add('active');
@@ -709,14 +727,15 @@ html += f"""                </div>
 
       // Auto-filter if URL contains category hash
       if (window.location.hash) {{
-        const initialTarget = window.location.hash.substring(1);
+        const initialTarget = resolveTarget(window.location.hash.substring(1));
         if (initialTarget && document.getElementById(initialTarget)) {{
           filterCategory(initialTarget, false);
         }}
       }}
 
       window.addEventListener('hashchange', () => {{
-        const hash = window.location.hash.substring(1);
+        const rawHash = window.location.hash.substring(1);
+        const hash = resolveTarget(rawHash);
         if (hash && document.getElementById(hash)) {{
           filterCategory(hash, false);
         }} else if (!hash) {{
@@ -829,4 +848,4 @@ html += f"""                </div>
 with open('work.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
-print(f"Successfully generated work.html with {total_frames} items!")
+print(f"Successfully generated work.html with {total_frames} items without any Slide text!")
