@@ -110,10 +110,10 @@ categories = [
         'subtitle': 'Video Editing & Broadcast Sound',
         'desc': '4K multi-cam editing, interview pacing, audio cleanup, and color mastering for film festival dialogues.',
         'items': [
-            {'src': 'assets/yt_anupam_kher.jpg', 'slide': 'KIFF Ep 01', 'num': '01', 'title': 'Anupam Kher Unfiltered — Acting Masterclass', 'type': 'video', 'videoId': 'X9qT-WJ5u4Y'},
-            {'src': 'assets/yt_saurabh_shukla.jpg', 'slide': 'KIFF Ep 02', 'num': '02', 'title': 'Saurabh Shukla — Screenwriting & Satya', 'type': 'video', 'videoId': '3Z_8jR_6yS0'},
-            {'src': 'assets/yt_subhash_sehgal.jpg', 'slide': 'KIFF Ep 03', 'num': '03', 'title': 'Subhash Sehgal — Film Editing Masterclass', 'type': 'video', 'videoId': 'k8V8C0-m1Xk'},
-            {'src': 'assets/yt_deepshikha_nagpal.jpg', 'slide': 'KIFF Ep 04', 'num': '04', 'title': 'Deepshikha Nagpal — Industry & Direction', 'type': 'video', 'videoId': 'dQw4w9WgXcQ'},
+            {'src': 'assets/yt_anupam_kher.jpg', 'slide': 'KIFF Ep 01', 'num': '01', 'title': 'Anupam Kher Unfiltered — Acting Masterclass', 'type': 'video', 'videoId': 'Sh0jTGE660o'},
+            {'src': 'assets/yt_saurabh_shukla.jpg', 'slide': 'KIFF Ep 02', 'num': '02', 'title': 'Saurabh Shukla — Screenwriting & Satya', 'type': 'video', 'videoId': 'ojgap437XT8'},
+            {'src': 'assets/yt_subhash_sehgal.jpg', 'slide': 'KIFF Ep 03', 'num': '03', 'title': 'Subhash Sehgal — Film Editing Masterclass', 'type': 'video', 'videoId': 'AWiazyKn8ak'},
+            {'src': 'assets/yt_deepshikha_nagpal.jpg', 'slide': 'KIFF Ep 04', 'num': '04', 'title': 'Deepshikha Nagpal — Industry & Direction', 'type': 'video', 'videoId': 'hcNVkH6HhVk'},
         ]
     }
 ]
@@ -301,6 +301,11 @@ html = f"""<!DOCTYPE html>
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }}
 
+    /* 16:9 for Video Cards */
+    .photo-friendly-container.photo-video-container {{
+      aspect-ratio: 16 / 9 !important;
+    }}
+
     .photo-card-wrapper:hover .photo-friendly-container {{
       border-color: rgba(0, 0, 0, 0.5);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
@@ -342,62 +347,52 @@ html = f"""<!DOCTYPE html>
       background: #e50914;
       color: #fff;
       font-size: 10px;
+      font-weight: 600;
       padding: 3px 8px;
       font-family: 'IBM Plex Mono', monospace;
       border-radius: 2px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      pointer-events: none;
     }}
 
     .photo-card-meta {{
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 10px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-    }}
-
-    .photo-card-meta .meta-date {{
-      color: #666;
+      padding: 8px 2px 2px 2px;
       font-size: 11px;
+      color: #444;
+      font-family: 'IBM Plex Mono', monospace;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      margin-top: 6px;
     }}
 
-    .photo-card-meta .meta-title {{
-      color: #000;
-      font-weight: 500;
+    .meta-title {{
       flex-grow: 1;
-      margin: 0 8px;
+      margin: 0 10px;
+      color: #000;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }}
 
-    .photo-card-meta .meta-badge {{
-      color: #666;
-      font-size: 11px;
+    .meta-badge {{
+      color: #777;
     }}
 
-    /* Filter links in right sidebar */
-    .filter-cat-link {{
-      cursor: pointer;
-      display: block;
-      padding: 3px 0;
-      color: #444;
-      text-decoration: none;
-      transition: color 0.15s;
-    }}
-    .filter-cat-link:hover, .filter-cat-link.active {{
-      color: #000;
-      font-weight: 500;
-      text-decoration: underline;
+    /* Lightbox modal responsive */
+    @media screen and (max-width: 600px) {{
+      #work-lightbox {{
+        padding: 8px !important;
+      }}
+      #work-lightbox > div {{
+        max-height: 98vh !important;
+      }}
     }}
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation -->
   <nav class="menu">
     <div class="w-layout-blockcontainer container w-container">
       <div class="menu-content">
@@ -418,36 +413,48 @@ html = f"""<!DOCTYPE html>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
               <a href="work.html" aria-current="page" class="menu-item w-inline-block w--current">
-                <div class="menu-link"><div class="body-font" style="text-decoration: underline; font-weight: 500;">Work (All {total_frames} Photos)</div></div>
+                <div class="menu-link"><div class="body-font">Work ({total_frames} Frames)</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
-              <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
-                <div class="menu-link"><div class="body-font">Contact</div></div>
+              <a href="#cat-slide-10" class="menu-item w-inline-block filter-nav-direct" data-target="cat-slide-10">
+                <div class="menu-link"><div class="body-font">Slide 10</div></div>
+                <div class="menu-separator"><div class="body-font">,</div></div>
+              </a>
+              <a href="#cat-kiff" class="menu-item w-inline-block filter-nav-direct" data-target="cat-kiff">
+                <div class="menu-link"><div class="body-font">KIFF Podcasts</div></div>
+                <div class="menu-separator"><div class="body-font">,</div></div>
+              </a>
+              <a href="#cat-slide-21" class="menu-item w-inline-block filter-nav-direct" data-target="cat-slide-21">
+                <div class="menu-link"><div class="body-font">Songti Stills</div></div>
               </a>
             </div>
+            <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
+              <div class="menu-link"><div class="body-font">Contact</div></div>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Main Work & Categorized Exhibition Section -->
-  <section class="section works-section">
+  <!-- Sticky Horizontal Category Selector Bar -->
+  <section class="work-sticky-bar">
     <div class="w-layout-blockcontainer container w-container">
-
-      <!-- Sticky Quick Category Filter Bar -->
-      <div class="work-sticky-bar">
-        <div class="category-pills-scroll">
-          <button class="cat-pill active" data-target="all">All Photos ({total_frames})</button>
+      <div class="category-pills-scroll">
+        <button type="button" class="cat-pill active" data-target="all">All Photos ({total_frames})</button>
 """
 
 for c in categories:
     clean_name = c["title"].split("•")[1].strip() if "•" in c["title"] else c["title"]
-    html += f'          <button class="cat-pill" data-target="{c["id"]}">[{c["code"]}] {clean_name} ({len(c["items"])})</button>\n'
+    html += f'        <button type="button" class="cat-pill" data-target="{c["id"]}">[{c["code"]}] {clean_name} ({len(c["items"])})</button>\n'
 
-html += f"""        </div>
-      </div>
+html += f"""      </div>
+    </div>
+  </section>
 
+  <!-- Main Work Gallery Layout -->
+  <section class="works">
+    <div class="w-layout-blockcontainer container grow w-container">
       <div class="works-content">
 
         <!-- Left Column: The Divided Categories & Photo Cards -->
@@ -476,11 +483,12 @@ for c in categories:
         video_id = item.get('videoId', '')
         badge_html = '<div class="video-badge">&#9658; 4K VIDEO</div>' if is_video else '<div class="photo-zoom-hint">[+] VIEW FULL</div>'
         meta_tag = '[4K Video]' if is_video else '[Full Frame]'
-        
+        container_class = 'photo-friendly-container photo-video-container' if is_video else 'photo-friendly-container'
+
         html += f"""              <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="{item['src']}" data-title="{item['title']}" data-cat="{c['title']}" data-video-id="{video_id}">
-                  <div class="photo-friendly-container">
-                    <img src="{item['src']}" alt="{item['title']}" loading="lazy"/>
+                  <div class="{container_class}">
+                    <img src="{item['src']}" alt="{item['title']}" loading="eager" decoding="async"/>
                     {badge_html}
                   </div>
                   <div class="photo-card-meta">
@@ -590,9 +598,9 @@ html += f"""                </div>
       </div>
 
       <!-- Lightbox Body -->
-      <div id="work-lightbox-body" style="position:relative; width:100%; flex-grow:1; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#000; padding:16px; box-sizing:border-box;">
+      <div id="work-lightbox-body" style="position:relative; width:100%; flex-grow:1; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#000; padding:12px; box-sizing:border-box;">
         <img id="work-lightbox-img" src="" alt="" style="max-width:100%; max-height:76vh; object-fit:contain; display:block; filter:drop-shadow(0 4px 18px rgba(0,0,0,0.7));">
-        <div id="work-lightbox-video" style="display:none; width:100%; aspect-ratio:16/9; background:#000;"></div>
+        <div id="work-lightbox-video" style="display:none; width:100%; max-width:960px; background:#000;"></div>
       </div>
 
       <!-- Lightbox Navigation Footer -->
@@ -623,10 +631,20 @@ html += f"""                </div>
       // 2. Category Jump & Filter
       const catPills = document.querySelectorAll('.cat-pill');
       const sidebarLinks = document.querySelectorAll('.filter-cat-link');
+      const navDirectLinks = document.querySelectorAll('.filter-nav-direct');
       const categorySections = document.querySelectorAll('.category-section-block');
+      const allCards = Array.from(document.querySelectorAll('.photo-card-wrapper'));
 
-      function filterCategory(targetId) {{
-        // Update active states
+      function getActiveCards() {{
+        const visible = allCards.filter(c => {{
+          const sec = c.closest('.category-section-block');
+          return !sec || sec.style.display !== 'none';
+        }});
+        return visible.length > 0 ? visible : allCards;
+      }}
+
+      function filterCategory(targetId, updateUrl = true) {{
+        // Update active states on pills and sidebar links
         catPills.forEach(p => {{
           if (p.getAttribute('data-target') === targetId) p.classList.add('active');
           else p.classList.remove('active');
@@ -639,15 +657,24 @@ html += f"""                </div>
         if (targetId === 'all') {{
           categorySections.forEach(sec => sec.style.display = 'block');
           window.scrollTo({{ top: 0, behavior: 'smooth' }});
+          if (updateUrl && window.location.hash) {{
+            history.replaceState(null, '', window.location.pathname);
+          }}
         }} else {{
           categorySections.forEach(sec => {{
             if (sec.id === targetId) {{
               sec.style.display = 'block';
-              sec.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
             }} else {{
               sec.style.display = 'none';
             }}
           }});
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {{
+            targetEl.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
+          }}
+          if (updateUrl) {{
+            history.replaceState(null, '', '#' + targetId);
+          }}
         }}
       }}
 
@@ -667,8 +694,37 @@ html += f"""                </div>
         }});
       }});
 
-      // 3. Lightbox with Next / Previous & Keyboard Support
-      const cards = Array.from(document.querySelectorAll('.photo-card-wrapper'));
+      navDirectLinks.forEach(nl => {{
+        nl.addEventListener('click', (e) => {{
+          e.preventDefault();
+          const target = nl.getAttribute('data-target');
+          filterCategory(target);
+          if (menuOpen && menuInfo) {{
+            menuOpen = false;
+            menuInfo.style.display = '';
+            if (menuBtn) menuBtn.querySelector('.body-font').textContent = '[+]';
+          }}
+        }});
+      }});
+
+      // Auto-filter if URL contains category hash
+      if (window.location.hash) {{
+        const initialTarget = window.location.hash.substring(1);
+        if (initialTarget && document.getElementById(initialTarget)) {{
+          filterCategory(initialTarget, false);
+        }}
+      }}
+
+      window.addEventListener('hashchange', () => {{
+        const hash = window.location.hash.substring(1);
+        if (hash && document.getElementById(hash)) {{
+          filterCategory(hash, false);
+        }} else if (!hash) {{
+          filterCategory('all', false);
+        }}
+      }});
+
+      // 3. Fullscreen Lightbox with Next / Previous & Keyboard Support
       const lightbox = document.getElementById('work-lightbox');
       const lightboxImg = document.getElementById('work-lightbox-img');
       const lightboxVideo = document.getElementById('work-lightbox-video');
@@ -679,20 +735,21 @@ html += f"""                </div>
       const prevBtn = document.getElementById('work-lightbox-prev');
       const nextBtn = document.getElementById('work-lightbox-next');
 
-      let currentIndex = 0;
+      let currentCard = null;
 
-      function showItem(index) {{
-        if (index < 0) index = cards.length - 1;
-        if (index >= cards.length) index = 0;
-        currentIndex = index;
+      function showCard(card) {{
+        if (!card) return;
+        currentCard = card;
+        const activeCards = getActiveCards();
+        const activeIndex = activeCards.indexOf(card);
+        const total = activeCards.length;
 
-        const card = cards[currentIndex];
         const src = card.getAttribute('data-src');
         const title = card.getAttribute('data-title') || 'Photograph';
         const cat = card.getAttribute('data-cat') || '';
         const videoId = card.getAttribute('data-video-id');
 
-        lightboxCounter.textContent = `[${{currentIndex + 1}} / ${{cards.length}}]`;
+        lightboxCounter.textContent = `[${{activeIndex + 1}} / ${{total}}]`;
         lightboxTitle.textContent = title;
         lightboxCategory.textContent = cat;
 
@@ -700,11 +757,20 @@ html += f"""                </div>
           lightboxImg.style.display = 'none';
           lightboxVideo.style.display = 'block';
           lightboxVideo.innerHTML = `
-            <iframe src="https://www.youtube-nocookie.com/embed/${{videoId}}?autoplay=1&rel=0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen 
-              style="width:100%; height:100%; border:0;">
-            </iframe>
+            <div style="position:relative; width:100%; aspect-ratio:16/9; background:#000;">
+              <iframe src="https://www.youtube.com/embed/${{videoId}}?autoplay=1&rel=0&enablejsapi=1" 
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen 
+                style="width:100%; height:100%; border:0; display:block;">
+              </iframe>
+            </div>
+            <div style="padding:10px 14px; background:#111; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #222; flex-wrap:wrap; gap:8px;">
+              <span style="color:#aaa; font-size:11px; font-family:'IBM Plex Mono', monospace;">KIFF 4K Broadcast Masterclass</span>
+              <a href="https://www.youtube.com/watch?v=${{videoId}}" target="_blank" rel="noopener noreferrer" style="color:#fff; text-decoration:underline; font-size:11px; font-family:'IBM Plex Mono', monospace;">[Watch Directly on YouTube &rarr;]</a>
+            </div>
           `;
         }} else {{
           lightboxVideo.style.display = 'none';
@@ -715,9 +781,17 @@ html += f"""                </div>
         }}
       }}
 
-      cards.forEach((card, idx) => {{
+      function stepCard(dir) {{
+        const activeCards = getActiveCards();
+        let idx = activeCards.indexOf(currentCard);
+        if (idx === -1) idx = 0;
+        idx = (idx + dir + activeCards.length) % activeCards.length;
+        showCard(activeCards[idx]);
+      }}
+
+      allCards.forEach(card => {{
         card.addEventListener('click', () => {{
-          showItem(idx);
+          showCard(card);
           lightbox.style.display = 'flex';
           document.body.style.overflow = 'hidden';
         }});
@@ -730,20 +804,20 @@ html += f"""                </div>
       }}
 
       if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-      if (prevBtn) prevBtn.addEventListener('click', () => showItem(currentIndex - 1));
-      if (nextBtn) nextBtn.addEventListener('click', () => showItem(currentIndex + 1));
+      if (prevBtn) prevBtn.addEventListener('click', () => stepCard(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => stepCard(1));
 
       if (lightbox) {{
         lightbox.addEventListener('click', (e) => {{
-          if (e.target === lightbox) closeLightbox();
+          if (e.target === lightbox || e.target.id === 'work-lightbox-body') closeLightbox();
         }});
       }}
 
       document.addEventListener('keydown', (e) => {{
-        if (lightbox.style.display === 'flex') {{
+        if (lightbox && lightbox.style.display === 'flex') {{
           if (e.key === 'Escape') closeLightbox();
-          if (e.key === 'ArrowLeft') showItem(currentIndex - 1);
-          if (e.key === 'ArrowRight') showItem(currentIndex + 1);
+          if (e.key === 'ArrowLeft') stepCard(-1);
+          if (e.key === 'ArrowRight') stepCard(1);
         }}
       }});
     }});

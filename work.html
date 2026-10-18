@@ -179,6 +179,11 @@
       transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }
 
+    /* 16:9 for Video Cards */
+    .photo-friendly-container.photo-video-container {
+      aspect-ratio: 16 / 9 !important;
+    }
+
     .photo-card-wrapper:hover .photo-friendly-container {
       border-color: rgba(0, 0, 0, 0.5);
       box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
@@ -220,62 +225,52 @@
       background: #e50914;
       color: #fff;
       font-size: 10px;
+      font-weight: 600;
       padding: 3px 8px;
       font-family: 'IBM Plex Mono', monospace;
       border-radius: 2px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
+      pointer-events: none;
     }
 
     .photo-card-meta {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding-top: 10px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-    }
-
-    .photo-card-meta .meta-date {
-      color: #666;
+      padding: 8px 2px 2px 2px;
       font-size: 11px;
+      color: #444;
+      font-family: 'IBM Plex Mono', monospace;
+      border-top: 1px solid rgba(0, 0, 0, 0.08);
+      margin-top: 6px;
     }
 
-    .photo-card-meta .meta-title {
-      color: #000;
-      font-weight: 500;
+    .meta-title {
       flex-grow: 1;
-      margin: 0 8px;
+      margin: 0 10px;
+      color: #000;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .photo-card-meta .meta-badge {
-      color: #666;
-      font-size: 11px;
+    .meta-badge {
+      color: #777;
     }
 
-    /* Filter links in right sidebar */
-    .filter-cat-link {
-      cursor: pointer;
-      display: block;
-      padding: 3px 0;
-      color: #444;
-      text-decoration: none;
-      transition: color 0.15s;
-    }
-    .filter-cat-link:hover, .filter-cat-link.active {
-      color: #000;
-      font-weight: 500;
-      text-decoration: underline;
+    /* Lightbox modal responsive */
+    @media screen and (max-width: 600px) {
+      #work-lightbox {
+        padding: 8px !important;
+      }
+      #work-lightbox > div {
+        max-height: 98vh !important;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
+  <!-- Navigation -->
   <nav class="menu">
     <div class="w-layout-blockcontainer container w-container">
       <div class="menu-content">
@@ -296,39 +291,51 @@
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
               <a href="work.html" aria-current="page" class="menu-item w-inline-block w--current">
-                <div class="menu-link"><div class="body-font" style="text-decoration: underline; font-weight: 500;">Work (All 60 Photos)</div></div>
+                <div class="menu-link"><div class="body-font">Work (60 Frames)</div></div>
                 <div class="menu-separator"><div class="body-font">,</div></div>
               </a>
-              <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
-                <div class="menu-link"><div class="body-font">Contact</div></div>
+              <a href="#cat-slide-10" class="menu-item w-inline-block filter-nav-direct" data-target="cat-slide-10">
+                <div class="menu-link"><div class="body-font">Slide 10</div></div>
+                <div class="menu-separator"><div class="body-font">,</div></div>
+              </a>
+              <a href="#cat-kiff" class="menu-item w-inline-block filter-nav-direct" data-target="cat-kiff">
+                <div class="menu-link"><div class="body-font">KIFF Podcasts</div></div>
+                <div class="menu-separator"><div class="body-font">,</div></div>
+              </a>
+              <a href="#cat-slide-21" class="menu-item w-inline-block filter-nav-direct" data-target="cat-slide-21">
+                <div class="menu-link"><div class="body-font">Songti Stills</div></div>
               </a>
             </div>
+            <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
+              <div class="menu-link"><div class="body-font">Contact</div></div>
+            </a>
           </div>
         </div>
       </div>
     </div>
   </nav>
 
-  <!-- Main Work & Categorized Exhibition Section -->
-  <section class="section works-section">
+  <!-- Sticky Horizontal Category Selector Bar -->
+  <section class="work-sticky-bar">
     <div class="w-layout-blockcontainer container w-container">
-
-      <!-- Sticky Quick Category Filter Bar -->
-      <div class="work-sticky-bar">
-        <div class="category-pills-scroll">
-          <button class="cat-pill active" data-target="all">All Photos (60)</button>
-          <button class="cat-pill" data-target="cat-slide-10">[01] Slide 10 Edition (4)</button>
-          <button class="cat-pill" data-target="cat-slide-5">[02] Studio Series (Slide 5) (13)</button>
-          <button class="cat-pill" data-target="cat-slides-6-7">[03] Mood & Styling (Slides 6 & 7) (9)</button>
-          <button class="cat-pill" data-target="cat-slides-8-9">[04] Ambient Light (Slides 8 & 9) (5)</button>
-          <button class="cat-pill" data-target="cat-slides-11-12">[05] Character Studies (Slides 11 & 12) (10)</button>
-          <button class="cat-pill" data-target="cat-slides-13-14">[06] Monochromes & Tone (Slides 13 & 14) (8)</button>
-          <button class="cat-pill" data-target="cat-slide-15">[07] Limited Edition 2030 (2)</button>
-          <button class="cat-pill" data-target="cat-slide-21">[08] Songti Still Frames (Slide 21) (5)</button>
-          <button class="cat-pill" data-target="cat-kiff">[09] KIFF Celebrity Podcasts & Masterclasses (4)</button>
-        </div>
+      <div class="category-pills-scroll">
+        <button type="button" class="cat-pill active" data-target="all">All Photos (60)</button>
+        <button type="button" class="cat-pill" data-target="cat-slide-10">[01] Slide 10 Edition (4)</button>
+        <button type="button" class="cat-pill" data-target="cat-slide-5">[02] Studio Series (Slide 5) (13)</button>
+        <button type="button" class="cat-pill" data-target="cat-slides-6-7">[03] Mood & Styling (Slides 6 & 7) (9)</button>
+        <button type="button" class="cat-pill" data-target="cat-slides-8-9">[04] Ambient Light (Slides 8 & 9) (5)</button>
+        <button type="button" class="cat-pill" data-target="cat-slides-11-12">[05] Character Studies (Slides 11 & 12) (10)</button>
+        <button type="button" class="cat-pill" data-target="cat-slides-13-14">[06] Monochromes & Tone (Slides 13 & 14) (8)</button>
+        <button type="button" class="cat-pill" data-target="cat-slide-15">[07] Limited Edition 2030 (2)</button>
+        <button type="button" class="cat-pill" data-target="cat-slide-21">[08] Songti Still Frames (Slide 21) (5)</button>
+        <button type="button" class="cat-pill" data-target="cat-kiff">[09] KIFF Celebrity Podcasts & Masterclasses (4)</button>
       </div>
+    </div>
+  </section>
 
+  <!-- Main Work Gallery Layout -->
+  <section class="works">
+    <div class="w-layout-blockcontainer container grow w-container">
       <div class="works-content">
 
         <!-- Left Column: The Divided Categories & Photo Cards -->
@@ -351,7 +358,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_10_1.jpg" data-title="High-Fashion Portrait I" data-cat="Photoshoot • Slide 10 Edition" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_10_1.jpg" alt="High-Fashion Portrait I" loading="lazy"/>
+                    <img src="assets/slide_10_1.jpg" alt="High-Fashion Portrait I" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -364,7 +371,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_10_2.jpg" data-title="High-Fashion Portrait II" data-cat="Photoshoot • Slide 10 Edition" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_10_2.jpg" alt="High-Fashion Portrait II" loading="lazy"/>
+                    <img src="assets/slide_10_2.jpg" alt="High-Fashion Portrait II" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -377,7 +384,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_10_3.jpg" data-title="High-Fashion Portrait III" data-cat="Photoshoot • Slide 10 Edition" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_10_3.jpg" alt="High-Fashion Portrait III" loading="lazy"/>
+                    <img src="assets/slide_10_3.jpg" alt="High-Fashion Portrait III" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -390,7 +397,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_10_4.jpg" data-title="High-Fashion Portrait IV" data-cat="Photoshoot • Slide 10 Edition" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_10_4.jpg" alt="High-Fashion Portrait IV" loading="lazy"/>
+                    <img src="assets/slide_10_4.jpg" alt="High-Fashion Portrait IV" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -420,7 +427,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_1.jpg" data-title="Studio Study 01" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_1.jpg" alt="Studio Study 01" loading="lazy"/>
+                    <img src="assets/slide_5_1.jpg" alt="Studio Study 01" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -433,7 +440,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_2.jpg" data-title="Studio Study 02" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_2.jpg" alt="Studio Study 02" loading="lazy"/>
+                    <img src="assets/slide_5_2.jpg" alt="Studio Study 02" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -446,7 +453,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_3.jpg" data-title="Studio Study 03" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_3.jpg" alt="Studio Study 03" loading="lazy"/>
+                    <img src="assets/slide_5_3.jpg" alt="Studio Study 03" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -459,7 +466,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_4.jpg" data-title="Studio Study 04" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_4.jpg" alt="Studio Study 04" loading="lazy"/>
+                    <img src="assets/slide_5_4.jpg" alt="Studio Study 04" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -472,7 +479,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_5.jpg" data-title="Studio Study 05" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_5.jpg" alt="Studio Study 05" loading="lazy"/>
+                    <img src="assets/slide_5_5.jpg" alt="Studio Study 05" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -485,7 +492,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_6.jpg" data-title="Studio Study 06" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_6.jpg" alt="Studio Study 06" loading="lazy"/>
+                    <img src="assets/slide_5_6.jpg" alt="Studio Study 06" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -498,7 +505,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_7.jpg" data-title="Studio Study 07" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_7.jpg" alt="Studio Study 07" loading="lazy"/>
+                    <img src="assets/slide_5_7.jpg" alt="Studio Study 07" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -511,7 +518,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_8.jpg" data-title="Studio Study 08" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_8.jpg" alt="Studio Study 08" loading="lazy"/>
+                    <img src="assets/slide_5_8.jpg" alt="Studio Study 08" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -524,7 +531,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_9.jpg" data-title="Studio Study 09" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_9.jpg" alt="Studio Study 09" loading="lazy"/>
+                    <img src="assets/slide_5_9.jpg" alt="Studio Study 09" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -537,7 +544,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_10.jpg" data-title="Studio Study 10" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_10.jpg" alt="Studio Study 10" loading="lazy"/>
+                    <img src="assets/slide_5_10.jpg" alt="Studio Study 10" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -550,7 +557,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_11.jpg" data-title="Studio Study 11" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_11.jpg" alt="Studio Study 11" loading="lazy"/>
+                    <img src="assets/slide_5_11.jpg" alt="Studio Study 11" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -563,7 +570,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_12.jpg" data-title="Studio Study 12" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_12.jpg" alt="Studio Study 12" loading="lazy"/>
+                    <img src="assets/slide_5_12.jpg" alt="Studio Study 12" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -576,7 +583,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_5_13.jpg" data-title="Studio Study 13" data-cat="Photoshoot • Studio Series (Slide 5)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_5_13.jpg" alt="Studio Study 13" loading="lazy"/>
+                    <img src="assets/slide_5_13.jpg" alt="Studio Study 13" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -606,7 +613,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_6_1.jpg" data-title="Mood Framing 01" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_6_1.jpg" alt="Mood Framing 01" loading="lazy"/>
+                    <img src="assets/slide_6_1.jpg" alt="Mood Framing 01" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -619,7 +626,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_6_2.jpg" data-title="Mood Framing 02" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_6_2.jpg" alt="Mood Framing 02" loading="lazy"/>
+                    <img src="assets/slide_6_2.jpg" alt="Mood Framing 02" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -632,7 +639,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_6_3.jpg" data-title="Mood Framing 03" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_6_3.jpg" alt="Mood Framing 03" loading="lazy"/>
+                    <img src="assets/slide_6_3.jpg" alt="Mood Framing 03" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -645,7 +652,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_6_4.jpg" data-title="Mood Framing 04" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_6_4.jpg" alt="Mood Framing 04" loading="lazy"/>
+                    <img src="assets/slide_6_4.jpg" alt="Mood Framing 04" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -658,7 +665,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_1.jpg" data-title="Styling Study 01" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_1.jpg" alt="Styling Study 01" loading="lazy"/>
+                    <img src="assets/slide_7_1.jpg" alt="Styling Study 01" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -671,7 +678,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_2.jpg" data-title="Styling Study 02" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_2.jpg" alt="Styling Study 02" loading="lazy"/>
+                    <img src="assets/slide_7_2.jpg" alt="Styling Study 02" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -684,7 +691,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_3.jpg" data-title="Styling Study 03" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_3.jpg" alt="Styling Study 03" loading="lazy"/>
+                    <img src="assets/slide_7_3.jpg" alt="Styling Study 03" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -697,7 +704,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_4.jpg" data-title="Styling Study 04" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_4.jpg" alt="Styling Study 04" loading="lazy"/>
+                    <img src="assets/slide_7_4.jpg" alt="Styling Study 04" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -710,7 +717,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_5.jpg" data-title="Styling Study 05" data-cat="Photoshoot • Mood & Styling (Slides 6 & 7)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_5.jpg" alt="Styling Study 05" loading="lazy"/>
+                    <img src="assets/slide_7_5.jpg" alt="Styling Study 05" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -740,7 +747,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_8_1.jpg" data-title="Ambient Study 01" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_8_1.jpg" alt="Ambient Study 01" loading="lazy"/>
+                    <img src="assets/slide_8_1.jpg" alt="Ambient Study 01" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -753,7 +760,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_8_2.jpg" data-title="Ambient Study 02" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_8_2.jpg" alt="Ambient Study 02" loading="lazy"/>
+                    <img src="assets/slide_8_2.jpg" alt="Ambient Study 02" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -766,7 +773,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_8_3.jpg" data-title="Ambient Study 03" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_8_3.jpg" alt="Ambient Study 03" loading="lazy"/>
+                    <img src="assets/slide_8_3.jpg" alt="Ambient Study 03" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -779,7 +786,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_8_4.jpg" data-title="Ambient Study 04" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_8_4.jpg" alt="Ambient Study 04" loading="lazy"/>
+                    <img src="assets/slide_8_4.jpg" alt="Ambient Study 04" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -792,7 +799,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_9_1.jpg" data-title="Ambient Portrait I" data-cat="Photoshoot • Ambient Light (Slides 8 & 9)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_9_1.jpg" alt="Ambient Portrait I" loading="lazy"/>
+                    <img src="assets/slide_9_1.jpg" alt="Ambient Portrait I" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -822,7 +829,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_11_1.jpg" data-title="Character Study 01" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_11_1.jpg" alt="Character Study 01" loading="lazy"/>
+                    <img src="assets/slide_11_1.jpg" alt="Character Study 01" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -835,7 +842,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_11_2.jpg" data-title="Character Study 02" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_11_2.jpg" alt="Character Study 02" loading="lazy"/>
+                    <img src="assets/slide_11_2.jpg" alt="Character Study 02" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -848,7 +855,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_11_3.jpg" data-title="Character Study 03" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_11_3.jpg" alt="Character Study 03" loading="lazy"/>
+                    <img src="assets/slide_11_3.jpg" alt="Character Study 03" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -861,7 +868,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_11_4.jpg" data-title="Character Study 04" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_11_4.jpg" alt="Character Study 04" loading="lazy"/>
+                    <img src="assets/slide_11_4.jpg" alt="Character Study 04" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -874,7 +881,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_11_5.jpg" data-title="Character Study 05" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_11_5.jpg" alt="Character Study 05" loading="lazy"/>
+                    <img src="assets/slide_11_5.jpg" alt="Character Study 05" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -887,7 +894,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_12_1.jpg" data-title="Character Expression 01" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_12_1.jpg" alt="Character Expression 01" loading="lazy"/>
+                    <img src="assets/slide_12_1.jpg" alt="Character Expression 01" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -900,7 +907,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_12_2.jpg" data-title="Character Expression 02" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_12_2.jpg" alt="Character Expression 02" loading="lazy"/>
+                    <img src="assets/slide_12_2.jpg" alt="Character Expression 02" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -913,7 +920,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_12_3.jpg" data-title="Character Expression 03" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_12_3.jpg" alt="Character Expression 03" loading="lazy"/>
+                    <img src="assets/slide_12_3.jpg" alt="Character Expression 03" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -926,7 +933,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_12_4.jpg" data-title="Character Expression 04" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_12_4.jpg" alt="Character Expression 04" loading="lazy"/>
+                    <img src="assets/slide_12_4.jpg" alt="Character Expression 04" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -939,7 +946,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_12_5.jpg" data-title="Character Expression 05" data-cat="Photoshoot • Character Studies (Slides 11 & 12)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_12_5.jpg" alt="Character Expression 05" loading="lazy"/>
+                    <img src="assets/slide_12_5.jpg" alt="Character Expression 05" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -969,7 +976,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_13_1.jpg" data-title="Monochrome 01" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_13_1.jpg" alt="Monochrome 01" loading="lazy"/>
+                    <img src="assets/slide_13_1.jpg" alt="Monochrome 01" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -982,7 +989,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_13_2.jpg" data-title="Monochrome 02" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_13_2.jpg" alt="Monochrome 02" loading="lazy"/>
+                    <img src="assets/slide_13_2.jpg" alt="Monochrome 02" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -995,7 +1002,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_13_3.jpg" data-title="Monochrome 03" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_13_3.jpg" alt="Monochrome 03" loading="lazy"/>
+                    <img src="assets/slide_13_3.jpg" alt="Monochrome 03" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1008,7 +1015,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_13_4.jpg" data-title="Monochrome 04" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_13_4.jpg" alt="Monochrome 04" loading="lazy"/>
+                    <img src="assets/slide_13_4.jpg" alt="Monochrome 04" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1021,7 +1028,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_13_5.jpg" data-title="Monochrome 05" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_13_5.jpg" alt="Monochrome 05" loading="lazy"/>
+                    <img src="assets/slide_13_5.jpg" alt="Monochrome 05" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1034,7 +1041,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_14_1.jpg" data-title="Monochrome Study 01" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_14_1.jpg" alt="Monochrome Study 01" loading="lazy"/>
+                    <img src="assets/slide_14_1.jpg" alt="Monochrome Study 01" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1047,7 +1054,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_14_2.jpg" data-title="Monochrome Study 02" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_14_2.jpg" alt="Monochrome Study 02" loading="lazy"/>
+                    <img src="assets/slide_14_2.jpg" alt="Monochrome Study 02" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1060,7 +1067,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_14_3.jpg" data-title="Monochrome Study 03" data-cat="Photoshoot • Monochromes & Tone (Slides 13 & 14)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_14_3.jpg" alt="Monochrome Study 03" loading="lazy"/>
+                    <img src="assets/slide_14_3.jpg" alt="Monochrome Study 03" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1090,7 +1097,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_15_1.jpg" data-title="Limited Edition 2030 Feature" data-cat="Editorial Collection • Limited Edition 2030" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_15_1.jpg" alt="Limited Edition 2030 Feature" loading="lazy"/>
+                    <img src="assets/slide_15_1.jpg" alt="Limited Edition 2030 Feature" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1103,7 +1110,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_1_1.jpg" data-title="Cover Portfolio Visual Direction" data-cat="Editorial Collection • Limited Edition 2030" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_1_1.jpg" alt="Cover Portfolio Visual Direction" loading="lazy"/>
+                    <img src="assets/slide_1_1.jpg" alt="Cover Portfolio Visual Direction" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1133,7 +1140,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_1.jpg" data-title="Songti Cinematic Frame 01" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_1.jpg" alt="Songti Cinematic Frame 01" loading="lazy"/>
+                    <img src="assets/slide_7_1.jpg" alt="Songti Cinematic Frame 01" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1146,7 +1153,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_2.jpg" data-title="Songti Cinematic Frame 02" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_2.jpg" alt="Songti Cinematic Frame 02" loading="lazy"/>
+                    <img src="assets/slide_7_2.jpg" alt="Songti Cinematic Frame 02" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1159,7 +1166,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_3.jpg" data-title="Songti Cinematic Frame 03" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_3.jpg" alt="Songti Cinematic Frame 03" loading="lazy"/>
+                    <img src="assets/slide_7_3.jpg" alt="Songti Cinematic Frame 03" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1172,7 +1179,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_4.jpg" data-title="Songti Cinematic Frame 04" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_4.jpg" alt="Songti Cinematic Frame 04" loading="lazy"/>
+                    <img src="assets/slide_7_4.jpg" alt="Songti Cinematic Frame 04" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1185,7 +1192,7 @@
               <div role="listitem" class="w-dyn-item">
                 <div class="photo-card-wrapper" data-src="assets/slide_7_5.jpg" data-title="Songti Cinematic Frame 05" data-cat="Songti Still Frames (Slide 21)" data-video-id="">
                   <div class="photo-friendly-container">
-                    <img src="assets/slide_7_5.jpg" alt="Songti Cinematic Frame 05" loading="lazy"/>
+                    <img src="assets/slide_7_5.jpg" alt="Songti Cinematic Frame 05" loading="eager" decoding="async"/>
                     <div class="photo-zoom-hint">[+] VIEW FULL</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1213,9 +1220,9 @@
 
             <div class="grid-work-collection-list w-dyn-items">
               <div role="listitem" class="w-dyn-item">
-                <div class="photo-card-wrapper" data-src="assets/yt_anupam_kher.jpg" data-title="Anupam Kher Unfiltered — Acting Masterclass" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="X9qT-WJ5u4Y">
-                  <div class="photo-friendly-container">
-                    <img src="assets/yt_anupam_kher.jpg" alt="Anupam Kher Unfiltered — Acting Masterclass" loading="lazy"/>
+                <div class="photo-card-wrapper" data-src="assets/yt_anupam_kher.jpg" data-title="Anupam Kher Unfiltered — Acting Masterclass" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="Sh0jTGE660o">
+                  <div class="photo-friendly-container photo-video-container">
+                    <img src="assets/yt_anupam_kher.jpg" alt="Anupam Kher Unfiltered — Acting Masterclass" loading="eager" decoding="async"/>
                     <div class="video-badge">&#9658; 4K VIDEO</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1226,9 +1233,9 @@
                 </div>
               </div>
               <div role="listitem" class="w-dyn-item">
-                <div class="photo-card-wrapper" data-src="assets/yt_saurabh_shukla.jpg" data-title="Saurabh Shukla — Screenwriting & Satya" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="3Z_8jR_6yS0">
-                  <div class="photo-friendly-container">
-                    <img src="assets/yt_saurabh_shukla.jpg" alt="Saurabh Shukla — Screenwriting & Satya" loading="lazy"/>
+                <div class="photo-card-wrapper" data-src="assets/yt_saurabh_shukla.jpg" data-title="Saurabh Shukla — Screenwriting & Satya" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="ojgap437XT8">
+                  <div class="photo-friendly-container photo-video-container">
+                    <img src="assets/yt_saurabh_shukla.jpg" alt="Saurabh Shukla — Screenwriting & Satya" loading="eager" decoding="async"/>
                     <div class="video-badge">&#9658; 4K VIDEO</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1239,9 +1246,9 @@
                 </div>
               </div>
               <div role="listitem" class="w-dyn-item">
-                <div class="photo-card-wrapper" data-src="assets/yt_subhash_sehgal.jpg" data-title="Subhash Sehgal — Film Editing Masterclass" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="k8V8C0-m1Xk">
-                  <div class="photo-friendly-container">
-                    <img src="assets/yt_subhash_sehgal.jpg" alt="Subhash Sehgal — Film Editing Masterclass" loading="lazy"/>
+                <div class="photo-card-wrapper" data-src="assets/yt_subhash_sehgal.jpg" data-title="Subhash Sehgal — Film Editing Masterclass" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="AWiazyKn8ak">
+                  <div class="photo-friendly-container photo-video-container">
+                    <img src="assets/yt_subhash_sehgal.jpg" alt="Subhash Sehgal — Film Editing Masterclass" loading="eager" decoding="async"/>
                     <div class="video-badge">&#9658; 4K VIDEO</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1252,9 +1259,9 @@
                 </div>
               </div>
               <div role="listitem" class="w-dyn-item">
-                <div class="photo-card-wrapper" data-src="assets/yt_deepshikha_nagpal.jpg" data-title="Deepshikha Nagpal — Industry & Direction" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="dQw4w9WgXcQ">
-                  <div class="photo-friendly-container">
-                    <img src="assets/yt_deepshikha_nagpal.jpg" alt="Deepshikha Nagpal — Industry & Direction" loading="lazy"/>
+                <div class="photo-card-wrapper" data-src="assets/yt_deepshikha_nagpal.jpg" data-title="Deepshikha Nagpal — Industry & Direction" data-cat="KIFF Celebrity Podcasts & Masterclasses" data-video-id="hcNVkH6HhVk">
+                  <div class="photo-friendly-container photo-video-container">
+                    <img src="assets/yt_deepshikha_nagpal.jpg" alt="Deepshikha Nagpal — Industry & Direction" loading="eager" decoding="async"/>
                     <div class="video-badge">&#9658; 4K VIDEO</div>
                   </div>
                   <div class="photo-card-meta">
@@ -1363,9 +1370,9 @@
       </div>
 
       <!-- Lightbox Body -->
-      <div id="work-lightbox-body" style="position:relative; width:100%; flex-grow:1; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#000; padding:16px; box-sizing:border-box;">
+      <div id="work-lightbox-body" style="position:relative; width:100%; flex-grow:1; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#000; padding:12px; box-sizing:border-box;">
         <img id="work-lightbox-img" src="" alt="" style="max-width:100%; max-height:76vh; object-fit:contain; display:block; filter:drop-shadow(0 4px 18px rgba(0,0,0,0.7));">
-        <div id="work-lightbox-video" style="display:none; width:100%; aspect-ratio:16/9; background:#000;"></div>
+        <div id="work-lightbox-video" style="display:none; width:100%; max-width:960px; background:#000;"></div>
       </div>
 
       <!-- Lightbox Navigation Footer -->
@@ -1396,10 +1403,20 @@
       // 2. Category Jump & Filter
       const catPills = document.querySelectorAll('.cat-pill');
       const sidebarLinks = document.querySelectorAll('.filter-cat-link');
+      const navDirectLinks = document.querySelectorAll('.filter-nav-direct');
       const categorySections = document.querySelectorAll('.category-section-block');
+      const allCards = Array.from(document.querySelectorAll('.photo-card-wrapper'));
 
-      function filterCategory(targetId) {
-        // Update active states
+      function getActiveCards() {
+        const visible = allCards.filter(c => {
+          const sec = c.closest('.category-section-block');
+          return !sec || sec.style.display !== 'none';
+        });
+        return visible.length > 0 ? visible : allCards;
+      }
+
+      function filterCategory(targetId, updateUrl = true) {
+        // Update active states on pills and sidebar links
         catPills.forEach(p => {
           if (p.getAttribute('data-target') === targetId) p.classList.add('active');
           else p.classList.remove('active');
@@ -1412,15 +1429,24 @@
         if (targetId === 'all') {
           categorySections.forEach(sec => sec.style.display = 'block');
           window.scrollTo({ top: 0, behavior: 'smooth' });
+          if (updateUrl && window.location.hash) {
+            history.replaceState(null, '', window.location.pathname);
+          }
         } else {
           categorySections.forEach(sec => {
             if (sec.id === targetId) {
               sec.style.display = 'block';
-              sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
             } else {
               sec.style.display = 'none';
             }
           });
+          const targetEl = document.getElementById(targetId);
+          if (targetEl) {
+            targetEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+          if (updateUrl) {
+            history.replaceState(null, '', '#' + targetId);
+          }
         }
       }
 
@@ -1440,8 +1466,37 @@
         });
       });
 
-      // 3. Lightbox with Next / Previous & Keyboard Support
-      const cards = Array.from(document.querySelectorAll('.photo-card-wrapper'));
+      navDirectLinks.forEach(nl => {
+        nl.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = nl.getAttribute('data-target');
+          filterCategory(target);
+          if (menuOpen && menuInfo) {
+            menuOpen = false;
+            menuInfo.style.display = '';
+            if (menuBtn) menuBtn.querySelector('.body-font').textContent = '[+]';
+          }
+        });
+      });
+
+      // Auto-filter if URL contains category hash
+      if (window.location.hash) {
+        const initialTarget = window.location.hash.substring(1);
+        if (initialTarget && document.getElementById(initialTarget)) {
+          filterCategory(initialTarget, false);
+        }
+      }
+
+      window.addEventListener('hashchange', () => {
+        const hash = window.location.hash.substring(1);
+        if (hash && document.getElementById(hash)) {
+          filterCategory(hash, false);
+        } else if (!hash) {
+          filterCategory('all', false);
+        }
+      });
+
+      // 3. Fullscreen Lightbox with Next / Previous & Keyboard Support
       const lightbox = document.getElementById('work-lightbox');
       const lightboxImg = document.getElementById('work-lightbox-img');
       const lightboxVideo = document.getElementById('work-lightbox-video');
@@ -1452,20 +1507,21 @@
       const prevBtn = document.getElementById('work-lightbox-prev');
       const nextBtn = document.getElementById('work-lightbox-next');
 
-      let currentIndex = 0;
+      let currentCard = null;
 
-      function showItem(index) {
-        if (index < 0) index = cards.length - 1;
-        if (index >= cards.length) index = 0;
-        currentIndex = index;
+      function showCard(card) {
+        if (!card) return;
+        currentCard = card;
+        const activeCards = getActiveCards();
+        const activeIndex = activeCards.indexOf(card);
+        const total = activeCards.length;
 
-        const card = cards[currentIndex];
         const src = card.getAttribute('data-src');
         const title = card.getAttribute('data-title') || 'Photograph';
         const cat = card.getAttribute('data-cat') || '';
         const videoId = card.getAttribute('data-video-id');
 
-        lightboxCounter.textContent = `[${currentIndex + 1} / ${cards.length}]`;
+        lightboxCounter.textContent = `[${activeIndex + 1} / ${total}]`;
         lightboxTitle.textContent = title;
         lightboxCategory.textContent = cat;
 
@@ -1473,11 +1529,20 @@
           lightboxImg.style.display = 'none';
           lightboxVideo.style.display = 'block';
           lightboxVideo.innerHTML = `
-            <iframe src="https://www.youtube-nocookie.com/embed/${videoId}?autoplay=1&rel=0" 
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-              allowfullscreen 
-              style="width:100%; height:100%; border:0;">
-            </iframe>
+            <div style="position:relative; width:100%; aspect-ratio:16/9; background:#000;">
+              <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1" 
+                title="YouTube video player"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen 
+                style="width:100%; height:100%; border:0; display:block;">
+              </iframe>
+            </div>
+            <div style="padding:10px 14px; background:#111; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #222; flex-wrap:wrap; gap:8px;">
+              <span style="color:#aaa; font-size:11px; font-family:'IBM Plex Mono', monospace;">KIFF 4K Broadcast Masterclass</span>
+              <a href="https://www.youtube.com/watch?v=${videoId}" target="_blank" rel="noopener noreferrer" style="color:#fff; text-decoration:underline; font-size:11px; font-family:'IBM Plex Mono', monospace;">[Watch Directly on YouTube &rarr;]</a>
+            </div>
           `;
         } else {
           lightboxVideo.style.display = 'none';
@@ -1488,9 +1553,17 @@
         }
       }
 
-      cards.forEach((card, idx) => {
+      function stepCard(dir) {
+        const activeCards = getActiveCards();
+        let idx = activeCards.indexOf(currentCard);
+        if (idx === -1) idx = 0;
+        idx = (idx + dir + activeCards.length) % activeCards.length;
+        showCard(activeCards[idx]);
+      }
+
+      allCards.forEach(card => {
         card.addEventListener('click', () => {
-          showItem(idx);
+          showCard(card);
           lightbox.style.display = 'flex';
           document.body.style.overflow = 'hidden';
         });
@@ -1503,20 +1576,20 @@
       }
 
       if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-      if (prevBtn) prevBtn.addEventListener('click', () => showItem(currentIndex - 1));
-      if (nextBtn) nextBtn.addEventListener('click', () => showItem(currentIndex + 1));
+      if (prevBtn) prevBtn.addEventListener('click', () => stepCard(-1));
+      if (nextBtn) nextBtn.addEventListener('click', () => stepCard(1));
 
       if (lightbox) {
         lightbox.addEventListener('click', (e) => {
-          if (e.target === lightbox) closeLightbox();
+          if (e.target === lightbox || e.target.id === 'work-lightbox-body') closeLightbox();
         });
       }
 
       document.addEventListener('keydown', (e) => {
-        if (lightbox.style.display === 'flex') {
+        if (lightbox && lightbox.style.display === 'flex') {
           if (e.key === 'Escape') closeLightbox();
-          if (e.key === 'ArrowLeft') showItem(currentIndex - 1);
-          if (e.key === 'ArrowRight') showItem(currentIndex + 1);
+          if (e.key === 'ArrowLeft') stepCard(-1);
+          if (e.key === 'ArrowRight') stepCard(1);
         }
       });
     });
