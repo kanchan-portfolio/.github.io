@@ -1,23 +1,16 @@
-# Kanchan — Photography & Videography Portfolio
+# Framehaus — Cinematic Production Studio Website
 
-Live website: [https://kanchan-portfolio.github.io](https://kanchan-portfolio.github.io)
+Live website: [https://kanchan-portfolio.github.io/.github.io/](https://kanchan-portfolio.github.io/.github.io/)
 
-A cinematic, editorial landing page and portfolio designed for **Kanchan**, Director of Photography & Visual Storyteller.
+A visual replica of **Framehaus** (`https://framehaus.webflow.io`) built for cinema, film direction, photography, and production studios.
 
-## Key Highlights
-- **Cinematic Dark Design**: Editorial luxury aesthetic with champagne gold accents, deep dark tones, and bold serif titles.
-- **Interactive Gallery & Filters**: Instant categorization for Photography, Videography/Films, Editorial Portraits, and Commercial work.
-- **Showreel & Cinema Player Lightbox**: Fullscreen modal viewer with video simulation and high-resolution photo examination.
-- **Services & Arsenal Breakdown**: Details commercial film production, cameras (Sony FX Cinema / G-Master optics / DJI drones), and post-production color grading.
-- **Shoot Booking & Inquiry Form**: Interactive client inquiry form with instant validation and feedback.
-- **Responsive & Lightweight**: Zero external build toolchain; pure standard HTML5, CSS3, and JavaScript.
-
-## File Organization
-```
-├── index.html        # Landing page structure
-├── css/
-│   └── style.css     # Luxury cinema styling & responsive design
-├── js/
-│   └── main.js       # Filters, lightbox modal, booking handler & theme toggle
-└── README.md         # Documentation
-```
+## Features
+- **Brutalist / Editorial Aesthetic**: Layered 3D hero typography with interactive mouse-movement depth.
+- **Cinematic Works Showcase**:
+  - *Fever Coast* (Berlin Independent Cinema Prize)
+  - *The Sounds Between* (Locarno Visual Storytelling Award)
+  - *Ghost Orchid* (SXSW Film Awards)
+- **Services Grid**: Production, SFX & Practical Effects, Production Design, and Cinematography.
+- **Story Philosophy & Trails**: 01 Story First, 02 Design with Intent, 03 Make It Real.
+- **Split Contact Section & Interactive Booking Form**: Real-time submission state and verification.
+- **Responsive Architecture**: Fully responsive for mobile, tablet, and widescreen displays.
