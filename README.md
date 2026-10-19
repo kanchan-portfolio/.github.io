@@ -2,17 +2,17 @@
 
 Live website: [https://kanchan-portfolio.github.io/.github.io/](https://kanchan-portfolio.github.io/.github.io/)
 
-Designed in the minimalist, editorial aesthetic of **Felix Kern** (`https://felix-kern.webflow.io`) featuring **60 high-resolution frames and 4K celebrity masterclasses** by Kanchan Choudhary.
+Designed in the minimalist, editorial aesthetic of **Felix Kern** (`https://felix-kern.webflow.io`) featuring **60 high-resolution works and 4K celebrity masterclasses** by Kanchan Choudhary.
 
 ## Included Content & Categories:
-- **High-Fashion Editorial**: 4 high-res portraits & fashion frames
+- **High-Fashion Editorial**: 4 high-res portraits & fashion works
 - **Studio Lighting Series**: 13 high-res studio lighting & form studies
-- **Mood & Styling Series**: 9 high-res atmospheric & editorial frames
+- **Mood & Styling Series**: 9 high-res atmospheric & editorial works
 - **Ambient Light Series**: 5 high-res natural light portraits
 - **Character Studies**: 10 high-res wardrobe & character expressions
 - **Monochromes & Tone**: 8 high-res black & white cinematography stills
 - **Limited Collection 2030 & Cover**: Concept artwork & cover visual direction
-- **Songti Cinematography Stills**: 5 film production still frames
+- **Songti Cinematography Stills**: 5 film production stills
 - **KIFF Celebrity Podcasts & Masterclasses**:
   - *Anupam Kher Unfiltered*
   - *Saurabh Shukla Full Interview*

@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function activatePreview() {
       if (heroImg && thumb) {
         heroImg.src = thumb;
-        if (heroCaption) heroCaption.textContent = `[${title} • Full Frame]`;
+        if (heroCaption) heroCaption.textContent = `[${title}]`;
       }
     }
 

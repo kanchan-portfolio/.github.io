@@ -20,7 +20,7 @@ categories = [
         'code': '02',
         'title': 'Photoshoot • Studio Lighting Series',
         'subtitle': 'Studio Lighting & Form',
-        'desc': 'Studio lighting setups, wide and intimate character framing, prop compositions, and expressive poses.',
+        'desc': 'Studio lighting setups, wide and intimate character compositions, prop compositions, and expressive poses.',
         'items': [
             {'src': f'assets/slide_5_{i}.jpg', 'tag': 'Studio', 'num': f'{i:02d}', 'title': f'Studio Study {i:02d}', 'type': 'photo'}
             for i in range(1, 14)
@@ -33,7 +33,7 @@ categories = [
         'subtitle': 'Atmospheric & Visual Narratives',
         'desc': 'Natural daylight styling, atmospheric textures, outdoor narratives, and editorial lookbooks.',
         'items': [
-            {'src': f'assets/slide_6_{i}.jpg', 'tag': 'Mood', 'num': f'{i:02d}', 'title': f'Mood Framing {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_6_{i}.jpg', 'tag': 'Mood', 'num': f'{i:02d}', 'title': f'Mood Study {i:02d}', 'type': 'photo'}
             for i in range(1, 5)
         ] + [
             {'src': f'assets/slide_7_{i}.jpg', 'tag': 'Styling', 'num': f'{i:02d}', 'title': f'Styling Study {i:02d}', 'type': 'photo'}
@@ -95,11 +95,11 @@ categories = [
     {
         'id': 'cat-songti',
         'code': '08',
-        'title': 'Songti Cinematography Still Frames',
+        'title': 'Songti Cinematography Stills',
         'subtitle': 'Film Stills & Color Grading',
-        'desc': 'Cinematography production stills, color graded frames, and narrative film cinematography.',
+        'desc': 'Cinematography production stills, color graded imagery, and narrative film cinematography.',
         'items': [
-            {'src': f'assets/slide_7_{i}.jpg', 'tag': 'Songti Still', 'num': f'{i:02d}', 'title': f'Songti Cinematic Frame {i:02d}', 'type': 'photo'}
+            {'src': f'assets/slide_7_{i}.jpg', 'tag': 'Songti Still', 'num': f'{i:02d}', 'title': f'Songti Cinematic Still {i:02d}', 'type': 'photo'}
             for i in range(1, 6)
         ]
     },
@@ -118,16 +118,16 @@ categories = [
     }
 ]
 
-total_frames = sum(len(c['items']) for c in categories)
+total_items = sum(len(c['items']) for c in categories)
 
 html = f"""<!DOCTYPE html>
 <html data-wf-domain="kanchan-portfolio.github.io" lang="en">
 <head>
   <meta charset="utf-8"/>
   <title>Kanchan Choudhary — Work &amp; Full Exhibition (All Works)</title>
-  <meta content="All works and categorized exhibition of Kanchan Choudhary. Uncropped high-resolution frames from High-Fashion Editorials, Studio Series, Monochromes, Songti stills, and KIFF celebrity podcasts." name="description"/>
+  <meta content="All works and categorized exhibition of Kanchan Choudhary. Uncropped high-resolution photographs from High-Fashion Editorials, Studio Series, Monochromes, Songti stills, and KIFF celebrity podcasts." name="description"/>
   <meta content="Kanchan Choudhary — Work &amp; Full Exhibition" property="og:title"/>
-  <meta content="All works and categorized exhibition of Kanchan Choudhary. Uncropped high-resolution frames from High-Fashion Editorials, Studio Series, Monochromes, Songti stills, and KIFF celebrity podcasts." property="og:description"/>
+  <meta content="All works and categorized exhibition of Kanchan Choudhary. Uncropped high-resolution photographs from High-Fashion Editorials, Studio Series, Monochromes, Songti stills, and KIFF celebrity podcasts." property="og:description"/>
   <meta content="assets/slide_10_1.jpg" property="og:image"/>
   <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
@@ -429,7 +429,7 @@ html = f"""<!DOCTYPE html>
   <section class="work-sticky-bar">
     <div class="w-layout-blockcontainer container w-container">
       <div class="category-pills-scroll">
-        <button type="button" class="cat-pill active" data-target="all">All Photos ({total_frames})</button>
+        <button type="button" class="cat-pill active" data-target="all">All Photos ({total_items})</button>
 """
 
 for c in categories:
@@ -450,6 +450,7 @@ html += f"""      </div>
 """
 
 for c in categories:
+    item_label = "Videos" if c['id'] == 'cat-kiff' else "Photos"
     html += f"""
           <!-- Category Section: {c['title']} -->
           <div class="category-section-block" id="{c['id']}" data-category="{c['id']}">
@@ -459,7 +460,7 @@ for c in categories:
                   <span class="cat-code-badge">[{c['code']} / 09]</span>
                   <h2 class="cat-heading">{c['title']}</h2>
                 </div>
-                <span class="cat-count-pill">{len(c['items'])} Frames</span>
+                <span class="cat-count-pill">{len(c['items'])} {item_label}</span>
               </div>
               <div class="cat-description-text">{c['desc']}</div>
             </div>
@@ -470,7 +471,7 @@ for c in categories:
         is_video = item.get('type') == 'video'
         video_id = item.get('videoId', '')
         badge_html = '<div class="video-badge">&#9658; 4K VIDEO</div>' if is_video else '<div class="photo-zoom-hint">[+] VIEW FULL</div>'
-        meta_tag = '[4K Video]' if is_video else '[Full Frame]'
+        meta_tag = '[4K Video]' if is_video else '[High-Res]'
         container_class = 'photo-friendly-container photo-video-container' if is_video else 'photo-friendly-container'
 
         html += f"""              <div role="listitem" class="w-dyn-item">
@@ -511,7 +512,7 @@ html += f"""
               <div class="items-blocks">
                 <h1 class="label-font opacity">Exhibition Index</h1>
                 <div class="items works-items">
-                  <a href="#all" class="body-font filter-cat-link active" data-target="all">All Categories ({total_frames} Frames)</a>
+                  <a href="#all" class="body-font filter-cat-link active" data-target="all">All Categories ({total_items} Works)</a>
                   <a href="index.html" class="body-font">&larr; Selected Works Table</a>
                 </div>
               </div>
@@ -531,7 +532,7 @@ html += f"""                </div>
               <div class="items-blocks">
                 <div class="label-font opacity">Display Philosophy</div>
                 <div class="items works-items">
-                  <div class="body-font">100% Uncropped Full-Frame</div>
+                  <div class="body-font">100% Uncropped High-Res</div>
                   <div class="body-font">Natural Aspect Ratios</div>
                   <div class="body-font">Click any card to examine high-res</div>
                 </div>
@@ -588,7 +589,7 @@ html += f"""                </div>
       <!-- Lightbox Header -->
       <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 18px; border-bottom:1px solid #222; background:#08090d;">
         <div style="display:flex; align-items:center; gap:12px;">
-          <span id="work-lightbox-counter" style="color:#888; font-size:12px; font-family:'IBM Plex Mono', monospace;">[1 / {total_frames}]</span>
+          <span id="work-lightbox-counter" style="color:#888; font-size:12px; font-family:'IBM Plex Mono', monospace;">[1 / {total_items}]</span>
           <span id="work-lightbox-title" style="color:#fff; font-size:13px; font-family:'IBM Plex Mono', monospace; font-weight:500;">Photograph</span>
         </div>
         <button id="work-close-lightbox" style="background:none; border:none; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:14px; cursor:pointer; padding:4px 8px;">[CLOSE &times;]</button>
@@ -831,4 +832,4 @@ html += f"""                </div>
 with open('work.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
-print(f"Successfully generated work.html with {total_frames} items without any Slide text!")
+print(f"Successfully generated work.html with {total_items} items without any Slide or Frame text!")
