@@ -483,6 +483,67 @@
       to { opacity: 1; transform: translateY(0); }
     }
 
+    /* Screen Flood Container & Stamps */
+    .sorry-flood-container {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 90;
+      overflow: hidden;
+    }
+
+    .sorry-stamp {
+      position: absolute;
+      font-family: 'Caveat', cursive, sans-serif;
+      font-weight: 700;
+      line-height: 1;
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+      animation: stampPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) forwards, stampHoverFloat 4s ease-in-out infinite alternate;
+      filter: drop-shadow(0 3px 10px rgba(0, 0, 0, 0.75));
+      will-change: transform, opacity;
+    }
+
+    @keyframes stampPopIn {
+      0% {
+        opacity: 0;
+        transform: scale(0.1) rotate(var(--init-rot, -15deg));
+      }
+      70% {
+        opacity: 1;
+        transform: scale(1.18) rotate(var(--target-rot, 0deg));
+      }
+      100% {
+        opacity: 0.95;
+        transform: scale(1) rotate(var(--target-rot, 0deg));
+      }
+    }
+
+    @keyframes stampHoverFloat {
+      0% {
+        transform: translateY(0) rotate(var(--target-rot, 0deg));
+      }
+      100% {
+        transform: translateY(-10px) rotate(calc(var(--target-rot, 0deg) + 2deg));
+      }
+    }
+
+    /* Screen Vibration on Burst */
+    .screen-shake {
+      animation: vibeDialog 0.38s ease-in-out;
+    }
+
+    @keyframes vibeDialog {
+      0%, 100% { transform: scale(1) translate(0, 0); }
+      20% { transform: scale(1.02) translate(-5px, 4px); }
+      40% { transform: scale(1.02) translate(5px, -4px); }
+      60% { transform: scale(1.01) translate(-4px, -2px); }
+      80% { transform: scale(1) translate(3px, 2px); }
+    }
+
     /* Floating Click Sparks */
     .click-spark {
       position: fixed;
@@ -545,6 +606,9 @@
 
   <!-- Falling / Raining Particles Canvas -->
   <canvas id="particle-canvas"></canvas>
+
+  <!-- Screen Flood Container for Full-Screen "Sorryyy" Stamps -->
+  <div class="sorry-flood-container" id="sorry-flood-container"></div>
 
   <!-- Floating Minimal Top Navigation -->
   <div class="sorry-top-nav">
@@ -785,6 +849,102 @@
       const btnMoreSorry = document.getElementById('btn-more-sorry');
       const btnForgive = document.getElementById('btn-forgive');
       const forgiveBanner = document.getElementById('forgive-banner');
+      const floodContainer = document.getElementById('sorry-flood-container');
+      const popupDialog = document.getElementById('popup-dialog');
+
+      let sorryBurstCount = 0;
+
+      // Function to flood the screen densely with "sorryyy" everywhere
+      function floodScreenWithSorry(amount = 80) {
+        if (!floodContainer) return;
+
+        const phrases = [
+          'sorryyy 🥺', 'so sorryyy!', 'sorryyyy ❤️', 'i am sorryyy',
+          'sorryyy 🌼', 'please forgive me 🥺', 'so so sorryyy 💛',
+          'sorryyyy 😭', 'sorryyy ✨', 'SORRYYY!', 'sorryyy 💐',
+          'really sorryyy 🥺', 'so sorryyyy 💕'
+        ];
+
+        const colors = [
+          '#7ec3d5', '#ffd166', '#ff9ec7', '#ffffff', 
+          '#a8dadc', '#ff6b6b', '#f72585', '#4cc9f0', '#ffeaa7'
+        ];
+
+        // Increase background wallpaper glow and visibility
+        if (sorryWallpaper) {
+          sorryWallpaper.classList.add('active');
+          sorryWallpaper.style.opacity = Math.min(0.65, 0.25 + sorryBurstCount * 0.1);
+        }
+
+        // Calculate grid coverage so stamps cover entire width & height
+        const w = window.innerWidth;
+        const h = window.innerHeight;
+        const cols = Math.ceil(Math.sqrt(amount * (w / h)));
+        const rows = Math.ceil(amount / cols);
+        const cellW = w / cols;
+        const cellH = h / rows;
+
+        for (let r = 0; r < rows; r++) {
+          for (let c = 0; c < cols; c++) {
+            if (Math.random() > 0.88 && amount < 100) continue;
+
+            const stamp = document.createElement('div');
+            stamp.className = 'sorry-stamp';
+
+            const phrase = phrases[Math.floor(Math.random() * phrases.length)];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            const size = Math.floor(Math.random() * 22) + 18; // 18px to 40px
+            const rot = (Math.random() - 0.5) * 44; // -22 to +22 deg
+
+            // Position within cell + random jitter
+            const posX = Math.max(10, Math.min(w - 120, c * cellW + (Math.random() - 0.2) * cellW));
+            const posY = Math.max(10, Math.min(h - 40, r * cellH + (Math.random() - 0.2) * cellH));
+
+            stamp.textContent = phrase;
+            stamp.style.left = `${posX}px`;
+            stamp.style.top = `${posY}px`;
+            stamp.style.color = color;
+            stamp.style.fontSize = `${size}px`;
+            stamp.style.setProperty('--init-rot', `${rot * 2}deg`);
+            stamp.style.setProperty('--target-rot', `${rot}deg`);
+
+            // 30% chance for modern bold font
+            if (Math.random() < 0.3) {
+              stamp.style.fontFamily = "'Plus Jakarta Sans', sans-serif";
+              stamp.style.fontWeight = '800';
+              stamp.style.letterSpacing = '-0.02em';
+            }
+
+            floodContainer.appendChild(stamp);
+          }
+        }
+
+        // Also trigger massive canvas rain of particles
+        burstParticles(90);
+
+        // Screen shake animation on popup dialog
+        if (popupDialog) {
+          popupDialog.classList.remove('screen-shake');
+          void popupDialog.offsetWidth; // trigger reflow
+          popupDialog.classList.add('screen-shake');
+        }
+
+        // Upgrade button text dynamically
+        sorryBurstCount++;
+        if (btnMoreSorry) {
+          const labels = [
+            '🥺 Send Even More Sorryyy!',
+            '😭 Screen Flooded with Sorryyy!',
+            '💛 1000% Sorryyy Everywhere!',
+            '✨ Overwhelming Sorryyy Power!',
+            '♾️ Infinite Sorryyy Forever!'
+          ];
+          const labelSpan = btnMoreSorry.querySelector('span');
+          if (labelSpan) {
+            labelSpan.textContent = labels[Math.min(sorryBurstCount - 1, labels.length - 1)];
+          }
+        }
+      }
 
       function triggerSorryExperience() {
         playChime(false);
@@ -793,6 +953,8 @@
         // Activate raining engine & explosion
         isRaining = true;
         burstParticles(80);
+        // Initial flood layer
+        floodScreenWithSorry(50);
         // Open the popup modal
         if (sorryModal) sorryModal.classList.add('active');
       }
@@ -820,13 +982,14 @@
         });
       }
 
-      // "Send More Sorryyy" Button
+      // "Send More Sorryyy" Button — FULL SCREEN COMPLETELY FILLED WITH SORRY
       if (btnMoreSorry) {
         btnMoreSorry.addEventListener('click', (e) => {
           e.stopPropagation();
           playChime(false);
-          burstParticles(60);
-          for (let i = 0; i < 20; i++) spawnParticle();
+          // Flood screen with another 80-100 animated sorry tags across every coordinate
+          floodScreenWithSorry(90);
+          for (let i = 0; i < 30; i++) spawnParticle();
         });
       }
 
