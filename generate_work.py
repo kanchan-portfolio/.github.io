@@ -121,194 +121,215 @@ categories = [
 total_items = sum(len(c['items']) for c in categories)
 
 html = f"""<!DOCTYPE html>
-<html data-wf-domain="kanchan-portfolio.github.io" lang="en">
+<html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Kanchan Choudhary — Work &amp; Full Exhibition (All Works)</title>
-  <meta content="All works and categorized exhibition of Kanchan Choudhary. Uncropped high-resolution photographs from High-Fashion Editorials, Studio Series, Monochromes, Songti stills, and KIFF celebrity podcasts." name="description"/>
-  <meta content="Kanchan Choudhary — Work &amp; Full Exhibition" property="og:title"/>
-  <meta content="All works and categorized exhibition of Kanchan Choudhary. Uncropped high-resolution photographs from High-Fashion Editorials, Studio Series, Monochromes, Songti stills, and KIFF celebrity podcasts." property="og:description"/>
+  <title>Works Archive — Kanchan Choudhary®</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"/>
+  <meta content="The complete works archive of Kanchan Choudhary. 60 high-resolution uncropped photographs and 4K celebrity masterclasses across 9 curated disciplines." name="description"/>
+  <meta content="Works Archive — Kanchan Choudhary®" property="og:title"/>
+  <meta content="The complete works archive of Kanchan Choudhary. 60 high-resolution uncropped photographs and 4K celebrity masterclasses across 9 curated disciplines." property="og:description"/>
   <meta content="assets/slide_10_1.jpg" property="og:image"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
 
-  <!-- Fonts -->
+  <!-- Google Fonts: Plus Jakarta Sans & Newsreader -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <!-- Stylesheets -->
-  <link href="https://cdn.prod.website-files.com/6ab6692b52b5a2110575e141/css/felix-kern.webflow.shared.67c341a1a.css" rel="stylesheet" type="text/css"/>
-  <link href="css/felix-kern.css" rel="stylesheet" type="text/css"/>
+  <!-- Shared Cosmos Theme Stylesheet -->
+  <link rel="stylesheet" href="css/cosmos.css">
 
   <style>
-    body {{
-      -webkit-font-smoothing: antialiased;
-      -moz-font-smoothing: antialiased;
-      font-family: 'IBM Plex Mono', monospace !important;
-      background-color: #f7f7f8;
-      color: #000;
+    /* Work Page Specific Cosmos Styles */
+    .work-hero-header {{
+      text-align: center;
+      padding: 130px 20px 40px 20px;
+      max-width: 900px;
+      margin: 0 auto;
     }}
 
-    .contact-link {{
-      color: inherit;
-      text-decoration: underline;
-      transition: opacity 0.2s;
-    }}
-    .contact-link:hover {{
-      opacity: 0.6;
+    .work-page-title {{
+      font-family: var(--font-serif);
+      font-size: clamp(2.8rem, 6.5vw, 5.2rem);
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      line-height: 1.05;
+      margin-bottom: 16px;
     }}
 
-    /* Sticky Category Jump Bar */
+    .work-page-subtitle {{
+      font-size: clamp(1rem, 1.8vw, 1.25rem);
+      color: var(--text-secondary);
+      max-width: 650px;
+      margin: 0 auto;
+    }}
+
+    /* Sticky Category Pills Bar */
     .work-sticky-bar {{
       position: sticky;
-      top: 0;
-      background: rgba(247, 247, 248, 0.96);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      z-index: 90;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-      padding: 12px 0;
-      margin-bottom: 28px;
+      top: 20px;
+      z-index: 900;
+      display: flex;
+      justify-content: center;
+      padding: 10px 16px;
+      margin-bottom: 50px;
+      pointer-events: none;
     }}
 
     .category-pills-scroll {{
+      pointer-events: auto;
       display: flex;
+      align-items: center;
       gap: 8px;
+      background: var(--nav-bg);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+      border: 1px solid var(--nav-border);
+      padding: 6px 12px;
+      border-radius: 9999px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
       overflow-x: auto;
-      white-space: nowrap;
+      max-width: 94vw;
       scrollbar-width: none;
-      -ms-overflow-style: none;
-      padding: 2px 4px;
     }}
+
     .category-pills-scroll::-webkit-scrollbar {{
       display: none;
     }}
 
     .cat-pill {{
-      display: inline-block;
-      padding: 7px 14px;
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: #111;
-      background: #fff;
-      border: 1px solid #ccc;
-      border-radius: 2px;
-      text-decoration: none;
-      transition: all 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--text-secondary);
+      background: transparent;
+      border: 1px solid transparent;
+      white-space: nowrap;
+      transition: all 0.2s ease;
       cursor: pointer;
     }}
-    .cat-pill:hover, .cat-pill.active {{
-      background: #000;
-      color: #fff;
-      border-color: #000;
+
+    .cat-pill:hover {{
+      color: var(--text-primary);
+      background: var(--pill-bg-hover);
     }}
 
-    /* Category Section Header */
-    .category-section-block {{
-      margin-bottom: 56px;
-      scroll-margin-top: 80px;
+    .cat-pill.active {{
+      background: var(--pill-active-bg);
+      color: var(--pill-active-text);
+      font-weight: 600;
+    }}
+
+    /* Category Section Layout */
+    .work-category-section {{
+      max-width: 1280px;
+      margin: 0 auto 80px auto;
+      padding: 0 24px;
+      scroll-margin-top: 100px;
     }}
 
     .category-section-header {{
-      margin-bottom: 22px;
-      padding-bottom: 12px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.15);
-    }}
-
-    .cat-meta-row {{
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
-      margin-bottom: 6px;
+      align-items: flex-end;
+      border-bottom: 1px solid var(--card-border);
+      padding-bottom: 18px;
+      margin-bottom: 30px;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 12px;
     }}
 
-    .cat-title-row {{
+    .cat-title-group {{
       display: flex;
-      align-items: center;
-      gap: 12px;
+      align-items: baseline;
+      gap: 14px;
       flex-wrap: wrap;
     }}
 
     .cat-code-badge {{
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: #666;
+      font-size: 12px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      font-weight: 600;
     }}
 
     .cat-heading {{
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 17px;
-      font-weight: 500;
+      font-family: var(--font-serif);
+      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      font-weight: 400;
+      color: var(--text-primary);
       margin: 0;
-      color: #000;
     }}
 
     .cat-count-pill {{
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 11px;
-      color: #555;
-      border: 1px solid #bbb;
-      background: #fff;
-      padding: 2px 8px;
-      border-radius: 2px;
+      font-size: 12px;
+      color: var(--text-secondary);
+      background: var(--pill-bg);
+      border: 1px solid var(--pill-border);
+      padding: 4px 12px;
+      border-radius: 9999px;
     }}
 
-    .cat-description-text {{
-      font-family: 'IBM Plex Mono', monospace;
-      font-size: 12px;
-      color: #555;
-      line-height: 1.5;
+    .cat-desc-row {{
+      width: 100%;
+      font-size: 13px;
+      color: var(--text-secondary);
       margin-top: 4px;
     }}
 
-    /* Grid collection layout */
-    .grid-work-collection-list {{
+    /* Friendly Photo Cards Grid — 100% Full Uncropped View */
+    .work-cards-grid {{
       display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 28px 20px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
     }}
 
-    @media screen and (max-width: 600px) {{
-      .grid-work-collection-list {{
+    @media (max-width: 768px) {{
+      .work-cards-grid {{
         grid-template-columns: 1fr;
       }}
     }}
 
-    /* Friendly Photo Card - NEVER CROPPED */
     .photo-card-wrapper {{
-      cursor: pointer;
       display: flex;
       flex-direction: column;
+      border-radius: 16px;
+      overflow: hidden;
+      background: var(--card-bg-solid);
+      border: 1px solid var(--card-border);
+      box-shadow: var(--shadow-card);
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s, box-shadow 0.3s;
       text-decoration: none;
       color: inherit;
     }}
 
+    .photo-card-wrapper:hover {{
+      transform: translateY(-6px);
+      border-color: var(--card-border-hover);
+      box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+    }}
+
+    /* Friendly container — ALWAYS CONTAIN, NEVER CROP */
     .photo-friendly-container {{
-      background-color: #0c0d12;
-      border: 1px solid rgba(0, 0, 0, 0.14);
-      border-radius: 3px;
-      aspect-ratio: 3 / 4;
       width: 100%;
+      aspect-ratio: 3 / 4;
+      background-color: #090a0f;
       display: flex;
       align-items: center;
       justify-content: center;
-      overflow: hidden;
-      padding: 10px;
       position: relative;
+      overflow: hidden;
+      padding: 14px;
       box-sizing: border-box;
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
     }}
 
-    /* 16:9 for Video Cards */
-    .photo-friendly-container.photo-video-container {{
-      aspect-ratio: 16 / 9 !important;
-    }}
-
-    .photo-card-wrapper:hover .photo-friendly-container {{
-      border-color: rgba(0, 0, 0, 0.5);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.16);
+    .photo-friendly-container.is-video {{
+      aspect-ratio: 16 / 9;
     }}
 
     .photo-friendly-container img {{
@@ -316,41 +337,43 @@ html = f"""<!DOCTYPE html>
       max-height: 100%;
       width: auto;
       height: auto;
-      object-fit: contain !important; /* CRITICAL: 100% full uncropped image */
+      object-fit: contain !important; /* CRITICAL: 100% FULL UNCLIPPED IMAGE */
       display: block;
       margin: auto;
-      filter: drop-shadow(0 2px 8px rgba(0,0,0,0.55));
-      transition: transform 0.25s ease;
+      filter: drop-shadow(0 4px 14px rgba(0,0,0,0.6));
+      transition: transform 0.3s ease;
     }}
 
     .photo-card-wrapper:hover .photo-friendly-container img {{
-      transform: scale(1.025);
+      transform: scale(1.03);
     }}
 
     .photo-zoom-hint {{
       position: absolute;
-      bottom: 8px;
-      right: 8px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      font-size: 10px;
-      padding: 3px 7px;
-      font-family: 'IBM Plex Mono', monospace;
-      border-radius: 2px;
+      bottom: 12px;
+      right: 12px;
+      background: var(--badge-bg);
+      color: var(--badge-text);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 6px;
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       pointer-events: none;
     }}
 
-    .video-badge {{
+    .video-play-badge {{
       position: absolute;
-      top: 8px;
-      left: 8px;
+      top: 12px;
+      left: 12px;
       background: #e50914;
       color: #fff;
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 600;
-      padding: 3px 8px;
-      font-family: 'IBM Plex Mono', monospace;
-      border-radius: 2px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      backdrop-filter: blur(8px);
       pointer-events: none;
     }}
 
@@ -358,338 +381,299 @@ html = f"""<!DOCTYPE html>
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 8px 2px 2px 2px;
+      padding: 14px 18px;
+      border-top: 1px solid var(--card-border);
+      font-size: 13px;
+    }}
+
+    .meta-tag-pill {{
       font-size: 11px;
-      color: #444;
-      font-family: 'IBM Plex Mono', monospace;
-      border-top: 1px solid rgba(0, 0, 0, 0.08);
-      margin-top: 6px;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
     }}
 
     .meta-title {{
-      flex-grow: 1;
+      color: var(--text-primary);
+      font-weight: 500;
       margin: 0 10px;
-      color: #000;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      flex-grow: 1;
     }}
 
     .meta-badge {{
-      color: #777;
-    }}
-
-    /* Lightbox modal responsive */
-    @media screen and (max-width: 600px) {{
-      #work-lightbox {{
-        padding: 8px !important;
-      }}
-      #work-lightbox > div {{
-        max-height: 98vh !important;
-      }}
+      color: var(--text-secondary);
+      font-size: 11px;
+      font-weight: 500;
     }}
   </style>
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="menu">
-    <div class="w-layout-blockcontainer container w-container">
-      <div class="menu-content">
-        <div class="menu-main">
-          <a href="index.html" class="logo w-inline-block">
-            <div class="body-font">Kanchan Choudhary</div>
-          </a>
-          <div class="menu-button plus" id="menu-toggle-btn">
-            <div class="body-font">[+]</div>
-            <div class="menu-button minus"><div class="body-font">[-]</div></div>
-          </div>
-        </div>
-        <div class="menu-info" id="menu-info">
-          <div class="menu-items-wrapper">
-            <div class="menu-items">
-              <a href="index.html" class="menu-item w-inline-block">
-                <div class="menu-link"><div class="body-font">Home</div></div>
-                <div class="menu-separator"><div class="body-font">,</div></div>
-              </a>
-              <a href="work.html" aria-current="page" class="menu-item w-inline-block w--current">
-                <div class="menu-link"><div class="body-font">Work</div></div>
-              </a>
-            </div>
-            <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
-              <div class="menu-link"><div class="body-font">Contact</div></div>
-            </a>
-          </div>
-        </div>
+  <!-- =========================================================================
+       FLOATING TOP NAVIGATION PILL (Exact: Home, Works, Get in touch)
+       ========================================================================= -->
+  <div class="cosmos-nav-wrapper">
+    <nav class="cosmos-nav">
+      <a href="index.html" class="nav-brand">KANCHAN<span style="font-size:0.7em; vertical-align:super;">®</span></a>
+      <div class="nav-links">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="work.html" class="nav-link active">Works</a>
       </div>
-    </div>
-  </nav>
+      <a href="mailto:kanchanc0410@gmail.com" class="nav-cta-btn">Get in touch</a>
+    </nav>
+  </div>
 
-  <!-- Sticky Horizontal Category Selector Bar -->
-  <section class="work-sticky-bar">
-    <div class="w-layout-blockcontainer container w-container">
-      <div class="category-pills-scroll">
-        <button type="button" class="cat-pill active" data-target="all">All Photos ({total_items})</button>
+
+  <!-- =========================================================================
+       BOTTOM FLOATING CONTROLS: Dark | Light Switch
+       ========================================================================= -->
+  <div class="bottom-controls-left">
+    <div class="theme-pill-switch">
+      <button type="button" class="theme-btn active" id="theme-btn-dark" aria-label="Dark Mode">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="12" height="12"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73A8.15 8.15 0 0 1 9.08 5.49a8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05z"/></svg>
+        Dark
+      </button>
+      <button type="button" class="theme-btn" id="theme-btn-light" aria-label="Light Mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="12" height="12"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        Light
+      </button>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       HERO HEADER FOR WORKS PAGE
+       ========================================================================= -->
+  <header class="work-hero-header">
+    <h1 class="work-page-title">The Complete Archive</h1>
+    <p class="work-page-subtitle">
+      60 uncropped photographs and 4K celebrity masterclasses across 9 curated visual disciplines.
+    </p>
+  </header>
+
+
+  <!-- =========================================================================
+       STICKY FROSTED GLASS CATEGORY SELECTOR PILLS
+       ========================================================================= -->
+  <div class="work-sticky-bar">
+    <div class="category-pills-scroll">
+      <button type="button" class="cat-pill active" data-target="all">All Works ({total_items})</button>
 """
 
 for c in categories:
     clean_name = c["title"].split("•")[1].strip() if "•" in c["title"] else c["title"]
-    html += f'        <button type="button" class="cat-pill" data-target="{c["id"]}">[{c["code"]}] {clean_name} ({len(c["items"])})</button>\n'
+    html += f'      <button type="button" class="cat-pill" data-target="{c["id"]}">[{c["code"]}] {clean_name} ({len(c["items"])})</button>\n'
 
-html += f"""      </div>
-    </div>
-  </section>
+html += f"""    </div>
+  </div>
 
-  <!-- Main Work Gallery Layout -->
-  <section class="works">
-    <div class="w-layout-blockcontainer container grow w-container">
-      <div class="works-content">
 
-        <!-- Left Column: The Divided Categories & Photo Cards -->
-        <div class="grid-work-blocks w-dyn-list" id="works-container">
+  <!-- =========================================================================
+       MAIN WORK COLLECTIONS (100% Uncropped Photo Cards)
+       ========================================================================= -->
+  <main id="works-container">
 """
 
 for c in categories:
     item_label = "Videos" if c['id'] == 'cat-kiff' else "Photos"
     html += f"""
-          <!-- Category Section: {c['title']} -->
-          <div class="category-section-block" id="{c['id']}" data-category="{c['id']}">
-            <div class="category-section-header">
-              <div class="cat-meta-row">
-                <div class="cat-title-row">
-                  <span class="cat-code-badge">[{c['code']} / 09]</span>
-                  <h2 class="cat-heading">{c['title']}</h2>
-                </div>
-                <span class="cat-count-pill">{len(c['items'])} {item_label}</span>
-              </div>
-              <div class="cat-description-text">{c['desc']}</div>
-            </div>
+    <!-- Category Section: {c['title']} -->
+    <section class="work-category-section" id="{c['id']}" data-category="{c['id']}">
+      <div class="category-section-header">
+        <div class="cat-title-group">
+          <span class="cat-code-badge">[{c['code']} / 09]</span>
+          <h2 class="cat-heading">{c['title']}</h2>
+          <span class="cat-count-pill">{len(c['items'])} {item_label}</span>
+        </div>
+        <div class="cat-desc-row">{c['desc']}</div>
+      </div>
 
-            <div class="grid-work-collection-list w-dyn-items">
+      <div class="work-cards-grid">
 """
     for item in c['items']:
         is_video = item.get('type') == 'video'
         video_id = item.get('videoId', '')
-        badge_html = '<div class="video-badge">&#9658; 4K VIDEO</div>' if is_video else '<div class="photo-zoom-hint">[+] VIEW FULL</div>'
+        badge_html = '<div class="video-play-badge">&#9658; 4K VIDEO</div>' if is_video else '<div class="photo-zoom-hint">[+] VIEW FULL</div>'
         meta_tag = '[4K Video]' if is_video else '[High-Res]'
-        container_class = 'photo-friendly-container photo-video-container' if is_video else 'photo-friendly-container'
+        container_class = 'photo-friendly-container is-video' if is_video else 'photo-friendly-container'
 
-        html += f"""              <div role="listitem" class="w-dyn-item">
-                <div class="photo-card-wrapper" data-src="{item['src']}" data-title="{item['title']}" data-cat="{c['title']}" data-video-id="{video_id}">
-                  <div class="{container_class}">
-                    <img src="{item['src']}" alt="{item['title']}" loading="eager" decoding="async"/>
-                    {badge_html}
-                  </div>
-                  <div class="photo-card-meta">
-                    <span class="meta-date">{item['tag']}</span>
-                    <span class="meta-title">{item['title']}</span>
-                    <span class="meta-badge">{meta_tag}</span>
-                  </div>
-                </div>
-              </div>
+        html += f"""        <div class="photo-card-wrapper" data-src="{item['src']}" data-title="{item['title']}" data-cat="{c['title']}" data-video-id="{video_id}">
+          <div class="{container_class}">
+            <img src="{item['src']}" alt="{item['title']}" loading="lazy" decoding="async"/>
+            {badge_html}
+          </div>
+          <div class="photo-card-meta">
+            <span class="meta-tag-pill">{item['tag']}</span>
+            <span class="meta-title">{item['title']}</span>
+            <span class="meta-badge">{meta_tag}</span>
+          </div>
+        </div>
 """
 
-    html += """            </div>
-          </div>
+    html += """      </div>
+    </section>
 """
 
 html += f"""
-          <!-- Bottom Navigation Back to Home matching Felix Kern view all line -->
-          <div class="button-wrapper" style="margin-top: 40px; margin-bottom: 20px;">
-            <a href="index.html" class="button w-inline-block">
-              <div class="body-font">&larr; Return to Homepage &amp; Selected Works</div>
-              <div class="button-line"></div>
-            </a>
-          </div>
-
-        </div>
-
-        <!-- Right Column: Sticky Categories & Bio Index -->
-        <div class="works-info">
-          <div class="progress-blocks">
-            <div class="blocks">
-
-              <div class="items-blocks">
-                <h1 class="label-font opacity">Exhibition Index</h1>
-                <div class="items works-items">
-                  <a href="#all" class="body-font filter-cat-link active" data-target="all">All Categories ({total_items} Works)</a>
-                  <a href="index.html" class="body-font">&larr; Selected Works Table</a>
-                </div>
-              </div>
-
-              <div class="items-blocks">
-                <div class="label-font opacity">Categories (9)</div>
-                <div class="items works-items second">
-"""
-
-for c in categories:
-    short_title = c['title'].replace('Photoshoot • ', '').replace('&amp;', '&')
-    html += f'                  <a href="#{c["id"]}" class="body-font filter-cat-link" data-target="{c["id"]}">[{c["code"]}] {short_title} ({len(c["items"])})</a>\n'
-
-html += f"""                </div>
-              </div>
-
-              <div class="items-blocks">
-                <div class="label-font opacity">Display Philosophy</div>
-                <div class="items works-items">
-                  <div class="body-font">100% Uncropped High-Res</div>
-                  <div class="body-font">Natural Aspect Ratios</div>
-                  <div class="body-font">Click any card to examine high-res</div>
-                </div>
-              </div>
-
-              <div class="items-blocks">
-                <div class="label-font opacity">Kanchan Choudhary</div>
-                <div class="items works-items">
-                  <div class="body-font">Video Editor &amp; Cinematographer</div>
-                  <div class="body-font"><a href="mailto:kanchanc0410@gmail.com" class="contact-link">kanchanc0410@gmail.com</a></div>
-                  <div class="body-font"><a href="tel:7977667004" class="contact-link">+91 7977667004</a></div>
-                </div>
-              </div>
-
-            </div>
-          </div>
-
-          <!-- Sticky Sidebar Footer -->
-          <div class="footer-wrapper">
-            <footer class="footer">
-              <div class="w-layout-blockcontainer container footer-container w-container">
-                <div class="footer-content">
-                  <div class="footer-item-wrapper">
-                    <div class="body-font">&copy; 2026 Kanchan Choudhary</div>
-                    <div class="menu-items">
-                      <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
-                        <div class="menu-link"><div class="body-font">kanchanc0410@gmail.com</div></div>
-                        <div class="menu-separator"><div class="body-font">,</div></div>
-                      </a>
-                      <a href="tel:7977667004" class="menu-item w-inline-block">
-                        <div class="menu-link"><div class="body-font">+91 7977667004</div></div>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="availability">
-                    <div class="indicator-wrapper"><div class="indicator"></div></div>
-                    <div class="body-font">Available for work</div>
-                  </div>
-                </div>
-              </div>
-            </footer>
-          </div>
-
-        </div>
-
-      </div>
+    <!-- Return to Home Action Button -->
+    <div style="text-align: center; margin: 60px 0 100px 0;">
+      <a href="index.html" class="craft-pill" style="padding: 14px 34px; font-weight: 600; font-size: 14px;">
+        &larr; Return to Universe Home
+      </a>
     </div>
-  </section>
 
-  <!-- Fullscreen Lightbox Modal with Next / Prev Navigation -->
-  <div id="work-lightbox" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.96); z-index:999999; align-items:center; justify-content:center; padding:1.5rem; box-sizing:border-box;">
-    <div style="position:relative; width:100%; max-width:1100px; max-height:94vh; background:#000; border:1px solid #333; display:flex; flex-direction:column; box-shadow:0 20px 60px rgba(0,0,0,0.8);">
-      
-      <!-- Lightbox Header -->
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 18px; border-bottom:1px solid #222; background:#08090d;">
-        <div style="display:flex; align-items:center; gap:12px;">
-          <span id="work-lightbox-counter" style="color:#888; font-size:12px; font-family:'IBM Plex Mono', monospace;">[1 / {total_items}]</span>
-          <span id="work-lightbox-title" style="color:#fff; font-size:13px; font-family:'IBM Plex Mono', monospace; font-weight:500;">Photograph</span>
+  </main>
+
+
+  <!-- =========================================================================
+       GIANT FOOTER (Matching Homepage)
+       ========================================================================= -->
+  <footer class="cosmos-footer">
+    <div class="footer-top-grid">
+
+      <!-- Col 1: Quote -->
+      <div>
+        <p class="footer-quote">
+          ✦ Kanchan Choudhary is the visual storyteller you've been searching for.
+        </p>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div>
+        <div class="footer-col-title">Exhibition</div>
+        <div class="footer-links-list">
+          <a href="index.html">Universe Home</a>
+          <a href="work.html">The Complete Archive</a>
+          <a href="work.html#cat-editorial">High-Fashion</a>
+          <a href="work.html#cat-kiff">KIFF Podcasts</a>
         </div>
-        <button id="work-close-lightbox" style="background:none; border:none; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:14px; cursor:pointer; padding:4px 8px;">[CLOSE &times;]</button>
       </div>
 
-      <!-- Lightbox Body -->
-      <div id="work-lightbox-body" style="position:relative; width:100%; flex-grow:1; display:flex; align-items:center; justify-content:center; overflow:hidden; background:#000; padding:12px; box-sizing:border-box;">
-        <img id="work-lightbox-img" src="" alt="" style="max-width:100%; max-height:76vh; object-fit:contain; display:block; filter:drop-shadow(0 4px 18px rgba(0,0,0,0.7));">
-        <div id="work-lightbox-video" style="display:none; width:100%; max-width:960px; background:#000;"></div>
+      <!-- Col 3: Disciplines -->
+      <div>
+        <div class="footer-col-title">Disciplines</div>
+        <div class="footer-links-list">
+          <a href="work.html#cat-studio">Studio Lighting</a>
+          <a href="work.html#cat-monochrome">Monochromes</a>
+          <a href="work.html#cat-songti">Cinematography Stills</a>
+          <a href="work.html#cat-limited-2030">Limited Edition 2030</a>
+        </div>
       </div>
 
-      <!-- Lightbox Navigation Footer -->
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:10px 18px; border-top:1px solid #222; background:#08090d;">
-        <button id="work-lightbox-prev" style="background:none; border:1px solid #444; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:12px; padding:5px 14px; cursor:pointer;">&larr; PREV</button>
-        <span id="work-lightbox-category" style="color:#aaa; font-size:11px; font-family:'IBM Plex Mono', monospace;">Category</span>
-        <button id="work-lightbox-next" style="background:none; border:1px solid #444; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:12px; padding:5px 14px; cursor:pointer;">NEXT &rarr;</button>
+      <!-- Col 4: Contact -->
+      <div>
+        <div class="footer-col-title">Direct Inquiries</div>
+        <div class="footer-links-list">
+          <a href="mailto:kanchanc0410@gmail.com">kanchanc0410@gmail.com</a>
+          <a href="tel:7977667004">+91 7977667004</a>
+          <a href="https://www.youtube.com/watch?v=Sh0jTGE660o" target="_blank" rel="noopener">YouTube Masterclasses</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Giant Viewport Outline Typography -->
+    <div class="giant-footer-brand">
+      <span class="giant-footer-text">KANCHAN CHOUDHARY®</span>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom-bar">
+      <div>&copy; 2026 Kanchan Choudhary. All rights reserved.</div>
+      <div class="footer-availability">
+        <span class="status-dot"></span>
+        <span>Available for international commissions</span>
+      </div>
+      <div>Designed in Cosmos Aesthetic</div>
+    </div>
+  </footer>
+
+
+  <!-- =========================================================================
+       FULLSCREEN LIGHTBOX MODAL & 4K VIDEO LIGHTBOX
+       ========================================================================= -->
+  <div id="cosmos-lightbox">
+    <div class="lightbox-dialog">
+
+      <div class="lightbox-header">
+        <div class="lightbox-meta">
+          <span class="lightbox-counter" id="lightbox-counter">[1 / {total_items}]</span>
+          <span class="lightbox-title" id="lightbox-title">Photograph Exhibition</span>
+        </div>
+        <button type="button" class="lightbox-close-btn" id="lightbox-close">Close &times;</button>
+      </div>
+
+      <div class="lightbox-body" id="lightbox-body">
+        <img src="" alt="" class="lightbox-img" id="lightbox-img"/>
+        <div class="lightbox-video-container" id="lightbox-video" style="display:none;"></div>
+      </div>
+
+      <div class="lightbox-footer">
+        <button type="button" class="lightbox-nav-btn" id="lb-prev">&larr; Previous</button>
+        <span style="font-size:12px; color:var(--text-muted);">Kanchan Choudhary Archive</span>
+        <button type="button" class="lightbox-nav-btn" id="lb-next">Next &rarr;</button>
       </div>
 
     </div>
   </div>
 
-  <!-- Interactive Scripts -->
+
+  <!-- =========================================================================
+       INTERACTIVE SCRIPTS (Theme, Filtering & Lightbox)
+       ========================================================================= -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {{
-      // Legacy hash mapping for backwards compatibility
-      const aliasMap = {{
-        'cat-slide-10': 'cat-editorial',
-        'cat-slide-5': 'cat-studio',
-        'cat-slides-6-7': 'cat-mood-styling',
-        'cat-slides-8-9': 'cat-ambient-light',
-        'cat-slides-11-12': 'cat-character',
-        'cat-slides-13-14': 'cat-monochrome',
-        'cat-slide-15': 'cat-limited-2030',
-        'cat-slide-21': 'cat-songti'
-      }};
+      // 1. Theme Switcher Sync with localStorage
+      const darkBtn = document.getElementById('theme-btn-dark');
+      const lightBtn = document.getElementById('theme-btn-light');
 
-      // 1. Mobile Menu Toggle
-      const menuBtn = document.getElementById('menu-toggle-btn');
-      const menuInfo = document.getElementById('menu-info');
-      let menuOpen = false;
-      if (menuBtn && menuInfo) {{
-        menuBtn.addEventListener('click', () => {{
-          menuOpen = !menuOpen;
-          menuInfo.style.display = menuOpen ? 'block' : '';
-          menuBtn.querySelector('.body-font').textContent = menuOpen ? '[-]' : '[+]';
-        }});
+      function setTheme(theme) {{
+        if (theme === 'light') {{
+          document.body.classList.add('light-theme');
+          if (lightBtn) lightBtn.classList.add('active');
+          if (darkBtn) darkBtn.classList.remove('active');
+          localStorage.setItem('cosmos-theme', 'light');
+        }} else {{
+          document.body.classList.remove('light-theme');
+          if (darkBtn) darkBtn.classList.add('active');
+          if (lightBtn) lightBtn.classList.remove('active');
+          localStorage.setItem('cosmos-theme', 'dark');
+        }}
       }}
 
-      // 2. Category Jump & Filter
+      const savedTheme = localStorage.getItem('cosmos-theme') || 'dark';
+      setTheme(savedTheme);
+
+      if (darkBtn) darkBtn.addEventListener('click', () => setTheme('dark'));
+      if (lightBtn) lightBtn.addEventListener('click', () => setTheme('light'));
+
+      // 2. Category Filter Pills
       const catPills = document.querySelectorAll('.cat-pill');
-      const sidebarLinks = document.querySelectorAll('.filter-cat-link');
-      const categorySections = document.querySelectorAll('.category-section-block');
-      const allCards = Array.from(document.querySelectorAll('.photo-card-wrapper'));
+      const categorySections = document.querySelectorAll('.work-category-section');
 
-      function getActiveCards() {{
-        const visible = allCards.filter(c => {{
-          const sec = c.closest('.category-section-block');
-          return !sec || sec.style.display !== 'none';
-        }});
-        return visible.length > 0 ? visible : allCards;
-      }}
-
-      function resolveTarget(rawId) {{
-        return aliasMap[rawId] || rawId;
-      }}
-
-      function filterCategory(rawTargetId, updateUrl = true) {{
-        const targetId = resolveTarget(rawTargetId);
-
-        // Update active states on pills and sidebar links
+      function filterCategory(targetId, updateUrl = true) {{
         catPills.forEach(p => {{
           if (p.getAttribute('data-target') === targetId) p.classList.add('active');
           else p.classList.remove('active');
         }});
-        sidebarLinks.forEach(l => {{
-          if (l.getAttribute('data-target') === targetId) l.classList.add('active');
-          else l.classList.remove('active');
-        }});
 
         if (targetId === 'all') {{
           categorySections.forEach(sec => sec.style.display = 'block');
-          window.scrollTo({{ top: 0, behavior: 'smooth' }});
-          if (updateUrl && window.location.hash) {{
-            history.replaceState(null, '', window.location.pathname);
-          }}
+          if (updateUrl) history.replaceState(null, '', window.location.pathname);
         }} else {{
           categorySections.forEach(sec => {{
             if (sec.id === targetId) {{
               sec.style.display = 'block';
+              sec.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
             }} else {{
               sec.style.display = 'none';
             }}
           }});
-          const targetEl = document.getElementById(targetId);
-          if (targetEl) {{
-            targetEl.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
-          }}
-          if (updateUrl) {{
-            history.replaceState(null, '', '#' + targetId);
-          }}
+          if (updateUrl) history.replaceState(null, '', '#' + targetId);
         }}
       }}
 
@@ -701,25 +685,15 @@ html += f"""                </div>
         }});
       }});
 
-      sidebarLinks.forEach(l => {{
-        l.addEventListener('click', (e) => {{
-          e.preventDefault();
-          const target = l.getAttribute('data-target');
-          filterCategory(target);
-        }});
-      }});
-
-      // Auto-filter if URL contains category hash
       if (window.location.hash) {{
-        const initialTarget = resolveTarget(window.location.hash.substring(1));
-        if (initialTarget && document.getElementById(initialTarget)) {{
-          filterCategory(initialTarget, false);
+        const hash = window.location.hash.substring(1);
+        if (document.getElementById(hash)) {{
+          filterCategory(hash, false);
         }}
       }}
 
       window.addEventListener('hashchange', () => {{
-        const rawHash = window.location.hash.substring(1);
-        const hash = resolveTarget(rawHash);
+        const hash = window.location.hash.substring(1);
         if (hash && document.getElementById(hash)) {{
           filterCategory(hash, false);
         }} else if (!hash) {{
@@ -727,100 +701,98 @@ html += f"""                </div>
         }}
       }});
 
-      // 3. Fullscreen Lightbox with Next / Previous & Keyboard Support
-      const lightbox = document.getElementById('work-lightbox');
-      const lightboxImg = document.getElementById('work-lightbox-img');
-      const lightboxVideo = document.getElementById('work-lightbox-video');
-      const lightboxTitle = document.getElementById('work-lightbox-title');
-      const lightboxCounter = document.getElementById('work-lightbox-counter');
-      const lightboxCategory = document.getElementById('work-lightbox-category');
-      const closeBtn = document.getElementById('work-close-lightbox');
-      const prevBtn = document.getElementById('work-lightbox-prev');
-      const nextBtn = document.getElementById('work-lightbox-next');
+      // 3. Fullscreen Lightbox & 4K Video Player
+      const lightbox = document.getElementById('cosmos-lightbox');
+      const lightboxImg = document.getElementById('lightbox-img');
+      const lightboxVideo = document.getElementById('lightbox-video');
+      const lightboxTitle = document.getElementById('lightbox-title');
+      const lightboxCounter = document.getElementById('lightbox-counter');
+      const closeBtn = document.getElementById('lightbox-close');
+      const lbPrev = document.getElementById('lb-prev');
+      const lbNext = document.getElementById('lb-next');
 
-      let currentCard = null;
+      const allCards = Array.from(document.querySelectorAll('.photo-card-wrapper'));
+      let currentIndex = 0;
 
-      function showCard(card) {{
-        if (!card) return;
-        currentCard = card;
-        const activeCards = getActiveCards();
-        const activeIndex = activeCards.indexOf(card);
-        const total = activeCards.length;
-
+      function openCard(card) {{
+        if (!card || !lightbox) return;
+        currentIndex = allCards.indexOf(card);
         const src = card.getAttribute('data-src');
         const title = card.getAttribute('data-title') || 'Photograph';
-        const cat = card.getAttribute('data-cat') || '';
         const videoId = card.getAttribute('data-video-id');
 
-        lightboxCounter.textContent = `[${{activeIndex + 1}} / ${{total}}]`;
-        lightboxTitle.textContent = title;
-        lightboxCategory.textContent = cat;
+        if (lightboxTitle) lightboxTitle.textContent = title;
+        if (lightboxCounter) lightboxCounter.textContent = `[${{currentIndex + 1}} / ${{allCards.length}}]`;
 
         if (videoId) {{
-          lightboxImg.style.display = 'none';
-          lightboxVideo.style.display = 'block';
-          lightboxVideo.innerHTML = `
-            <div style="position:relative; width:100%; aspect-ratio:16/9; background:#000;">
+          if (lightboxImg) lightboxImg.style.display = 'none';
+          if (lightboxVideo) {{
+            lightboxVideo.style.display = 'block';
+            lightboxVideo.innerHTML = `
               <iframe src="https://www.youtube.com/embed/${{videoId}}?autoplay=1&rel=0&enablejsapi=1" 
-                title="YouTube video player"
+                title="4K Video Player"
                 frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                referrerpolicy="strict-origin-when-cross-origin"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                 allowfullscreen 
-                style="width:100%; height:100%; border:0; display:block;">
+                style="width:100%; height:100%; border-radius:10px; border:0;">
               </iframe>
-            </div>
-            <div style="padding:10px 14px; background:#111; display:flex; justify-content:space-between; align-items:center; border-top:1px solid #222; flex-wrap:wrap; gap:8px;">
-              <span style="color:#aaa; font-size:11px; font-family:'IBM Plex Mono', monospace;">KIFF 4K Broadcast Masterclass</span>
-              <a href="https://www.youtube.com/watch?v=${{videoId}}" target="_blank" rel="noopener noreferrer" style="color:#fff; text-decoration:underline; font-size:11px; font-family:'IBM Plex Mono', monospace;">[Watch Directly on YouTube &rarr;]</a>
-            </div>
-          `;
+            `;
+          }}
         }} else {{
-          lightboxVideo.style.display = 'none';
-          lightboxVideo.innerHTML = '';
-          lightboxImg.style.display = 'block';
-          lightboxImg.src = src;
-          lightboxImg.alt = title;
+          if (lightboxVideo) {{
+            lightboxVideo.style.display = 'none';
+            lightboxVideo.innerHTML = '';
+          }}
+          if (lightboxImg) {{
+            lightboxImg.style.display = 'block';
+            lightboxImg.src = src;
+            lightboxImg.alt = title;
+          }}
         }}
+
+        lightbox.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
       }}
 
-      function stepCard(dir) {{
-        const activeCards = getActiveCards();
-        let idx = activeCards.indexOf(currentCard);
-        if (idx === -1) idx = 0;
-        idx = (idx + dir + activeCards.length) % activeCards.length;
-        showCard(activeCards[idx]);
+      function closeLightbox() {{
+        if (!lightbox) return;
+        lightbox.style.display = 'none';
+        if (lightboxVideo) lightboxVideo.innerHTML = '';
+        document.body.style.overflow = '';
       }}
 
       allCards.forEach(card => {{
-        card.addEventListener('click', () => {{
-          showCard(card);
-          lightbox.style.display = 'flex';
-          document.body.style.overflow = 'hidden';
+        card.addEventListener('click', (e) => {{
+          e.preventDefault();
+          openCard(card);
         }});
       }});
 
-      function closeLightbox() {{
-        lightbox.style.display = 'none';
-        lightboxVideo.innerHTML = '';
-        document.body.style.overflow = 'auto';
-      }}
-
       if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
-      if (prevBtn) prevBtn.addEventListener('click', () => stepCard(-1));
-      if (nextBtn) nextBtn.addEventListener('click', () => stepCard(1));
+      if (lbPrev) {{
+        lbPrev.addEventListener('click', () => {{
+          currentIndex = (currentIndex - 1 + allCards.length) % allCards.length;
+          openCard(allCards[currentIndex]);
+        }});
+      }}
+      if (lbNext) {{
+        lbNext.addEventListener('click', () => {{
+          currentIndex = (currentIndex + 1) % allCards.length;
+          openCard(allCards[currentIndex]);
+        }});
+      }}
 
       if (lightbox) {{
         lightbox.addEventListener('click', (e) => {{
-          if (e.target === lightbox || e.target.id === 'work-lightbox-body') closeLightbox();
+          if (e.target === lightbox) closeLightbox();
         }});
       }}
 
       document.addEventListener('keydown', (e) => {{
         if (lightbox && lightbox.style.display === 'flex') {{
           if (e.key === 'Escape') closeLightbox();
-          if (e.key === 'ArrowLeft') stepCard(-1);
-          if (e.key === 'ArrowRight') stepCard(1);
+          if (e.key === 'ArrowLeft' && lbPrev) lbPrev.click();
+          if (e.key === 'ArrowRight' && lbNext) lbNext.click();
         }}
       }});
     }});
@@ -832,4 +804,4 @@ html += f"""                </div>
 with open('work.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
-print(f"Successfully generated work.html with {total_items} items without any Slide or Frame text!")
+print(f"Successfully generated work.html in Cosmos theme with {total_items} items!")
