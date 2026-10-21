@@ -391,6 +391,15 @@ html = f"""<!DOCTYPE html>
     </div>
   </div>
 
+  <!-- Floating Pill: If you see this website click here -->
+  <div class="sorry-floating-indicator">
+    <a href="sorry.html" class="sorry-pill-link">
+      <span class="sorry-pill-sparkle">✨</span>
+      <span>If you see this website, click here</span>
+      <span class="sorry-pill-emoji">💌</span>
+    </a>
+  </div>
+
 
   <!-- =========================================================================
        HERO HEADER FOR WORKS PAGE
@@ -499,6 +508,7 @@ html += f"""
           <a href="mailto:kanchanc0410@gmail.com">kanchanc0410@gmail.com</a>
           <a href="tel:7977667004">+91 7977667004</a>
           <a href="https://www.youtube.com/watch?v=Sh0jTGE660o" target="_blank" rel="noopener">YouTube Masterclasses</a>
+          <a href="sorry.html" style="color: #7ec3d5; font-weight: 600;">✦ If you see this website, click here</a>
         </div>
       </div>
 
