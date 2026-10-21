@@ -1,662 +1,746 @@
 <!DOCTYPE html>
-<html data-wf-domain="kanchan-portfolio.github.io" lang="en">
+<html lang="en">
 <head>
   <meta charset="utf-8"/>
-  <title>Kanchan Choudhary — Portfolio &amp; Full Exhibition (All Works)</title>
-  <meta content="Portfolio of Kanchan Choudhary — Video Editor &amp; Cinematographer. Full photography archive (60 photographs), High-Fashion Editorial, KIFF celebrity podcasts, brand films, and Songti stills." name="description"/>
-  <meta content="Kanchan Choudhary — Portfolio &amp; Full Exhibition" property="og:title"/>
-  <meta content="Portfolio of Kanchan Choudhary — Video Editor &amp; Cinematographer. Full photography archive (60 photographs), High-Fashion Editorial, KIFF celebrity podcasts, brand films, and Songti stills." property="og:description"/>
+  <title>Kanchan Choudhary® — Creative Universe &amp; Visual Works Archive</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"/>
+  <meta content="Kanchan Choudhary — Video Editor, Cinematographer &amp; Visual Storyteller. A creative universe for directors, fashion houses, and filmmakers. 60 curated photographs and 4K celebrity masterclasses." name="description"/>
+  <meta content="Kanchan Choudhary® — Creative Universe" property="og:title"/>
+  <meta content="Kanchan Choudhary — Video Editor, Cinematographer &amp; Visual Storyteller. A creative universe for directors, fashion houses, and filmmakers." property="og:description"/>
   <meta content="assets/slide_10_1.jpg" property="og:image"/>
-  <meta content="width=device-width, initial-scale=1" name="viewport"/>
-  
-  <!-- Fonts -->
+
+  <!-- Google Fonts: Plus Jakarta Sans & Newsreader / Instrument Serif -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
-  
-  <!-- Stylesheets -->
-  <link href="https://cdn.prod.website-files.com/6ab6692b52b5a2110575e141/css/felix-kern.webflow.shared.67c341a1a.css" rel="stylesheet" type="text/css"/>
-  <link href="css/felix-kern.css" rel="stylesheet" type="text/css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-  <style>
-    body {
-      -webkit-font-smoothing: antialiased;
-      -moz-font-smoothing: antialiased;
-      font-family: 'IBM Plex Mono', monospace !important;
-    }
-    .contact-link {
-      color: inherit;
-      text-decoration: underline;
-      transition: opacity 0.2s;
-    }
-    .contact-link:hover {
-      opacity: 0.6;
-    }
-
-    /* Friendly Photo Layout - Zero Cropping Across All Screens */
-    .hero-image-wrapper {
-      background-color: #0c0d12 !important;
-      border: 1px solid rgba(0, 0, 0, 0.18) !important;
-      border-radius: 3px !important;
-      width: 100% !important;
-      min-height: 460px !important;
-      max-height: 72vh !important;
-      aspect-ratio: 4 / 3 !important;
-      display: flex !important;
-      align-items: center !important;
-      justify-content: center !important;
-      position: relative !important;
-      overflow: hidden !important;
-      padding: 16px !important;
-      box-sizing: border-box !important;
-    }
-
-    .hero-image-wrapper .image.bg-image {
-      position: relative !important;
-      max-width: 100% !important;
-      max-height: 100% !important;
-      width: auto !important;
-      height: auto !important;
-      object-fit: contain !important; /* CRITICAL: Never crop any part of any photo */
-      inset: auto !important;
-      top: auto !important;
-      bottom: auto !important;
-      left: auto !important;
-      right: auto !important;
-      display: block !important;
-      margin: auto !important;
-      transition: opacity 0.2s ease, transform 0.2s ease;
-      filter: drop-shadow(0 4px 16px rgba(0,0,0,0.55));
-    }
-
-    .hero-photo-indicator {
-      position: absolute;
-      bottom: 12px;
-      right: 12px;
-      background: rgba(0, 0, 0, 0.8);
-      color: #fff;
-      font-size: 11px;
-      padding: 3px 8px;
-      border: 1px solid #444;
-      font-family: 'IBM Plex Mono', monospace;
-      pointer-events: none;
-    }
-
-    /* Selected Works Table */
-    .selected-works-section {
-      display: block;
-    }
-
-    .gallery-grid-lightbox {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 16px;
-      max-height: 75vh;
-      overflow-y: auto;
-      padding: 14px;
-    }
-
-    .gallery-grid-lightbox img {
-      width: 100%;
-      height: auto;
-      max-height: 420px;
-      object-fit: contain;
-      background: #111;
-      border: 1px solid #333;
-      transition: transform 0.2s;
-      cursor: zoom-in;
-    }
-
-    .gallery-grid-lightbox img:hover {
-      transform: scale(1.02);
-      border-color: #fff;
-    }
-  </style>
+  <!-- Cosmos Stylesheet -->
+  <link rel="stylesheet" href="css/cosmos.css">
 </head>
 <body>
 
-  <!-- Navigation -->
-  <nav class="menu">
-    <div class="w-layout-blockcontainer container w-container">
-      <div class="menu-content">
-        <div class="menu-main">
-          <a href="#" aria-current="page" class="logo w-inline-block w--current">
-            <div class="body-font">Kanchan Choudhary</div>
-          </a>
-          <div class="menu-button plus" id="menu-toggle-btn">
-            <div class="body-font">[+]</div>
-            <div class="menu-button minus"><div class="body-font">[-]</div></div>
-          </div>
+  <!-- =========================================================================
+       1. COSMOS PRELOADER (Exact to 00:00 in video)
+       ========================================================================= -->
+  <div id="cosmos-loader">
+    <div class="loader-logo">KANCHAN CHOUDHARY<span style="font-size:0.5em; vertical-align:super;">®</span></div>
+    <div class="loader-counter" id="loader-counter">0%</div>
+  </div>
+
+
+  <!-- =========================================================================
+       FLOATING TOP NAVIGATION PILL
+       ========================================================================= -->
+  <div class="cosmos-nav-wrapper">
+    <nav class="cosmos-nav">
+      <a href="index.html" class="nav-brand">KANCHAN<span style="font-size:0.7em; vertical-align:super;">®</span></a>
+      <div class="nav-links">
+        <a href="#order" class="nav-link">Universe</a>
+        <a href="#curate" class="nav-link">Curation</a>
+        <a href="#resurface" class="nav-link">Search</a>
+        <a href="#world" class="nav-link">World</a>
+        <a href="work.html" class="nav-link">Full Archive (60)</a>
+      </div>
+      <a href="mailto:kanchanc0410@gmail.com" class="nav-cta-btn">Get in touch</a>
+    </nav>
+  </div>
+
+
+  <!-- =========================================================================
+       BOTTOM FLOATING CONTROLS: Dark | Light Switch & Scroll Indicator
+       ========================================================================= -->
+  <div class="bottom-controls-left">
+    <div class="theme-pill-switch">
+      <button type="button" class="theme-btn active" id="theme-btn-dark" aria-label="Dark Mode">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73A8.15 8.15 0 0 1 9.08 5.49a8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05z"/></svg>
+        Dark
+      </button>
+      <button type="button" class="theme-btn" id="theme-btn-light" aria-label="Light Mode">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        Light
+      </button>
+    </div>
+  </div>
+
+  <div class="bottom-controls-right">
+    <div class="scroll-hint">
+      <span>Scroll to explore</span>
+      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
+  </div>
+
+
+  <!-- =========================================================================
+       HERO SECTION (Cosmic Constellation Vortex 00:01 - 00:07)
+       ========================================================================= -->
+  <section class="hero-cosmos" id="hero">
+    <canvas id="cosmos-starfield"></canvas>
+
+    <!-- 3D Orbit Layer with Floating Kanchan Moodboard Cards -->
+    <div class="hero-vortex-orbit">
+      <div class="orbit-layer">
+
+        <!-- Card 1: High-Fashion Portrait I -->
+        <div class="orbit-card card-orbit-1" data-lightbox="true" data-src="assets/slide_10_1.jpg" data-title="High-Fashion Editorial I">
+          <img src="assets/slide_10_1.jpg" alt="High-Fashion Editorial I" loading="eager"/>
+          <span class="orbit-badge">Editorial</span>
         </div>
-        <div class="menu-info" id="menu-info">
-          <div class="menu-items-wrapper">
-            <div class="menu-items">
-              <a href="index.html" aria-current="page" class="menu-item w-inline-block w--current">
-                <div class="menu-link"><div class="body-font">Home</div></div>
-                <div class="menu-separator"><div class="body-font">,</div></div>
-              </a>
-              <a href="work.html" class="menu-item w-inline-block">
-                <div class="menu-link"><div class="body-font">Work</div></div>
-              </a>
-            </div>
-            <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
-              <div class="menu-link"><div class="body-font">Contact</div></div>
-            </a>
+
+        <!-- Card 2: Studio Lighting Series -->
+        <div class="orbit-card card-orbit-2" data-lightbox="true" data-src="assets/slide_5_1.jpg" data-title="Studio Lighting Series #01">
+          <img src="assets/slide_5_1.jpg" alt="Studio Lighting Series" loading="eager"/>
+          <span class="orbit-badge">Studio</span>
+        </div>
+
+        <!-- Card 3: KIFF 4K Celebrity Masterclass (Anupam Kher) -->
+        <div class="orbit-card card-orbit-3" data-lightbox="true" data-video-id="Sh0jTGE660o" data-title="Anupam Kher Unfiltered — KIFF Masterclass">
+          <img src="assets/yt_anupam_kher.jpg" alt="Anupam Kher KIFF Masterclass" loading="eager"/>
+          <span class="orbit-badge" style="background:#e50914; color:#fff;">▶ 4K Video</span>
+        </div>
+
+        <!-- Card 4: Songti Cinematography Still -->
+        <div class="orbit-card card-orbit-4" data-lightbox="true" data-src="assets/slide_7_1.jpg" data-title="Songti Cinematography Still #01">
+          <img src="assets/slide_7_1.jpg" alt="Songti Cinematography Still" loading="eager"/>
+          <span class="orbit-badge">Cinema</span>
+        </div>
+
+        <!-- Card 5: Monochrome & Tone -->
+        <div class="orbit-card card-orbit-5" data-lightbox="true" data-src="assets/slide_13_1.jpg" data-title="Monochrome Portrait Study">
+          <img src="assets/slide_13_1.jpg" alt="Monochrome Study" loading="eager"/>
+          <span class="orbit-badge">Mono</span>
+        </div>
+
+        <!-- Card 6: Mood & Styling Series -->
+        <div class="orbit-card card-orbit-6" data-lightbox="true" data-src="assets/slide_6_1.jpg" data-title="Mood &amp; Styling Series">
+          <img src="assets/slide_6_1.jpg" alt="Mood &amp; Styling Series" loading="eager"/>
+          <span class="orbit-badge">Mood</span>
+        </div>
+
+        <!-- Card 7: Ambient Light Series -->
+        <div class="orbit-card card-orbit-7" data-lightbox="true" data-src="assets/slide_8_1.jpg" data-title="Ambient Natural Light Study">
+          <img src="assets/slide_8_1.jpg" alt="Ambient Light Study" loading="eager"/>
+          <span class="orbit-badge">Ambient</span>
+        </div>
+
+        <!-- Card 8: Limited Edition 2030 -->
+        <div class="orbit-card card-orbit-8" data-lightbox="true" data-src="assets/slide_15_1.jpg" data-title="Limited Edition 2030 Feature">
+          <img src="assets/slide_15_1.jpg" alt="Limited Edition 2030" loading="eager"/>
+          <span class="orbit-badge">Cover</span>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Center Hero Typography -->
+    <div class="hero-content">
+      <h1 class="hero-title">
+        KANCHAN CHOUDHARY<span class="trademark">®</span>
+      </h1>
+      <div class="hero-subtitle-container">
+        <span class="hero-static-sub">A visual universe for</span>
+        <span id="hero-cycle" class="hero-cycling-word">directors</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       STICKY FLOATING INPUT PILL (Transform from 00:08 - 00:11)
+       ========================================================================= -->
+  <div class="sticky-pill-bar">
+    <form class="interactive-waitlist-pill waitlist-form" action="mailto:kanchanc0410@gmail.com" method="GET">
+      <div class="pill-spinner"></div>
+      <input type="email" class="pill-email-input" placeholder="kanchanc0410@gmail.com" required/>
+      <button type="submit" class="pill-submit-btn">Let's Collab</button>
+    </form>
+  </div>
+
+
+  <!-- =========================================================================
+       SECTION 2: "Bring order to your creative universe" (00:09 - 00:11)
+       ========================================================================= -->
+  <section class="cosmos-section" id="order">
+    <div class="section-editorial-header">
+      <h2 class="editorial-title">Bring order to your visual universe</h2>
+      <p class="editorial-subtitle">
+        One home for <span id="sub-cycle" class="cycle-item">cinematography</span>
+      </p>
+    </div>
+
+    <!-- 4-Column Floating Moodboard Grid with Parallax -->
+    <div class="floating-moodboard-grid">
+
+      <!-- Column 1 -->
+      <div class="moodboard-column">
+        <div class="moodboard-card" data-lightbox="true" data-src="assets/slide_10_2.jpg" data-title="High-Fashion Editorial II">
+          <img src="assets/slide_10_2.jpg" alt="High-Fashion Editorial II" loading="lazy"/>
+          <span class="moodboard-badge">Fashion</span>
+        </div>
+        <div class="moodboard-card" data-lightbox="true" data-src="assets/slide_5_4.jpg" data-title="Studio Lighting Series #04">
+          <img src="assets/slide_5_4.jpg" alt="Studio Lighting Series" loading="lazy"/>
+          <span class="moodboard-badge">Studio</span>
+        </div>
+        <div class="moodboard-quote-card">
+          <p class="quote-text">"Cinema is a matter of what's in the light and what's in the shadow."</p>
+          <div class="quote-author">
+            <span>Martin Scorsese</span>
+            <span style="opacity:0.5;">✦ Direction</span>
           </div>
         </div>
       </div>
-    </div>
-  </nav>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="w-layout-blockcontainer container grow w-container">
-      <div class="hero-content">
-        
-        <!-- Left Column: Bio & Core Disciplines -->
-        <div class="hero-blocks">
-          <div class="text-block">
-            <div class="label-font opacity">Profile</div>
-            <h1 class="body-font block-description">
-              I am Kanchan Choudhary, a Video Editor and Visual Storyteller. My work encompasses celebrity interview podcasts (KIFF), commercial brand films, high-fashion photoshoot collections, behind-the-scenes cinematography, and Songti stills.
-            </h1>
-          </div>
+      <!-- Column 2 -->
+      <div class="moodboard-column" style="margin-top: 36px;">
+        <div class="moodboard-card" data-lightbox="true" data-video-id="ojgap437XT8" data-title="Saurabh Shukla on Screenwriting &amp; Satya">
+          <img src="assets/yt_saurabh_shukla.jpg" alt="Saurabh Shukla KIFF Masterclass" loading="lazy"/>
+          <span class="moodboard-badge" style="background:#e50914; color:#fff;">▶ 4K Video</span>
+        </div>
+        <div class="moodboard-card" data-lightbox="true" data-src="assets/slide_13_2.jpg" data-title="Monochrome Shadow Play">
+          <img src="assets/slide_13_2.jpg" alt="Monochrome Shadow Play" loading="lazy"/>
+          <span class="moodboard-badge">Mono</span>
+        </div>
+        <div class="moodboard-card" data-lightbox="true" data-src="assets/slide_7_3.jpg" data-title="Songti Production Still #03">
+          <img src="assets/slide_7_3.jpg" alt="Songti Production Still" loading="lazy"/>
+          <span class="moodboard-badge">Cinema</span>
+        </div>
+      </div>
 
-          <div class="items-block">
-            <div class="label-font opacity">Projects &amp; Archive</div>
-            <div class="items">
-              <div class="body-font">Podcast shoot (KIFF)</div>
-              <div class="body-font">Photoshoots (Editorial &amp; 50+ Photos)</div>
-              <div class="body-font">Brand Video &amp; BTS</div>
-              <div class="body-font">Songti Cinematography Stills</div>
-              <div class="body-font">Limited Collection 2030</div>
-            </div>
-          </div>
-
-          <div class="items-block">
-            <div class="label-font opacity">Subjects</div>
-            <div class="items">
-              <div class="body-font">Celebrities &amp; Film Festivals</div>
-              <div class="body-font">Fashion &amp; Editorial Portraits</div>
-              <div class="body-font">Brand Commercials</div>
-              <div class="body-font">Production Stills</div>
-            </div>
-          </div>
-
-          <div class="items-block">
-            <div class="label-font opacity">Output</div>
-            <div class="items">
-              <div class="body-font">Video Editing (4K Broadcast)</div>
-              <div class="body-font">Color Grading &amp; Mastering</div>
-              <div class="body-font">Photoshoots (Uncropped High-Res)</div>
-              <div class="body-font">Audio &amp; Sound Post</div>
-            </div>
-          </div>
-
-          <div class="items-block">
-            <div class="label-font opacity">Let's Collab</div>
-            <div class="items">
-              <div class="body-font"><a href="mailto:kanchanc0410@gmail.com" class="contact-link">kanchanc0410@gmail.com</a></div>
-              <div class="body-font"><a href="tel:7977667004" class="contact-link">+91 7977667004</a></div>
-            </div>
+      <!-- Column 3 -->
+      <div class="moodboard-column">
+        <div class="moodboard-quote-card">
+          <p class="quote-text">"I am always doing things I can't do; that's how I get to do them."</p>
+          <div class="quote-author">
+            <span>Pablo Picasso</span>
+            <span style="opacity:0.5;">✦ Vision</span>
           </div>
         </div>
+        <div class="moodboard-card" data-lightbox="true" data-src="assets/slide_10_3.jpg" data-title="High-Fashion Editorial III">
+          <img src="assets/slide_10_3.jpg" alt="High-Fashion Editorial III" loading="lazy"/>
+          <span class="moodboard-badge">Editorial</span>
+        </div>
+        <div class="moodboard-card" data-lightbox="true" data-src="assets/slide_6_3.jpg" data-title="Mood &amp; Styling Natural Light">
+          <img src="assets/slide_6_3.jpg" alt="Mood &amp; Styling" loading="lazy"/>
+          <span class="moodboard-badge">Mood</span>
+        </div>
+      </div>
 
-        <!-- Right Column: Visual Preview & Selected Works -->
-        <div class="hero-info" id="works">
-          
-          <!-- Photo-Friendly Hero Layout (100% Uncropped) -->
-          <div class="hero-image-wrapper">
-            <img src="assets/slide_10_1.jpg" id="hero-dynamic-img" loading="eager" width="Auto" height="Auto" alt="High-Fashion Editorial - Kanchan Choudhary Portfolio" class="image bg-image"/>
-            <div class="hero-photo-indicator" id="hero-caption-indicator">[Editorial &bull; Photo 01]</div>
+      <!-- Column 4 -->
+      <div class="moodboard-column" style="margin-top: 50px;">
+        <div class="moodboard-card" data-lightbox="true" data-src="assets/slide_8_2.jpg" data-title="Ambient Rim Lighting Series">
+          <img src="assets/slide_8_2.jpg" alt="Ambient Rim Lighting" loading="lazy"/>
+          <span class="moodboard-badge">Ambient</span>
+        </div>
+        <div class="moodboard-card" data-lightbox="true" data-video-id="AWiazyKn8ak" data-title="Subhash Sehgal — National Award Film Editing">
+          <img src="assets/yt_subhash_sehgal.jpg" alt="Subhash Sehgal Film Editing" loading="lazy"/>
+          <span class="moodboard-badge" style="background:#e50914; color:#fff;">▶ 4K Video</span>
+        </div>
+        <div class="moodboard-card" data-lightbox="true" data-src="assets/slide_11_2.jpg" data-title="Character Study &amp; Expression">
+          <img src="assets/slide_11_2.jpg" alt="Character Study" loading="lazy"/>
+          <span class="moodboard-badge">Character</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECTION 3: "Mastered for broadcast & cinema" / Craft Pills (00:12 - 00:14)
+       ========================================================================= -->
+  <section class="cosmos-section" style="padding-top: 40px; padding-bottom: 80px;">
+    <div class="section-editorial-header" style="margin-bottom: 24px;">
+      <h2 class="editorial-title" style="font-size: clamp(2rem, 4.2vw, 3.2rem);">Mastered for cinema &amp; global broadcasts</h2>
+      <p class="editorial-subtitle">Seamless workflow across post-production and cinematography suites</p>
+      
+      <div class="craft-pills-row">
+        <div class="craft-pill"><span class="dot"></span> 4K Broadcast Standards</div>
+        <div class="craft-pill"><span class="dot"></span> DaVinci Resolve Color</div>
+        <div class="craft-pill"><span class="dot"></span> Premiere &amp; Final Cut Pro</div>
+        <div class="craft-pill"><span class="dot"></span> Multi-Cam Pacing</div>
+        <div class="craft-pill"><span class="dot"></span> Cinema Sound Mastering</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECTION 4: "Curate your elements" / Cluster Card Showcase (00:15 - 00:18)
+       ========================================================================= -->
+  <section class="cosmos-section" id="curate" style="padding-top: 60px;">
+    <div class="section-editorial-header">
+      <h2 class="editorial-title">Curate your visual collections</h2>
+      <p class="editorial-subtitle">
+        Organize productions into dedicated visual collections. Seamless storytelling for brand films, international festivals, and high-fashion lookbooks.
+      </p>
+    </div>
+
+    <div class="cluster-showcase-wrapper">
+      <div class="cluster-card">
+        <div class="cluster-header">
+          <h3 class="cluster-title">Editorial &amp; Celebrity Archives</h3>
+          <p class="cluster-meta">60 Works • Curated by @kanchanc0410</p>
+          <a href="work.html" class="cluster-follow-btn">Explore Full Archive &rarr;</a>
+        </div>
+        <div class="cluster-previews">
+          <div class="cluster-thumb" data-lightbox="true" data-src="assets/slide_10_1.jpg" data-title="High-Fashion Editorial Archive">
+            <img src="assets/slide_10_1.jpg" alt="High-Fashion Editorial" loading="lazy"/>
           </div>
-
-          <div class="hero-sections-wrapper">
-            
-            <!-- Selected Works Table -->
-            <div class="selected-works-section" id="section-table">
-              <div class="selected-works">
-                <div class="block-items-wrapper">
-                  <div class="list-works">
-                    
-                    <!-- Table Header -->
-                    <div class="list-works-header">
-                      <div class="horizontal-wrapper">
-                        <div class="label-font fixed-w opacity">Date/No.</div>
-                        <div class="label-font grow opacity">Project &bull; Title</div>
-                      </div>
-                      <div class="horizontal-wrapper">
-                        <div class="label-font grow opacity">Type / Category</div>
-                        <div class="label-font fixed-w right opacity">Items</div>
-                      </div>
-                    </div>
-
-                    <!-- Table Items List -->
-                    <div class="w-dyn-list">
-                      <div role="list" class="collection-list w-dyn-items">
-                        
-                        <!-- High-Fashion Editorial Photoshoot -->
-                        <div role="listitem" class="w-dyn-item" id="photoshoots">
-                          <a href="work.html#cat-editorial" data-title="Photoshoot &bull; High-Fashion Editorial" data-thumb="assets/slide_10_1.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#01</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Photoshoot &bull; High-Fashion Editorial</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Fashion &bull; Portraits</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">4</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Anupam Kher KIFF -->
-                        <div role="listitem" class="w-dyn-item" id="podcasts">
-                          <a href="https://www.youtube.com/watch?v=Sh0jTGE660o" data-video-id="Sh0jTGE660o" data-title="Anupam Kher Unfiltered | Stories, Struggles &amp; Stardom" data-thumb="assets/yt_anupam_kher.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#02</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Anupam Kher Unfiltered</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Podcast Shoot (KIFF)</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">4K</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Saurabh Shukla KIFF -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="https://www.youtube.com/watch?v=ojgap437XT8" data-video-id="ojgap437XT8" data-title="Saurabh Shukla Full Interview | Life Story | Bollywood" data-thumb="assets/yt_saurabh_shukla.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#02</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Saurabh Shukla Interview</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Podcast Shoot (KIFF)</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">4K</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Subhash Sehgal KIFF -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="https://www.youtube.com/watch?v=AWiazyKn8ak" data-video-id="AWiazyKn8ak" data-title="Subhash Sehgal on Editing Ramayan &amp; Working with Gulzar" data-thumb="assets/yt_subhash_sehgal.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#02</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Subhash Sehgal on Editing</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Masterclass Interview</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">4K</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Deepshikha Nagpal KIFF -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="https://www.youtube.com/watch?v=hcNVkH6HhVk" data-video-id="hcNVkH6HhVk" data-title="Deepshikha Nagpal on Failed Marriage &amp; Film Industry" data-thumb="assets/yt_deepshikha_nagpal.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#02</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Deepshikha Nagpal Interview</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Podcast Shoot (KIFF)</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">4K</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Photoshoot Studio Series -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="work.html#cat-studio" data-title="Photoshoot &bull; Studio Lighting Series" data-thumb="assets/slide_5_1.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#03</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Photoshoot Studio Series</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Photoshoot &bull; Studio</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">13</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Photoshoot Mood & Styling -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="work.html#cat-mood-styling" data-title="Photoshoot &bull; Mood &amp; Styling Series" data-thumb="assets/slide_6_1.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#04</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Mood &amp; Styling Series</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Editorial &bull; Creative</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">9</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Photoshoot Ambient Light -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="work.html#cat-ambient-light" data-title="Photoshoot &bull; Ambient Light Series" data-thumb="assets/slide_8_1.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#05</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Ambient Light Series</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Natural Light Portraits</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">5</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Photoshoot Character Studies -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="work.html#cat-character" data-title="Photoshoot &bull; Character Studies" data-thumb="assets/slide_11_1.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#06</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Character Studies Series</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Fashion Styling</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">10</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Photoshoot Monochromes -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="work.html#cat-monochrome" data-title="Photoshoot &bull; Monochromes &amp; Tone" data-thumb="assets/slide_13_1.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#07</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Monochromes &amp; Tone</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Monochrome Photography</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">8</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Limited Collection 2030 -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="work.html#cat-limited-2030" data-title="Limited Collection 2030" data-thumb="assets/slide_15_1.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#08</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Limited Collection 2030</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Editorial Collection</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">1</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Brand Commercials & BTS -->
-                        <div role="listitem" class="w-dyn-item">
-                          <a href="work.html#cat-limited-2030" data-title="Brand Commercials &amp; BTS Productions" data-thumb="assets/slide_1_1.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#09</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Brand Video &amp; BTS</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Commercial &amp; BTS</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">Film</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                        <!-- Songti Cinematography Stills -->
-                        <div role="listitem" class="w-dyn-item" id="stills">
-                          <a href="work.html#cat-songti" data-title="Songti Cinematography Stills" data-thumb="assets/slide_7_1.jpg" class="list-work-block w-inline-block">
-                            <div class="horizontal-wrapper">
-                              <div class="date-wrapper">
-                                <div class="body-font">#10</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="name-wrapper">
-                                <h3 class="body-font grow">Songti Cinematography Stills</h3>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                            </div>
-                            <div class="horizontal-wrapper">
-                              <div class="category-wrapper">
-                                <div class="body-font grow">Cinematic Stills</div>
-                                <div class="background list-work-block-bg"></div>
-                              </div>
-                              <div class="amount-images-wrapper">
-                                <div class="body-font">[</div>
-                                <div class="background list-work-block-bg"></div>
-                                <div class="body-font">5</div>
-                                <div class="body-font">]</div>
-                              </div>
-                            </div>
-                          </a>
-                        </div>
-
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <!-- Exact Felix Kern "View all" Button -->
-            <div class="button-wrapper" style="margin-top: 24px; margin-bottom: 32px;">
-              <a href="work.html" class="button w-inline-block">
-                <div class="body-font">View all</div>
-                <div class="button-line"></div>
-              </a>
-            </div>
-
-            <!-- Footer -->
-            <footer class="footer">
-              <div class="w-layout-blockcontainer container footer-container w-container">
-                <div class="footer-content">
-                  <div class="footer-item-wrapper">
-                    <div class="body-font">&copy; 2026 Kanchan Choudhary</div>
-                    <div class="menu-items">
-                      <a href="mailto:kanchanc0410@gmail.com" class="menu-item w-inline-block">
-                        <div class="menu-link"><div class="body-font">kanchanc0410@gmail.com</div></div>
-                        <div class="menu-separator"><div class="body-font">,</div></div>
-                      </a>
-                      <a href="tel:7977667004" class="menu-item w-inline-block">
-                        <div class="menu-link"><div class="body-font">+91 7977667004</div></div>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="availability">
-                    <div class="indicator-wrapper"><div class="indicator"></div></div>
-                    <div class="body-font">Available for work</div>
-                  </div>
-                </div>
-              </div>
-            </footer>
-
+          <div class="cluster-thumb" data-lightbox="true" data-src="assets/slide_5_2.jpg" data-title="Studio Lighting Series">
+            <img src="assets/slide_5_2.jpg" alt="Studio Series" loading="lazy"/>
+          </div>
+          <div class="cluster-thumb" data-lightbox="true" data-src="assets/slide_13_3.jpg" data-title="Monochrome Collection">
+            <img src="assets/slide_13_3.jpg" alt="Monochrome" loading="lazy"/>
+          </div>
+          <div class="cluster-thumb" data-lightbox="true" data-src="assets/slide_7_4.jpg" data-title="Songti Cinematography">
+            <img src="assets/slide_7_4.jpg" alt="Songti Still" loading="lazy"/>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Video & Multi-Photo Lightbox Modal Player -->
-  <div id="video-lightbox" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.95); z-index:99999; align-items:center; justify-content:center; padding:1.5rem;">
-    <div style="position:relative; width:100%; max-width:1050px; background:#000; border:1px solid #333; max-height:92vh; display:flex; flex-direction:column;">
-      <div style="display:flex; justify-content:space-between; align-items:center; padding:12px 18px; border-bottom:1px solid #222;">
-        <span id="lightbox-caption" style="color:#eee; font-size:13px; font-family:'IBM Plex Mono', monospace;">[Project Title]</span>
-        <button id="close-lightbox" style="background:none; border:none; color:#fff; font-family:'IBM Plex Mono', monospace; font-size:14px; cursor:pointer;">[CLOSE &times;]</button>
+
+  <!-- =========================================================================
+       SECTION 5: "AI-Powered Tagging System" (Interactive Tagged Image 00:19 - 00:21)
+       ========================================================================= -->
+  <section class="cosmos-section" id="tagging">
+    <div class="tagged-interactive-grid">
+
+      <!-- Left: Interactive Image with Pulsing Emanating Hotspots -->
+      <div class="interactive-image-box">
+        <img src="assets/slide_10_1.jpg" alt="High-Fashion Editorial Tagged Study" loading="lazy"/>
+
+        <!-- Hotspot Pin 1: Movement & Fabric -->
+        <div class="hotspot-pin" style="top: 26%; left: 34%;">
+          <div class="pin-dot"></div>
+          <span class="pin-tag">creative styling</span>
+        </div>
+
+        <!-- Hotspot Pin 2: Lighting Setup -->
+        <div class="hotspot-pin" style="top: 48%; left: 45%;">
+          <div class="pin-dot"></div>
+          <span class="pin-tag">studio rim light</span>
+        </div>
+
+        <!-- Hotspot Pin 3: Monochromatic Depth -->
+        <div class="hotspot-pin" style="top: 68%; left: 30%;">
+          <div class="pin-dot"></div>
+          <span class="pin-tag">high-fashion editorial</span>
+        </div>
+
+        <!-- Hotspot Pin 4: Mastered Tone -->
+        <div class="hotspot-pin" style="top: 80%; left: 58%;">
+          <div class="pin-dot"></div>
+          <span class="pin-tag">calibrated LUT</span>
+        </div>
       </div>
-      <div id="lightbox-embed-container" style="position:relative; width:100%; flex-grow:1; overflow:auto;">
-        <!-- Embedded YouTube or Photo Gallery Grid -->
+
+      <!-- Right: Editorial Content -->
+      <div class="tagged-content-side">
+        <h2 class="editorial-title" style="text-align:left; margin-bottom: 20px;">
+          Precision color &amp; visual tagging system
+        </h2>
+        <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 24px;">
+          Every sequence and still is meticulously crafted for maximum narrative impact. Advanced lighting ratios, custom tonal curves, and atmospheric textures elevate every commercial and film festival production.
+        </p>
+
+        <div class="tagged-pills-shelf">
+          <span class="craft-pill"><span class="dot"></span> editorial styling</span>
+          <span class="craft-pill"><span class="dot"></span> high-contrast B&amp;W</span>
+          <span class="craft-pill"><span class="dot"></span> natural daylight</span>
+          <span class="craft-pill"><span class="dot"></span> cinematic master</span>
+          <span class="craft-pill"><span class="dot"></span> 4K broadcast</span>
+        </div>
       </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECTION 6: "Resurface your elements instantly" (Live Search & Grid 00:22 - 00:23)
+       ========================================================================= -->
+  <section class="cosmos-section" id="resurface">
+    <div class="section-editorial-header">
+      <h2 class="editorial-title">Resurface any production instantly</h2>
+      <p class="editorial-subtitle">
+        Find any photoshoot, celebrity podcast, or cinematic still across the archive with instant live filtering.
+      </p>
+    </div>
+
+    <!-- Live Search Input Pill -->
+    <div class="resurface-search-bar">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="opacity:0.6;"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+      <input type="text" id="resurface-input" class="resurface-search-input" placeholder="Search fashion, studio, podcast, monochrome, kiff..."/>
+    </div>
+
+    <!-- Quick Filter Category Pills -->
+    <div class="search-filters-row">
+      <button type="button" class="search-filter-btn active" data-filter="all">All Works (60)</button>
+      <button type="button" class="search-filter-btn" data-filter="fashion">High-Fashion</button>
+      <button type="button" class="search-filter-btn" data-filter="podcast">Podcasts (KIFF)</button>
+      <button type="button" class="search-filter-btn" data-filter="studio">Studio Series</button>
+      <button type="button" class="search-filter-btn" data-filter="ambient">Ambient Light</button>
+      <button type="button" class="search-filter-btn" data-filter="mono">Monochrome</button>
+      <button type="button" class="search-filter-btn" data-filter="cinema">Cinematography</button>
+    </div>
+
+    <!-- Instant Resurface Results Grid -->
+    <div class="resurface-results-grid" id="resurface-grid">
+
+      <!-- Item 1: High-Fashion I -->
+      <div class="resurface-item" data-cat="fashion editorial" data-title="High-Fashion Editorial I" data-tags="fashion portrait model styling" data-lightbox="true" data-src="assets/slide_10_1.jpg">
+        <img src="assets/slide_10_1.jpg" alt="High-Fashion Portrait" loading="lazy"/>
+        <div class="resurface-meta">
+          <span class="resurface-title">Editorial Portrait I</span>
+          <span class="resurface-tag">Fashion</span>
+        </div>
+      </div>
+
+      <!-- Item 2: KIFF Anupam Kher Video -->
+      <div class="resurface-item" data-cat="podcast video kiff" data-title="Anupam Kher Unfiltered (KIFF)" data-tags="podcast acting masterclass interview film" data-lightbox="true" data-video-id="Sh0jTGE660o">
+        <img src="assets/yt_anupam_kher.jpg" alt="Anupam Kher" loading="lazy"/>
+        <div class="resurface-meta">
+          <span class="resurface-title">Anupam Kher</span>
+          <span class="resurface-tag" style="color:#e50914;">▶ 4K Video</span>
+        </div>
+      </div>
+
+      <!-- Item 3: Studio Lighting Series -->
+      <div class="resurface-item" data-cat="studio lighting" data-title="Studio Lighting Series #05" data-tags="studio shadows forms poses" data-lightbox="true" data-src="assets/slide_5_5.jpg">
+        <img src="assets/slide_5_5.jpg" alt="Studio Series" loading="lazy"/>
+        <div class="resurface-meta">
+          <span class="resurface-title">Studio Series #05</span>
+          <span class="resurface-tag">Studio</span>
+        </div>
+      </div>
+
+      <!-- Item 4: Saurabh Shukla Podcast -->
+      <div class="resurface-item" data-cat="podcast video kiff" data-title="Saurabh Shukla — Satya &amp; Cinema" data-tags="podcast screenwriting interview satya" data-lightbox="true" data-video-id="ojgap437XT8">
+        <img src="assets/yt_saurabh_shukla.jpg" alt="Saurabh Shukla" loading="lazy"/>
+        <div class="resurface-meta">
+          <span class="resurface-title">Saurabh Shukla</span>
+          <span class="resurface-tag" style="color:#e50914;">▶ 4K Video</span>
+        </div>
+      </div>
+
+      <!-- Item 5: Songti Cinematography -->
+      <div class="resurface-item" data-cat="cinema still" data-title="Songti Cinematography Still #02" data-tags="cinema production color grading" data-lightbox="true" data-src="assets/slide_7_2.jpg">
+        <img src="assets/slide_7_2.jpg" alt="Songti Still" loading="lazy"/>
+        <div class="resurface-meta">
+          <span class="resurface-title">Songti Still #02</span>
+          <span class="resurface-tag">Cinema</span>
+        </div>
+      </div>
+
+      <!-- Item 6: Monochrome Tone -->
+      <div class="resurface-item" data-cat="mono monochrome" data-title="Monochrome Tone #04" data-tags="monochrome black white shadow" data-lightbox="true" data-src="assets/slide_13_4.jpg">
+        <img src="assets/slide_13_4.jpg" alt="Monochrome Study" loading="lazy"/>
+        <div class="resurface-meta">
+          <span class="resurface-title">Monochrome Tone #04</span>
+          <span class="resurface-tag">Mono</span>
+        </div>
+      </div>
+
+      <!-- Item 7: Deepshikha Nagpal Podcast -->
+      <div class="resurface-item" data-cat="podcast video kiff" data-title="Deepshikha Nagpal (KIFF)" data-tags="podcast interview industry direction" data-lightbox="true" data-video-id="hcNVkH6HhVk">
+        <img src="assets/yt_deepshikha_nagpal.jpg" alt="Deepshikha Nagpal" loading="lazy"/>
+        <div class="resurface-meta">
+          <span class="resurface-title">Deepshikha Nagpal</span>
+          <span class="resurface-tag" style="color:#e50914;">▶ 4K Video</span>
+        </div>
+      </div>
+
+      <!-- Item 8: Ambient Light Series -->
+      <div class="resurface-item" data-cat="ambient light" data-title="Ambient Natural Shadows" data-tags="ambient light mood daylight" data-lightbox="true" data-src="assets/slide_8_4.jpg">
+        <img src="assets/slide_8_4.jpg" alt="Ambient Light" loading="lazy"/>
+        <div class="resurface-meta">
+          <span class="resurface-title">Ambient Study #04</span>
+          <span class="resurface-tag">Ambient</span>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Link to full 60 works -->
+    <div style="text-align: center; margin-top: 50px;">
+      <a href="work.html" class="craft-pill" style="padding: 12px 28px; font-weight: 600;">
+        View Complete 60 Works Archive &rarr;
+      </a>
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECTION 7: "Welcome to our world" / Constellation Starfield & Carousel (00:24 - 00:30)
+       ========================================================================= -->
+  <section class="world-section" id="world">
+    <canvas id="world-starfield" class="world-starfield"></canvas>
+
+    <div class="world-header-row">
+      <h2 class="world-title">Welcome to our world</h2>
+      <p class="world-subtext">
+        Zero noise, notifications, or distractions.<br/>
+        No likes, comments, or ego. Just pure, cinematic visual storytelling.
+      </p>
+    </div>
+
+    <!-- Draggable Carousel Track -->
+    <div class="world-carousel-wrapper">
+      <div class="world-carousel-track">
+
+        <!-- Card 1: High-Fashion Editorial -->
+        <div class="world-card" data-lightbox="true" data-src="assets/slide_10_4.jpg" data-title="High-Fashion Editorial IV">
+          <div class="world-card-media">
+            <img src="assets/slide_10_4.jpg" alt="High-Fashion Editorial" loading="lazy"/>
+          </div>
+          <div class="world-card-info">
+            <h4 class="world-card-title">High-Fashion Editorial</h4>
+            <span class="world-card-creator">By @kanchanc0410</span>
+          </div>
+        </div>
+
+        <!-- Card 2: Anupam Kher Masterclass -->
+        <div class="world-card" data-lightbox="true" data-video-id="Sh0jTGE660o" data-title="Anupam Kher Unfiltered — KIFF 4K">
+          <div class="world-card-media">
+            <img src="assets/yt_anupam_kher.jpg" alt="Anupam Kher" loading="lazy"/>
+            <span class="orbit-badge" style="background:#e50914; color:#fff;">▶ 4K Video</span>
+          </div>
+          <div class="world-card-info">
+            <h4 class="world-card-title">KIFF Celebrity Podcast</h4>
+            <span class="world-card-creator">By @kanchanc0410</span>
+          </div>
+        </div>
+
+        <!-- Card 3: Studio Lighting Series -->
+        <div class="world-card" data-lightbox="true" data-src="assets/slide_5_6.jpg" data-title="Studio Lighting Series">
+          <div class="world-card-media">
+            <img src="assets/slide_5_6.jpg" alt="Studio Series" loading="lazy"/>
+          </div>
+          <div class="world-card-info">
+            <h4 class="world-card-title">Studio Lighting Series</h4>
+            <span class="world-card-creator">By @kanchanc0410</span>
+          </div>
+        </div>
+
+        <!-- Card 4: Saurabh Shukla Interview -->
+        <div class="world-card" data-lightbox="true" data-video-id="ojgap437XT8" data-title="Saurabh Shukla — Satya Screenwriting">
+          <div class="world-card-media">
+            <img src="assets/yt_saurabh_shukla.jpg" alt="Saurabh Shukla" loading="lazy"/>
+            <span class="orbit-badge" style="background:#e50914; color:#fff;">▶ 4K Video</span>
+          </div>
+          <div class="world-card-info">
+            <h4 class="world-card-title">Screenplay &amp; Directing</h4>
+            <span class="world-card-creator">By @kanchanc0410</span>
+          </div>
+        </div>
+
+        <!-- Card 5: Songti Cinematography -->
+        <div class="world-card" data-lightbox="true" data-src="assets/slide_7_5.jpg" data-title="Songti Production Stills">
+          <div class="world-card-media">
+            <img src="assets/slide_7_5.jpg" alt="Songti Production" loading="lazy"/>
+          </div>
+          <div class="world-card-info">
+            <h4 class="world-card-title">Songti Cinematography</h4>
+            <span class="world-card-creator">By @kanchanc0410</span>
+          </div>
+        </div>
+
+        <!-- Card 6: Monochromes & Tone -->
+        <div class="world-card" data-lightbox="true" data-src="assets/slide_13_5.jpg" data-title="Monochromes &amp; Tone">
+          <div class="world-card-media">
+            <img src="assets/slide_13_5.jpg" alt="Monochromes" loading="lazy"/>
+          </div>
+          <div class="world-card-info">
+            <h4 class="world-card-title">Monochromes &amp; Tone</h4>
+            <span class="world-card-creator">By @kanchanc0410</span>
+          </div>
+        </div>
+
+        <!-- Card 7: Limited Edition 2030 -->
+        <div class="world-card" data-lightbox="true" data-src="assets/slide_1_1.jpg" data-title="Cover Visual Direction">
+          <div class="world-card-media">
+            <img src="assets/slide_1_1.jpg" alt="Cover Visual Direction" loading="lazy"/>
+          </div>
+          <div class="world-card-info">
+            <h4 class="world-card-title">Limited Edition 2030</h4>
+            <span class="world-card-creator">By @kanchanc0410</span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <div class="carousel-nav-arrows">
+      <button type="button" class="carousel-arrow-btn" id="carousel-prev" aria-label="Previous">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 18l-6-6 6-6"/></svg>
+      </button>
+      <button type="button" class="carousel-arrow-btn" id="carousel-next" aria-label="Next">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+      </button>
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECTION 8: "Available across platforms" & Collaborators (00:31 - 00:32)
+       ========================================================================= -->
+  <section class="cosmos-section" style="padding-bottom: 60px;">
+    <div class="platforms-grid">
+      <div>
+        <h2 class="editorial-title" style="text-align: left; margin-bottom: 18px;">
+          Available for worldwide commissions
+        </h2>
+        <p style="font-size: 15px; color: var(--text-secondary); line-height: 1.7; margin-bottom: 28px;">
+          Direction, video editing, and cinematography for international film festivals, luxury fashion houses, and broadcast networks.
+        </p>
+        <a href="mailto:kanchanc0410@gmail.com" class="nav-cta-btn" style="display:inline-block; margin-left:0; padding:12px 28px; font-size:13px;">
+          Commission a Project &rarr;
+        </a>
+      </div>
+
+      <div class="platform-mockup-wrapper">
+        <div class="device-mockup-inner">
+          <img src="assets/slide_10_1.jpg" alt="Kanchan Portfolio Workspace" style="width:100%; height:auto; opacity:0.9;"/>
+        </div>
+      </div>
+    </div>
+
+    <!-- Collaborators & Festivals Row (matching logos at 00:32) -->
+    <div class="collaborators-row">
+      <div class="collaborators-label">Featured In &amp; Productions For</div>
+      <div class="collaborators-list">
+        <span class="collab-brand">KIFF FILM FESTIVAL</span>
+        <span class="collab-brand">VOGUE LOOKBOOKS</span>
+        <span class="collab-brand">4K BROADCAST</span>
+        <span class="collab-brand">SONGTI CINEMA</span>
+        <span class="collab-brand">STUDIO PRODUCTIONS</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECTION 9: "Start your journey" & Floating 3D Cosmic Rocks (00:33 - 00:34)
+       ========================================================================= -->
+  <section class="journey-section" id="journey">
+
+    <!-- Floating 3D Asteroid Layer with Parallax -->
+    <div class="floating-rocks-layer">
+      <img src="assets/rock_1.svg" class="cosmic-rock rock-1" alt="Cosmic asteroid"/>
+      <img src="assets/rock_2.svg" class="cosmic-rock rock-2" alt="Cosmic asteroid"/>
+      <img src="assets/rock_3.svg" class="cosmic-rock rock-3" alt="Cosmic asteroid"/>
+      <img src="assets/rock_4.svg" class="cosmic-rock rock-4" alt="Cosmic asteroid"/>
+      <img src="assets/rock_1.svg" class="cosmic-rock rock-5" alt="Cosmic asteroid"/>
+      <img src="assets/rock_2.svg" class="cosmic-rock rock-6" alt="Cosmic asteroid"/>
+    </div>
+
+    <div class="journey-content">
+      <div class="journey-eyebrow">We welcome you to collaborate</div>
+      <h2 class="journey-title">Start your journey</h2>
+
+      <form class="interactive-waitlist-pill waitlist-form" style="margin: 0 auto;" action="mailto:kanchanc0410@gmail.com" method="GET">
+        <input type="email" class="pill-email-input" placeholder="Enter your email to connect..." required/>
+        <button type="submit" class="pill-submit-btn">Let's Collab</button>
+      </form>
+    </div>
+  </section>
+
+
+  <!-- =========================================================================
+       SECTION 10: GIANT FOOTER (Cosmos Full-Bleed Typography 00:35 - 00:36)
+       ========================================================================= -->
+  <footer class="cosmos-footer">
+    <div class="footer-top-grid">
+
+      <!-- Col 1: Quote -->
+      <div>
+        <p class="footer-quote">
+          ✦ Kanchan Choudhary is the visual storyteller you've been searching for.
+        </p>
+      </div>
+
+      <!-- Col 2: Navigation -->
+      <div>
+        <div class="footer-col-title">Exhibition</div>
+        <div class="footer-links-list">
+          <a href="index.html">Universe Home</a>
+          <a href="work.html">Complete 60 Works</a>
+          <a href="work.html#cat-editorial">High-Fashion</a>
+          <a href="work.html#cat-kiff">KIFF Podcasts</a>
+        </div>
+      </div>
+
+      <!-- Col 3: Disciplines -->
+      <div>
+        <div class="footer-col-title">Disciplines</div>
+        <div class="footer-links-list">
+          <a href="work.html#cat-studio">Studio Lighting</a>
+          <a href="work.html#cat-monochrome">Monochromes</a>
+          <a href="work.html#cat-songti">Cinematography Stills</a>
+          <a href="work.html#cat-limited-2030">Limited Edition 2030</a>
+        </div>
+      </div>
+
+      <!-- Col 4: Contact -->
+      <div>
+        <div class="footer-col-title">Direct Inquiries</div>
+        <div class="footer-links-list">
+          <a href="mailto:kanchanc0410@gmail.com">kanchanc0410@gmail.com</a>
+          <a href="tel:7977667004">+91 7977667004</a>
+          <a href="https://www.youtube.com/watch?v=Sh0jTGE660o" target="_blank" rel="noopener">YouTube Masterclasses</a>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Giant Viewport Outline Typography (Exact to 00:36 in video) -->
+    <div class="giant-footer-brand">
+      <span class="giant-footer-text">KANCHAN CHOUDHARY®</span>
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="footer-bottom-bar">
+      <div>&copy; 2026 Kanchan Choudhary. All rights reserved.</div>
+      <div class="footer-availability">
+        <span class="status-dot"></span>
+        <span>Available for international commissions</span>
+      </div>
+      <div>Designed in Cosmos Aesthetic</div>
+    </div>
+  </footer>
+
+
+  <!-- =========================================================================
+       FULLSCREEN LIGHTBOX MODAL & 4K VIDEO LIGHTBOX
+       ========================================================================= -->
+  <div id="cosmos-lightbox">
+    <div class="lightbox-dialog">
+
+      <div class="lightbox-header">
+        <div class="lightbox-meta">
+          <span class="lightbox-counter" id="lightbox-counter">[1 / 60]</span>
+          <span class="lightbox-title" id="lightbox-title">Photograph Exhibition</span>
+        </div>
+        <button type="button" class="lightbox-close-btn" id="lightbox-close">Close &times;</button>
+      </div>
+
+      <div class="lightbox-body" id="lightbox-body">
+        <img src="" alt="" class="lightbox-img" id="lightbox-img"/>
+        <div class="lightbox-video-container" id="lightbox-video" style="display:none;"></div>
+      </div>
+
+      <div class="lightbox-footer">
+        <button type="button" class="lightbox-nav-btn" id="lb-prev">&larr; Previous</button>
+        <span style="font-size:12px; color:var(--text-muted);">Kanchan Choudhary Archive</span>
+        <button type="button" class="lightbox-nav-btn" id="lb-next">Next &rarr;</button>
+      </div>
+
     </div>
   </div>
 
-  <script src="js/main.js"></script>
+  <!-- Cosmos Scripts -->
+  <script src="js/cosmos.js"></script>
 </body>
 </html>

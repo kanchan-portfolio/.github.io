@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 180" fill="none">
+  <defs>
+    <radialGradient id="r2_light" cx="30%" cy="25%" r="70%">
+      <stop offset="0%" stop-color="#555768"/>
+      <stop offset="50%" stop-color="#262733"/>
+      <stop offset="100%" stop-color="#0a0a0f"/>
+    </radialGradient>
+    <filter id="shadow2" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="10" stdDeviation="14" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+  <g filter="url(#shadow2)">
+    <path d="M50,18 L122,28 L155,75 L142,130 L85,158 L32,138 L18,78 Z" fill="url(#r2_light)"/>
+    <path d="M50,18 L95,58 L45,82 L18,78 Z" fill="#424452" opacity="0.7"/>
+    <path d="M95,58 L122,28 L155,75 L118,98 Z" fill="#20212a" opacity="0.85"/>
+    <path d="M45,82 L95,58 L118,98 L75,130 L32,138 Z" fill="#181920" opacity="0.75"/>
+    <path d="M118,98 L155,75 L142,130 L85,158 L75,130 Z" fill="#0c0d12" opacity="0.95"/>
+  </g>
+</svg>
