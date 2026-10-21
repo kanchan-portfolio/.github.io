@@ -338,7 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const videoId = item.getAttribute('data-video-id');
 
     if (lightboxTitle) lightboxTitle.textContent = title;
-    if (lightboxCounter) lightboxCounter.textContent = `[${currentIndex + 1} / ${clickables.length}]`;
+    if (lightboxCounter) lightboxCounter.textContent = '';
 
     if (videoId) {
       if (lightboxImg) lightboxImg.style.display = 'none';

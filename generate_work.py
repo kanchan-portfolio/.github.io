@@ -4,121 +4,139 @@ import os
 categories = [
     {
         'id': 'cat-editorial',
-        'code': '01',
-        'title': 'Photoshoot • High-Fashion Editorial',
+        'title': 'High-Fashion Editorial',
         'subtitle': 'Fashion & Editorial Styling',
         'desc': 'High-fashion portraiture, creative styling, and expressive character poses in contemporary studio aesthetic.',
         'items': [
-            {'src': 'assets/slide_10_1.jpg', 'tag': 'Editorial', 'num': '01', 'title': 'High-Fashion Portrait I', 'type': 'photo'},
-            {'src': 'assets/slide_10_2.jpg', 'tag': 'Editorial', 'num': '02', 'title': 'High-Fashion Portrait II', 'type': 'photo'},
-            {'src': 'assets/slide_10_3.jpg', 'tag': 'Editorial', 'num': '03', 'title': 'High-Fashion Portrait III', 'type': 'photo'},
-            {'src': 'assets/slide_10_4.jpg', 'tag': 'Editorial', 'num': '04', 'title': 'High-Fashion Portrait IV', 'type': 'photo'},
+            {'src': 'assets/slide_10_1.jpg', 'tag': 'Editorial', 'title': 'High-Fashion Editorial Portrait', 'type': 'photo'},
+            {'src': 'assets/slide_10_2.jpg', 'tag': 'Editorial', 'title': 'Contemporary Haute Couture', 'type': 'photo'},
+            {'src': 'assets/slide_10_3.jpg', 'tag': 'Editorial', 'title': 'Avant-Garde Silhouette', 'type': 'photo'},
+            {'src': 'assets/slide_10_4.jpg', 'tag': 'Editorial', 'title': 'Editorial Form & Texture', 'type': 'photo'},
         ]
     },
     {
         'id': 'cat-studio',
-        'code': '02',
-        'title': 'Photoshoot • Studio Lighting Series',
+        'title': 'Studio Lighting Series',
         'subtitle': 'Studio Lighting & Form',
         'desc': 'Studio lighting setups, wide and intimate character compositions, prop compositions, and expressive poses.',
         'items': [
-            {'src': f'assets/slide_5_{i}.jpg', 'tag': 'Studio', 'num': f'{i:02d}', 'title': f'Studio Study {i:02d}', 'type': 'photo'}
-            for i in range(1, 14)
+            {'src': 'assets/slide_5_1.jpg', 'tag': 'Studio', 'title': 'Sculptural Rim Lighting', 'type': 'photo'},
+            {'src': 'assets/slide_5_2.jpg', 'tag': 'Studio', 'title': 'Dramatic Chiaroscuro Form', 'type': 'photo'},
+            {'src': 'assets/slide_5_3.jpg', 'tag': 'Studio', 'title': 'Soft Diffused Key Light', 'type': 'photo'},
+            {'src': 'assets/slide_5_4.jpg', 'tag': 'Studio', 'title': 'Studio Shadow & Symmetry', 'type': 'photo'},
+            {'src': 'assets/slide_5_5.jpg', 'tag': 'Studio', 'title': 'Intimate Contour Study', 'type': 'photo'},
+            {'src': 'assets/slide_5_6.jpg', 'tag': 'Studio', 'title': 'Atmospheric Studio Portrait', 'type': 'photo'},
+            {'src': 'assets/slide_5_7.jpg', 'tag': 'Studio', 'title': 'Directional High-Contrast Form', 'type': 'photo'},
+            {'src': 'assets/slide_5_8.jpg', 'tag': 'Studio', 'title': 'Minimalist Posing Study', 'type': 'photo'},
+            {'src': 'assets/slide_5_9.jpg', 'tag': 'Studio', 'title': 'Expressive Gestural Pose', 'type': 'photo'},
+            {'src': 'assets/slide_5_10.jpg', 'tag': 'Studio', 'title': 'Low-Key Edge Illumination', 'type': 'photo'},
+            {'src': 'assets/slide_5_11.jpg', 'tag': 'Studio', 'title': 'Cinematic Fill Lighting', 'type': 'photo'},
+            {'src': 'assets/slide_5_12.jpg', 'tag': 'Studio', 'title': 'Studio Monochrome Contrast', 'type': 'photo'},
+            {'src': 'assets/slide_5_13.jpg', 'tag': 'Studio', 'title': 'Balanced Ambient Composition', 'type': 'photo'},
         ]
     },
     {
         'id': 'cat-mood-styling',
-        'code': '03',
-        'title': 'Photoshoot • Mood & Styling Series',
+        'title': 'Mood & Styling Series',
         'subtitle': 'Atmospheric & Visual Narratives',
         'desc': 'Natural daylight styling, atmospheric textures, outdoor narratives, and editorial lookbooks.',
         'items': [
-            {'src': f'assets/slide_6_{i}.jpg', 'tag': 'Mood', 'num': f'{i:02d}', 'title': f'Mood Study {i:02d}', 'type': 'photo'}
-            for i in range(1, 5)
-        ] + [
-            {'src': f'assets/slide_7_{i}.jpg', 'tag': 'Styling', 'num': f'{i:02d}', 'title': f'Styling Study {i:02d}', 'type': 'photo'}
-            for i in range(1, 6)
+            {'src': 'assets/slide_6_1.jpg', 'tag': 'Mood', 'title': 'Natural Daylight Mood', 'type': 'photo'},
+            {'src': 'assets/slide_6_2.jpg', 'tag': 'Mood', 'title': 'Golden Hour Atmosphere', 'type': 'photo'},
+            {'src': 'assets/slide_6_3.jpg', 'tag': 'Mood', 'title': 'Subtle Color Palette', 'type': 'photo'},
+            {'src': 'assets/slide_6_4.jpg', 'tag': 'Mood', 'title': 'Earthy Tonal Harmony', 'type': 'photo'},
+            {'src': 'assets/slide_7_1.jpg', 'tag': 'Styling', 'title': 'Contemporary Street Styling', 'type': 'photo'},
+            {'src': 'assets/slide_7_2.jpg', 'tag': 'Styling', 'title': 'Urban Editorial Narrative', 'type': 'photo'},
+            {'src': 'assets/slide_7_3.jpg', 'tag': 'Styling', 'title': 'Textured Fabric Expression', 'type': 'photo'},
+            {'src': 'assets/slide_7_4.jpg', 'tag': 'Styling', 'title': 'Modern Wardrobe Direction', 'type': 'photo'},
+            {'src': 'assets/slide_7_5.jpg', 'tag': 'Styling', 'title': 'Cinematic Natural Pose', 'type': 'photo'},
         ]
     },
     {
         'id': 'cat-ambient-light',
-        'code': '04',
-        'title': 'Photoshoot • Ambient Light Series',
+        'title': 'Ambient Light Series',
         'subtitle': 'Natural Shadows & Tonal Depth',
         'desc': 'Directional soft light, warm shadows, cinematic rim lighting, and organic mood portraits.',
         'items': [
-            {'src': f'assets/slide_8_{i}.jpg', 'tag': 'Ambient', 'num': f'{i:02d}', 'title': f'Ambient Study {i:02d}', 'type': 'photo'}
-            for i in range(1, 5)
-        ] + [
-            {'src': 'assets/slide_9_1.jpg', 'tag': 'Ambient', 'num': '01', 'title': 'Ambient Portrait I', 'type': 'photo'}
+            {'src': 'assets/slide_8_1.jpg', 'tag': 'Ambient', 'title': 'Organic Daylight Reflections', 'type': 'photo'},
+            {'src': 'assets/slide_8_2.jpg', 'tag': 'Ambient', 'title': 'Warm Window Illumination', 'type': 'photo'},
+            {'src': 'assets/slide_8_3.jpg', 'tag': 'Ambient', 'title': 'Muted Natural Shadows', 'type': 'photo'},
+            {'src': 'assets/slide_8_4.jpg', 'tag': 'Ambient', 'title': 'Atmospheric Depth & Grain', 'type': 'photo'},
+            {'src': 'assets/slide_9_1.jpg', 'tag': 'Ambient', 'title': 'Gentle Ambient Glow', 'type': 'photo'},
         ]
     },
     {
         'id': 'cat-character',
-        'code': '05',
-        'title': 'Photoshoot • Character Studies',
+        'title': 'Character Studies',
         'subtitle': 'Dramatic Wardrobe & Angles',
         'desc': 'Contemporary character exploration, dynamic camera angles, and editorial expressions.',
         'items': [
-            {'src': f'assets/slide_11_{i}.jpg', 'tag': 'Character', 'num': f'{i:02d}', 'title': f'Character Study {i:02d}', 'type': 'photo'}
-            for i in range(1, 6)
-        ] + [
-            {'src': f'assets/slide_12_{i}.jpg', 'tag': 'Character', 'num': f'{i:02d}', 'title': f'Character Expression {i:02d}', 'type': 'photo'}
-            for i in range(1, 6)
+            {'src': 'assets/slide_11_1.jpg', 'tag': 'Character', 'title': 'Intense Character Gaze', 'type': 'photo'},
+            {'src': 'assets/slide_11_2.jpg', 'tag': 'Character', 'title': 'Dynamic Profile Perspective', 'type': 'photo'},
+            {'src': 'assets/slide_11_3.jpg', 'tag': 'Character', 'title': 'Cinematic Character Presence', 'type': 'photo'},
+            {'src': 'assets/slide_11_4.jpg', 'tag': 'Character', 'title': 'Subtle Emotional Nuance', 'type': 'photo'},
+            {'src': 'assets/slide_11_5.jpg', 'tag': 'Character', 'title': 'Expressive Character Stance', 'type': 'photo'},
+            {'src': 'assets/slide_12_1.jpg', 'tag': 'Character', 'title': 'Dramatic Facial Contours', 'type': 'photo'},
+            {'src': 'assets/slide_12_2.jpg', 'tag': 'Character', 'title': 'Introspective Close-Up', 'type': 'photo'},
+            {'src': 'assets/slide_12_3.jpg', 'tag': 'Character', 'title': 'Bold Cinematic Expression', 'type': 'photo'},
+            {'src': 'assets/slide_12_4.jpg', 'tag': 'Character', 'title': 'Candid Performance Mood', 'type': 'photo'},
+            {'src': 'assets/slide_12_5.jpg', 'tag': 'Character', 'title': 'Poised Editorial Attitude', 'type': 'photo'},
         ]
     },
     {
         'id': 'cat-monochrome',
-        'code': '06',
-        'title': 'Photoshoot • Monochromes & Tone',
+        'title': 'Monochromes & Tone',
         'subtitle': 'Black & White Cinematography Stills',
         'desc': 'High-contrast black & white tones, silhouettes, structural shadow play, and intimate portraits.',
         'items': [
-            {'src': f'assets/slide_13_{i}.jpg', 'tag': 'Monochrome', 'num': f'{i:02d}', 'title': f'Monochrome {i:02d}', 'type': 'photo'}
-            for i in range(1, 6)
-        ] + [
-            {'src': f'assets/slide_14_{i}.jpg', 'tag': 'Monochrome', 'num': f'{i:02d}', 'title': f'Monochrome Study {i:02d}', 'type': 'photo'}
-            for i in range(1, 4)
+            {'src': 'assets/slide_13_1.jpg', 'tag': 'Monochrome', 'title': 'Deep Monochrome Contrast', 'type': 'photo'},
+            {'src': 'assets/slide_13_2.jpg', 'tag': 'Monochrome', 'title': 'Monochrome Shadow Play', 'type': 'photo'},
+            {'src': 'assets/slide_13_3.jpg', 'tag': 'Monochrome', 'title': 'High-Contrast Silhouette', 'type': 'photo'},
+            {'src': 'assets/slide_13_4.jpg', 'tag': 'Monochrome', 'title': 'Silver Gelatin Tone', 'type': 'photo'},
+            {'src': 'assets/slide_13_5.jpg', 'tag': 'Monochrome', 'title': 'Architectural Light & Shade', 'type': 'photo'},
+            {'src': 'assets/slide_13_6.jpg', 'tag': 'Monochrome', 'title': 'Sculpted Monochromatic Form', 'type': 'photo'},
+            {'src': 'assets/slide_14_1.jpg', 'tag': 'Monochrome', 'title': 'Minimalist Shadow Profile', 'type': 'photo'},
+            {'src': 'assets/slide_14_2.jpg', 'tag': 'Monochrome', 'title': 'Noir Atmospheric Still', 'type': 'photo'},
+            {'src': 'assets/slide_14_3.jpg', 'tag': 'Monochrome', 'title': 'Tonal Gradient Portrait', 'type': 'photo'},
+            {'src': 'assets/slide_14_4.jpg', 'tag': 'Monochrome', 'title': 'Dynamic Light Refraction', 'type': 'photo'},
         ]
     },
     {
-        'id': 'cat-limited-2030',
-        'code': '07',
-        'title': 'Editorial Collection • Limited Edition 2030',
-        'subtitle': 'Futuristic Concept & Cover Production',
+        'id': 'cat-limited-edition',
+        'title': 'Editorial Concept Collection',
+        'subtitle': 'Concept Direction & Cover Production',
         'desc': 'Editorial concept artwork and official portfolio cover visual direction.',
         'items': [
-            {'src': 'assets/slide_15_1.jpg', 'tag': 'Edition 2030', 'num': '01', 'title': 'Limited Edition 2030 Feature', 'type': 'photo'},
-            {'src': 'assets/slide_1_1.jpg', 'tag': 'Cover Concept', 'num': '01', 'title': 'Cover Portfolio Visual Direction', 'type': 'photo'}
+            {'src': 'assets/slide_15_1.jpg', 'tag': 'Concept', 'title': 'Futuristic Concept Artwork', 'type': 'photo'},
+            {'src': 'assets/slide_1_1.jpg', 'tag': 'Cover', 'title': 'Portfolio Cover Visual Direction', 'type': 'photo'},
         ]
     },
     {
         'id': 'cat-songti',
-        'code': '08',
         'title': 'Songti Cinematography Stills',
         'subtitle': 'Film Stills & Color Grading',
         'desc': 'Cinematography production stills, color graded imagery, and narrative film cinematography.',
         'items': [
-            {'src': f'assets/slide_7_{i}.jpg', 'tag': 'Songti Still', 'num': f'{i:02d}', 'title': f'Songti Cinematic Still {i:02d}', 'type': 'photo'}
-            for i in range(1, 6)
+            {'src': 'assets/slide_7_1.jpg', 'tag': 'Cinematography', 'title': 'Songti Film Production Still', 'type': 'photo'},
+            {'src': 'assets/slide_7_2.jpg', 'tag': 'Cinematography', 'title': 'Songti Color Grade Framing', 'type': 'photo'},
+            {'src': 'assets/slide_7_3.jpg', 'tag': 'Cinematography', 'title': 'Songti Narrative Scene Study', 'type': 'photo'},
+            {'src': 'assets/slide_7_4.jpg', 'tag': 'Cinematography', 'title': 'Songti Cinematic Atmosphere', 'type': 'photo'},
+            {'src': 'assets/slide_7_5.jpg', 'tag': 'Cinematography', 'title': 'Songti Director Visual Frame', 'type': 'photo'},
         ]
     },
     {
         'id': 'cat-kiff',
-        'code': '09',
         'title': 'KIFF Celebrity Podcasts & Masterclasses',
         'subtitle': 'Video Editing & Broadcast Sound',
         'desc': '4K multi-cam editing, interview pacing, audio cleanup, and color mastering for film festival dialogues.',
         'items': [
-            {'src': 'assets/yt_anupam_kher.jpg', 'tag': 'KIFF Ep 01', 'num': '01', 'title': 'Anupam Kher Unfiltered — Acting Masterclass', 'type': 'video', 'videoId': 'Sh0jTGE660o'},
-            {'src': 'assets/yt_saurabh_shukla.jpg', 'tag': 'KIFF Ep 02', 'num': '02', 'title': 'Saurabh Shukla — Screenwriting & Satya', 'type': 'video', 'videoId': 'ojgap437XT8'},
-            {'src': 'assets/yt_subhash_sehgal.jpg', 'tag': 'KIFF Ep 03', 'num': '03', 'title': 'Subhash Sehgal — Film Editing Masterclass', 'type': 'video', 'videoId': 'AWiazyKn8ak'},
-            {'src': 'assets/yt_deepshikha_nagpal.jpg', 'tag': 'KIFF Ep 04', 'num': '04', 'title': 'Deepshikha Nagpal — Industry & Direction', 'type': 'video', 'videoId': 'hcNVkH6HhVk'},
+            {'src': 'assets/yt_anupam_kher.jpg', 'tag': 'Masterclass', 'title': 'Anupam Kher Unfiltered — Acting Masterclass', 'type': 'video', 'videoId': 'Sh0jTGE660o'},
+            {'src': 'assets/yt_saurabh_shukla.jpg', 'tag': 'Screenwriting', 'title': 'Saurabh Shukla — Screenwriting & Satya', 'type': 'video', 'videoId': 'ojgap437XT8'},
+            {'src': 'assets/yt_subhash_sehgal.jpg', 'tag': 'Film Editing', 'title': 'Subhash Sehgal — Film Editing Masterclass', 'type': 'video', 'videoId': 'AWiazyKn8ak'},
+            {'src': 'assets/yt_deepshikha_nagpal.jpg', 'tag': 'Direction', 'title': 'Deepshikha Nagpal — Industry & Direction', 'type': 'video', 'videoId': 'hcNVkH6HhVk'},
         ]
     }
 ]
-
-total_items = sum(len(c['items']) for c in categories)
 
 html = f"""<!DOCTYPE html>
 <html lang="en">
@@ -126,9 +144,9 @@ html = f"""<!DOCTYPE html>
   <meta charset="utf-8"/>
   <title>Works Archive — Kanchan Choudhary®</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"/>
-  <meta content="The complete works archive of Kanchan Choudhary. 60 high-resolution uncropped photographs and 4K celebrity masterclasses across 9 curated disciplines." name="description"/>
+  <meta content="The complete works archive of Kanchan Choudhary. High-resolution uncropped photographs and 4K celebrity masterclasses across curated visual disciplines." name="description"/>
   <meta content="Works Archive — Kanchan Choudhary®" property="og:title"/>
-  <meta content="The complete works archive of Kanchan Choudhary. 60 high-resolution uncropped photographs and 4K celebrity masterclasses across 9 curated disciplines." property="og:description"/>
+  <meta content="The complete works archive of Kanchan Choudhary. High-resolution uncropped photographs and 4K celebrity masterclasses across curated visual disciplines." property="og:description"/>
   <meta content="assets/slide_10_1.jpg" property="og:image"/>
 
   <!-- Google Fonts: Plus Jakarta Sans & Newsreader -->
@@ -143,7 +161,7 @@ html = f"""<!DOCTYPE html>
     /* Work Page Specific Cosmos Styles */
     .work-hero-header {{
       text-align: center;
-      padding: 130px 20px 40px 20px;
+      padding: 130px 20px 50px 20px;
       max-width: 900px;
       margin: 0 auto;
     }}
@@ -162,92 +180,24 @@ html = f"""<!DOCTYPE html>
       color: var(--text-secondary);
       max-width: 650px;
       margin: 0 auto;
-    }}
-
-    /* Sticky Category Pills Bar (Offset below floating header) */
-    .work-sticky-bar {{
-      position: sticky;
-      top: 68px;
-      z-index: 900;
-      display: flex;
-      justify-content: center;
-      padding: 10px 16px;
-      margin-bottom: 50px;
-      pointer-events: none;
-    }}
-
-    @media (max-width: 680px) {{
-      .work-sticky-bar {{
-        top: 54px;
-        padding: 6px 10px;
-      }}
-    }}
-
-    .category-pills-scroll {{
-      pointer-events: auto;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid var(--nav-border);
-      padding: 6px 12px;
-      border-radius: 9999px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
-      overflow-x: auto;
-      max-width: 94vw;
-      scrollbar-width: none;
-    }}
-
-    .category-pills-scroll::-webkit-scrollbar {{
-      display: none;
-    }}
-
-    .cat-pill {{
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      background: transparent;
-      border: 1px solid transparent;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }}
-
-    .cat-pill:hover {{
-      color: var(--text-primary);
-      background: var(--pill-bg-hover);
-    }}
-
-    .cat-pill.active {{
-      background: var(--pill-active-bg);
-      color: var(--pill-active-text);
-      font-weight: 600;
+      line-height: 1.6;
     }}
 
     /* Category Section Layout */
     .work-category-section {{
       max-width: 1280px;
-      margin: 0 auto 80px auto;
+      margin: 0 auto 90px auto;
       padding: 0 24px;
       scroll-margin-top: 100px;
     }}
 
     .category-section-header {{
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      flex-direction: column;
       border-bottom: 1px solid var(--card-border);
       padding-bottom: 18px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-      gap: 12px;
+      margin-bottom: 32px;
+      gap: 8px;
     }}
 
     .cat-title-group {{
@@ -257,35 +207,20 @@ html = f"""<!DOCTYPE html>
       flex-wrap: wrap;
     }}
 
-    .cat-code-badge {{
-      font-size: 12px;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-      font-weight: 600;
-    }}
-
     .cat-heading {{
       font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
       font-weight: 400;
       color: var(--text-primary);
       margin: 0;
-    }}
-
-    .cat-count-pill {{
-      font-size: 12px;
-      color: var(--text-secondary);
-      background: var(--pill-bg);
-      border: 1px solid var(--pill-border);
-      padding: 4px 12px;
-      border-radius: 9999px;
+      letter-spacing: -0.01em;
     }}
 
     .cat-desc-row {{
       width: 100%;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-secondary);
-      margin-top: 4px;
+      line-height: 1.6;
     }}
 
     /* Friendly Photo Cards Grid — 100% Full Uncropped View */
@@ -298,6 +233,11 @@ html = f"""<!DOCTYPE html>
     @media (max-width: 768px) {{
       .work-cards-grid {{
         grid-template-columns: 1fr;
+        gap: 20px;
+      }}
+      .work-category-section {{
+        padding: 0 16px;
+        margin-bottom: 60px;
       }}
     }}
 
@@ -458,25 +398,9 @@ html = f"""<!DOCTYPE html>
   <header class="work-hero-header">
     <h1 class="work-page-title">The Complete Archive</h1>
     <p class="work-page-subtitle">
-      60 uncropped photographs and 4K celebrity masterclasses across 9 curated visual disciplines.
+      Uncropped photographs and 4K celebrity masterclasses across curated visual disciplines.
     </p>
   </header>
-
-
-  <!-- =========================================================================
-       STICKY FROSTED GLASS CATEGORY SELECTOR PILLS
-       ========================================================================= -->
-  <div class="work-sticky-bar">
-    <div class="category-pills-scroll">
-      <button type="button" class="cat-pill active" data-target="all">All Works ({total_items})</button>
-"""
-
-for c in categories:
-    clean_name = c["title"].split("•")[1].strip() if "•" in c["title"] else c["title"]
-    html += f'      <button type="button" class="cat-pill" data-target="{c["id"]}">[{c["code"]}] {clean_name} ({len(c["items"])})</button>\n'
-
-html += f"""    </div>
-  </div>
 
 
   <!-- =========================================================================
@@ -486,15 +410,12 @@ html += f"""    </div>
 """
 
 for c in categories:
-    item_label = "Videos" if c['id'] == 'cat-kiff' else "Photos"
     html += f"""
     <!-- Category Section: {c['title']} -->
     <section class="work-category-section" id="{c['id']}" data-category="{c['id']}">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[{c['code']} / 09]</span>
           <h2 class="cat-heading">{c['title']}</h2>
-          <span class="cat-count-pill">{len(c['items'])} {item_label}</span>
         </div>
         <div class="cat-desc-row">{c['desc']}</div>
       </div>
@@ -567,7 +488,7 @@ html += f"""
           <a href="work.html#cat-studio">Studio Lighting</a>
           <a href="work.html#cat-monochrome">Monochromes</a>
           <a href="work.html#cat-songti">Cinematography Stills</a>
-          <a href="work.html#cat-limited-2030">Limited Edition 2030</a>
+          <a href="work.html#cat-limited-edition">Editorial Concept</a>
         </div>
       </div>
 
@@ -608,7 +529,6 @@ html += f"""
 
       <div class="lightbox-header">
         <div class="lightbox-meta">
-          <span class="lightbox-counter" id="lightbox-counter">[1 / {total_items}]</span>
           <span class="lightbox-title" id="lightbox-title">Photograph Exhibition</span>
         </div>
         <button type="button" class="lightbox-close-btn" id="lightbox-close">Close &times;</button>
@@ -621,7 +541,7 @@ html += f"""
 
       <div class="lightbox-footer">
         <button type="button" class="lightbox-nav-btn" id="lb-prev">&larr; Previous</button>
-        <span style="font-size:12px; color:var(--text-muted);">Kanchan Choudhary Archive</span>
+        <span style="font-size:12px; color:var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase;">Kanchan Choudhary Archive</span>
         <button type="button" class="lightbox-nav-btn" id="lb-next">Next &rarr;</button>
       </div>
 
@@ -630,7 +550,7 @@ html += f"""
 
 
   <!-- =========================================================================
-       INTERACTIVE SCRIPTS (Theme, Filtering & Lightbox)
+       INTERACTIVE SCRIPTS (Theme Switcher & Lightbox)
        ========================================================================= -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {{
@@ -658,62 +578,11 @@ html += f"""
       if (darkBtn) darkBtn.addEventListener('click', () => setTheme('dark'));
       if (lightBtn) lightBtn.addEventListener('click', () => setTheme('light'));
 
-      // 2. Category Filter Pills
-      const catPills = document.querySelectorAll('.cat-pill');
-      const categorySections = document.querySelectorAll('.work-category-section');
-
-      function filterCategory(targetId, updateUrl = true) {{
-        catPills.forEach(p => {{
-          if (p.getAttribute('data-target') === targetId) p.classList.add('active');
-          else p.classList.remove('active');
-        }});
-
-        if (targetId === 'all') {{
-          categorySections.forEach(sec => sec.style.display = 'block');
-          if (updateUrl) history.replaceState(null, '', window.location.pathname);
-        }} else {{
-          categorySections.forEach(sec => {{
-            if (sec.id === targetId) {{
-              sec.style.display = 'block';
-              sec.scrollIntoView({{ behavior: 'smooth', block: 'start' }});
-            }} else {{
-              sec.style.display = 'none';
-            }}
-          }});
-          if (updateUrl) history.replaceState(null, '', '#' + targetId);
-        }}
-      }}
-
-      catPills.forEach(p => {{
-        p.addEventListener('click', (e) => {{
-          e.preventDefault();
-          const target = p.getAttribute('data-target');
-          filterCategory(target);
-        }});
-      }});
-
-      if (window.location.hash) {{
-        const hash = window.location.hash.substring(1);
-        if (document.getElementById(hash)) {{
-          filterCategory(hash, false);
-        }}
-      }}
-
-      window.addEventListener('hashchange', () => {{
-        const hash = window.location.hash.substring(1);
-        if (hash && document.getElementById(hash)) {{
-          filterCategory(hash, false);
-        }} else if (!hash) {{
-          filterCategory('all', false);
-        }}
-      }});
-
-      // 3. Fullscreen Lightbox & 4K Video Player
+      // 2. Fullscreen Lightbox & 4K Video Player
       const lightbox = document.getElementById('cosmos-lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
       const lightboxVideo = document.getElementById('lightbox-video');
       const lightboxTitle = document.getElementById('lightbox-title');
-      const lightboxCounter = document.getElementById('lightbox-counter');
       const closeBtn = document.getElementById('lightbox-close');
       const lbPrev = document.getElementById('lb-prev');
       const lbNext = document.getElementById('lb-next');
@@ -729,7 +598,6 @@ html += f"""
         const videoId = card.getAttribute('data-video-id');
 
         if (lightboxTitle) lightboxTitle.textContent = title;
-        if (lightboxCounter) lightboxCounter.textContent = `[${{currentIndex + 1}} / ${{allCards.length}}]`;
 
         if (videoId) {{
           if (lightboxImg) lightboxImg.style.display = 'none';
@@ -811,4 +679,4 @@ html += f"""
 with open('work.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
-print(f"Successfully generated work.html in Cosmos theme with {total_items} items!")
+print("Successfully generated work.html with professional titles and zero number counts!")

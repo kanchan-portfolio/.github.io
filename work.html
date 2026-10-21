@@ -4,9 +4,9 @@
   <meta charset="utf-8"/>
   <title>Works Archive — Kanchan Choudhary®</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover"/>
-  <meta content="The complete works archive of Kanchan Choudhary. 60 high-resolution uncropped photographs and 4K celebrity masterclasses across 9 curated disciplines." name="description"/>
+  <meta content="The complete works archive of Kanchan Choudhary. High-resolution uncropped photographs and 4K celebrity masterclasses across curated visual disciplines." name="description"/>
   <meta content="Works Archive — Kanchan Choudhary®" property="og:title"/>
-  <meta content="The complete works archive of Kanchan Choudhary. 60 high-resolution uncropped photographs and 4K celebrity masterclasses across 9 curated disciplines." property="og:description"/>
+  <meta content="The complete works archive of Kanchan Choudhary. High-resolution uncropped photographs and 4K celebrity masterclasses across curated visual disciplines." property="og:description"/>
   <meta content="assets/slide_10_1.jpg" property="og:image"/>
 
   <!-- Google Fonts: Plus Jakarta Sans & Newsreader -->
@@ -21,7 +21,7 @@
     /* Work Page Specific Cosmos Styles */
     .work-hero-header {
       text-align: center;
-      padding: 130px 20px 40px 20px;
+      padding: 130px 20px 50px 20px;
       max-width: 900px;
       margin: 0 auto;
     }
@@ -40,92 +40,24 @@
       color: var(--text-secondary);
       max-width: 650px;
       margin: 0 auto;
-    }
-
-    /* Sticky Category Pills Bar (Offset below floating header) */
-    .work-sticky-bar {
-      position: sticky;
-      top: 68px;
-      z-index: 900;
-      display: flex;
-      justify-content: center;
-      padding: 10px 16px;
-      margin-bottom: 50px;
-      pointer-events: none;
-    }
-
-    @media (max-width: 680px) {
-      .work-sticky-bar {
-        top: 54px;
-        padding: 6px 10px;
-      }
-    }
-
-    .category-pills-scroll {
-      pointer-events: auto;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--nav-bg);
-      backdrop-filter: blur(28px);
-      -webkit-backdrop-filter: blur(28px);
-      border: 1px solid var(--nav-border);
-      padding: 6px 12px;
-      border-radius: 9999px;
-      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
-      overflow-x: auto;
-      max-width: 94vw;
-      scrollbar-width: none;
-    }
-
-    .category-pills-scroll::-webkit-scrollbar {
-      display: none;
-    }
-
-    .cat-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 9999px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--text-secondary);
-      background: transparent;
-      border: 1px solid transparent;
-      white-space: nowrap;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .cat-pill:hover {
-      color: var(--text-primary);
-      background: var(--pill-bg-hover);
-    }
-
-    .cat-pill.active {
-      background: var(--pill-active-bg);
-      color: var(--pill-active-text);
-      font-weight: 600;
+      line-height: 1.6;
     }
 
     /* Category Section Layout */
     .work-category-section {
       max-width: 1280px;
-      margin: 0 auto 80px auto;
+      margin: 0 auto 90px auto;
       padding: 0 24px;
       scroll-margin-top: 100px;
     }
 
     .category-section-header {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
+      flex-direction: column;
       border-bottom: 1px solid var(--card-border);
       padding-bottom: 18px;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-      gap: 12px;
+      margin-bottom: 32px;
+      gap: 8px;
     }
 
     .cat-title-group {
@@ -135,35 +67,20 @@
       flex-wrap: wrap;
     }
 
-    .cat-code-badge {
-      font-size: 12px;
-      color: var(--text-muted);
-      letter-spacing: 0.05em;
-      font-weight: 600;
-    }
-
     .cat-heading {
       font-family: var(--font-serif);
-      font-size: clamp(1.6rem, 3.2vw, 2.4rem);
+      font-size: clamp(1.8rem, 3.4vw, 2.6rem);
       font-weight: 400;
       color: var(--text-primary);
       margin: 0;
-    }
-
-    .cat-count-pill {
-      font-size: 12px;
-      color: var(--text-secondary);
-      background: var(--pill-bg);
-      border: 1px solid var(--pill-border);
-      padding: 4px 12px;
-      border-radius: 9999px;
+      letter-spacing: -0.01em;
     }
 
     .cat-desc-row {
       width: 100%;
-      font-size: 13px;
+      font-size: 14px;
       color: var(--text-secondary);
-      margin-top: 4px;
+      line-height: 1.6;
     }
 
     /* Friendly Photo Cards Grid — 100% Full Uncropped View */
@@ -176,6 +93,11 @@
     @media (max-width: 768px) {
       .work-cards-grid {
         grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .work-category-section {
+        padding: 0 16px;
+        margin-bottom: 60px;
       }
     }
 
@@ -336,28 +258,9 @@
   <header class="work-hero-header">
     <h1 class="work-page-title">The Complete Archive</h1>
     <p class="work-page-subtitle">
-      60 uncropped photographs and 4K celebrity masterclasses across 9 curated visual disciplines.
+      Uncropped photographs and 4K celebrity masterclasses across curated visual disciplines.
     </p>
   </header>
-
-
-  <!-- =========================================================================
-       STICKY FROSTED GLASS CATEGORY SELECTOR PILLS
-       ========================================================================= -->
-  <div class="work-sticky-bar">
-    <div class="category-pills-scroll">
-      <button type="button" class="cat-pill active" data-target="all">All Works (60)</button>
-      <button type="button" class="cat-pill" data-target="cat-editorial">[01] High-Fashion Editorial (4)</button>
-      <button type="button" class="cat-pill" data-target="cat-studio">[02] Studio Lighting Series (13)</button>
-      <button type="button" class="cat-pill" data-target="cat-mood-styling">[03] Mood & Styling Series (9)</button>
-      <button type="button" class="cat-pill" data-target="cat-ambient-light">[04] Ambient Light Series (5)</button>
-      <button type="button" class="cat-pill" data-target="cat-character">[05] Character Studies (10)</button>
-      <button type="button" class="cat-pill" data-target="cat-monochrome">[06] Monochromes & Tone (8)</button>
-      <button type="button" class="cat-pill" data-target="cat-limited-2030">[07] Limited Edition 2030 (2)</button>
-      <button type="button" class="cat-pill" data-target="cat-songti">[08] Songti Cinematography Stills (5)</button>
-      <button type="button" class="cat-pill" data-target="cat-kiff">[09] KIFF Celebrity Podcasts & Masterclasses (4)</button>
-    </div>
-  </div>
 
 
   <!-- =========================================================================
@@ -365,666 +268,674 @@
        ========================================================================= -->
   <main id="works-container">
 
-    <!-- Category Section: Photoshoot • High-Fashion Editorial -->
+    <!-- Category Section: High-Fashion Editorial -->
     <section class="work-category-section" id="cat-editorial" data-category="cat-editorial">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[01 / 09]</span>
-          <h2 class="cat-heading">Photoshoot • High-Fashion Editorial</h2>
-          <span class="cat-count-pill">4 Photos</span>
+          <h2 class="cat-heading">High-Fashion Editorial</h2>
         </div>
         <div class="cat-desc-row">High-fashion portraiture, creative styling, and expressive character poses in contemporary studio aesthetic.</div>
       </div>
 
       <div class="work-cards-grid">
-        <div class="photo-card-wrapper" data-src="assets/slide_10_1.jpg" data-title="High-Fashion Portrait I" data-cat="Photoshoot • High-Fashion Editorial" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_10_1.jpg" data-title="High-Fashion Editorial Portrait" data-cat="High-Fashion Editorial" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_10_1.jpg" alt="High-Fashion Portrait I" loading="lazy" decoding="async"/>
+            <img src="assets/slide_10_1.jpg" alt="High-Fashion Editorial Portrait" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Editorial</span>
-            <span class="meta-title">High-Fashion Portrait I</span>
+            <span class="meta-title">High-Fashion Editorial Portrait</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_10_2.jpg" data-title="High-Fashion Portrait II" data-cat="Photoshoot • High-Fashion Editorial" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_10_2.jpg" data-title="Contemporary Haute Couture" data-cat="High-Fashion Editorial" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_10_2.jpg" alt="High-Fashion Portrait II" loading="lazy" decoding="async"/>
+            <img src="assets/slide_10_2.jpg" alt="Contemporary Haute Couture" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Editorial</span>
-            <span class="meta-title">High-Fashion Portrait II</span>
+            <span class="meta-title">Contemporary Haute Couture</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_10_3.jpg" data-title="High-Fashion Portrait III" data-cat="Photoshoot • High-Fashion Editorial" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_10_3.jpg" data-title="Avant-Garde Silhouette" data-cat="High-Fashion Editorial" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_10_3.jpg" alt="High-Fashion Portrait III" loading="lazy" decoding="async"/>
+            <img src="assets/slide_10_3.jpg" alt="Avant-Garde Silhouette" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Editorial</span>
-            <span class="meta-title">High-Fashion Portrait III</span>
+            <span class="meta-title">Avant-Garde Silhouette</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_10_4.jpg" data-title="High-Fashion Portrait IV" data-cat="Photoshoot • High-Fashion Editorial" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_10_4.jpg" data-title="Editorial Form & Texture" data-cat="High-Fashion Editorial" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_10_4.jpg" alt="High-Fashion Portrait IV" loading="lazy" decoding="async"/>
+            <img src="assets/slide_10_4.jpg" alt="Editorial Form & Texture" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Editorial</span>
-            <span class="meta-title">High-Fashion Portrait IV</span>
+            <span class="meta-title">Editorial Form & Texture</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Category Section: Photoshoot • Studio Lighting Series -->
+    <!-- Category Section: Studio Lighting Series -->
     <section class="work-category-section" id="cat-studio" data-category="cat-studio">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[02 / 09]</span>
-          <h2 class="cat-heading">Photoshoot • Studio Lighting Series</h2>
-          <span class="cat-count-pill">13 Photos</span>
+          <h2 class="cat-heading">Studio Lighting Series</h2>
         </div>
         <div class="cat-desc-row">Studio lighting setups, wide and intimate character compositions, prop compositions, and expressive poses.</div>
       </div>
 
       <div class="work-cards-grid">
-        <div class="photo-card-wrapper" data-src="assets/slide_5_1.jpg" data-title="Studio Study 01" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_1.jpg" data-title="Sculptural Rim Lighting" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_1.jpg" alt="Studio Study 01" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_1.jpg" alt="Sculptural Rim Lighting" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 01</span>
+            <span class="meta-title">Sculptural Rim Lighting</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_2.jpg" data-title="Studio Study 02" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_2.jpg" data-title="Dramatic Chiaroscuro Form" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_2.jpg" alt="Studio Study 02" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_2.jpg" alt="Dramatic Chiaroscuro Form" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 02</span>
+            <span class="meta-title">Dramatic Chiaroscuro Form</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_3.jpg" data-title="Studio Study 03" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_3.jpg" data-title="Soft Diffused Key Light" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_3.jpg" alt="Studio Study 03" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_3.jpg" alt="Soft Diffused Key Light" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 03</span>
+            <span class="meta-title">Soft Diffused Key Light</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_4.jpg" data-title="Studio Study 04" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_4.jpg" data-title="Studio Shadow & Symmetry" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_4.jpg" alt="Studio Study 04" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_4.jpg" alt="Studio Shadow & Symmetry" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 04</span>
+            <span class="meta-title">Studio Shadow & Symmetry</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_5.jpg" data-title="Studio Study 05" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_5.jpg" data-title="Intimate Contour Study" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_5.jpg" alt="Studio Study 05" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_5.jpg" alt="Intimate Contour Study" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 05</span>
+            <span class="meta-title">Intimate Contour Study</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_6.jpg" data-title="Studio Study 06" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_6.jpg" data-title="Atmospheric Studio Portrait" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_6.jpg" alt="Studio Study 06" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_6.jpg" alt="Atmospheric Studio Portrait" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 06</span>
+            <span class="meta-title">Atmospheric Studio Portrait</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_7.jpg" data-title="Studio Study 07" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_7.jpg" data-title="Directional High-Contrast Form" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_7.jpg" alt="Studio Study 07" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_7.jpg" alt="Directional High-Contrast Form" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 07</span>
+            <span class="meta-title">Directional High-Contrast Form</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_8.jpg" data-title="Studio Study 08" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_8.jpg" data-title="Minimalist Posing Study" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_8.jpg" alt="Studio Study 08" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_8.jpg" alt="Minimalist Posing Study" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 08</span>
+            <span class="meta-title">Minimalist Posing Study</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_9.jpg" data-title="Studio Study 09" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_9.jpg" data-title="Expressive Gestural Pose" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_9.jpg" alt="Studio Study 09" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_9.jpg" alt="Expressive Gestural Pose" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 09</span>
+            <span class="meta-title">Expressive Gestural Pose</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_10.jpg" data-title="Studio Study 10" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_10.jpg" data-title="Low-Key Edge Illumination" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_10.jpg" alt="Studio Study 10" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_10.jpg" alt="Low-Key Edge Illumination" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 10</span>
+            <span class="meta-title">Low-Key Edge Illumination</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_11.jpg" data-title="Studio Study 11" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_11.jpg" data-title="Cinematic Fill Lighting" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_11.jpg" alt="Studio Study 11" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_11.jpg" alt="Cinematic Fill Lighting" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 11</span>
+            <span class="meta-title">Cinematic Fill Lighting</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_12.jpg" data-title="Studio Study 12" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_12.jpg" data-title="Studio Monochrome Contrast" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_12.jpg" alt="Studio Study 12" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_12.jpg" alt="Studio Monochrome Contrast" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 12</span>
+            <span class="meta-title">Studio Monochrome Contrast</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_5_13.jpg" data-title="Studio Study 13" data-cat="Photoshoot • Studio Lighting Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_5_13.jpg" data-title="Balanced Ambient Composition" data-cat="Studio Lighting Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_5_13.jpg" alt="Studio Study 13" loading="lazy" decoding="async"/>
+            <img src="assets/slide_5_13.jpg" alt="Balanced Ambient Composition" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Studio</span>
-            <span class="meta-title">Studio Study 13</span>
+            <span class="meta-title">Balanced Ambient Composition</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Category Section: Photoshoot • Mood & Styling Series -->
+    <!-- Category Section: Mood & Styling Series -->
     <section class="work-category-section" id="cat-mood-styling" data-category="cat-mood-styling">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[03 / 09]</span>
-          <h2 class="cat-heading">Photoshoot • Mood & Styling Series</h2>
-          <span class="cat-count-pill">9 Photos</span>
+          <h2 class="cat-heading">Mood & Styling Series</h2>
         </div>
         <div class="cat-desc-row">Natural daylight styling, atmospheric textures, outdoor narratives, and editorial lookbooks.</div>
       </div>
 
       <div class="work-cards-grid">
-        <div class="photo-card-wrapper" data-src="assets/slide_6_1.jpg" data-title="Mood Study 01" data-cat="Photoshoot • Mood & Styling Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_6_1.jpg" data-title="Natural Daylight Mood" data-cat="Mood & Styling Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_6_1.jpg" alt="Mood Study 01" loading="lazy" decoding="async"/>
+            <img src="assets/slide_6_1.jpg" alt="Natural Daylight Mood" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Mood</span>
-            <span class="meta-title">Mood Study 01</span>
+            <span class="meta-title">Natural Daylight Mood</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_6_2.jpg" data-title="Mood Study 02" data-cat="Photoshoot • Mood & Styling Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_6_2.jpg" data-title="Golden Hour Atmosphere" data-cat="Mood & Styling Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_6_2.jpg" alt="Mood Study 02" loading="lazy" decoding="async"/>
+            <img src="assets/slide_6_2.jpg" alt="Golden Hour Atmosphere" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Mood</span>
-            <span class="meta-title">Mood Study 02</span>
+            <span class="meta-title">Golden Hour Atmosphere</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_6_3.jpg" data-title="Mood Study 03" data-cat="Photoshoot • Mood & Styling Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_6_3.jpg" data-title="Subtle Color Palette" data-cat="Mood & Styling Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_6_3.jpg" alt="Mood Study 03" loading="lazy" decoding="async"/>
+            <img src="assets/slide_6_3.jpg" alt="Subtle Color Palette" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Mood</span>
-            <span class="meta-title">Mood Study 03</span>
+            <span class="meta-title">Subtle Color Palette</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_6_4.jpg" data-title="Mood Study 04" data-cat="Photoshoot • Mood & Styling Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_6_4.jpg" data-title="Earthy Tonal Harmony" data-cat="Mood & Styling Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_6_4.jpg" alt="Mood Study 04" loading="lazy" decoding="async"/>
+            <img src="assets/slide_6_4.jpg" alt="Earthy Tonal Harmony" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Mood</span>
-            <span class="meta-title">Mood Study 04</span>
+            <span class="meta-title">Earthy Tonal Harmony</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_7_1.jpg" data-title="Styling Study 01" data-cat="Photoshoot • Mood & Styling Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_1.jpg" data-title="Contemporary Street Styling" data-cat="Mood & Styling Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_1.jpg" alt="Styling Study 01" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_1.jpg" alt="Contemporary Street Styling" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Styling</span>
-            <span class="meta-title">Styling Study 01</span>
+            <span class="meta-title">Contemporary Street Styling</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_7_2.jpg" data-title="Styling Study 02" data-cat="Photoshoot • Mood & Styling Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_2.jpg" data-title="Urban Editorial Narrative" data-cat="Mood & Styling Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_2.jpg" alt="Styling Study 02" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_2.jpg" alt="Urban Editorial Narrative" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Styling</span>
-            <span class="meta-title">Styling Study 02</span>
+            <span class="meta-title">Urban Editorial Narrative</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_7_3.jpg" data-title="Styling Study 03" data-cat="Photoshoot • Mood & Styling Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_3.jpg" data-title="Textured Fabric Expression" data-cat="Mood & Styling Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_3.jpg" alt="Styling Study 03" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_3.jpg" alt="Textured Fabric Expression" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Styling</span>
-            <span class="meta-title">Styling Study 03</span>
+            <span class="meta-title">Textured Fabric Expression</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_7_4.jpg" data-title="Styling Study 04" data-cat="Photoshoot • Mood & Styling Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_4.jpg" data-title="Modern Wardrobe Direction" data-cat="Mood & Styling Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_4.jpg" alt="Styling Study 04" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_4.jpg" alt="Modern Wardrobe Direction" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Styling</span>
-            <span class="meta-title">Styling Study 04</span>
+            <span class="meta-title">Modern Wardrobe Direction</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_7_5.jpg" data-title="Styling Study 05" data-cat="Photoshoot • Mood & Styling Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_5.jpg" data-title="Cinematic Natural Pose" data-cat="Mood & Styling Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_5.jpg" alt="Styling Study 05" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_5.jpg" alt="Cinematic Natural Pose" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Styling</span>
-            <span class="meta-title">Styling Study 05</span>
+            <span class="meta-title">Cinematic Natural Pose</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Category Section: Photoshoot • Ambient Light Series -->
+    <!-- Category Section: Ambient Light Series -->
     <section class="work-category-section" id="cat-ambient-light" data-category="cat-ambient-light">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[04 / 09]</span>
-          <h2 class="cat-heading">Photoshoot • Ambient Light Series</h2>
-          <span class="cat-count-pill">5 Photos</span>
+          <h2 class="cat-heading">Ambient Light Series</h2>
         </div>
         <div class="cat-desc-row">Directional soft light, warm shadows, cinematic rim lighting, and organic mood portraits.</div>
       </div>
 
       <div class="work-cards-grid">
-        <div class="photo-card-wrapper" data-src="assets/slide_8_1.jpg" data-title="Ambient Study 01" data-cat="Photoshoot • Ambient Light Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_8_1.jpg" data-title="Organic Daylight Reflections" data-cat="Ambient Light Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_8_1.jpg" alt="Ambient Study 01" loading="lazy" decoding="async"/>
+            <img src="assets/slide_8_1.jpg" alt="Organic Daylight Reflections" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Ambient</span>
-            <span class="meta-title">Ambient Study 01</span>
+            <span class="meta-title">Organic Daylight Reflections</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_8_2.jpg" data-title="Ambient Study 02" data-cat="Photoshoot • Ambient Light Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_8_2.jpg" data-title="Warm Window Illumination" data-cat="Ambient Light Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_8_2.jpg" alt="Ambient Study 02" loading="lazy" decoding="async"/>
+            <img src="assets/slide_8_2.jpg" alt="Warm Window Illumination" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Ambient</span>
-            <span class="meta-title">Ambient Study 02</span>
+            <span class="meta-title">Warm Window Illumination</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_8_3.jpg" data-title="Ambient Study 03" data-cat="Photoshoot • Ambient Light Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_8_3.jpg" data-title="Muted Natural Shadows" data-cat="Ambient Light Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_8_3.jpg" alt="Ambient Study 03" loading="lazy" decoding="async"/>
+            <img src="assets/slide_8_3.jpg" alt="Muted Natural Shadows" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Ambient</span>
-            <span class="meta-title">Ambient Study 03</span>
+            <span class="meta-title">Muted Natural Shadows</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_8_4.jpg" data-title="Ambient Study 04" data-cat="Photoshoot • Ambient Light Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_8_4.jpg" data-title="Atmospheric Depth & Grain" data-cat="Ambient Light Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_8_4.jpg" alt="Ambient Study 04" loading="lazy" decoding="async"/>
+            <img src="assets/slide_8_4.jpg" alt="Atmospheric Depth & Grain" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Ambient</span>
-            <span class="meta-title">Ambient Study 04</span>
+            <span class="meta-title">Atmospheric Depth & Grain</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_9_1.jpg" data-title="Ambient Portrait I" data-cat="Photoshoot • Ambient Light Series" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_9_1.jpg" data-title="Gentle Ambient Glow" data-cat="Ambient Light Series" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_9_1.jpg" alt="Ambient Portrait I" loading="lazy" decoding="async"/>
+            <img src="assets/slide_9_1.jpg" alt="Gentle Ambient Glow" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Ambient</span>
-            <span class="meta-title">Ambient Portrait I</span>
+            <span class="meta-title">Gentle Ambient Glow</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Category Section: Photoshoot • Character Studies -->
+    <!-- Category Section: Character Studies -->
     <section class="work-category-section" id="cat-character" data-category="cat-character">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[05 / 09]</span>
-          <h2 class="cat-heading">Photoshoot • Character Studies</h2>
-          <span class="cat-count-pill">10 Photos</span>
+          <h2 class="cat-heading">Character Studies</h2>
         </div>
         <div class="cat-desc-row">Contemporary character exploration, dynamic camera angles, and editorial expressions.</div>
       </div>
 
       <div class="work-cards-grid">
-        <div class="photo-card-wrapper" data-src="assets/slide_11_1.jpg" data-title="Character Study 01" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_11_1.jpg" data-title="Intense Character Gaze" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_11_1.jpg" alt="Character Study 01" loading="lazy" decoding="async"/>
+            <img src="assets/slide_11_1.jpg" alt="Intense Character Gaze" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Study 01</span>
+            <span class="meta-title">Intense Character Gaze</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_11_2.jpg" data-title="Character Study 02" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_11_2.jpg" data-title="Dynamic Profile Perspective" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_11_2.jpg" alt="Character Study 02" loading="lazy" decoding="async"/>
+            <img src="assets/slide_11_2.jpg" alt="Dynamic Profile Perspective" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Study 02</span>
+            <span class="meta-title">Dynamic Profile Perspective</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_11_3.jpg" data-title="Character Study 03" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_11_3.jpg" data-title="Cinematic Character Presence" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_11_3.jpg" alt="Character Study 03" loading="lazy" decoding="async"/>
+            <img src="assets/slide_11_3.jpg" alt="Cinematic Character Presence" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Study 03</span>
+            <span class="meta-title">Cinematic Character Presence</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_11_4.jpg" data-title="Character Study 04" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_11_4.jpg" data-title="Subtle Emotional Nuance" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_11_4.jpg" alt="Character Study 04" loading="lazy" decoding="async"/>
+            <img src="assets/slide_11_4.jpg" alt="Subtle Emotional Nuance" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Study 04</span>
+            <span class="meta-title">Subtle Emotional Nuance</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_11_5.jpg" data-title="Character Study 05" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_11_5.jpg" data-title="Expressive Character Stance" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_11_5.jpg" alt="Character Study 05" loading="lazy" decoding="async"/>
+            <img src="assets/slide_11_5.jpg" alt="Expressive Character Stance" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Study 05</span>
+            <span class="meta-title">Expressive Character Stance</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_12_1.jpg" data-title="Character Expression 01" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_12_1.jpg" data-title="Dramatic Facial Contours" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_12_1.jpg" alt="Character Expression 01" loading="lazy" decoding="async"/>
+            <img src="assets/slide_12_1.jpg" alt="Dramatic Facial Contours" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Expression 01</span>
+            <span class="meta-title">Dramatic Facial Contours</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_12_2.jpg" data-title="Character Expression 02" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_12_2.jpg" data-title="Introspective Close-Up" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_12_2.jpg" alt="Character Expression 02" loading="lazy" decoding="async"/>
+            <img src="assets/slide_12_2.jpg" alt="Introspective Close-Up" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Expression 02</span>
+            <span class="meta-title">Introspective Close-Up</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_12_3.jpg" data-title="Character Expression 03" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_12_3.jpg" data-title="Bold Cinematic Expression" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_12_3.jpg" alt="Character Expression 03" loading="lazy" decoding="async"/>
+            <img src="assets/slide_12_3.jpg" alt="Bold Cinematic Expression" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Expression 03</span>
+            <span class="meta-title">Bold Cinematic Expression</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_12_4.jpg" data-title="Character Expression 04" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_12_4.jpg" data-title="Candid Performance Mood" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_12_4.jpg" alt="Character Expression 04" loading="lazy" decoding="async"/>
+            <img src="assets/slide_12_4.jpg" alt="Candid Performance Mood" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Expression 04</span>
+            <span class="meta-title">Candid Performance Mood</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_12_5.jpg" data-title="Character Expression 05" data-cat="Photoshoot • Character Studies" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_12_5.jpg" data-title="Poised Editorial Attitude" data-cat="Character Studies" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_12_5.jpg" alt="Character Expression 05" loading="lazy" decoding="async"/>
+            <img src="assets/slide_12_5.jpg" alt="Poised Editorial Attitude" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Character</span>
-            <span class="meta-title">Character Expression 05</span>
+            <span class="meta-title">Poised Editorial Attitude</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Category Section: Photoshoot • Monochromes & Tone -->
+    <!-- Category Section: Monochromes & Tone -->
     <section class="work-category-section" id="cat-monochrome" data-category="cat-monochrome">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[06 / 09]</span>
-          <h2 class="cat-heading">Photoshoot • Monochromes & Tone</h2>
-          <span class="cat-count-pill">8 Photos</span>
+          <h2 class="cat-heading">Monochromes & Tone</h2>
         </div>
         <div class="cat-desc-row">High-contrast black & white tones, silhouettes, structural shadow play, and intimate portraits.</div>
       </div>
 
       <div class="work-cards-grid">
-        <div class="photo-card-wrapper" data-src="assets/slide_13_1.jpg" data-title="Monochrome 01" data-cat="Photoshoot • Monochromes & Tone" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_13_1.jpg" data-title="Deep Monochrome Contrast" data-cat="Monochromes & Tone" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_13_1.jpg" alt="Monochrome 01" loading="lazy" decoding="async"/>
+            <img src="assets/slide_13_1.jpg" alt="Deep Monochrome Contrast" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Monochrome</span>
-            <span class="meta-title">Monochrome 01</span>
+            <span class="meta-title">Deep Monochrome Contrast</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_13_2.jpg" data-title="Monochrome 02" data-cat="Photoshoot • Monochromes & Tone" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_13_2.jpg" data-title="Monochrome Shadow Play" data-cat="Monochromes & Tone" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_13_2.jpg" alt="Monochrome 02" loading="lazy" decoding="async"/>
+            <img src="assets/slide_13_2.jpg" alt="Monochrome Shadow Play" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Monochrome</span>
-            <span class="meta-title">Monochrome 02</span>
+            <span class="meta-title">Monochrome Shadow Play</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_13_3.jpg" data-title="Monochrome 03" data-cat="Photoshoot • Monochromes & Tone" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_13_3.jpg" data-title="High-Contrast Silhouette" data-cat="Monochromes & Tone" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_13_3.jpg" alt="Monochrome 03" loading="lazy" decoding="async"/>
+            <img src="assets/slide_13_3.jpg" alt="High-Contrast Silhouette" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Monochrome</span>
-            <span class="meta-title">Monochrome 03</span>
+            <span class="meta-title">High-Contrast Silhouette</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_13_4.jpg" data-title="Monochrome 04" data-cat="Photoshoot • Monochromes & Tone" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_13_4.jpg" data-title="Silver Gelatin Tone" data-cat="Monochromes & Tone" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_13_4.jpg" alt="Monochrome 04" loading="lazy" decoding="async"/>
+            <img src="assets/slide_13_4.jpg" alt="Silver Gelatin Tone" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Monochrome</span>
-            <span class="meta-title">Monochrome 04</span>
+            <span class="meta-title">Silver Gelatin Tone</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_13_5.jpg" data-title="Monochrome 05" data-cat="Photoshoot • Monochromes & Tone" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_13_5.jpg" data-title="Architectural Light & Shade" data-cat="Monochromes & Tone" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_13_5.jpg" alt="Monochrome 05" loading="lazy" decoding="async"/>
+            <img src="assets/slide_13_5.jpg" alt="Architectural Light & Shade" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Monochrome</span>
-            <span class="meta-title">Monochrome 05</span>
+            <span class="meta-title">Architectural Light & Shade</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_14_1.jpg" data-title="Monochrome Study 01" data-cat="Photoshoot • Monochromes & Tone" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_13_6.jpg" data-title="Sculpted Monochromatic Form" data-cat="Monochromes & Tone" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_14_1.jpg" alt="Monochrome Study 01" loading="lazy" decoding="async"/>
+            <img src="assets/slide_13_6.jpg" alt="Sculpted Monochromatic Form" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Monochrome</span>
-            <span class="meta-title">Monochrome Study 01</span>
+            <span class="meta-title">Sculpted Monochromatic Form</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_14_2.jpg" data-title="Monochrome Study 02" data-cat="Photoshoot • Monochromes & Tone" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_14_1.jpg" data-title="Minimalist Shadow Profile" data-cat="Monochromes & Tone" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_14_2.jpg" alt="Monochrome Study 02" loading="lazy" decoding="async"/>
+            <img src="assets/slide_14_1.jpg" alt="Minimalist Shadow Profile" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Monochrome</span>
-            <span class="meta-title">Monochrome Study 02</span>
+            <span class="meta-title">Minimalist Shadow Profile</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_14_3.jpg" data-title="Monochrome Study 03" data-cat="Photoshoot • Monochromes & Tone" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_14_2.jpg" data-title="Noir Atmospheric Still" data-cat="Monochromes & Tone" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_14_3.jpg" alt="Monochrome Study 03" loading="lazy" decoding="async"/>
+            <img src="assets/slide_14_2.jpg" alt="Noir Atmospheric Still" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
             <span class="meta-tag-pill">Monochrome</span>
-            <span class="meta-title">Monochrome Study 03</span>
+            <span class="meta-title">Noir Atmospheric Still</span>
+            <span class="meta-badge">[High-Res]</span>
+          </div>
+        </div>
+        <div class="photo-card-wrapper" data-src="assets/slide_14_3.jpg" data-title="Tonal Gradient Portrait" data-cat="Monochromes & Tone" data-video-id="">
+          <div class="photo-friendly-container">
+            <img src="assets/slide_14_3.jpg" alt="Tonal Gradient Portrait" loading="lazy" decoding="async"/>
+            <div class="photo-zoom-hint">[+] VIEW FULL</div>
+          </div>
+          <div class="photo-card-meta">
+            <span class="meta-tag-pill">Monochrome</span>
+            <span class="meta-title">Tonal Gradient Portrait</span>
+            <span class="meta-badge">[High-Res]</span>
+          </div>
+        </div>
+        <div class="photo-card-wrapper" data-src="assets/slide_14_4.jpg" data-title="Dynamic Light Refraction" data-cat="Monochromes & Tone" data-video-id="">
+          <div class="photo-friendly-container">
+            <img src="assets/slide_14_4.jpg" alt="Dynamic Light Refraction" loading="lazy" decoding="async"/>
+            <div class="photo-zoom-hint">[+] VIEW FULL</div>
+          </div>
+          <div class="photo-card-meta">
+            <span class="meta-tag-pill">Monochrome</span>
+            <span class="meta-title">Dynamic Light Refraction</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Category Section: Editorial Collection • Limited Edition 2030 -->
-    <section class="work-category-section" id="cat-limited-2030" data-category="cat-limited-2030">
+    <!-- Category Section: Editorial Concept Collection -->
+    <section class="work-category-section" id="cat-limited-edition" data-category="cat-limited-edition">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[07 / 09]</span>
-          <h2 class="cat-heading">Editorial Collection • Limited Edition 2030</h2>
-          <span class="cat-count-pill">2 Photos</span>
+          <h2 class="cat-heading">Editorial Concept Collection</h2>
         </div>
         <div class="cat-desc-row">Editorial concept artwork and official portfolio cover visual direction.</div>
       </div>
 
       <div class="work-cards-grid">
-        <div class="photo-card-wrapper" data-src="assets/slide_15_1.jpg" data-title="Limited Edition 2030 Feature" data-cat="Editorial Collection • Limited Edition 2030" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_15_1.jpg" data-title="Futuristic Concept Artwork" data-cat="Editorial Concept Collection" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_15_1.jpg" alt="Limited Edition 2030 Feature" loading="lazy" decoding="async"/>
+            <img src="assets/slide_15_1.jpg" alt="Futuristic Concept Artwork" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">Edition 2030</span>
-            <span class="meta-title">Limited Edition 2030 Feature</span>
+            <span class="meta-tag-pill">Concept</span>
+            <span class="meta-title">Futuristic Concept Artwork</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_1_1.jpg" data-title="Cover Portfolio Visual Direction" data-cat="Editorial Collection • Limited Edition 2030" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_1_1.jpg" data-title="Portfolio Cover Visual Direction" data-cat="Editorial Concept Collection" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_1_1.jpg" alt="Cover Portfolio Visual Direction" loading="lazy" decoding="async"/>
+            <img src="assets/slide_1_1.jpg" alt="Portfolio Cover Visual Direction" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">Cover Concept</span>
-            <span class="meta-title">Cover Portfolio Visual Direction</span>
+            <span class="meta-tag-pill">Cover</span>
+            <span class="meta-title">Portfolio Cover Visual Direction</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
@@ -1035,66 +946,64 @@
     <section class="work-category-section" id="cat-songti" data-category="cat-songti">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[08 / 09]</span>
           <h2 class="cat-heading">Songti Cinematography Stills</h2>
-          <span class="cat-count-pill">5 Photos</span>
         </div>
         <div class="cat-desc-row">Cinematography production stills, color graded imagery, and narrative film cinematography.</div>
       </div>
 
       <div class="work-cards-grid">
-        <div class="photo-card-wrapper" data-src="assets/slide_7_1.jpg" data-title="Songti Cinematic Still 01" data-cat="Songti Cinematography Stills" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_1.jpg" data-title="Songti Film Production Still" data-cat="Songti Cinematography Stills" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_1.jpg" alt="Songti Cinematic Still 01" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_1.jpg" alt="Songti Film Production Still" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">Songti Still</span>
-            <span class="meta-title">Songti Cinematic Still 01</span>
+            <span class="meta-tag-pill">Cinematography</span>
+            <span class="meta-title">Songti Film Production Still</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_7_2.jpg" data-title="Songti Cinematic Still 02" data-cat="Songti Cinematography Stills" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_2.jpg" data-title="Songti Color Grade Framing" data-cat="Songti Cinematography Stills" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_2.jpg" alt="Songti Cinematic Still 02" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_2.jpg" alt="Songti Color Grade Framing" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">Songti Still</span>
-            <span class="meta-title">Songti Cinematic Still 02</span>
+            <span class="meta-tag-pill">Cinematography</span>
+            <span class="meta-title">Songti Color Grade Framing</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_7_3.jpg" data-title="Songti Cinematic Still 03" data-cat="Songti Cinematography Stills" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_3.jpg" data-title="Songti Narrative Scene Study" data-cat="Songti Cinematography Stills" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_3.jpg" alt="Songti Cinematic Still 03" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_3.jpg" alt="Songti Narrative Scene Study" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">Songti Still</span>
-            <span class="meta-title">Songti Cinematic Still 03</span>
+            <span class="meta-tag-pill">Cinematography</span>
+            <span class="meta-title">Songti Narrative Scene Study</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_7_4.jpg" data-title="Songti Cinematic Still 04" data-cat="Songti Cinematography Stills" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_4.jpg" data-title="Songti Cinematic Atmosphere" data-cat="Songti Cinematography Stills" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_4.jpg" alt="Songti Cinematic Still 04" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_4.jpg" alt="Songti Cinematic Atmosphere" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">Songti Still</span>
-            <span class="meta-title">Songti Cinematic Still 04</span>
+            <span class="meta-tag-pill">Cinematography</span>
+            <span class="meta-title">Songti Cinematic Atmosphere</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
-        <div class="photo-card-wrapper" data-src="assets/slide_7_5.jpg" data-title="Songti Cinematic Still 05" data-cat="Songti Cinematography Stills" data-video-id="">
+        <div class="photo-card-wrapper" data-src="assets/slide_7_5.jpg" data-title="Songti Director Visual Frame" data-cat="Songti Cinematography Stills" data-video-id="">
           <div class="photo-friendly-container">
-            <img src="assets/slide_7_5.jpg" alt="Songti Cinematic Still 05" loading="lazy" decoding="async"/>
+            <img src="assets/slide_7_5.jpg" alt="Songti Director Visual Frame" loading="lazy" decoding="async"/>
             <div class="photo-zoom-hint">[+] VIEW FULL</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">Songti Still</span>
-            <span class="meta-title">Songti Cinematic Still 05</span>
+            <span class="meta-tag-pill">Cinematography</span>
+            <span class="meta-title">Songti Director Visual Frame</span>
             <span class="meta-badge">[High-Res]</span>
           </div>
         </div>
@@ -1105,9 +1014,7 @@
     <section class="work-category-section" id="cat-kiff" data-category="cat-kiff">
       <div class="category-section-header">
         <div class="cat-title-group">
-          <span class="cat-code-badge">[09 / 09]</span>
           <h2 class="cat-heading">KIFF Celebrity Podcasts & Masterclasses</h2>
-          <span class="cat-count-pill">4 Videos</span>
         </div>
         <div class="cat-desc-row">4K multi-cam editing, interview pacing, audio cleanup, and color mastering for film festival dialogues.</div>
       </div>
@@ -1119,7 +1026,7 @@
             <div class="video-play-badge">&#9658; 4K VIDEO</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">KIFF Ep 01</span>
+            <span class="meta-tag-pill">Masterclass</span>
             <span class="meta-title">Anupam Kher Unfiltered — Acting Masterclass</span>
             <span class="meta-badge">[4K Video]</span>
           </div>
@@ -1130,7 +1037,7 @@
             <div class="video-play-badge">&#9658; 4K VIDEO</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">KIFF Ep 02</span>
+            <span class="meta-tag-pill">Screenwriting</span>
             <span class="meta-title">Saurabh Shukla — Screenwriting & Satya</span>
             <span class="meta-badge">[4K Video]</span>
           </div>
@@ -1141,7 +1048,7 @@
             <div class="video-play-badge">&#9658; 4K VIDEO</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">KIFF Ep 03</span>
+            <span class="meta-tag-pill">Film Editing</span>
             <span class="meta-title">Subhash Sehgal — Film Editing Masterclass</span>
             <span class="meta-badge">[4K Video]</span>
           </div>
@@ -1152,7 +1059,7 @@
             <div class="video-play-badge">&#9658; 4K VIDEO</div>
           </div>
           <div class="photo-card-meta">
-            <span class="meta-tag-pill">KIFF Ep 04</span>
+            <span class="meta-tag-pill">Direction</span>
             <span class="meta-title">Deepshikha Nagpal — Industry & Direction</span>
             <span class="meta-badge">[4K Video]</span>
           </div>
@@ -1201,7 +1108,7 @@
           <a href="work.html#cat-studio">Studio Lighting</a>
           <a href="work.html#cat-monochrome">Monochromes</a>
           <a href="work.html#cat-songti">Cinematography Stills</a>
-          <a href="work.html#cat-limited-2030">Limited Edition 2030</a>
+          <a href="work.html#cat-limited-edition">Editorial Concept</a>
         </div>
       </div>
 
@@ -1242,7 +1149,6 @@
 
       <div class="lightbox-header">
         <div class="lightbox-meta">
-          <span class="lightbox-counter" id="lightbox-counter">[1 / 60]</span>
           <span class="lightbox-title" id="lightbox-title">Photograph Exhibition</span>
         </div>
         <button type="button" class="lightbox-close-btn" id="lightbox-close">Close &times;</button>
@@ -1255,7 +1161,7 @@
 
       <div class="lightbox-footer">
         <button type="button" class="lightbox-nav-btn" id="lb-prev">&larr; Previous</button>
-        <span style="font-size:12px; color:var(--text-muted);">Kanchan Choudhary Archive</span>
+        <span style="font-size:12px; color:var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase;">Kanchan Choudhary Archive</span>
         <button type="button" class="lightbox-nav-btn" id="lb-next">Next &rarr;</button>
       </div>
 
@@ -1264,7 +1170,7 @@
 
 
   <!-- =========================================================================
-       INTERACTIVE SCRIPTS (Theme, Filtering & Lightbox)
+       INTERACTIVE SCRIPTS (Theme Switcher & Lightbox)
        ========================================================================= -->
   <script>
     document.addEventListener('DOMContentLoaded', () => {
@@ -1292,62 +1198,11 @@
       if (darkBtn) darkBtn.addEventListener('click', () => setTheme('dark'));
       if (lightBtn) lightBtn.addEventListener('click', () => setTheme('light'));
 
-      // 2. Category Filter Pills
-      const catPills = document.querySelectorAll('.cat-pill');
-      const categorySections = document.querySelectorAll('.work-category-section');
-
-      function filterCategory(targetId, updateUrl = true) {
-        catPills.forEach(p => {
-          if (p.getAttribute('data-target') === targetId) p.classList.add('active');
-          else p.classList.remove('active');
-        });
-
-        if (targetId === 'all') {
-          categorySections.forEach(sec => sec.style.display = 'block');
-          if (updateUrl) history.replaceState(null, '', window.location.pathname);
-        } else {
-          categorySections.forEach(sec => {
-            if (sec.id === targetId) {
-              sec.style.display = 'block';
-              sec.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            } else {
-              sec.style.display = 'none';
-            }
-          });
-          if (updateUrl) history.replaceState(null, '', '#' + targetId);
-        }
-      }
-
-      catPills.forEach(p => {
-        p.addEventListener('click', (e) => {
-          e.preventDefault();
-          const target = p.getAttribute('data-target');
-          filterCategory(target);
-        });
-      });
-
-      if (window.location.hash) {
-        const hash = window.location.hash.substring(1);
-        if (document.getElementById(hash)) {
-          filterCategory(hash, false);
-        }
-      }
-
-      window.addEventListener('hashchange', () => {
-        const hash = window.location.hash.substring(1);
-        if (hash && document.getElementById(hash)) {
-          filterCategory(hash, false);
-        } else if (!hash) {
-          filterCategory('all', false);
-        }
-      });
-
-      // 3. Fullscreen Lightbox & 4K Video Player
+      // 2. Fullscreen Lightbox & 4K Video Player
       const lightbox = document.getElementById('cosmos-lightbox');
       const lightboxImg = document.getElementById('lightbox-img');
       const lightboxVideo = document.getElementById('lightbox-video');
       const lightboxTitle = document.getElementById('lightbox-title');
-      const lightboxCounter = document.getElementById('lightbox-counter');
       const closeBtn = document.getElementById('lightbox-close');
       const lbPrev = document.getElementById('lb-prev');
       const lbNext = document.getElementById('lb-next');
@@ -1363,7 +1218,6 @@
         const videoId = card.getAttribute('data-video-id');
 
         if (lightboxTitle) lightboxTitle.textContent = title;
-        if (lightboxCounter) lightboxCounter.textContent = `[${currentIndex + 1} / ${allCards.length}]`;
 
         if (videoId) {
           if (lightboxImg) lightboxImg.style.display = 'none';
