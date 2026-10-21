@@ -164,16 +164,23 @@ html = f"""<!DOCTYPE html>
       margin: 0 auto;
     }}
 
-    /* Sticky Category Pills Bar */
+    /* Sticky Category Pills Bar (Offset below floating header) */
     .work-sticky-bar {{
       position: sticky;
-      top: 20px;
+      top: 68px;
       z-index: 900;
       display: flex;
       justify-content: center;
       padding: 10px 16px;
       margin-bottom: 50px;
       pointer-events: none;
+    }}
+
+    @media (max-width: 680px) {{
+      .work-sticky-bar {{
+        top: 54px;
+        padding: 6px 10px;
+      }}
     }}
 
     .category-pills-scroll {{

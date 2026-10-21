@@ -203,7 +203,7 @@ img {
   white-space: nowrap;
 }
 
-.nav-link:hover {
+.nav-link:hover, .nav-link.active {
   color: var(--text-primary);
 }
 
@@ -226,8 +226,30 @@ img {
 }
 
 @media (max-width: 680px) {
+  .cosmos-nav-wrapper {
+    top: 10px;
+    padding: 0 10px;
+  }
+  .cosmos-nav {
+    padding: 5px 6px 5px 12px;
+    gap: 8px;
+    max-width: calc(100vw - 20px);
+  }
+  .nav-brand {
+    font-size: 11px;
+    margin-right: 2px;
+  }
   .nav-links {
-    display: none;
+    display: flex;
+    gap: 10px;
+  }
+  .nav-link {
+    font-size: 11px;
+  }
+  .nav-cta-btn {
+    font-size: 11px;
+    padding: 6px 12px;
+    margin-left: 2px;
   }
 }
 
@@ -300,6 +322,20 @@ img {
 @keyframes bounceHint {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(4px); }
+}
+
+@media (max-width: 600px) {
+  .bottom-controls-left {
+    bottom: 16px;
+    left: 14px;
+  }
+  .theme-btn {
+    padding: 5px 10px;
+    font-size: 10px;
+  }
+  .bottom-controls-right {
+    display: none;
+  }
 }
 
 /* ==========================================================================
@@ -467,16 +503,16 @@ img {
 }
 
 /* ==========================================================================
-   STICKY FLOATING INPUT PILL (Transform from video 00:08 - 00:11)
+   INPUT PILL (Between Hero and Section 2)
    ========================================================================== */
 .sticky-pill-bar {
-  position: sticky;
-  top: 20px;
-  z-index: 950;
+  position: relative;
+  z-index: 50;
   display: flex;
   justify-content: center;
   padding: 10px 16px;
-  pointer-events: none;
+  margin: 10px auto 40px auto;
+  pointer-events: auto;
 }
 
 .interactive-waitlist-pill {
@@ -1401,7 +1437,7 @@ img {
 
 .giant-footer-text {
   font-family: var(--font-sans);
-  font-size: clamp(3rem, 11vw, 12rem);
+  font-size: clamp(1.8rem, 8.5vw, 12rem);
   font-weight: 800;
   letter-spacing: -0.05em;
   line-height: 0.9;
