@@ -326,7 +326,7 @@ img {
 
 @media (max-width: 600px) {
   .bottom-controls-left {
-    bottom: 16px;
+    bottom: calc(16px + env(safe-area-inset-bottom, 0px));
     left: 14px;
   }
   .theme-btn {
@@ -1669,7 +1669,7 @@ img {
 
 @media (max-width: 680px) {
   .sorry-floating-indicator {
-    bottom: 16px;
+    bottom: calc(66px + env(safe-area-inset-bottom, 0px));
     left: auto;
     right: 14px;
     transform: none;
