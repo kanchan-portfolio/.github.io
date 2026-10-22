@@ -6,25 +6,32 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // =========================================================================
-  // 1. PRELOADER (0% -> 100%)
+  // 1. HIGH-PERFORMANCE PRELOADER (Instant & Non-Blocking)
   // =========================================================================
   const loader = document.getElementById('cosmos-loader');
   const counter = document.getElementById('loader-counter');
   let progress = 0;
 
+  function dismissLoader() {
+    if (!loader || loader.classList.contains('loaded')) return;
+    if (counter) counter.textContent = '100%';
+    loader.classList.add('loaded');
+  }
+
+  // Fast smooth progress increment (takes ~80ms instead of 1000ms)
   const loadInterval = setInterval(() => {
-    progress += Math.floor(Math.random() * 14) + 6;
+    progress += 25;
     if (progress >= 100) {
       progress = 100;
       clearInterval(loadInterval);
-      if (counter) counter.textContent = '100%';
-      setTimeout(() => {
-        if (loader) loader.classList.add('loaded');
-      }, 350);
+      dismissLoader();
     } else {
       if (counter) counter.textContent = `${progress}%`;
     }
-  }, 40);
+  }, 18);
+
+  // Fallback: dismiss as soon as page assets are ready
+  window.addEventListener('load', dismissLoader, { once: true });
 
 
   // =========================================================================
@@ -55,23 +62,31 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // =========================================================================
-  // 3. CANVAS STARFIELD (Twinkling Cosmos Stars)
+  // 3. CANVAS STARFIELD (Optimized with IntersectionObserver)
   // =========================================================================
   const canvas = document.getElementById('cosmos-starfield');
   const worldCanvas = document.getElementById('world-starfield');
 
-  function initStarfield(cvs, count = 140) {
+  function initStarfield(cvs, count = 120) {
     if (!cvs) return;
     const ctx = cvs.getContext('2d');
-    let width = cvs.width = cvs.offsetWidth;
-    let height = cvs.height = cvs.offsetHeight;
+    let width = cvs.width = cvs.offsetWidth || window.innerWidth;
+    let height = cvs.height = cvs.offsetHeight || window.innerHeight;
 
+    let resizeTimeout;
     window.addEventListener('resize', () => {
-      width = cvs.width = cvs.offsetWidth;
-      height = cvs.height = cvs.offsetHeight;
-    });
+      clearTimeout(resizeTimeout);
+      resizeTimeout = setTimeout(() => {
+        width = cvs.width = cvs.offsetWidth || window.innerWidth;
+        height = cvs.height = cvs.offsetHeight || window.innerHeight;
+      }, 150);
+    }, { passive: true });
 
-    const stars = Array.from({ length: count }, () => ({
+    // Adaptive particle count for mobile screens (saves battery & GPU)
+    const isMobile = window.innerWidth < 680;
+    const actualCount = isMobile ? Math.min(count, 50) : count;
+
+    const stars = Array.from({ length: actualCount }, () => ({
       x: Math.random() * width,
       y: Math.random() * height,
       size: Math.random() * 1.5 + 0.4,
@@ -80,7 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
       increasing: Math.random() > 0.5
     }));
 
+    let isVisible = true;
+    let animFrame = null;
+
     function animateStars() {
+      if (!isVisible) return;
       ctx.clearRect(0, 0, width, height);
       stars.forEach(s => {
         if (s.increasing) {
@@ -95,33 +114,54 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.arc(s.x, s.y, s.size, 0, Math.PI * 2);
         ctx.fill();
       });
-      requestAnimationFrame(animateStars);
+      animFrame = requestAnimationFrame(animateStars);
     }
-    animateStars();
+
+    // Only render frames when canvas is visible in viewport
+    if ('IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isVisible = entry.isIntersecting;
+          if (isVisible) {
+            cancelAnimationFrame(animFrame);
+            animateStars();
+          } else {
+            cancelAnimationFrame(animFrame);
+          }
+        });
+      }, { threshold: 0.05 });
+      observer.observe(cvs);
+    } else {
+      animateStars();
+    }
   }
 
-  initStarfield(canvas, 140);
-  initStarfield(worldCanvas, 180);
+  initStarfield(canvas, 100);
+  initStarfield(worldCanvas, 120);
 
 
   // =========================================================================
-  // 4. HERO 3D ORBIT MOUSE PARALLAX & DRIFT
+  // 4. HERO 3D ORBIT MOUSE PARALLAX & DRIFT (Viewport-Optimized)
   // =========================================================================
   const orbitLayer = document.querySelector('.orbit-layer');
-  const orbitCards = document.querySelectorAll('.orbit-card');
+  const heroSection = document.getElementById('hero');
 
-  if (orbitLayer) {
+  if (orbitLayer && heroSection) {
     let targetX = 0, targetY = 0;
     let currentX = 0, currentY = 0;
+    let isHeroVisible = true;
+    let orbitFrame = null;
 
+    // Passive listener for non-blocking scrolling
     window.addEventListener('mousemove', (e) => {
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
       targetX = (e.clientX - centerX) / centerX;
       targetY = (e.clientY - centerY) / centerY;
-    });
+    }, { passive: true });
 
     function renderOrbit() {
+      if (!isHeroVisible) return;
       currentX += (targetX - currentX) * 0.06;
       currentY += (targetY - currentY) * 0.06;
 
@@ -129,18 +169,26 @@ document.addEventListener('DOMContentLoaded', () => {
       const rotX = -currentY * 12;
 
       orbitLayer.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg)`;
-
-      orbitCards.forEach((c, idx) => {
-        const factor = (idx % 3 + 1) * 8;
-        const offsetX = currentX * factor;
-        const offsetY = currentY * factor;
-        const origTransform = c.dataset.origTransform || window.getComputedStyle(c).transform;
-        if (!c.dataset.origTransform) c.dataset.origTransform = origTransform;
-      });
-
-      requestAnimationFrame(renderOrbit);
+      orbitFrame = requestAnimationFrame(renderOrbit);
     }
-    renderOrbit();
+
+    // Pause when Hero scrolls out of view
+    if ('IntersectionObserver' in window) {
+      const heroObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          isHeroVisible = entry.isIntersecting;
+          if (isHeroVisible) {
+            cancelAnimationFrame(orbitFrame);
+            renderOrbit();
+          } else {
+            cancelAnimationFrame(orbitFrame);
+          }
+        });
+      }, { threshold: 0.05 });
+      heroObserver.observe(heroSection);
+    } else {
+      renderOrbit();
+    }
   }
 
 
