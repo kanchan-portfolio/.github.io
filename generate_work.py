@@ -516,7 +516,7 @@ html += f"""
         <span class="status-dot"></span>
         <span>Available for international commissions</span>
       </div>
-      <div>Designed in Cosmos Aesthetic</div>
+      <div>Designed by 4-11 Studio</div>
     </div>
   </footer>
 
