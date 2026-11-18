@@ -6,32 +6,100 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // =========================================================================
-  // 1. HIGH-PERFORMANCE PRELOADER (Instant & Non-Blocking)
+  // 1. CINEMATIC SPLIT-SHUTTER PRELOADER (Jason Bergh Director UI Style)
   // =========================================================================
   const loader = document.getElementById('cosmos-loader');
+  const loaderPhrase = document.getElementById('loader-phrase');
   const counter = document.getElementById('loader-counter');
-  let progress = 0;
+  const logoLeft = document.getElementById('shutter-logo-left');
+  const logoRight = document.getElementById('shutter-logo-right');
+  const skipBtn = document.getElementById('loader-skip-btn');
 
-  function dismissLoader() {
-    if (!loader || loader.classList.contains('loaded')) return;
-    if (counter) counter.textContent = '100%';
-    loader.classList.add('loaded');
+  let isDismissed = false;
+
+  function dismissLoaderInstant() {
+    if (isDismissed || !loader) return;
+    isDismissed = true;
+    loader.classList.add('is-opening');
+    if (logoLeft) logoLeft.classList.add('visible');
+    if (logoRight) logoRight.classList.add('visible');
+    if (loaderPhrase) loaderPhrase.classList.remove('visible');
+    if (counter) counter.classList.remove('visible');
+
+    setTimeout(() => {
+      loader.classList.add('loaded');
+    }, 700);
   }
 
-  // Fast smooth progress increment (takes ~80ms instead of 1000ms)
-  const loadInterval = setInterval(() => {
-    progress += 25;
-    if (progress >= 100) {
-      progress = 100;
-      clearInterval(loadInterval);
-      dismissLoader();
-    } else {
-      if (counter) counter.textContent = `${progress}%`;
-    }
-  }, 18);
+  if (skipBtn) {
+    skipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      dismissLoaderInstant();
+    });
+  }
 
-  // Fallback: dismiss as soon as page assets are ready
-  window.addEventListener('load', dismissLoader, { once: true });
+  if (loader) {
+    loader.addEventListener('click', () => {
+      dismissLoaderInstant();
+    });
+
+    // Step 1: Fade in phrase "Intimate, Raw / Human Storytelling"
+    setTimeout(() => {
+      if (isDismissed) return;
+      if (loaderPhrase) loaderPhrase.classList.add('visible');
+    }, 150);
+
+    // Step 2: Fade out phrase, show counter
+    setTimeout(() => {
+      if (isDismissed) return;
+      if (loaderPhrase) loaderPhrase.classList.remove('visible');
+    }, 1400);
+
+    setTimeout(() => {
+      if (isDismissed) return;
+      if (counter) {
+        counter.classList.add('visible');
+        let count = 1;
+        const countInterval = setInterval(() => {
+          if (isDismissed) {
+            clearInterval(countInterval);
+            return;
+          }
+          count += Math.floor(Math.random() * 8) + 4;
+          if (count >= 100) {
+            count = 100;
+            counter.textContent = '100';
+            clearInterval(countInterval);
+
+            // Step 3: Counter fades out, reveal split logotype "Kanchan" & "Choudhary"
+            setTimeout(() => {
+              if (isDismissed) return;
+              counter.classList.remove('visible');
+              if (logoLeft) logoLeft.classList.add('visible');
+              if (logoRight) logoRight.classList.add('visible');
+
+              // Step 4: Shutter splits open!
+              setTimeout(() => {
+                if (isDismissed) return;
+                loader.classList.add('is-opening');
+
+                // Step 5: Complete dismiss
+                setTimeout(() => {
+                  isDismissed = true;
+                  loader.classList.add('loaded');
+                }, 850);
+
+              }, 500);
+
+            }, 250);
+
+          } else {
+            counter.textContent = count < 10 ? `0${count}` : `${count}`;
+          }
+        }, 32);
+      }
+    }, 1750);
+  }
 
 
   // =========================================================================

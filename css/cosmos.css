@@ -112,50 +112,273 @@ img {
 }
 
 /* ==========================================================================
-   Preloader
+   Preloader: Cinematic Split-Shutter (Inspired by Jason Bergh Film Director UI)
    ========================================================================== */
-#cosmos-loader {
+#cosmos-loader.cinema-loader {
   position: fixed;
   inset: 0;
-  background: #f7f6f2;
-  color: #121214;
+  background: #06070a !important;
+  color: #ffffff;
   z-index: 999999;
   display: flex;
-  flex-direction: column;
-  justify-content: center;
   align-items: center;
-  transition: opacity 0.25s ease, visibility 0.25s;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.65s ease;
   will-change: opacity;
+}
+
+#cosmos-loader.cinema-loader.loaded {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Backlit Dramatic Silhouette Backdrop (Exact to video) */
+.loader-backlit-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center 25%;
+  filter: brightness(0.28) contrast(1.2) grayscale(0.65);
+  opacity: 0.65;
+  transform: scale(1.06);
+  transition: transform 4.5s ease-out;
+  pointer-events: none;
+}
+
+.loader-film-grain {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
+  background-size: 3px 3px;
+  opacity: 0.25;
+  pointer-events: none;
+}
+
+/* Skip Intro Button */
+.loader-skip-btn {
+  position: absolute;
+  top: 28px;
+  right: 28px;
+  z-index: 30;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  color: rgba(255, 255, 255, 0.75);
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.loader-skip-btn:hover {
+  background: #ffffff;
+  color: #070709;
+  border-color: #ffffff;
+  transform: translateY(-1px);
+}
+
+/* Central Cinematic Aperture / Shutter Box */
+.loader-aperture-box {
+  position: relative;
+  z-index: 10;
+  width: min(840px, 90vw);
+  height: min(440px, 54vh);
+  background: #040407;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.98), inset 0 1px 1px rgba(255, 255, 255, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Film Vignettes sliding horizontally on Left & Right gates */
+.loader-film-strip {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 110px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.loader-film-strip.left-strip {
+  left: -20px;
+}
+
+.loader-film-strip.right-strip {
+  right: -20px;
+}
+
+.film-vignette {
+  width: 95px;
+  height: 60px;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
+  opacity: 0.75;
+  margin: 10px 0;
+  transition: opacity 0.3s ease;
+}
+
+.film-vignette img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.88) contrast(1.05);
+}
+
+/* Split Shutters (The Theater Curtains) */
+.loader-shutter-curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.3%;
+  background: #040407;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
+  will-change: transform;
+}
+
+.shutter-left {
+  left: 0;
+  justify-content: flex-end;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.shutter-right {
+  right: 0;
+  justify-content: flex-start;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.shutter-inner {
+  padding: 0 16px;
+}
+
+.shutter-logo-part {
+  font-family: var(--font-serif);
+  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
+  color: #ffffff;
+  letter-spacing: -0.01em;
+  opacity: 0;
+  transition: opacity 0.45s ease;
+}
+
+.shutter-logo-part.visible {
+  opacity: 1;
+}
+
+.logo-left-text {
+  font-weight: 400;
+  text-align: right;
+}
+
+.logo-right-text {
+  font-weight: 300;
+  font-style: italic;
+  color: #f7f4ed;
+  text-align: left;
+}
+
+/* Opening Split Transition */
+.cinema-loader.is-opening .shutter-left {
+  transform: translateX(-104%);
+}
+
+.cinema-loader.is-opening .shutter-right {
+  transform: translateX(104%);
+}
+
+/* Center Dynamic Display (Phrases & Counter) */
+.loader-center-content {
+  position: relative;
+  z-index: 5;
+  text-align: center;
+}
+
+.loader-phrase {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.55s ease, transform 0.55s ease;
+}
+
+.loader-phrase.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.phrase-top {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.phrase-bottom {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  font-style: italic;
+  font-weight: 300;
+  color: #f7f4ed;
+  margin-top: 4px;
+}
+
+.loader-numeric-counter {
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 6.5vw, 4.8rem);
+  font-style: italic;
+  font-weight: 300;
+  color: #ffffff;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  letter-spacing: 0.05em;
+  margin-top: -10px;
+}
+
+.loader-numeric-counter.visible {
+  opacity: 1;
+}
+
+@media (max-width: 768px) {
+  .loader-aperture-box {
+    width: 92vw;
+    height: 380px;
+  }
+  .film-vignette {
+    width: 65px;
+    height: 44px;
+  }
+  .loader-film-strip.left-strip {
+    left: -10px;
+  }
+  .loader-film-strip.right-strip {
+    right: -10px;
+  }
+  .shutter-logo-part {
+    font-size: 2.2rem;
+  }
 }
 
 /* Rendering performance containment for smooth 60fps scrolling */
 .orbit-card, .moodboard-card, .resurface-item, .world-card, .photo-card-wrapper, .cinema-reel-frame, .panorama-card {
   contain: content;
   content-visibility: auto;
-}
-
-#cosmos-loader.loaded {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-.loader-logo {
-  font-family: var(--font-sans);
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 600;
-  letter-spacing: -0.04em;
-  margin-bottom: 1rem;
-}
-
-.loader-counter {
-  font-size: 11px;
-  letter-spacing: 0.1em;
-  color: #88888e;
-  font-weight: 500;
-  font-variant-numeric: tabular-nums;
-  position: absolute;
-  bottom: 40px;
 }
 
 /* ==========================================================================

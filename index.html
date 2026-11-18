@@ -20,11 +20,59 @@
 <body>
 
   <!-- =========================================================================
-       1. COSMOS PRELOADER (Exact to 00:00 in video)
+       1. CINEMATIC SPLIT-SHUTTER PRELOADER (Inspired by Jason Bergh Film Director UI)
        ========================================================================= -->
-  <div id="cosmos-loader">
-    <div class="loader-logo">KANCHAN CHOUDHARY<span style="font-size:0.5em; vertical-align:super;">®</span></div>
-    <div class="loader-counter" id="loader-counter">0%</div>
+  <div id="cosmos-loader" class="cinema-loader">
+    <!-- Backlit Dramatic Silhouette Backdrop (Exact to video) -->
+    <div class="loader-backlit-bg" style="background-image: url('assets/slide_5_1.jpg');"></div>
+    <div class="loader-film-grain" aria-hidden="true"></div>
+
+    <!-- Skip Button -->
+    <button type="button" class="loader-skip-btn" id="loader-skip-btn">Skip Intro &rarr;</button>
+
+    <!-- Central Cinematic Aperture / Shutter Box -->
+    <div class="loader-aperture-box">
+      
+      <!-- Film Vignettes sliding along the gates -->
+      <div class="loader-film-strip left-strip" aria-hidden="true">
+        <div class="film-vignette"><img src="assets/slide_10_1.jpg" alt="" loading="eager"></div>
+        <div class="film-vignette"><img src="assets/mulaqaat_ep1.jpg" alt="" loading="eager"></div>
+        <div class="film-vignette"><img src="assets/slide_7_4.jpg" alt="" loading="eager"></div>
+      </div>
+
+      <div class="loader-film-strip right-strip" aria-hidden="true">
+        <div class="film-vignette"><img src="assets/yt_anupam_kher.jpg" alt="" loading="eager"></div>
+        <div class="film-vignette"><img src="assets/slide_1_1.jpg" alt="" loading="eager"></div>
+        <div class="film-vignette"><img src="assets/yt_saurabh_shukla.jpg" alt="" loading="eager"></div>
+      </div>
+
+      <!-- Split Left Shutter Curtain -->
+      <div class="loader-shutter-curtain shutter-left">
+        <div class="shutter-inner">
+          <div class="shutter-logo-part logo-left-text" id="shutter-logo-left">Kanchan</div>
+        </div>
+      </div>
+
+      <!-- Split Right Shutter Curtain -->
+      <div class="loader-shutter-curtain shutter-right">
+        <div class="shutter-inner">
+          <div class="shutter-logo-part logo-right-text" id="shutter-logo-right">Choudhary</div>
+        </div>
+      </div>
+
+      <!-- Center Dynamic Display: Phrases, Numeric Counter -->
+      <div class="loader-center-content">
+        <!-- Phrase 1: Intimate, Raw / Human Storytelling -->
+        <div class="loader-phrase" id="loader-phrase">
+          <span class="phrase-top">Intimate, Raw</span>
+          <span class="phrase-bottom">Cinematic Storytelling</span>
+        </div>
+
+        <!-- Numeric Monoline Percentage Counter -->
+        <div class="loader-numeric-counter" id="loader-counter">00</div>
+      </div>
+
+    </div>
   </div>
 
 
