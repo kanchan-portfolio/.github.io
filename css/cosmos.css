@@ -129,7 +129,7 @@ img {
 }
 
 /* Rendering performance containment for smooth 60fps scrolling */
-.orbit-card, .moodboard-card, .resurface-item, .world-card, .photo-card-wrapper, .reel-card {
+.orbit-card, .moodboard-card, .resurface-item, .world-card, .photo-card-wrapper, .cinema-reel-frame {
   contain: content;
   content-visibility: auto;
 }
@@ -1621,177 +1621,294 @@ img {
 }
 
 /* ==========================================================================
-   HOMEPAGE REEL SHOWCASE SECTION: "Taana Baana — Mulaqaat"
+   HOMEPAGE HORIZONTAL REEL RUNWAY: "Taana Baana — Mulaqaat"
    ========================================================================== */
-.reels-showcase-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 32px;
-  max-width: 1200px;
-  margin: 48px auto 32px auto;
+.reels-horizon-section {
+  position: relative;
+  overflow: hidden;
+  padding: 70px 20px 80px 20px;
 }
 
-.reel-card {
-  background: var(--card-bg-solid);
-  border: 1px solid var(--card-border);
-  border-radius: 20px;
-  overflow: hidden;
+.reels-ambient-glow {
+  position: absolute;
+  top: 15%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 480px;
+  background: radial-gradient(ellipse at center, rgba(225, 48, 108, 0.12) 0%, rgba(240, 148, 51, 0.05) 45%, transparent 70%);
+  filter: blur(60px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.reels-eyebrow-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  border-radius: 9999px;
+  background: rgba(225, 48, 108, 0.08);
+  border: 1px solid rgba(225, 48, 108, 0.28);
+  color: #f09433;
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.live-rec-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #e1306c;
+  box-shadow: 0 0 10px #e1306c;
+  animation: recPulse 1.8s infinite ease-in-out;
+}
+
+@keyframes recPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+}
+
+/* Horizontal Track Wrapper */
+.reels-horizontal-track-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 1200px;
+  margin: 44px auto 28px auto;
+}
+
+.reels-horizontal-track {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  justify-content: center;
+  align-items: stretch;
+  gap: 28px;
+  flex-wrap: nowrap;
+}
+
+/* Single Vertical Cinema Frame */
+.cinema-reel-frame {
+  position: relative;
+  flex: 0 0 320px;
+  width: 320px;
+  height: 520px;
+  border-radius: 24px;
+  overflow: hidden;
+  background: #08090d;
+  border: 1px solid rgba(255, 255, 255, 0.12);
   cursor: pointer;
-  box-shadow: var(--shadow-card);
-  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.35s;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.5);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+              border-color 0.35s ease, 
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   contain: content;
   content-visibility: auto;
 }
 
-.reel-card:hover {
-  transform: translateY(-8px);
-  border-color: rgba(225, 48, 108, 0.45);
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.45);
+.cinema-reel-frame:hover {
+  transform: translateY(-10px) scale(1.02);
+  border-color: rgba(225, 48, 108, 0.55);
+  box-shadow: 0 28px 70px rgba(0, 0, 0, 0.6), 0 0 30px rgba(225, 48, 108, 0.25);
 }
 
-.reel-poster-box {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 9 / 15;
-  background: #08090d;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.reel-poster-box img {
+.reel-bg-image {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.45s ease;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
 }
 
-.reel-card:hover .reel-poster-box img {
-  transform: scale(1.05);
+.cinema-reel-frame:hover .reel-bg-image {
+  transform: scale(1.06);
 }
 
-.reel-play-overlay {
+/* Full Bleed Cinematic Vignette Overlay */
+.reel-cinema-vignette {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, 0.3);
+  background: linear-gradient(to top, 
+    rgba(6, 7, 10, 0.96) 0%, 
+    rgba(6, 7, 10, 0.72) 34%, 
+    rgba(6, 7, 10, 0.15) 60%, 
+    rgba(6, 7, 10, 0.65) 100%);
+  z-index: 2;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.cinema-reel-frame:hover .reel-cinema-vignette {
+  background: linear-gradient(to top, 
+    rgba(6, 7, 10, 0.98) 0%, 
+    rgba(6, 7, 10, 0.65) 34%, 
+    rgba(6, 7, 10, 0.1) 60%, 
+    rgba(6, 7, 10, 0.55) 100%);
+}
+
+/* Top Meta Bar */
+.reel-top-bar {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  right: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 3;
+}
+
+.reel-ep-chip {
+  padding: 5px 12px;
+  border-radius: 9999px;
+  background: linear-gradient(135deg, rgba(240, 148, 51, 0.9), rgba(220, 39, 67, 0.9));
+  color: #fff;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  box-shadow: 0 4px 14px rgba(220, 39, 67, 0.4);
+}
+
+.reel-dop-chip {
+  padding: 4px 10px;
+  border-radius: 9999px;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: rgba(255, 255, 255, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+/* Center Play Action */
+.reel-center-play {
+  position: absolute;
+  top: 44%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  z-index: 3;
+  opacity: 0.85;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.reel-play-circle {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.45);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity 0.25s ease;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
-.reel-card:hover .reel-play-overlay {
+.reel-play-circle svg {
+  margin-left: 2px;
+}
+
+.reel-play-text {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.8);
+  opacity: 0;
+  transform: translateY(4px);
+  transition: all 0.3s ease;
+}
+
+.cinema-reel-frame:hover .reel-center-play {
   opacity: 1;
 }
 
-.reel-play-btn {
-  width: 58px;
-  height: 58px;
-  border-radius: 50%;
+.cinema-reel-frame:hover .reel-play-circle {
   background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-color: rgba(255, 255, 255, 0.8);
+  transform: scale(1.12);
   box-shadow: 0 10px 28px rgba(220, 39, 67, 0.55);
-  transform: scale(0.9);
-  transition: transform 0.25s ease;
 }
 
-.reel-card:hover .reel-play-btn {
-  transform: scale(1.08);
+.cinema-reel-frame:hover .reel-play-text {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.reel-badge {
+/* Bottom Sheet Details */
+.reel-bottom-sheet {
   position: absolute;
-  top: 14px;
-  left: 14px;
-  background: rgba(0, 0, 0, 0.65);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  color: #fff;
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 5px 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  z-index: 2;
-}
-
-.reel-info {
-  padding: 22px 24px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px 20px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  flex-grow: 1;
-  border-top: 1px solid var(--card-border);
-  background: var(--card-bg-solid);
+  gap: 6px;
+  z-index: 3;
 }
 
-.reel-header-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  gap: 10px;
-}
-
-.reel-ep-title {
-  font-family: var(--font-serif);
-  font-size: 1.35rem;
-  font-weight: 400;
-  color: var(--text-primary);
-  margin: 0;
-  line-height: 1.25;
-}
-
-.reel-meta-tag {
-  font-size: 11px;
+.reel-sheet-label {
+  font-size: 10.5px;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
-  white-space: nowrap;
 }
 
-.reel-logline {
-  font-size: 13.5px;
-  color: var(--text-secondary);
-  line-height: 1.5;
+.reel-sheet-title {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: #fff;
   margin: 0;
-  font-style: italic;
-  flex-grow: 1;
+  line-height: 1.2;
 }
 
-.reel-action-bar {
+.reel-sheet-quote {
+  font-size: 12.5px;
+  color: rgba(255, 255, 255, 0.75);
+  line-height: 1.45;
+  margin: 2px 0 6px 0;
+  font-style: italic;
+}
+
+.reel-sheet-footer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-top: 14px;
-  margin-top: 4px;
-  border-top: 1px solid var(--card-border);
-  font-size: 12px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  font-size: 11.5px;
 }
 
-.reel-watch-hint {
+.reel-likes-badge {
+  color: rgba(255, 255, 255, 0.65);
+  font-weight: 500;
+}
+
+.reel-cta-link {
   background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 700;
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.reel-engagement {
-  color: var(--text-muted);
-  font-size: 11.5px;
-  font-weight: 500;
+  letter-spacing: 0.02em;
 }
 
 .reels-credits-banner {
@@ -1821,31 +1938,50 @@ img {
   color: var(--text-primary);
 }
 
-@media (max-width: 900px) {
-  .reels-showcase-grid {
-    grid-template-columns: repeat(3, minmax(260px, 1fr));
+/* Follow Button */
+.reels-follow-btn {
+  padding: 10px 22px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  background: linear-gradient(45deg, #f09433, #dc2743, #bc1888);
+  color: #fff !important;
+  border-radius: 9999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: 0 4px 18px rgba(220, 39, 67, 0.35);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.reels-follow-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(220, 39, 67, 0.55);
+}
+
+/* Responsive behavior: Keeps them in ONE horizontal line with horizontal scroll on smaller viewports */
+@media (max-width: 1080px) {
+  .reels-horizontal-track-wrapper {
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
     scroll-snap-type: x mandatory;
-    padding: 0 16px 16px 16px;
-    gap: 20px;
+    padding: 10px 20px 20px 20px;
   }
-  .reel-card {
-    scroll-snap-align: start;
+  .reels-horizontal-track {
+    justify-content: flex-start;
+    width: max-content;
+    gap: 22px;
+  }
+  .cinema-reel-frame {
+    scroll-snap-align: center;
+    flex: 0 0 290px;
+    width: 290px;
+    height: 480px;
   }
   .reels-credits-banner {
     margin: 16px;
     flex-direction: column;
     align-items: flex-start;
-  }
-}
-
-@media (max-width: 600px) {
-  .reels-showcase-grid {
-    grid-template-columns: 1fr;
-    overflow-x: visible;
-  }
-  .reel-poster-box {
-    aspect-ratio: 9 / 14;
   }
 }
 
