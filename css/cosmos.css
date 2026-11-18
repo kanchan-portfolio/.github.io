@@ -1592,6 +1592,12 @@ img {
   aspect-ratio: 16/9;
 }
 
+.lightbox-video-container.is-reel {
+  max-width: 440px;
+  aspect-ratio: unset;
+  height: auto;
+}
+
 .lightbox-footer {
   display: flex;
   justify-content: space-between;

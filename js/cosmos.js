@@ -384,14 +384,38 @@ document.addEventListener('DOMContentLoaded', () => {
     const src = item.getAttribute('data-src') || (item.querySelector('img') ? item.querySelector('img').src : '');
     const title = item.getAttribute('data-title') || 'Work Exhibition';
     const videoId = item.getAttribute('data-video-id');
+    const reelUrl = item.getAttribute('data-reel-url');
+    const embedUrl = item.getAttribute('data-embed-url');
 
     if (lightboxTitle) lightboxTitle.textContent = title;
     if (lightboxCounter) lightboxCounter.textContent = '';
 
-    if (videoId) {
+    if (reelUrl) {
       if (lightboxImg) lightboxImg.style.display = 'none';
       if (lightboxVideo) {
         lightboxVideo.style.display = 'block';
+        lightboxVideo.className = 'lightbox-video-container is-reel';
+        lightboxVideo.innerHTML = `
+          <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:14px; padding:10px 0;">
+            <iframe src="${embedUrl || reelUrl + 'embed/'}" 
+              title="${title}"
+              frameborder="0"
+              scrolling="no"
+              allowtransparency="true"
+              allowfullscreen="true"
+              style="width: 100%; max-width: 380px; height: 520px; border-radius: 12px; border: 1px solid var(--card-border); background: #000;">
+            </iframe>
+            <a href="${reelUrl}" target="_blank" rel="noopener noreferrer" class="craft-pill" style="padding:10px 24px; font-size:13px; font-weight:600; text-decoration:none; background:linear-gradient(45deg, #f09433, #dc2743, #bc1888); color:#fff; border:none; display:inline-flex; align-items:center; gap:8px;">
+              <span>Watch Episode on Instagram</span> &rarr;
+            </a>
+          </div>
+        `;
+      }
+    } else if (videoId) {
+      if (lightboxImg) lightboxImg.style.display = 'none';
+      if (lightboxVideo) {
+        lightboxVideo.style.display = 'block';
+        lightboxVideo.className = 'lightbox-video-container';
         lightboxVideo.innerHTML = `
           <iframe src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&enablejsapi=1" 
             title="4K Video Player"
@@ -406,6 +430,7 @@ document.addEventListener('DOMContentLoaded', () => {
       if (lightboxVideo) {
         lightboxVideo.style.display = 'none';
         lightboxVideo.innerHTML = '';
+        lightboxVideo.className = 'lightbox-video-container';
       }
       if (lightboxImg) {
         lightboxImg.style.display = 'block';
@@ -421,7 +446,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function closeLightboxModal() {
     if (!lightbox) return;
     lightbox.style.display = 'none';
-    if (lightboxVideo) lightboxVideo.innerHTML = '';
+    if (lightboxVideo) {
+      lightboxVideo.innerHTML = '';
+      lightboxVideo.className = 'lightbox-video-container';
+    }
     document.body.style.overflow = '';
   }
 

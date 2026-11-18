@@ -112,6 +112,17 @@ categories = [
         ]
     },
     {
+        'id': 'cat-mulaqaat',
+        'title': 'Taana Baana — Mulaqaat (Series)',
+        'subtitle': 'Narrative Cinematography & Visual Direction',
+        'desc': 'Original 3-part romantic vertical series by @taana__baana_. Directed by Nihal Parashar, starring Helly Shah & Chirag Garg. Cinematography by Kanchan Choudhary (@_kanchan__04).',
+        'items': [
+            {'src': 'assets/mulaqaat_ep1.jpg', 'tag': 'Cinematography', 'title': 'Mulaqaat | Episode 1: Sab Badhiya Hai', 'type': 'reel', 'reelUrl': 'https://www.instagram.com/taana__baana_/reel/DevZG4rhivG/', 'embedUrl': 'https://www.instagram.com/reel/DevZG4rhivG/embed/'},
+            {'src': 'assets/mulaqaat_ep2.jpg', 'tag': 'Cinematography', 'title': 'Mulaqaat | Episode 2: Kitna Bewkoof Tha Main', 'type': 'reel', 'reelUrl': 'https://www.instagram.com/taana__baana_/reel/De3Hg0VBuUY/', 'embedUrl': 'https://www.instagram.com/reel/De3Hg0VBuUY/embed/'},
+            {'src': 'assets/mulaqaat_ep3.jpg', 'tag': 'Cinematography', 'title': 'Mulaqaat | Episode 3: Woh Jeevan Beet Chuka Hai', 'type': 'reel', 'reelUrl': 'https://www.instagram.com/taana__baana_/reel/DfJ9HEUBVZ6/', 'embedUrl': 'https://www.instagram.com/reel/DfJ9HEUBVZ6/embed/'},
+        ]
+    },
+    {
         'id': 'cat-songti',
         'title': 'Songti Cinematography Stills',
         'subtitle': 'Film Stills & Color Grading',
@@ -279,6 +290,17 @@ html = f"""<!DOCTYPE html>
       aspect-ratio: 16 / 9;
     }}
 
+    .photo-friendly-container.is-reel {{
+      aspect-ratio: 9 / 16;
+      max-height: 520px;
+    }}
+
+    .lightbox-video-container.is-reel {{
+      max-width: 440px;
+      aspect-ratio: unset;
+      height: auto;
+    }}
+
     .photo-friendly-container img {{
       max-width: 100%;
       max-height: 100%;
@@ -424,12 +446,25 @@ for c in categories:
 """
     for item in c['items']:
         is_video = item.get('type') == 'video'
+        is_reel = item.get('type') == 'reel'
         video_id = item.get('videoId', '')
-        badge_html = '<div class="video-play-badge">&#9658; 4K VIDEO</div>' if is_video else '<div class="photo-zoom-hint">[+] VIEW FULL</div>'
-        meta_tag = '[4K Video]' if is_video else '[High-Res]'
-        container_class = 'photo-friendly-container is-video' if is_video else 'photo-friendly-container'
+        reel_url = item.get('reelUrl', '')
+        embed_url = item.get('embedUrl', '')
 
-        html += f"""        <div class="photo-card-wrapper" data-src="{item['src']}" data-title="{item['title']}" data-cat="{c['title']}" data-video-id="{video_id}">
+        if is_reel:
+            badge_html = '<div class="video-play-badge" style="background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color:#fff;">&#9658; REEL</div>'
+            meta_tag = '[Instagram Reel]'
+            container_class = 'photo-friendly-container is-reel'
+        elif is_video:
+            badge_html = '<div class="video-play-badge">&#9658; 4K VIDEO</div>'
+            meta_tag = '[4K Video]'
+            container_class = 'photo-friendly-container is-video'
+        else:
+            badge_html = '<div class="photo-zoom-hint">[+] VIEW FULL</div>'
+            meta_tag = '[High-Res]'
+            container_class = 'photo-friendly-container'
+
+        html += f"""        <div class="photo-card-wrapper" data-src="{item['src']}" data-title="{item['title']}" data-cat="{c['title']}" data-video-id="{video_id}" data-reel-url="{reel_url}" data-embed-url="{embed_url}">
           <div class="{container_class}">
             <img src="{item['src']}" alt="{item['title']}" loading="lazy" decoding="async"/>
             {badge_html}
@@ -485,9 +520,10 @@ html += f"""
       <div>
         <div class="footer-col-title">Disciplines</div>
         <div class="footer-links-list">
+          <a href="work.html#cat-mulaqaat">Taana Baana (Series)</a>
+          <a href="work.html#cat-songti">Songti Cinematography</a>
           <a href="work.html#cat-studio">Studio Lighting</a>
           <a href="work.html#cat-monochrome">Monochromes</a>
-          <a href="work.html#cat-songti">Cinematography Stills</a>
           <a href="work.html#cat-limited-edition">Editorial Concept</a>
         </div>
       </div>
@@ -596,13 +632,37 @@ html += f"""
         const src = card.getAttribute('data-src');
         const title = card.getAttribute('data-title') || 'Photograph';
         const videoId = card.getAttribute('data-video-id');
+        const reelUrl = card.getAttribute('data-reel-url');
+        const embedUrl = card.getAttribute('data-embed-url');
 
         if (lightboxTitle) lightboxTitle.textContent = title;
 
-        if (videoId) {{
+        if (reelUrl) {{
           if (lightboxImg) lightboxImg.style.display = 'none';
           if (lightboxVideo) {{
             lightboxVideo.style.display = 'block';
+            lightboxVideo.className = 'lightbox-video-container is-reel';
+            lightboxVideo.innerHTML = `
+              <div style="display:flex; flex-direction:column; align-items:center; justify-content:center; width:100%; height:100%; gap:14px; padding:10px 0;">
+                <iframe src="${{embedUrl || reelUrl + 'embed/'}}" 
+                  title="${{title}}"
+                  frameborder="0"
+                  scrolling="no"
+                  allowtransparency="true"
+                  allowfullscreen="true"
+                  style="width: 100%; max-width: 380px; height: 520px; border-radius: 12px; border: 1px solid var(--card-border); background: #000;">
+                </iframe>
+                <a href="${{reelUrl}}" target="_blank" rel="noopener noreferrer" class="craft-pill" style="padding:10px 24px; font-size:13px; font-weight:600; text-decoration:none; background:linear-gradient(45deg, #f09433, #dc2743, #bc1888); color:#fff; border:none; display:inline-flex; align-items:center; gap:8px;">
+                  <span>Watch Episode on Instagram</span> &rarr;
+                </a>
+              </div>
+            `;
+          }}
+        }} else if (videoId) {{
+          if (lightboxImg) lightboxImg.style.display = 'none';
+          if (lightboxVideo) {{
+            lightboxVideo.style.display = 'block';
+            lightboxVideo.className = 'lightbox-video-container';
             lightboxVideo.innerHTML = `
               <iframe src="https://www.youtube.com/embed/${{videoId}}?autoplay=1&rel=0&enablejsapi=1" 
                 title="4K Video Player"
@@ -617,6 +677,7 @@ html += f"""
           if (lightboxVideo) {{
             lightboxVideo.style.display = 'none';
             lightboxVideo.innerHTML = '';
+            lightboxVideo.className = 'lightbox-video-container';
           }}
           if (lightboxImg) {{
             lightboxImg.style.display = 'block';
@@ -632,7 +693,10 @@ html += f"""
       function closeLightbox() {{
         if (!lightbox) return;
         lightbox.style.display = 'none';
-        if (lightboxVideo) lightboxVideo.innerHTML = '';
+        if (lightboxVideo) {{
+          lightboxVideo.innerHTML = '';
+          lightboxVideo.className = 'lightbox-video-container';
+        }}
         document.body.style.overflow = '';
       }}
 
