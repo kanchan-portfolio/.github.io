@@ -1,7 +1,8 @@
 /**
- * HALVOR 3D SPHERE GALLERY & EDITORIAL ARCHIVE ENGINE
- * Recreates the exact 3D curved sphere canvas and Swiss editorial archive of Halvor
- * (https://halvor.framer.website)
+ * HALVOR 3D SPHERE GALLERY ENGINE (Kanchan Choudhary® Visual Archive)
+ * Fixed uniform card frames, 100% uncropped photos (contain fit),
+ * true rounded corners in WebGL via alpha-tested offscreen canvas textures,
+ * inertia orbit physics, active frame focus, and fullscreen modal inspection.
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -29,13 +30,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // --------------------------------------------------------------------------
-  // 2. LIVE CLOCK (Mumbai / Global Time)
+  // 2. LIVE CLOCK (Mumbai / Asia-Kolkata Time)
   // --------------------------------------------------------------------------
   const clockEl = document.getElementById('live-clock');
   function updateClock() {
     if (!clockEl) return;
     const now = new Date();
-    // Format to 12-hour time with AM/PM
     const timeStr = now.toLocaleTimeString('en-US', {
       timeZone: 'Asia/Kolkata',
       hour: '2-digit',
@@ -49,10 +49,10 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateClock();
 
   // --------------------------------------------------------------------------
-  // 3. THEME TOGGLE (Light Halvor vs Dark Universe)
+  // 3. THEME TOGGLE (Dark Universe vs Light Studio)
   // --------------------------------------------------------------------------
   const themeBtn = document.getElementById('theme-toggle');
-  let isDarkTheme = localStorage.getItem('halvor-theme') === 'dark';
+  let isDarkTheme = localStorage.getItem('halvor-theme') !== 'light'; // default dark
 
   function applyTheme(dark) {
     isDarkTheme = dark;
@@ -67,6 +67,8 @@ document.addEventListener('DOMContentLoaded', async () => {
       localStorage.setItem('halvor-theme', 'light');
       if (renderer) renderer.setClearColor(0xffffff, 1);
     }
+    // Update card textures background for current theme
+    refreshAllCardTextures();
   }
 
   if (themeBtn) {
@@ -74,85 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // --------------------------------------------------------------------------
-  // 4. TAB NAVIGATION SWITCHER (3D GALLERY vs WORKS ARCHIVE)
-  // --------------------------------------------------------------------------
-  const tabGallery = document.getElementById('tab-gallery');
-  const tabWorks = document.getElementById('tab-works');
-  const galleryView = document.getElementById('gallery-view');
-  const worksView = document.getElementById('works-view');
-  const bottomBar = document.getElementById('halvor-bottom-container');
-
-  function switchView(viewName) {
-    if (viewName === 'works') {
-      if (tabGallery) tabGallery.classList.remove('active');
-      if (tabWorks) tabWorks.classList.add('active');
-      if (galleryView) galleryView.classList.add('is-hidden');
-      if (worksView) worksView.classList.add('is-visible');
-      if (bottomBar) bottomBar.style.display = 'none';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    } else {
-      if (tabWorks) tabWorks.classList.remove('active');
-      if (tabGallery) tabGallery.classList.add('active');
-      if (worksView) worksView.classList.remove('is-visible');
-      if (galleryView) galleryView.classList.remove('is-hidden');
-      if (bottomBar) bottomBar.style.display = 'flex';
-      if (renderer) onWindowResize();
-    }
-  }
-
-  if (tabGallery) tabGallery.addEventListener('click', () => switchView('gallery'));
-  if (tabWorks) tabWorks.addEventListener('click', () => switchView('works'));
-
-  // --------------------------------------------------------------------------
-  // 5. POPULATE WORKS ARCHIVE TABLE
-  // --------------------------------------------------------------------------
-  const worksTableBody = document.getElementById('works-table-body');
-  const hoverPreview = document.getElementById('hover-preview');
-  const hoverPreviewImg = document.getElementById('hover-preview-img');
-
-  if (worksTableBody) {
-    works.forEach(item => {
-      const row = document.createElement('div');
-      row.className = 'work-table-row';
-      const videoTag = item.videoId || item.reelUrl ? '<span class="row-video-tag">▶ VIDEO</span>' : '';
-      row.innerHTML = `
-        <span class="row-no">${item.no}</span>
-        <span class="row-title">${item.title} ${videoTag}</span>
-        <span class="row-cat row-muted">${item.cat}</span>
-        <span class="row-format row-muted">${item.format}</span>
-        <span class="row-year row-muted">${item.year}</span>
-      `;
-
-      row.addEventListener('mouseenter', () => {
-        if (hoverPreview && hoverPreviewImg) {
-          hoverPreviewImg.src = item.src;
-          hoverPreview.classList.add('is-active');
-        }
-      });
-
-      row.addEventListener('mouseleave', () => {
-        if (hoverPreview) {
-          hoverPreview.classList.remove('is-active');
-        }
-      });
-
-      row.addEventListener('mousemove', (e) => {
-        if (hoverPreview) {
-          hoverPreview.style.left = `${e.clientX + 16}px`;
-          hoverPreview.style.top = `${e.clientY + 16}px`;
-        }
-      });
-
-      row.addEventListener('click', () => {
-        openModal(item);
-      });
-
-      worksTableBody.appendChild(row);
-    });
-  }
-
-  // --------------------------------------------------------------------------
-  // 6. THREE.JS 3D CURVED SPHERE / CYLINDER GALLERY
+  // 4. THREE.JS 3D CURVED CYLINDER / SPHERE GALLERY
   // --------------------------------------------------------------------------
   const canvas = document.getElementById('sphere-canvas');
   if (!canvas || typeof THREE === 'undefined') {
@@ -161,26 +85,25 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 10, 5000);
+  const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 10, 5000);
   camera.position.set(0, 0, 0);
 
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // Set initial clear color based on theme
-  applyTheme(isDarkTheme);
-
-  // Group containing the curved card sphere
+  // Group containing all curved card meshes
   const sphereGroup = new THREE.Group();
   scene.add(sphereGroup);
 
-  // Curvature radius
-  const RADIUS = 880;
-  const CARD_WIDTH = 280;
-  const CARD_HEIGHT = 210;
+  // Geometry & Card Dimensions
+  // Fixed uniform portrait frame for all cards
+  const CARD_WIDTH = 220;
+  const CARD_HEIGHT = 310;
+  const RADIUS = 960;
+  const CORNER_RADIUS = 28; // on 440x620 retina canvas -> 14px in 3D
 
-  // Create curved plane geometry matching cylinder radius
+  // Creates cylindrical curvature along X so cards wrap seamlessly around radius
   function createCurvedGeometry(width, height, radius) {
     const geom = new THREE.PlaneGeometry(width, height, 16, 1);
     const pos = geom.attributes.position;
@@ -195,20 +118,132 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const curvedGeometry = createCurvedGeometry(CARD_WIDTH, CARD_HEIGHT, RADIUS);
-  const textureLoader = new THREE.TextureLoader();
   const cardMeshes = [];
+  const cardTextureHolders = [];
 
-  // Arrange in 3 horizontal tiers (Top: +280, Center: 0, Bottom: -280)
+  /**
+   * Helper: Paints an uncropped image onto an offscreen Hi-DPI canvas
+   * with smooth rounded corners (ctx.roundRect + clip) and subtle luxury border.
+   */
+  function paintCardToCanvas(canvasEl, img, isDark) {
+    const w = canvasEl.width;
+    const h = canvasEl.height;
+    const r = CORNER_RADIUS;
+    const ctx = canvasEl.getContext('2d');
+
+    ctx.clearRect(0, 0, w, h);
+
+    // 1. Smooth Rounded Rectangle Path
+    ctx.save();
+    ctx.beginPath();
+    if (typeof ctx.roundRect === 'function') {
+      ctx.roundRect(0, 0, w, h, r);
+    } else {
+      ctx.moveTo(r, 0);
+      ctx.lineTo(w - r, 0);
+      ctx.quadraticCurveTo(w, 0, w, r);
+      ctx.lineTo(w, h - r);
+      ctx.quadraticCurveTo(w, h, w - r, h);
+      ctx.lineTo(r, h);
+      ctx.quadraticCurveTo(0, h, 0, h - r);
+      ctx.lineTo(0, r);
+      ctx.quadraticCurveTo(0, 0, r, 0);
+      ctx.closePath();
+    }
+    ctx.clip();
+
+    // 2. Card Background (Studio Matte Board)
+    ctx.fillStyle = isDark ? '#0d0f13' : '#f2f3f6';
+    ctx.fillRect(0, 0, w, h);
+
+    // 3. Draw Image Uncropped (Aspect Ratio strictly preserved with contain fit)
+    if (img && img.complete && img.naturalWidth > 0 && img.naturalHeight > 0) {
+      const nw = img.naturalWidth;
+      const nh = img.naturalHeight;
+      const imgRatio = nw / nh;
+      const targetRatio = w / h;
+
+      let drawW, drawH, drawX, drawY;
+      if (imgRatio > targetRatio) {
+        // Image is wider than 440x620 frame
+        drawW = w;
+        drawH = w / imgRatio;
+        drawX = 0;
+        drawY = (h - drawH) / 2;
+      } else {
+        // Image is taller than or equal to frame
+        drawH = h;
+        drawW = h * imgRatio;
+        drawX = (w - drawW) / 2;
+        drawY = 0;
+      }
+
+      ctx.drawImage(img, drawX, drawY, drawW, drawH);
+    } else {
+      // Sleek loading placeholder shimmer
+      ctx.fillStyle = isDark ? '#171a21' : '#e5e7eb';
+      ctx.fillRect(w * 0.1, h * 0.1, w * 0.8, h * 0.8);
+    }
+
+    // 4. Subtle Inner Luxury Outline with rounded corner
+    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.14)' : 'rgba(0, 0, 0, 0.09)';
+    ctx.lineWidth = 3;
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
+  function createCardTexture(item) {
+    const c = document.createElement('canvas');
+    c.width = 440; // 2x Retina resolution for razor sharpness
+    c.height = 620;
+
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+
+    // Initial paint (placeholder matte)
+    paintCardToCanvas(c, img, isDarkTheme);
+
+    const texture = new THREE.CanvasTexture(c);
+    texture.generateMipmaps = true;
+    texture.minFilter = THREE.LinearMipmapLinearFilter;
+    texture.magFilter = THREE.LinearFilter;
+
+    // Load actual image
+    img.onload = () => {
+      paintCardToCanvas(c, img, isDarkTheme);
+      texture.needsUpdate = true;
+    };
+    img.src = item.src;
+
+    const holder = { canvas: c, img, texture };
+    cardTextureHolders.push(holder);
+    return texture;
+  }
+
+  function refreshAllCardTextures() {
+    cardTextureHolders.forEach(holder => {
+      paintCardToCanvas(holder.canvas, holder.img, isDarkTheme);
+      holder.texture.needsUpdate = true;
+    });
+  }
+
+  // 3 Horizontal Tiers covering all works (Top: +340, Center: 0, Bottom: -340)
+  const totalWorks = works.length;
+  const countMid = Math.ceil(totalWorks / 3);
+  const countTop = Math.floor((totalWorks - countMid) / 2);
+  const countBtm = totalWorks - countMid - countTop;
+
   const tiers = [
-    { y: 280, count: 14 },
-    { y: 0,   count: 16 },
-    { y: -280, count: 14 }
+    { y: 340,  count: countTop > 0 ? countTop : 21 },
+    { y: 0,    count: countMid > 0 ? countMid : 23 },
+    { y: -340, count: countBtm > 0 ? countBtm : 21 }
   ];
 
   let itemIdx = 0;
   tiers.forEach((tier, tierIdx) => {
     const angleStep = (Math.PI * 2) / tier.count;
-    // Slight offset for alternating brick layout
+    // Brick-pattern offset for alternating tiers
     const tierOffset = tierIdx % 2 === 1 ? angleStep * 0.5 : 0;
 
     for (let i = 0; i < tier.count; i++) {
@@ -216,15 +251,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       itemIdx++;
 
       const angle = i * angleStep + tierOffset;
-
-      // Load texture with mipmapping
-      const texture = textureLoader.load(item.src);
-      texture.generateMipmaps = true;
-      texture.minFilter = THREE.LinearMipmapLinearFilter;
+      const cardTexture = createCardTexture(item);
 
       const material = new THREE.MeshBasicMaterial({
-        map: texture,
-        side: THREE.DoubleSide
+        map: cardTexture,
+        side: THREE.DoubleSide,
+        transparent: true,
+        alphaTest: 0.05,
+        depthWrite: true
       });
 
       const mesh = new THREE.Mesh(curvedGeometry, material);
@@ -234,15 +268,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       mesh.position.z = RADIUS * Math.cos(angle);
       mesh.position.y = tier.y;
 
-      // Face towards camera (center 0,0,0)
+      // Face inward towards camera (center 0,0,0)
       mesh.rotation.y = angle + Math.PI;
 
-      // Attach metadata
+      // Metadata for raycasting and inspection
       mesh.userData = {
         item: item,
         angle: angle,
         y: tier.y,
-        baseScale: 1.0,
         tierIdx: tierIdx,
         indexInTier: i
       };
@@ -252,8 +285,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
+  // Apply initial theme
+  applyTheme(isDarkTheme);
+
   // --------------------------------------------------------------------------
-  // 7. INTERACTION PHYSICS & ORBIT DRAG
+  // 5. INTERACTION PHYSICS & ORBIT DRAG
   // --------------------------------------------------------------------------
   let isDragging = false;
   let prevPointerX = 0;
@@ -283,7 +319,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const focusCatEl = document.getElementById('focus-cat');
 
   function onPointerDown(e) {
-    if (isFocusMode && e.clientY > window.innerHeight - 70) return; // ignore clicks on bottom bar
+    // Ignore clicks on bottom toolbar buttons
+    if (e.target && e.target.closest('#active-toolbar')) return;
     isDragging = true;
     prevPointerX = e.clientX;
     prevPointerY = e.clientY;
@@ -331,13 +368,21 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function onPointerUp(e) {
+    if (e.target && e.target.closest('#active-toolbar')) return;
     isDragging = false;
-    // If was a click (not a drag)
+
+    // Click event (not a drag)
     if (dragDistance < 8) {
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(cardMeshes);
       if (intersects.length > 0) {
-        focusCard(intersects[0].object);
+        const clickedMesh = intersects[0].object;
+        if (isFocusMode && focusedMesh === clickedMesh) {
+          // Double click / re-click opens modal inspection
+          openModal(clickedMesh.userData.item);
+        } else {
+          focusCard(clickedMesh);
+        }
       }
     }
   }
@@ -348,15 +393,11 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Touch Support
   window.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 1) {
-      onPointerDown(e.touches[0]);
-    }
+    if (e.touches.length === 1) onPointerDown(e.touches[0]);
   }, { passive: true });
 
   window.addEventListener('touchmove', (e) => {
-    if (e.touches.length === 1) {
-      onPointerMove(e.touches[0]);
-    }
+    if (e.touches.length === 1) onPointerMove(e.touches[0]);
   }, { passive: true });
 
   window.addEventListener('touchend', (e) => {
@@ -364,20 +405,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   }, { passive: true });
 
   // --------------------------------------------------------------------------
-  // 8. FOCUS / ACTIVE FRAME MODE
+  // 6. FOCUS / ACTIVE FRAME MODE
   // --------------------------------------------------------------------------
   function focusCard(mesh) {
     if (!mesh) return;
     isFocusMode = true;
     focusedMesh = mesh;
 
-    // Angle that aligns mesh with camera forward (Z axis)
-    // Mesh is at position (R*sin(angle), y, R*cos(angle))
-    // To face camera, sphere rotation Y must equal -angle
+    // Calculate rotation Y to align mesh with camera view axis
     focusTargetRotY = -mesh.userData.angle;
-    // Elevation alignment
+    // Slight vertical tilt to center active tier
     focusTargetRotX = -mesh.userData.y * 0.0006;
-    focusCameraZ = 340; // Zoom camera closer!
+    focusCameraZ = 330; // Smooth camera zoom closer
 
     // Update bottom toolbar
     const item = mesh.userData.item;
@@ -406,9 +445,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const btnClose = document.getElementById('toolbar-btn-close');
   const btnView = document.getElementById('toolbar-btn-view');
 
-  if (btnClose) {
-    btnClose.addEventListener('click', releaseFocus);
-  }
+  if (btnClose) btnClose.addEventListener('click', releaseFocus);
 
   if (btnPrev) {
     btnPrev.addEventListener('click', () => {
@@ -436,8 +473,25 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (modalBackdrop && modalBackdrop.classList.contains('is-open')) {
+        closeModal();
+      } else if (isFocusMode) {
+        releaseFocus();
+      }
+    } else if (e.key === 'ArrowLeft' && isFocusMode) {
+      if (btnPrev) btnPrev.click();
+    } else if (e.key === 'ArrowRight' && isFocusMode) {
+      if (btnNext) btnNext.click();
+    } else if (e.key === 'Enter' && isFocusMode && (!modalBackdrop || !modalBackdrop.classList.contains('is-open'))) {
+      if (btnView) btnView.click();
+    }
+  });
+
   // --------------------------------------------------------------------------
-  // 9. ANIMATION RENDER LOOP
+  // 7. ANIMATION RENDER LOOP
   // --------------------------------------------------------------------------
   function animate() {
     requestAnimationFrame(animate);
@@ -455,7 +509,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       // Slow ambient drift when not dragging
       if (!isDragging) {
-        targetRotY += 0.0004;
+        targetRotY += 0.00035;
       }
     }
 
@@ -477,7 +531,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   window.addEventListener('resize', onWindowResize);
 
   // --------------------------------------------------------------------------
-  // 10. MODAL DIALOG (Videos & Full Master Photographs)
+  // 8. FULLSCREEN INSPECTION MODAL (4K Masterclasses, Reels & Stills)
   // --------------------------------------------------------------------------
   const modalBackdrop = document.getElementById('halvor-modal');
   const modalMediaWrap = document.getElementById('modal-media-wrap');
@@ -494,7 +548,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         <strong>Category:</strong> ${item.cat} &bull; 
         <strong>Format:</strong> ${item.format} &bull; 
         <strong>Archive Year:</strong> ${item.year}<br>
-        <strong>Costume & Styling:</strong> Kanchan Choudhary &bull; Visual Art Direction
+        <strong>Costume &amp; Styling:</strong> Kanchan Choudhary &bull; Visual Art Direction
       `;
     }
 
@@ -520,7 +574,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
       } else {
         modalMediaWrap.innerHTML = `
-          <img src="${item.src}" alt="${item.title}" />
+          <img src="${item.src}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px; background: #000;" />
         `;
       }
     }
@@ -542,15 +596,5 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (e.target === modalBackdrop) closeModal();
     });
   }
-
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (modalBackdrop && modalBackdrop.classList.contains('is-open')) {
-        closeModal();
-      } else if (isFocusMode) {
-        releaseFocus();
-      }
-    }
-  });
 
 });
