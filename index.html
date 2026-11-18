@@ -20,58 +20,65 @@
 <body>
 
   <!-- =========================================================================
-       1. CINEMATIC SPLIT-SHUTTER PRELOADER (Inspired by Jason Bergh Film Director UI)
+       1. CINEMATIC FULLSCREEN SPLIT-CURTAIN PRELOADER (Jason Bergh Director UI)
        ========================================================================= -->
-  <div id="cosmos-loader" class="cinema-loader">
-    <!-- Backlit Dramatic Silhouette Backdrop (Exact to video) -->
-    <div class="loader-backlit-bg" style="background-image: url('assets/slide_5_1.jpg');"></div>
+  <div id="cosmos-loader" class="cinema-loader" aria-label="Loading Experience">
+    <!-- Starfield & Film Grain Ambient Layer -->
+    <div class="loader-galaxy-stars" aria-hidden="true"></div>
     <div class="loader-film-grain" aria-hidden="true"></div>
 
-    <!-- Skip Button -->
-    <button type="button" class="loader-skip-btn" id="loader-skip-btn">Skip Intro &rarr;</button>
+    <!-- Skip Intro Button -->
+    <button type="button" class="loader-skip-btn" id="loader-skip-btn" aria-label="Skip Intro">Skip Intro &rarr;</button>
 
-    <!-- Central Cinematic Aperture / Shutter Box -->
-    <div class="loader-aperture-box">
-      
-      <!-- Film Vignettes sliding along the gates -->
-      <div class="loader-film-strip left-strip" aria-hidden="true">
+    <!-- Theatrical Left Curtain (Covers Left Half 50.1vw) -->
+    <div class="loader-curtain curtain-left" id="curtain-left">
+      <!-- Vignettes along curtain edge -->
+      <div class="loader-film-strip strip-left" aria-hidden="true">
         <div class="film-vignette"><img src="assets/slide_10_1.jpg" alt="" loading="eager"></div>
         <div class="film-vignette"><img src="assets/mulaqaat_ep1.jpg" alt="" loading="eager"></div>
         <div class="film-vignette"><img src="assets/slide_7_4.jpg" alt="" loading="eager"></div>
       </div>
+      <!-- Brand Signature (Left Half) -->
+      <div class="curtain-brand-wrap brand-left-wrap">
+        <span class="curtain-brand-text brand-left-text" id="shutter-logo-left">Kanchan</span>
+      </div>
+    </div>
 
-      <div class="loader-film-strip right-strip" aria-hidden="true">
+    <!-- Theatrical Right Curtain (Covers Right Half 50.1vw) -->
+    <div class="loader-curtain curtain-right" id="curtain-right">
+      <!-- Vignettes along curtain edge -->
+      <div class="loader-film-strip strip-right" aria-hidden="true">
         <div class="film-vignette"><img src="assets/yt_anupam_kher.jpg" alt="" loading="eager"></div>
         <div class="film-vignette"><img src="assets/slide_1_1.jpg" alt="" loading="eager"></div>
         <div class="film-vignette"><img src="assets/yt_saurabh_shukla.jpg" alt="" loading="eager"></div>
       </div>
+      <!-- Brand Signature (Right Half) -->
+      <div class="curtain-brand-wrap brand-right-wrap">
+        <span class="curtain-brand-text brand-right-text" id="shutter-logo-right">Choudhary</span>
+      </div>
+    </div>
 
-      <!-- Split Left Shutter Curtain -->
-      <div class="loader-shutter-curtain shutter-left">
-        <div class="shutter-inner">
-          <div class="shutter-logo-part logo-left-text" id="shutter-logo-left">Kanchan</div>
-        </div>
+    <!-- Center Stage (Manifesto & Numeric Counter) -->
+    <div class="loader-center-stage">
+      <!-- Phase 1: Director Manifesto -->
+      <div class="loader-phrase" id="loader-phrase">
+        <span class="phrase-top">Intimate, Raw</span>
+        <span class="phrase-bottom">Human Storytelling</span>
       </div>
 
-      <!-- Split Right Shutter Curtain -->
-      <div class="loader-shutter-curtain shutter-right">
-        <div class="shutter-inner">
-          <div class="shutter-logo-part logo-right-text" id="shutter-logo-right">Choudhary</div>
-        </div>
-      </div>
-
-      <!-- Center Dynamic Display: Phrases, Numeric Counter -->
-      <div class="loader-center-content">
-        <!-- Phrase 1: Intimate, Raw / Human Storytelling -->
-        <div class="loader-phrase" id="loader-phrase">
-          <span class="phrase-top">Intimate, Raw</span>
-          <span class="phrase-bottom">Cinematic Storytelling</span>
-        </div>
-
-        <!-- Numeric Monoline Percentage Counter -->
+      <!-- Phase 2: Numeric Counter -->
+      <div class="loader-counter-container" id="loader-counter-box">
         <div class="loader-numeric-counter" id="loader-counter">00</div>
+        <div class="loader-progress-track">
+          <div class="loader-progress-bar" id="loader-progress-bar"></div>
+        </div>
       </div>
+    </div>
 
+    <!-- Bottom Meta Label -->
+    <div class="loader-footer-meta">
+      <span>KANCHAN CHOUDHARY® &bull; PORTFOLIO</span>
+      <span>4K CINEMA &bull; HAUTE COUTURE</span>
     </div>
   </div>
 

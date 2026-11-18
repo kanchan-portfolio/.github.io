@@ -6,11 +6,13 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   // =========================================================================
-  // 1. CINEMATIC SPLIT-SHUTTER PRELOADER (Jason Bergh Director UI Style)
+  // 1. CINEMATIC FULL-SCREEN SPLIT-CURTAIN PRELOADER (Jason Bergh Director UI)
   // =========================================================================
   const loader = document.getElementById('cosmos-loader');
   const loaderPhrase = document.getElementById('loader-phrase');
-  const counter = document.getElementById('loader-counter');
+  const counterBox = document.getElementById('loader-counter-box');
+  const counterNumber = document.getElementById('loader-counter');
+  const progressBar = document.getElementById('loader-progress-bar');
   const logoLeft = document.getElementById('shutter-logo-left');
   const logoRight = document.getElementById('shutter-logo-right');
   const skipBtn = document.getElementById('loader-skip-btn');
@@ -20,15 +22,22 @@ document.addEventListener('DOMContentLoaded', () => {
   function dismissLoaderInstant() {
     if (isDismissed || !loader) return;
     isDismissed = true;
-    loader.classList.add('is-opening');
+
+    // Immediately hide center phase texts
+    if (loaderPhrase) loaderPhrase.classList.remove('visible');
+    if (counterBox) counterBox.classList.remove('visible');
+
+    // Reveal split logo on curtains
     if (logoLeft) logoLeft.classList.add('visible');
     if (logoRight) logoRight.classList.add('visible');
-    if (loaderPhrase) loaderPhrase.classList.remove('visible');
-    if (counter) counter.classList.remove('visible');
 
+    // Split curtains open
     setTimeout(() => {
-      loader.classList.add('loaded');
-    }, 700);
+      loader.classList.add('is-opening');
+      setTimeout(() => {
+        loader.classList.add('loaded');
+      }, 1100);
+    }, 120);
   }
 
   if (skipBtn) {
@@ -39,68 +48,73 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   if (loader) {
-    loader.addEventListener('click', () => {
-      dismissLoaderInstant();
+    loader.addEventListener('click', (e) => {
+      if (e.target !== skipBtn) {
+        dismissLoaderInstant();
+      }
     });
 
-    // Step 1: Fade in phrase "Intimate, Raw / Human Storytelling"
+    // Step 1: Fade in Manifesto ("Intimate, Raw / Human Storytelling")
     setTimeout(() => {
       if (isDismissed) return;
       if (loaderPhrase) loaderPhrase.classList.add('visible');
-    }, 150);
+    }, 100);
 
-    // Step 2: Fade out phrase, show counter
+    // Step 2: Dissolve Manifesto, introduce numeric counter
     setTimeout(() => {
       if (isDismissed) return;
       if (loaderPhrase) loaderPhrase.classList.remove('visible');
-    }, 1400);
 
-    setTimeout(() => {
-      if (isDismissed) return;
-      if (counter) {
-        counter.classList.add('visible');
-        let count = 1;
+      setTimeout(() => {
+        if (isDismissed) return;
+        if (counterBox) counterBox.classList.add('visible');
+
+        let count = 0;
         const countInterval = setInterval(() => {
           if (isDismissed) {
             clearInterval(countInterval);
             return;
           }
-          count += Math.floor(Math.random() * 8) + 4;
+          count += Math.floor(Math.random() * 7) + 5;
           if (count >= 100) {
             count = 100;
-            counter.textContent = '100';
+            if (counterNumber) counterNumber.textContent = '100';
+            if (progressBar) progressBar.style.width = '100%';
             clearInterval(countInterval);
 
-            // Step 3: Counter fades out, reveal split logotype "Kanchan" & "Choudhary"
+            // Step 3: Counter fades, split signature appears on curtains
             setTimeout(() => {
               if (isDismissed) return;
-              counter.classList.remove('visible');
+              if (counterBox) counterBox.classList.remove('visible');
               if (logoLeft) logoLeft.classList.add('visible');
               if (logoRight) logoRight.classList.add('visible');
 
-              // Step 4: Shutter splits open!
+              // Step 4: Theatrical Split Curtains part!
               setTimeout(() => {
                 if (isDismissed) return;
                 loader.classList.add('is-opening');
 
-                // Step 5: Complete dismiss
+                // Step 5: Mark loaded
                 setTimeout(() => {
                   isDismissed = true;
                   loader.classList.add('loaded');
-                }, 850);
+                }, 1100);
 
-              }, 500);
+              }, 450);
 
             }, 250);
 
           } else {
-            counter.textContent = count < 10 ? `0${count}` : `${count}`;
+            const formatted = count < 10 ? '0' + count : '' + count;
+            if (counterNumber) counterNumber.textContent = formatted;
+            if (progressBar) progressBar.style.width = count + '%';
           }
-        }, 32);
-      }
-    }, 1750);
-  }
+        }, 28);
 
+      }, 400);
+
+    }, 1250);
+  }
 
   // =========================================================================
   // 2. THEME SWITCHER (Dark | Light Mode)

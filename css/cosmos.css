@@ -112,66 +112,72 @@ img {
 }
 
 /* ==========================================================================
-   Preloader: Cinematic Split-Shutter (Inspired by Jason Bergh Film Director UI)
+   Preloader: Cinematic Fullscreen Split-Curtain (Jason Bergh Director UI)
    ========================================================================== */
 #cosmos-loader.cinema-loader {
   position: fixed;
   inset: 0;
-  background: #06070a !important;
-  color: #ffffff;
   z-index: 999999;
+  background: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), visibility 0.65s ease;
-  will-change: opacity;
+  user-select: none;
+  pointer-events: auto;
 }
 
 #cosmos-loader.cinema-loader.loaded {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  display: none !important;
+  pointer-events: none !important;
 }
 
-/* Backlit Dramatic Silhouette Backdrop (Exact to video) */
-.loader-backlit-bg {
+/* Starfield / Galaxy Ambient Texture */
+.loader-galaxy-stars {
   position: absolute;
   inset: 0;
-  background-size: cover;
-  background-position: center 25%;
-  filter: brightness(0.28) contrast(1.2) grayscale(0.65);
-  opacity: 0.65;
-  transform: scale(1.06);
-  transition: transform 4.5s ease-out;
+  background-image: 
+    radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 100px 150px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 220px 80px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1px 1px at 340px 220px, #ffffff, rgba(0,0,0,0)),
+    radial-gradient(1.5px 1.5px at 480px 120px, #ffffff, rgba(0,0,0,0));
+  background-repeat: repeat;
+  background-size: 500px 500px;
+  opacity: 0.18;
   pointer-events: none;
+  z-index: 5;
 }
 
+/* Film Grain Overlay */
 .loader-film-grain {
   position: absolute;
   inset: 0;
   background-image: radial-gradient(rgba(255, 255, 255, 0.12) 1px, transparent 1px);
   background-size: 3px 3px;
-  opacity: 0.25;
+  opacity: 0.22;
   pointer-events: none;
+  z-index: 50;
 }
 
 /* Skip Intro Button */
 .loader-skip-btn {
-  position: absolute;
+  position: fixed;
   top: 28px;
   right: 28px;
-  z-index: 30;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.18);
-  color: rgba(255, 255, 255, 0.75);
+  z-index: 100;
+  background: rgba(20, 20, 24, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  color: rgba(255, 255, 255, 0.85);
   font-family: var(--font-sans);
   font-size: 0.72rem;
   font-weight: 600;
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  padding: 8px 18px;
+  padding: 8px 20px;
   border-radius: 999px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   cursor: pointer;
   transition: all 0.25s ease;
 }
@@ -183,22 +189,87 @@ img {
   transform: translateY(-1px);
 }
 
-/* Central Cinematic Aperture / Shutter Box */
-.loader-aperture-box {
-  position: relative;
+/* Theatrical Curtains (Full Viewport Panels) */
+.loader-curtain {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50.1vw;
+  background: #050608;
   z-index: 10;
-  width: min(840px, 90vw);
-  height: min(440px, 54vh);
-  background: #040407;
-  border: 1px solid rgba(255, 255, 255, 0.14);
-  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.98), inset 0 1px 1px rgba(255, 255, 255, 0.15);
   display: flex;
   align-items: center;
-  justify-content: center;
   overflow: hidden;
+  will-change: transform;
+  transition: transform 1.1s cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Film Vignettes sliding horizontally on Left & Right gates */
+.curtain-left {
+  left: 0;
+  justify-content: flex-end;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.curtain-right {
+  right: 0;
+  justify-content: flex-start;
+  border-left: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Opening Split Transition */
+.cinema-loader.is-opening .curtain-left {
+  transform: translateX(-101%);
+}
+
+.cinema-loader.is-opening .curtain-right {
+  transform: translateX(101%);
+}
+
+/* Brand Signatures on Curtains */
+.curtain-brand-wrap {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  z-index: 15;
+}
+
+.brand-left-wrap {
+  right: 12px;
+}
+
+.brand-right-wrap {
+  left: 12px;
+}
+
+.curtain-brand-text {
+  font-family: var(--font-serif);
+  font-size: clamp(2.8rem, 6vw, 4.6rem);
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  white-space: nowrap;
+}
+
+.curtain-brand-text.visible {
+  opacity: 1;
+}
+
+.brand-left-text {
+  font-weight: 400;
+  text-align: right;
+}
+
+.brand-right-text {
+  font-weight: 300;
+  font-style: italic;
+  color: #f7f4ed;
+  text-align: left;
+}
+
+/* Film Vignettes along left & right curtain gates */
 .loader-film-strip {
   position: absolute;
   top: 0;
@@ -206,28 +277,27 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 110px;
-  z-index: 2;
+  width: 140px;
+  z-index: 12;
   pointer-events: none;
 }
 
-.loader-film-strip.left-strip {
-  left: -20px;
+.loader-film-strip.strip-left {
+  left: 3.5vw;
 }
 
-.loader-film-strip.right-strip {
-  right: -20px;
+.loader-film-strip.strip-right {
+  right: 3.5vw;
 }
 
 .film-vignette {
-  width: 95px;
-  height: 60px;
+  width: 110px;
+  height: 72px;
   border-radius: 6px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.16);
-  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8);
-  opacity: 0.75;
-  margin: 10px 0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.9);
+  opacity: 0.65;
   transition: opacity 0.3s ease;
 }
 
@@ -235,77 +305,18 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  filter: brightness(0.88) contrast(1.05);
+  filter: brightness(0.85) contrast(1.1);
 }
 
-/* Split Shutters (The Theater Curtains) */
-.loader-shutter-curtain {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 50.3%;
-  background: #040407;
-  z-index: 10;
+/* Center Stage (Manifesto & Numeric Counter) */
+.loader-center-stage {
+  position: fixed;
+  inset: 0;
   display: flex;
   align-items: center;
-  transition: transform 0.95s cubic-bezier(0.76, 0, 0.24, 1);
-  will-change: transform;
-}
-
-.shutter-left {
-  left: 0;
-  justify-content: flex-end;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.shutter-right {
-  right: 0;
-  justify-content: flex-start;
-  border-left: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.shutter-inner {
-  padding: 0 16px;
-}
-
-.shutter-logo-part {
-  font-family: var(--font-serif);
-  font-size: clamp(2.4rem, 4.8vw, 3.8rem);
-  color: #ffffff;
-  letter-spacing: -0.01em;
-  opacity: 0;
-  transition: opacity 0.45s ease;
-}
-
-.shutter-logo-part.visible {
-  opacity: 1;
-}
-
-.logo-left-text {
-  font-weight: 400;
-  text-align: right;
-}
-
-.logo-right-text {
-  font-weight: 300;
-  font-style: italic;
-  color: #f7f4ed;
-  text-align: left;
-}
-
-/* Opening Split Transition */
-.cinema-loader.is-opening .shutter-left {
-  transform: translateX(-104%);
-}
-
-.cinema-loader.is-opening .shutter-right {
-  transform: translateX(104%);
-}
-
-/* Center Dynamic Display (Phrases & Counter) */
-.loader-center-content {
-  position: relative;
-  z-index: 5;
+  justify-content: center;
+  z-index: 25; /* Sits proudly in front of curtains during countdown */
+  pointer-events: none;
   text-align: center;
 }
 
@@ -314,8 +325,8 @@ img {
   flex-direction: column;
   align-items: center;
   opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.55s ease, transform 0.55s ease;
+  transform: translateY(12px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
 }
 
 .loader-phrase.visible {
@@ -325,53 +336,89 @@ img {
 
 .phrase-top {
   font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
   font-weight: 400;
   color: #ffffff;
+  letter-spacing: -0.01em;
 }
 
 .phrase-bottom {
   font-family: var(--font-serif);
-  font-size: clamp(1.8rem, 3.8vw, 2.8rem);
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
   font-style: italic;
   font-weight: 300;
   color: #f7f4ed;
   margin-top: 4px;
 }
 
-.loader-numeric-counter {
-  font-family: var(--font-serif);
-  font-size: clamp(3.2rem, 6.5vw, 4.8rem);
-  font-style: italic;
-  font-weight: 300;
-  color: #ffffff;
+.loader-counter-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   opacity: 0;
   transition: opacity 0.35s ease;
-  letter-spacing: 0.05em;
-  margin-top: -10px;
 }
 
-.loader-numeric-counter.visible {
+.loader-counter-container.visible {
   opacity: 1;
 }
 
+.loader-numeric-counter {
+  font-family: var(--font-serif);
+  font-size: clamp(3.6rem, 7.5vw, 5.5rem);
+  font-style: italic;
+  font-weight: 300;
+  color: #ffffff;
+  letter-spacing: 0.04em;
+  line-height: 1;
+}
+
+.loader-progress-track {
+  width: 180px;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 2px;
+  margin-top: 14px;
+  overflow: hidden;
+}
+
+.loader-progress-bar {
+  width: 0%;
+  height: 100%;
+  background: #ffffff;
+  transition: width 0.05s linear;
+}
+
+.loader-footer-meta {
+  position: fixed;
+  bottom: 24px;
+  left: 4%;
+  right: 4%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.35);
+  z-index: 30;
+  pointer-events: none;
+}
+
 @media (max-width: 768px) {
-  .loader-aperture-box {
-    width: 92vw;
-    height: 380px;
+  .loader-film-strip {
+    display: none; /* Clean on mobile */
   }
-  .film-vignette {
-    width: 65px;
-    height: 44px;
-  }
-  .loader-film-strip.left-strip {
-    left: -10px;
-  }
-  .loader-film-strip.right-strip {
-    right: -10px;
-  }
-  .shutter-logo-part {
+  .curtain-brand-text {
     font-size: 2.2rem;
+  }
+  .phrase-top, .phrase-bottom {
+    font-size: 1.8rem;
+  }
+  .loader-numeric-counter {
+    font-size: 3.2rem;
+  }
+  .loader-footer-meta {
+    display: none;
   }
 }
 
