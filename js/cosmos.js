@@ -373,7 +373,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const lbNext = document.getElementById('lb-next');
 
   // Collect all interactive cards across the page
-  const clickables = Array.from(document.querySelectorAll('[data-lightbox="true"], .orbit-card, .moodboard-card, .resurface-item, .world-card'));
+  const clickables = Array.from(document.querySelectorAll('[data-lightbox="true"], .orbit-card, .moodboard-card, .resurface-item, .world-card, .reel-card'));
   let currentIndex = 0;
 
   function openLightbox(item) {
