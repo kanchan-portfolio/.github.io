@@ -516,4 +516,192 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
+  // =========================================================================
+  // 12. 3D CYLINDRICAL CURVED PANORAMA EXHIBITION (Dusk & Moss Inspired)
+  // =========================================================================
+  const panoramaViewport = document.getElementById('panorama-viewport');
+  const panoramaCards = document.querySelectorAll('.panorama-card');
+  const panoramaPrevBtn = document.getElementById('panorama-prev-btn');
+  const panoramaNextBtn = document.getElementById('panorama-next-btn');
+  const dotsContainer = document.getElementById('panorama-dots-container');
+  const activeTitle = document.getElementById('panorama-active-title');
+  const activeTag = document.getElementById('panorama-active-tag');
+  const activeDesc = document.getElementById('panorama-active-desc');
+  const activeBtn = document.getElementById('panorama-active-btn');
+
+  if (panoramaViewport && panoramaCards.length > 0) {
+    const totalCards = panoramaCards.length;
+    const angleStep = 360 / totalCards; // 36 deg per card
+    let currentAngle = 0;
+    let targetAngle = 0;
+    let isDragging = false;
+    let startX = 0;
+    let lastActiveIdx = -1;
+    let isHovered = false;
+
+    // Create Navigation Dots
+    if (dotsContainer) {
+      dotsContainer.innerHTML = '';
+      for (let i = 0; i < totalCards; i++) {
+        const dot = document.createElement('button');
+        dot.className = `panorama-dot ${i === 0 ? 'active' : ''}`;
+        dot.setAttribute('aria-label', `Go to scene ${i + 1}`);
+        dot.addEventListener('click', () => {
+          targetAngle = -i * angleStep;
+        });
+        dotsContainer.appendChild(dot);
+      }
+    }
+
+    function updatePlaque(card, idx) {
+      if (idx === lastActiveIdx) return;
+      lastActiveIdx = idx;
+
+      const title = card.getAttribute('data-title') || '';
+      const tag = card.getAttribute('data-tag') || '';
+      const desc = card.getAttribute('data-desc') || '';
+      const src = card.getAttribute('data-src') || '';
+
+      if (activeTitle) activeTitle.textContent = title;
+      if (activeTag) activeTag.innerHTML = tag;
+      if (activeDesc) activeDesc.textContent = desc;
+      if (activeBtn) {
+        activeBtn.setAttribute('data-src', src);
+        activeBtn.setAttribute('data-title', title);
+      }
+
+      // Update dots
+      if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.panorama-dot');
+        dots.forEach((d, dIdx) => {
+          d.classList.toggle('active', dIdx === idx);
+        });
+      }
+    }
+
+    function renderCylinder() {
+      const radius = window.innerWidth < 768 ? 480 : (window.innerWidth < 1200 ? 620 : 720);
+
+      // Autoplay drift when user is not dragging or hovering
+      if (!isDragging && !isHovered) {
+        targetAngle -= 0.04;
+      }
+
+      // Smooth Lerp
+      currentAngle += (targetAngle - currentAngle) * 0.1;
+
+      let closestIdx = 0;
+      let minDiff = 9999;
+
+      panoramaCards.forEach((card, idx) => {
+        // Angular difference from 0 (center)
+        let diff = ((idx * angleStep + currentAngle) % 360 + 540) % 360 - 180;
+        const absDiff = Math.abs(diff);
+
+        if (absDiff < minDiff) {
+          minDiff = absDiff;
+          closestIdx = idx;
+        }
+
+        if (absDiff > 96) {
+          card.style.display = 'none';
+        } else {
+          card.style.display = 'block';
+          const rad = diff * (Math.PI / 180);
+          const x = Math.sin(rad) * radius;
+          const z = (Math.cos(rad) - 1) * radius;
+          const rotY = -diff;
+
+          card.style.transform = `translateX(${x.toFixed(1)}px) translateZ(${z.toFixed(1)}px) rotateY(${rotY.toFixed(1)}deg)`;
+
+          const opacity = Math.max(0.12, 1 - Math.pow(absDiff / 96, 1.6) * 0.78);
+          card.style.opacity = opacity.toFixed(2);
+
+          if (absDiff < angleStep / 2) {
+            card.classList.add('is-center');
+          } else {
+            card.classList.remove('is-center');
+          }
+        }
+      });
+
+      updatePlaque(panoramaCards[closestIdx], closestIdx);
+      requestAnimationFrame(renderCylinder);
+    }
+
+    renderCylinder();
+
+    // Drag / Touch Event Listeners
+    panoramaViewport.addEventListener('mouseenter', () => { isHovered = true; });
+    panoramaViewport.addEventListener('mouseleave', () => { 
+      isHovered = false; 
+      isDragging = false; 
+    });
+
+    panoramaViewport.addEventListener('mousedown', (e) => {
+      isDragging = true;
+      startX = e.clientX;
+    });
+
+    window.addEventListener('mousemove', (e) => {
+      if (!isDragging) return;
+      const deltaX = e.clientX - startX;
+      targetAngle += deltaX * 0.22;
+      startX = e.clientX;
+    });
+
+    window.addEventListener('mouseup', () => {
+      if (isDragging) {
+        isDragging = false;
+        // Snap to nearest scene
+        targetAngle = Math.round(targetAngle / angleStep) * angleStep;
+      }
+    });
+
+    // Touch Support for Mobile / iPad
+    panoramaViewport.addEventListener('touchstart', (e) => {
+      if (e.touches.length === 1) {
+        isDragging = true;
+        startX = e.touches[0].clientX;
+      }
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      if (!isDragging || e.touches.length !== 1) return;
+      const deltaX = e.touches[0].clientX - startX;
+      targetAngle += deltaX * 0.24;
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+
+    window.addEventListener('touchend', () => {
+      if (isDragging) {
+        isDragging = false;
+        targetAngle = Math.round(targetAngle / angleStep) * angleStep;
+      }
+    });
+
+    // Click on Card
+    panoramaCards.forEach((card, idx) => {
+      card.addEventListener('click', () => {
+        if (!card.classList.contains('is-center')) {
+          targetAngle = -idx * angleStep;
+        }
+      });
+    });
+
+    // Arrow Buttons
+    if (panoramaPrevBtn) {
+      panoramaPrevBtn.addEventListener('click', () => {
+        targetAngle = Math.round(targetAngle / angleStep) * angleStep + angleStep;
+      });
+    }
+
+    if (panoramaNextBtn) {
+      panoramaNextBtn.addEventListener('click', () => {
+        targetAngle = Math.round(targetAngle / angleStep) * angleStep - angleStep;
+      });
+    }
+  }
+
 });
