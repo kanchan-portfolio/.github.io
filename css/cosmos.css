@@ -129,7 +129,7 @@ img {
 }
 
 /* Rendering performance containment for smooth 60fps scrolling */
-.orbit-card, .moodboard-card, .resurface-item, .world-card, .photo-card-wrapper, .cinema-reel-frame {
+.orbit-card, .moodboard-card, .resurface-item, .world-card, .photo-card-wrapper, .cinema-reel-frame, .wardrobe-hanger-slot {
   contain: content;
   content-visibility: auto;
 }
@@ -1982,6 +1982,372 @@ img {
     margin: 16px;
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+
+/* ==========================================================================
+   INTERACTIVE WARDROBE RACK SECTION (Pinterest Closet Animation)
+   ========================================================================== */
+.wardrobe-rack-section {
+  position: relative;
+  overflow: hidden;
+  padding: 80px 20px 90px 20px;
+}
+
+/* Studio Matrix Wall Background */
+.wardrobe-wall-bg {
+  position: absolute;
+  inset: 0;
+  background-color: var(--card-bg-solid);
+  background-image: radial-gradient(rgba(255, 255, 255, 0.1) 1px, transparent 1px);
+  background-size: 32px 32px;
+  opacity: 0.6;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body.light-theme .wardrobe-wall-bg {
+  background-color: #f6f5f2;
+  background-image: radial-gradient(rgba(0, 0, 0, 0.12) 1px, transparent 1px);
+}
+
+.wardrobe-stage-wrapper {
+  position: relative;
+  z-index: 1;
+  max-width: 1140px;
+  margin: 50px auto 30px auto;
+  perspective: 1200px;
+  -webkit-perspective: 1200px;
+}
+
+/* The Chrome Wardrobe Rod & Wall Mounts */
+.wardrobe-rod-assembly {
+  position: relative;
+  width: 100%;
+  height: 14px;
+  margin-bottom: -10px;
+  z-index: 5;
+}
+
+.wardrobe-chrome-rod {
+  width: 100%;
+  height: 12px;
+  background: linear-gradient(180deg, #ffffff 0%, #d8d8d8 30%, #8c8c8c 70%, #4a4a4a 100%);
+  border-radius: 6px;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.8);
+  position: relative;
+}
+
+.wardrobe-rod-bracket {
+  position: absolute;
+  top: -8px;
+  width: 18px;
+  height: 28px;
+  background: linear-gradient(180deg, #999, #555);
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+}
+.wardrobe-rod-bracket.left { left: 0; }
+.wardrobe-rod-bracket.right { right: 0; }
+
+/* The Hangers Row Container */
+.wardrobe-hangers-row {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0 20px;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  gap: 16px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: 24px;
+}
+
+/* Individual Hanger Slot */
+.wardrobe-hanger-slot {
+  position: relative;
+  flex: 0 0 120px;
+  width: 120px;
+  height: 380px;
+  cursor: pointer;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1), 
+              margin 0.45s cubic-bezier(0.22, 1, 0.36, 1), 
+              z-index 0.3s ease;
+  user-select: none;
+}
+
+/* Hanger Unit */
+.wardrobe-hanger-unit {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transform-origin: center top;
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  transition: transform 0.48s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+  transform: rotateY(-54deg);
+}
+
+/* Metal Hook */
+.hanger-hook {
+  width: 16px;
+  height: 24px;
+  border: 3px solid #e0e0e0;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  background: transparent;
+  margin-bottom: -2px;
+  position: relative;
+  z-index: 6;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+}
+
+/* Wooden Hanger Bar */
+.hanger-wood {
+  width: 150px;
+  height: 18px;
+  background: linear-gradient(180deg, #96613d 0%, #5a3821 100%);
+  border-radius: 10px 10px 4px 4px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.25);
+  position: relative;
+  z-index: 5;
+}
+
+/* Garment Cutout / Silhouette Card */
+.garment-body {
+  position: relative;
+  width: 165px;
+  height: 320px;
+  margin-top: -6px;
+  border-radius: 14px 14px 20px 20px;
+  overflow: hidden;
+  background: #0a0b10;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.6);
+  transition: transform 0.45s ease, box-shadow 0.45s ease, border-color 0.3s ease;
+}
+
+.garment-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s ease;
+}
+
+.garment-crease-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, 
+    rgba(255, 255, 255, 0.08) 0%, 
+    rgba(0, 0, 0, 0.25) 30%, 
+    rgba(255, 255, 255, 0.05) 55%, 
+    rgba(0, 0, 0, 0.4) 100%);
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+}
+
+.garment-tag-chip {
+  position: absolute;
+  bottom: 12px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  white-space: nowrap;
+}
+
+/* ==========================================================================
+   INTERACTION STATES: Swivel 90° Forward & Slide Neighbors Aside
+   ========================================================================== */
+
+/* Active Frontal Swivel */
+.wardrobe-hanger-slot.is-active {
+  z-index: 10;
+  flex: 0 0 190px;
+  width: 190px;
+}
+
+.wardrobe-hanger-slot.is-active .wardrobe-hanger-unit {
+  transform: rotateY(0deg) translateZ(40px) scale(1.06);
+}
+
+.wardrobe-hanger-slot.is-active .garment-body {
+  border-color: rgba(225, 48, 108, 0.6);
+  box-shadow: 0 26px 65px rgba(0, 0, 0, 0.7), 0 0 30px rgba(225, 48, 108, 0.3);
+}
+
+.wardrobe-hanger-slot.is-active .garment-crease-overlay {
+  opacity: 0.2;
+}
+
+.wardrobe-hanger-slot.is-active .garment-body img {
+  transform: scale(1.03);
+}
+
+/* Slide Neighbors to Left */
+.wardrobe-hanger-slot.slide-left {
+  transform: translateX(-18px);
+}
+
+.wardrobe-hanger-slot.slide-left .wardrobe-hanger-unit {
+  transform: rotateY(-62deg);
+}
+
+/* Slide Neighbors to Right */
+.wardrobe-hanger-slot.slide-right {
+  transform: translateX(18px);
+}
+
+.wardrobe-hanger-slot.slide-right .wardrobe-hanger-unit {
+  transform: rotateY(-46deg);
+}
+
+/* Active Look Floating Details Plaque */
+.wardrobe-details-plaque {
+  max-width: 680px;
+  margin: 36px auto 0 auto;
+  padding: 24px 32px;
+  background: var(--card-bg-solid);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  box-shadow: var(--shadow-card);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  position: relative;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.wardrobe-plaque-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #f09433;
+}
+
+.wardrobe-plaque-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  font-weight: 400;
+  color: var(--text-primary);
+  margin: 0;
+  letter-spacing: -0.01em;
+}
+
+.wardrobe-plaque-desc {
+  font-size: 14px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 540px;
+  margin: 0;
+}
+
+.wardrobe-examine-btn {
+  margin-top: 8px;
+  padding: 10px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  border-radius: 9999px;
+  background: var(--badge-bg);
+  border: 1px solid var(--card-border);
+  color: var(--text-primary);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  text-decoration: none;
+}
+
+.wardrobe-examine-btn:hover {
+  background: #fff;
+  color: #000;
+  transform: translateY(-2px);
+}
+
+/* Continuous Bottom Marquee Ticker (Exact to video) */
+.wardrobe-ticker-strip {
+  width: 100%;
+  overflow: hidden;
+  background: #08090e;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 12px 0;
+  margin-top: 50px;
+  position: relative;
+  z-index: 1;
+}
+
+.wardrobe-ticker-track {
+  display: flex;
+  white-space: nowrap;
+  gap: 28px;
+  width: max-content;
+  animation: wardrobeTicker 22s linear infinite;
+}
+
+.wardrobe-ticker-text {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  display: inline-flex;
+  align-items: center;
+  gap: 28px;
+}
+
+.wardrobe-ticker-text span.dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #e1306c;
+}
+
+@keyframes wardrobeTicker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .wardrobe-hanger-slot {
+    flex: 0 0 100px;
+    width: 100px;
+    height: 330px;
+  }
+  .wardrobe-hanger-slot.is-active {
+    flex: 0 0 150px;
+    width: 150px;
+  }
+  .hanger-wood {
+    width: 120px;
+  }
+  .garment-body {
+    width: 135px;
+    height: 270px;
+  }
+  .wardrobe-hangers-row {
+    justify-content: flex-start;
   }
 }
 

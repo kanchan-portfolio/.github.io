@@ -516,4 +516,54 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+
+  // =========================================================================
+  // 12. INTERACTIVE WARDROBE CLOSET RACK (Swivel & Dynamic Physics Spacing)
+  // =========================================================================
+  const rackSlots = document.querySelectorAll('.wardrobe-hanger-slot');
+  const rackTitle = document.getElementById('rack-active-title');
+  const rackTag = document.getElementById('rack-active-tag');
+  const rackDesc = document.getElementById('rack-active-desc');
+  const rackBtn = document.getElementById('rack-active-btn');
+
+  function activateHanger(slot, index) {
+    if (!slot) return;
+    
+    rackSlots.forEach((s, idx) => {
+      s.classList.remove('is-active', 'slide-left', 'slide-right');
+      if (idx === index) {
+        s.classList.add('is-active');
+      } else if (idx < index) {
+        s.classList.add('slide-left');
+      } else {
+        s.classList.add('slide-right');
+      }
+    });
+
+    const title = slot.getAttribute('data-title') || 'Editorial Look';
+    const tag = slot.getAttribute('data-tag') || 'Lookbook';
+    const desc = slot.getAttribute('data-desc') || '';
+    const src = slot.getAttribute('data-src') || '';
+
+    if (rackTitle) rackTitle.textContent = title;
+    if (rackTag) rackTag.textContent = tag;
+    if (rackDesc) rackDesc.textContent = desc;
+    if (rackBtn) {
+      rackBtn.setAttribute('data-src', src);
+      rackBtn.setAttribute('data-title', title);
+    }
+  }
+
+  if (rackSlots.length > 0) {
+    const defaultIdx = Math.floor(rackSlots.length / 2);
+    activateHanger(rackSlots[defaultIdx], defaultIdx);
+
+    rackSlots.forEach((slot, idx) => {
+      slot.addEventListener('mouseenter', () => activateHanger(slot, idx));
+      slot.addEventListener('click', () => {
+        activateHanger(slot, idx);
+      });
+    });
+  }
+
 });
