@@ -16,179 +16,66 @@
 
   <!-- Cosmos Stylesheet -->
   <link rel="stylesheet" href="css/cosmos.css">
+  <!-- Aren Vale Opening Stylesheet -->
+  <link rel="stylesheet" href="css/arenvale.css">
 </head>
 <body>
 
   <!-- =========================================================================
-       1. CINEMATIC FULLSCREEN SPLIT-CURTAIN PRELOADER (Jason Bergh Director UI)
+       1. AREN VALE BEND LOADER PRELOADER (Exact to arenvale.framer.photos)
        ========================================================================= -->
-  <div id="cosmos-loader" class="cinema-loader" aria-label="Loading Experience">
-    <!-- Starfield & Film Grain Ambient Layer -->
-    <div class="loader-galaxy-stars" aria-hidden="true"></div>
-    <div class="loader-film-grain" aria-hidden="true"></div>
-
-    <!-- Skip Intro Button -->
-    <button type="button" class="loader-skip-btn" id="loader-skip-btn" aria-label="Skip Intro">Skip Intro &rarr;</button>
-
-    <!-- Theatrical Left Curtain (Covers Left Half 50.1vw) -->
-    <div class="loader-curtain curtain-left" id="curtain-left">
-      <!-- Vignettes along curtain edge -->
-      <div class="loader-film-strip strip-left" aria-hidden="true">
-        <div class="film-vignette"><img src="assets/slide_10_1.jpg" alt="" loading="eager"></div>
-        <div class="film-vignette"><img src="assets/mulaqaat_ep1.jpg" alt="" loading="eager"></div>
-        <div class="film-vignette"><img src="assets/slide_7_4.jpg" alt="" loading="eager"></div>
-      </div>
-      <!-- Brand Signature (Left Half) -->
-      <div class="curtain-brand-wrap brand-left-wrap">
-        <span class="curtain-brand-text brand-left-text" id="shutter-logo-left">Kanchan</span>
-      </div>
+  <div id="arenvale-loader" class="arenvale-loader" aria-label="Developing Archive">
+    <div class="arenvale-loader-frame">
+      <img src="assets/slide_10_1.jpg" alt="Portfolio Preview" id="arenvale-loader-img"/>
     </div>
-
-    <!-- Theatrical Right Curtain (Covers Right Half 50.1vw) -->
-    <div class="loader-curtain curtain-right" id="curtain-right">
-      <!-- Vignettes along curtain edge -->
-      <div class="loader-film-strip strip-right" aria-hidden="true">
-        <div class="film-vignette"><img src="assets/yt_anupam_kher.jpg" alt="" loading="eager"></div>
-        <div class="film-vignette"><img src="assets/slide_1_1.jpg" alt="" loading="eager"></div>
-        <div class="film-vignette"><img src="assets/yt_saurabh_shukla.jpg" alt="" loading="eager"></div>
-      </div>
-      <!-- Brand Signature (Right Half) -->
-      <div class="curtain-brand-wrap brand-right-wrap">
-        <span class="curtain-brand-text brand-right-text" id="shutter-logo-right">Choudhary</span>
-      </div>
-    </div>
-
-    <!-- Center Stage (Manifesto & Numeric Counter) -->
-    <div class="loader-center-stage">
-      <!-- Phase 1: Director Manifesto -->
-      <div class="loader-phrase" id="loader-phrase">
-        <span class="phrase-top">Intimate, Raw</span>
-        <span class="phrase-bottom">Human Storytelling</span>
-      </div>
-
-      <!-- Phase 2: Numeric Counter -->
-      <div class="loader-counter-container" id="loader-counter-box">
-        <div class="loader-numeric-counter" id="loader-counter">00</div>
-        <div class="loader-progress-track">
-          <div class="loader-progress-bar" id="loader-progress-bar"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Meta Label -->
-    <div class="loader-footer-meta">
-      <span>KANCHAN CHOUDHARY® &bull; PORTFOLIO</span>
-      <span>4K CINEMA &bull; HAUTE COUTURE</span>
+    <div class="arenvale-loader-bar">
+      <span class="loader-bar-title">Kanchan Choudhary</span>
+      <span class="loader-bar-status">Developing Archive...</span>
+      <span class="loader-bar-counter" id="arenvale-counter">000</span>
     </div>
   </div>
 
-
   <!-- =========================================================================
-       FLOATING TOP NAVIGATION PILL
+       AREN VALE FIXED TOP EDITORIAL NAVIGATION
        ========================================================================= -->
-  <div class="cosmos-nav-wrapper">
-    <nav class="cosmos-nav">
-      <a href="index.html" class="nav-brand">KANCHAN<span style="font-size:0.7em; vertical-align:super;">®</span></a>
-      <div class="nav-links">
-        <a href="index.html" class="nav-link active">Home</a>
-        <a href="work.html" class="nav-link">Works</a>
-      </div>
-      <a href="mailto:kanchanc0410@gmail.com" class="nav-cta-btn">Get in touch</a>
+  <header class="arenvale-header" role="banner">
+    <div class="header-left">
+      <a href="index.html" class="header-brand">Kanchan Choudhary</a>
+      <span class="header-role">Costume Director &amp; Stylist</span>
+    </div>
+    <div class="header-center">
+      Open for select cinema &amp; editorial commissions, 2026
+    </div>
+    <nav class="header-right" aria-label="Main navigation">
+      <a href="work.html" class="header-nav-link active">Works</a>
+      <a href="#order" class="header-nav-link">Archive</a>
+      <a href="#world" class="header-nav-link">About</a>
+      <a href="mailto:choudharykanchan12@gmail.com" class="header-nav-link">Contact</a>
     </nav>
-  </div>
-
-
-  <!-- =========================================================================
-       BOTTOM FLOATING CONTROLS: Dark | Light Switch & Scroll Indicator
-       ========================================================================= -->
-  <div class="bottom-controls-left">
-    <div class="theme-pill-switch">
-      <button type="button" class="theme-btn active" id="theme-btn-dark" aria-label="Dark Mode">
-        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.64 13a1 1 0 0 0-1.05-.14 8.05 8.05 0 0 1-3.37.73A8.15 8.15 0 0 1 9.08 5.49a8.59 8.59 0 0 1 .25-2A1 1 0 0 0 8 2.36a10.14 10.14 0 1 0 14 11.69 1 1 0 0 0-.36-1.05z"/></svg>
-        Dark
-      </button>
-      <button type="button" class="theme-btn" id="theme-btn-light" aria-label="Light Mode">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
-        Light
-      </button>
-    </div>
-  </div>
-
-  <div class="bottom-controls-right">
-    <div class="scroll-hint">
-      <span>Scroll to explore</span>
-      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-    </div>
-  </div>
-
+  </header>
 
   <!-- =========================================================================
-       HERO SECTION (Cosmic Constellation Vortex 00:01 - 00:07)
+       2. HERO SECTION: 3D BEND CAROUSEL RIBBON (Exact to arenvale.framer.photos)
        ========================================================================= -->
-  <section class="hero-cosmos" id="hero">
-    <canvas id="cosmos-starfield"></canvas>
+  <section class="hero-arenvale" id="hero">
+    <canvas id="bend-carousel-canvas"></canvas>
 
-    <!-- 3D Orbit Layer with Floating Kanchan Moodboard Cards -->
-    <div class="hero-vortex-orbit">
-      <div class="orbit-layer">
-
-        <!-- Card 1: High-Fashion Portrait -->
-        <div class="orbit-card card-orbit-1" data-lightbox="true" data-src="assets/slide_10_1.jpg" data-title="High-Fashion Editorial Portrait">
-          <img src="assets/slide_10_1.jpg" alt="High-Fashion Editorial Portrait" loading="eager"/>
-          <span class="orbit-badge">Editorial</span>
-        </div>
-
-        <!-- Card 2: Studio Lighting Series -->
-        <div class="orbit-card card-orbit-2" data-lightbox="true" data-src="assets/slide_5_1.jpg" data-title="Sculptural Rim Lighting">
-          <img src="assets/slide_5_1.jpg" alt="Sculptural Rim Lighting" loading="eager"/>
-          <span class="orbit-badge">Studio</span>
-        </div>
-
-        <!-- Card 3: KIFF 4K Celebrity Masterclass (Anupam Kher) -->
-        <div class="orbit-card card-orbit-3" data-lightbox="true" data-video-id="Sh0jTGE660o" data-title="Anupam Kher Unfiltered — KIFF Masterclass">
-          <img src="assets/yt_anupam_kher.jpg" alt="Anupam Kher KIFF Masterclass" loading="eager"/>
-          <span class="orbit-badge" style="background:#e50914; color:#fff;">▶ 4K Video</span>
-        </div>
-
-        <!-- Card 4: Songti Cinematography Still -->
-        <div class="orbit-card card-orbit-4" data-lightbox="true" data-src="assets/slide_7_1.jpg" data-title="Songti Film Production Still">
-          <img src="assets/slide_7_1.jpg" alt="Songti Film Production Still" loading="eager"/>
-          <span class="orbit-badge">Cinema</span>
-        </div>
-
-        <!-- Card 5: Monochrome & Tone -->
-        <div class="orbit-card card-orbit-5" data-lightbox="true" data-src="assets/slide_13_1.jpg" data-title="Deep Monochrome Contrast">
-          <img src="assets/slide_13_1.jpg" alt="Deep Monochrome Contrast" loading="eager"/>
-          <span class="orbit-badge">Mono</span>
-        </div>
-
-        <!-- Card 6: Mood & Styling Series -->
-        <div class="orbit-card card-orbit-6" data-lightbox="true" data-src="assets/slide_6_1.jpg" data-title="Natural Daylight Mood">
-          <img src="assets/slide_6_1.jpg" alt="Natural Daylight Mood" loading="eager"/>
-          <span class="orbit-badge">Mood</span>
-        </div>
-
-        <!-- Card 7: Ambient Light Series -->
-        <div class="orbit-card card-orbit-7" data-lightbox="true" data-src="assets/slide_8_1.jpg" data-title="Organic Daylight Reflections">
-          <img src="assets/slide_8_1.jpg" alt="Organic Daylight Reflections" loading="eager"/>
-          <span class="orbit-badge">Ambient</span>
-        </div>
-
+    <!-- Aren Vale Editorial Footer Overlay -->
+    <div class="arenvale-footer-overlay">
+      <div class="arenvale-bio-box">
+        <p class="arenvale-bio-statement">
+          Kanchan Choudhary is an auteur costume director and visual stylist in Mumbai, designing narrative worlds for cinema, masterclasses, and haute couture.
+        </p>
+        <p class="arenvale-bio-sub">
+          Scroll or drag to browse, click a frame to open it.
+        </p>
       </div>
-    </div>
-
-    <!-- Center Hero Typography -->
-    <div class="hero-content">
-      <h1 class="hero-title">
-        KANCHAN CHOUDHARY<span class="trademark">®</span>
-      </h1>
-      <div class="hero-subtitle-container">
-        <span class="hero-static-sub">A visual universe for</span>
-        <span id="hero-cycle" class="hero-cycling-word">directors</span>
+      <div class="arenvale-footer-controls">
+        <button type="button" class="theme-toggle-pill" id="arenvale-theme-toggle">☾ DARK</button>
+        <a href="#order" class="scroll-down-hint">Scroll to explore &darr;</a>
       </div>
     </div>
   </section>
-
 
   <!-- =========================================================================
        STICKY FLOATING INPUT PILL (Transform from 00:08 - 00:11)
@@ -1040,6 +927,9 @@
     </div>
   </div>
 
+  <!-- Vendor Three.js & Aren Vale Scripts -->
+  <script src="js/vendor/three.min.js"></script>
+  <script src="js/arenvale.js"></script>
   <!-- Cosmos Scripts -->
   <script src="js/cosmos.js"></script>
 </body>
