@@ -2174,24 +2174,6 @@ img {
   filter: brightness(1.04);
 }
 
-/* Museum Visitor Observer Figure (Exact to video) */
-.panorama-observer {
-  position: absolute;
-  bottom: 8px;
-  left: 50%;
-  transform: translateX(-50%);
-  width: 86px;
-  z-index: 22;
-  pointer-events: none;
-  filter: drop-shadow(0 16px 32px rgba(0, 0, 0, 0.95));
-}
-
-.observer-svg {
-  width: 100%;
-  height: auto;
-  display: block;
-}
-
 /* Active Scene Metadata Plaque */
 .panorama-scene-meta {
   text-align: center;
@@ -2330,9 +2312,6 @@ img {
     width: 260px;
     height: 370px;
   }
-  .panorama-observer {
-    width: 74px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -2346,10 +2325,6 @@ img {
     width: 210px;
     height: 300px;
     border-radius: 14px;
-  }
-  .panorama-observer {
-    width: 62px;
-    bottom: -4px;
   }
   .panorama-main-title {
     font-size: 2.1rem;
