@@ -1,0 +1,607 @@
+/* ==========================================================================
+   HALVOR 3D SPHERE GALLERY & EDITORIAL ARCHIVE (work.html)
+   Inspired by Halvor Rygg (https://halvor.framer.website)
+   ========================================================================== */
+
+:root {
+  --bg-color: #ffffff;
+  --text-primary: #000000;
+  --text-muted: #707070;
+  --border-color: #ebebeb;
+  --canvas-bg: #ffffff;
+  --nav-bg: rgba(255, 255, 255, 0.88);
+  --row-hover-bg: #000000;
+  --row-hover-text: #ffffff;
+  --badge-bg: #000000;
+  --badge-text: #ffffff;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Newsreader', Georgia, serif;
+}
+
+/* Dark Galaxy Universe Theme */
+body.dark-theme {
+  --bg-color: #050608;
+  --text-primary: #ffffff;
+  --text-muted: #888888;
+  --border-color: rgba(255, 255, 255, 0.12);
+  --canvas-bg: #050608;
+  --nav-bg: rgba(5, 6, 8, 0.88);
+  --row-hover-bg: #ffffff;
+  --row-hover-text: #000000;
+  --badge-bg: #ffffff;
+  --badge-text: #000000;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: var(--bg-color);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* --------------------------------------------------------------------------
+   1. FIXED TOP NAVIGATION (Exact to Halvor)
+   -------------------------------------------------------------------------- */
+.halvor-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 56px;
+  padding: 0 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 100;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.nav-left-brand {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+.brand-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  font-size: 0.88rem;
+}
+
+.brand-subtitle {
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.nav-center-menu {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nav-tab-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: 700;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.nav-tab-btn:hover {
+  color: var(--text-primary);
+}
+
+.nav-tab-btn.active {
+  color: var(--text-primary);
+  background: rgba(128, 128, 128, 0.12);
+}
+
+.nav-right-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  color: var(--text-muted);
+  font-size: 0.75rem;
+}
+
+.live-clock-pill {
+  color: var(--text-primary);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Theme Switch Toggle Button */
+.theme-toggle-btn {
+  background: none;
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  padding: 4px 10px;
+  border-radius: 999px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  transition: all 0.2s ease;
+}
+
+.theme-toggle-btn:hover {
+  border-color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   2. 3D SPHERE CANVAS & VIEWPORT
+   -------------------------------------------------------------------------- */
+.halvor-gallery-view {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  overflow: hidden;
+  cursor: grab;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.halvor-gallery-view:active {
+  cursor: grabbing;
+}
+
+.halvor-gallery-view.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+#sphere-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  outline: none;
+}
+
+/* Center Eye Brand Watermark (Exact to Halvor "HALVOR (◉) RYGG") */
+.halvor-center-watermark {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 20;
+  pointer-events: none;
+  user-select: none;
+  font-family: var(--font-sans);
+  font-size: clamp(1.4rem, 3.2vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  opacity: 0.85;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  mix-blend-mode: difference;
+  transition: opacity 0.3s ease;
+}
+
+.halvor-center-watermark.is-faded {
+  opacity: 0.15;
+}
+
+.watermark-eye-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+}
+
+/* --------------------------------------------------------------------------
+   3. BOTTOM EDITORIAL BAR & ACTIVE PROJECT TOOLBAR
+   -------------------------------------------------------------------------- */
+.halvor-bottom-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 52px;
+  padding: 0 28px;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--nav-bg);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid var(--border-color);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+/* State A: Default Instruction Caption */
+.gallery-instruction-text {
+  text-align: center;
+  color: var(--text-muted);
+  max-width: 900px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: opacity 0.25s ease;
+}
+
+.gallery-instruction-text.is-hidden {
+  display: none;
+}
+
+/* State B: Active Frame Focus Toolbar */
+.halvor-active-toolbar {
+  display: none;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.halvor-active-toolbar.is-active {
+  display: flex;
+}
+
+.toolbar-side-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.toolbar-center-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  text-align: center;
+}
+
+.focus-project-title {
+  color: var(--text-primary);
+  font-weight: 800;
+  font-size: 0.88rem;
+  letter-spacing: -0.01em;
+}
+
+.focus-project-cat {
+  color: var(--text-muted);
+  font-size: 0.74rem;
+  font-weight: 600;
+}
+
+.halvor-btn {
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+.halvor-btn:hover {
+  background: var(--row-hover-bg);
+  color: var(--row-hover-text);
+}
+
+.halvor-btn.btn-action-primary {
+  background: var(--badge-bg);
+  color: var(--badge-text);
+}
+
+.halvor-btn.btn-action-primary:hover {
+  opacity: 0.85;
+}
+
+/* --------------------------------------------------------------------------
+   4. EDITORIAL WORKS ARCHIVE TABLE (/works Mode)
+   -------------------------------------------------------------------------- */
+.halvor-works-view {
+  position: relative;
+  z-index: 50;
+  min-height: 100vh;
+  padding: 80px 28px 80px 28px;
+  display: none;
+  background-color: var(--bg-color);
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.halvor-works-view.is-visible {
+  display: block;
+}
+
+.works-table-header {
+  display: grid;
+  grid-template-columns: 80px 3.2fr 1.8fr 1.4fr 90px;
+  padding: 18px 16px;
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  border-bottom: 2px solid var(--text-primary);
+  text-transform: uppercase;
+}
+
+.works-table-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.work-table-row {
+  display: grid;
+  grid-template-columns: 80px 3.2fr 1.8fr 1.4fr 90px;
+  align-items: center;
+  padding: 18px 16px;
+  border-bottom: 1px solid var(--border-color);
+  text-decoration: none;
+  color: var(--text-primary);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.2s ease;
+}
+
+.work-table-row:hover {
+  background-color: var(--row-hover-bg);
+  color: var(--row-hover-text);
+  padding-left: 24px;
+}
+
+.work-table-row:hover .row-muted {
+  color: var(--row-hover-text);
+  opacity: 0.75;
+}
+
+.row-no {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.row-title {
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.row-video-tag {
+  background: #e50914;
+  color: #ffffff;
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 2px;
+}
+
+.row-cat, .row-format {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+.row-year {
+  font-size: 0.8rem;
+  text-align: right;
+  color: var(--text-muted);
+}
+
+/* Floating Image Preview Follower */
+.halvor-hover-preview {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 350px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+  z-index: 1000;
+  opacity: 0;
+  transform: translate(-50%, -50%) scale(0.92);
+  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #111;
+}
+
+.halvor-hover-preview.is-active {
+  opacity: 1;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.halvor-hover-preview img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --------------------------------------------------------------------------
+   5. HALVOR PREVIEW MODAL (4K Masterclasses & High-Res Stills)
+   -------------------------------------------------------------------------- */
+.halvor-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.halvor-modal-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.halvor-modal-window {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  max-height: 90vh;
+  background: var(--bg-color);
+  color: var(--text-primary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 32px 90px rgba(0, 0, 0, 0.95);
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-media-wrap {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  background: #000;
+  overflow: hidden;
+}
+
+.modal-media-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #000;
+}
+
+.modal-media-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.modal-close-pill {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  background: rgba(0, 0, 0, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  color: #ffffff;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  z-index: 30;
+  transition: all 0.2s ease;
+}
+
+.modal-close-pill:hover {
+  background: #ffffff;
+  color: #000000;
+}
+
+.modal-info-bar {
+  padding: 24px 28px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-top: 1px solid var(--border-color);
+  gap: 20px;
+}
+
+.modal-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: -0.01em;
+  margin-bottom: 6px;
+}
+
+.modal-details {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   6. RESPONSIVE DESIGN (Mobile & Tablets)
+   -------------------------------------------------------------------------- */
+@media (max-width: 900px) {
+  .brand-subtitle {
+    display: none;
+  }
+  .works-table-header, .work-table-row {
+    grid-template-columns: 50px 2.5fr 1.5fr 70px;
+  }
+  .col-format, .row-format {
+    display: none;
+  }
+  .gallery-instruction-text {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 650px) {
+  .halvor-nav {
+    padding: 0 16px;
+  }
+  .nav-center-menu {
+    gap: 12px;
+  }
+  .nav-right-meta {
+    display: none;
+  }
+  .works-table-header, .work-table-row {
+    grid-template-columns: 40px 1fr 60px;
+    padding: 14px 10px;
+  }
+  .col-cat, .row-cat {
+    display: none;
+  }
+  .modal-media-wrap {
+    height: 280px;
+  }
+  .modal-info-bar {
+    flex-direction: column;
+    padding: 16px;
+  }
+}
