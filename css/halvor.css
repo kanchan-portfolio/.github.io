@@ -1,38 +1,29 @@
 /* ==========================================================================
-   HALVOR 3D SPHERE GALLERY & EDITORIAL ARCHIVE (work.html)
-   Inspired by Halvor Rygg (https://halvor.framer.website)
+   HALVOR 3D SPHERE GALLERY STYLESHEET
+   Recreates the exact Swiss minimalist editorial design of Halvor
+   (https://halvor.framer.website)
    ========================================================================== */
 
 :root {
   --bg-color: #ffffff;
-  --text-primary: #000000;
-  --text-muted: #707070;
-  --border-color: #ebebeb;
-  --canvas-bg: #ffffff;
-  --nav-bg: rgba(255, 255, 255, 0.88);
-  --row-hover-bg: #000000;
-  --row-hover-text: #ffffff;
-  --badge-bg: #000000;
-  --badge-text: #ffffff;
-  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-  --font-serif: 'Newsreader', Georgia, serif;
+  --bg-card: #f4f4f4;
+  --text-primary: #171717;
+  --text-muted: #737373;
+  --text-faint: #9a9a9a;
+  --border-color: rgba(0, 0, 0, 0.08);
+  --font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 }
 
-/* Dark Galaxy Universe Theme */
 body.dark-theme {
-  --bg-color: #050608;
+  --bg-color: #07080a;
+  --bg-card: #13151a;
   --text-primary: #ffffff;
   --text-muted: #888888;
-  --border-color: rgba(255, 255, 255, 0.12);
-  --canvas-bg: #050608;
-  --nav-bg: rgba(5, 6, 8, 0.88);
-  --row-hover-bg: #ffffff;
-  --row-hover-text: #000000;
-  --badge-bg: #ffffff;
-  --badge-text: #000000;
+  --text-faint: #555555;
+  --border-color: rgba(255, 255, 255, 0.1);
 }
 
-*, *::before, *::after {
+* {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -41,38 +32,36 @@ body.dark-theme {
 html, body {
   width: 100%;
   height: 100%;
-  overflow-x: hidden;
+  overflow: hidden;
   background-color: var(--bg-color);
   color: var(--text-primary);
-  font-family: var(--font-sans);
+  font-family: var(--font-family);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   transition: background-color 0.3s ease, color 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 /* --------------------------------------------------------------------------
-   1. FIXED TOP NAVIGATION (Exact to Halvor)
+   1. TOP EDITORIAL NAVIGATION BAR (Exact to Halvor Rygg)
    -------------------------------------------------------------------------- */
 .halvor-nav {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 56px;
+  height: 60px;
   padding: 0 28px;
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: center;
   z-index: 100;
-  background: var(--nav-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--border-color);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
+  letter-spacing: 0.06em;
   font-weight: 700;
-  letter-spacing: 0.04em;
   text-transform: uppercase;
-  user-select: none;
+  pointer-events: auto;
 }
 
 .nav-left-brand {
@@ -84,21 +73,20 @@ html, body {
 .brand-link {
   color: var(--text-primary);
   text-decoration: none;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  font-size: 0.88rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
 }
 
 .brand-subtitle {
   color: var(--text-muted);
-  font-size: 0.74rem;
   font-weight: 600;
+  font-size: 0.72rem;
 }
 
 .nav-center-menu {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 20px;
 }
 
 .nav-tab-btn {
@@ -109,11 +97,12 @@ html, body {
   font-weight: 700;
   color: var(--text-muted);
   cursor: pointer;
-  padding: 6px 12px;
+  padding: 6px 10px;
   border-radius: 4px;
-  transition: color 0.2s ease, background-color 0.2s ease;
+  transition: color 0.2s ease;
   text-decoration: none;
   text-transform: uppercase;
+  letter-spacing: 0.06em;
 }
 
 .nav-tab-btn:hover {
@@ -122,109 +111,125 @@ html, body {
 
 .nav-tab-btn.active {
   color: var(--text-primary);
-  background: rgba(128, 128, 128, 0.12);
+  font-weight: 800;
 }
 
 .nav-right-meta {
   display: flex;
   align-items: center;
   gap: 16px;
-  color: var(--text-muted);
-  font-size: 0.75rem;
 }
 
-.live-clock-pill {
-  color: var(--text-primary);
-  font-weight: 700;
-  font-variant-numeric: tabular-nums;
-}
-
-/* Theme Switch Toggle Button */
 .theme-toggle-btn {
   background: none;
-  border: 1px solid var(--border-color);
-  color: var(--text-primary);
-  padding: 4px 10px;
-  border-radius: 999px;
-  font-size: 0.68rem;
+  border: none;
+  font-family: inherit;
+  font-size: 0.72rem;
   font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
   cursor: pointer;
-  display: inline-flex;
-  align-items: center;
-  gap: 5px;
-  transition: all 0.2s ease;
+  padding: 4px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
 }
 
 .theme-toggle-btn:hover {
-  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.live-clock-pill {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  font-size: 0.74rem;
 }
 
 /* --------------------------------------------------------------------------
-   2. 3D SPHERE CANVAS & VIEWPORT
+   2. 3D CURVED SPHERE GALLERY VIEWPORT
    -------------------------------------------------------------------------- */
 .halvor-gallery-view {
-  position: fixed;
+  position: absolute;
   inset: 0;
   width: 100vw;
   height: 100vh;
-  z-index: 10;
   overflow: hidden;
-  cursor: grab;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.halvor-gallery-view:active {
-  cursor: grabbing;
-}
-
-.halvor-gallery-view.is-hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  background-color: var(--bg-color);
 }
 
 #sphere-canvas {
-  position: absolute;
-  inset: 0;
   width: 100%;
   height: 100%;
   display: block;
-  outline: none;
+  cursor: grab;
+  touch-action: none;
+}
+
+#sphere-canvas:active {
+  cursor: grabbing;
+}
+
+/* Iridescent Rainbow Spectral Halo Glow behind Sphere */
+.sphere-glow-backdrop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(920px, 90vw);
+  height: min(920px, 90vw);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 235, 205, 0.35) 0%,
+    rgba(215, 245, 255, 0.28) 25%,
+    rgba(235, 220, 255, 0.2) 48%,
+    rgba(255, 255, 255, 0) 72%
+  );
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+body.dark-theme .sphere-glow-backdrop {
+  background: radial-gradient(
+    circle,
+    rgba(80, 110, 160, 0.28) 0%,
+    rgba(120, 70, 150, 0.2) 35%,
+    rgba(0, 0, 0, 0) 70%
+  );
 }
 
 /* Center Eye Brand Watermark (Exact to Halvor "HALVOR (◉) RYGG") */
 .halvor-center-watermark {
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 20;
+  z-index: 2;
   pointer-events: none;
-  user-select: none;
-  font-family: var(--font-sans);
-  font-size: clamp(1.4rem, 3.2vw, 2.6rem);
-  font-weight: 800;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--text-primary);
-  opacity: 0.85;
   display: flex;
   align-items: center;
   gap: 12px;
-  mix-blend-mode: difference;
-  transition: opacity 0.3s ease;
+  font-family: var(--font-family);
+  font-size: 1.12rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--text-primary);
+  opacity: 0.85;
+  transition: opacity 0.35s cubic-bezier(0.33, 1, 0.68, 1);
+  user-select: none;
 }
 
 .halvor-center-watermark.is-faded {
-  opacity: 0.15;
+  opacity: 0;
 }
 
 .watermark-eye-icon {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 28px;
-  height: 28px;
+  opacity: 0.8;
 }
 
 /* --------------------------------------------------------------------------
@@ -235,380 +240,261 @@ html, body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 52px;
-  padding: 0 28px;
-  z-index: 100;
+  padding: 24px 32px;
+  z-index: 20;
   display: flex;
-  align-items: center;
   justify-content: center;
-  background: var(--nav-bg);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-top: 1px solid var(--border-color);
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  user-select: none;
+  align-items: center;
+  pointer-events: none;
 }
 
-/* State A: Default Instruction Caption */
 .gallery-instruction-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
   text-align: center;
-  color: var(--text-muted);
-  max-width: 900px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  transition: opacity 0.25s ease;
+  max-width: 880px;
+  line-height: 1.5;
+  text-transform: uppercase;
+  pointer-events: auto;
+  transition: opacity 0.3s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 .gallery-instruction-text.is-hidden {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
-/* State B: Active Frame Focus Toolbar */
+/* Active Project Controls (Fades in when an image is clicked) */
 .halvor-active-toolbar {
-  display: none;
-  width: 100%;
+  position: absolute;
+  bottom: 24px;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  gap: 14px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(12px);
+  transition: opacity 0.35s cubic-bezier(0.33, 1, 0.68, 1), transform 0.35s cubic-bezier(0.33, 1, 0.68, 1), visibility 0.35s;
 }
 
 .halvor-active-toolbar.is-active {
-  display: flex;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateY(0);
 }
 
-.toolbar-side-group {
+.toolbar-caption-text {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 12px;
-}
-
-.toolbar-center-meta {
-  display: flex;
-  align-items: center;
-  gap: 16px;
+  gap: 4px;
   text-align: center;
 }
 
 .focus-project-title {
-  color: var(--text-primary);
+  font-size: 1.05rem;
   font-weight: 800;
-  font-size: 0.88rem;
-  letter-spacing: -0.01em;
+  letter-spacing: 0.08em;
+  color: var(--text-primary);
+  text-transform: uppercase;
 }
 
 .focus-project-cat {
-  color: var(--text-muted);
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+  text-transform: uppercase;
 }
 
-.halvor-btn {
+.toolbar-actions-row {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.halvor-action-btn {
   background: none;
   border: none;
-  color: var(--text-primary);
   font-family: inherit;
   font-size: 0.75rem;
   font-weight: 800;
-  letter-spacing: 0.06em;
-  cursor: pointer;
-  padding: 6px 12px;
-  border-radius: 4px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 4px;
   transition: all 0.2s ease;
 }
 
-.halvor-btn:hover {
-  background: var(--row-hover-bg);
-  color: var(--row-hover-text);
+.halvor-action-btn:hover {
+  background: rgba(0, 0, 0, 0.06);
 }
 
-.halvor-btn.btn-action-primary {
-  background: var(--badge-bg);
-  color: var(--badge-text);
+body.dark-theme .halvor-action-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
 }
 
-.halvor-btn.btn-action-primary:hover {
-  opacity: 0.85;
-}
-
-/* --------------------------------------------------------------------------
-   4. EDITORIAL WORKS ARCHIVE TABLE (/works Mode)
-   -------------------------------------------------------------------------- */
-.halvor-works-view {
-  position: relative;
-  z-index: 50;
-  min-height: 100vh;
-  padding: 80px 28px 80px 28px;
-  display: none;
-  background-color: var(--bg-color);
-  max-width: 1400px;
-  margin: 0 auto;
-}
-
-.halvor-works-view.is-visible {
-  display: block;
-}
-
-.works-table-header {
-  display: grid;
-  grid-template-columns: 80px 3.2fr 1.8fr 1.4fr 90px;
-  padding: 18px 16px;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  color: var(--text-muted);
-  border-bottom: 2px solid var(--text-primary);
-  text-transform: uppercase;
-}
-
-.works-table-body {
-  display: flex;
-  flex-direction: column;
-}
-
-.work-table-row {
-  display: grid;
-  grid-template-columns: 80px 3.2fr 1.8fr 1.4fr 90px;
-  align-items: center;
-  padding: 18px 16px;
-  border-bottom: 1px solid var(--border-color);
-  text-decoration: none;
-  color: var(--text-primary);
-  font-size: 0.88rem;
-  font-weight: 700;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-  cursor: pointer;
-  transition: background-color 0.15s ease, color 0.15s ease, padding-left 0.2s ease;
-}
-
-.work-table-row:hover {
-  background-color: var(--row-hover-bg);
-  color: var(--row-hover-text);
-  padding-left: 24px;
-}
-
-.work-table-row:hover .row-muted {
-  color: var(--row-hover-text);
-  opacity: 0.75;
-}
-
-.row-no {
-  font-size: 0.78rem;
-  color: var(--text-muted);
-  font-variant-numeric: tabular-nums;
-}
-
-.row-title {
-  font-weight: 800;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.row-video-tag {
-  background: #e50914;
-  color: #ffffff;
-  font-size: 0.62rem;
-  font-weight: 800;
-  padding: 2px 6px;
-  border-radius: 2px;
-}
-
-.row-cat, .row-format {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-.row-year {
-  font-size: 0.8rem;
-  text-align: right;
-  color: var(--text-muted);
-}
-
-/* Floating Image Preview Follower */
-.halvor-hover-preview {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 260px;
-  height: 350px;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
-  pointer-events: none;
-  z-index: 1000;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(0.92);
-  transition: opacity 0.2s ease, transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-  background: #111;
-}
-
-.halvor-hover-preview.is-active {
-  opacity: 1;
-  transform: translate(-50%, -50%) scale(1);
-}
-
-.halvor-hover-preview img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
+.halvor-action-btn.btn-view-project {
+  font-weight: 900;
+  text-decoration: underline;
+  text-underline-offset: 4px;
 }
 
 /* --------------------------------------------------------------------------
-   5. HALVOR PREVIEW MODAL (4K Masterclasses & High-Res Stills)
+   4. FULLSCREEN PHOTOGRAPH VIEWER (Exact to Halvor Viewer)
    -------------------------------------------------------------------------- */
-.halvor-modal-backdrop {
+.halvor-viewer-backdrop {
   position: fixed;
   inset: 0;
-  z-index: 2000;
-  background: rgba(0, 0, 0, 0.85);
+  z-index: 10000;
+  background: var(--bg-color);
   display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 24px;
+  flex-direction: column;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 0.35s ease, visibility 0.35s ease;
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  transition: opacity 0.3s cubic-bezier(0.33, 1, 0.68, 1), visibility 0.3s;
 }
 
-.halvor-modal-backdrop.is-open {
+.halvor-viewer-backdrop.is-open {
   opacity: 1;
   visibility: visible;
 }
 
-.halvor-modal-window {
-  position: relative;
-  width: 100%;
-  max-width: 960px;
-  max-height: 92vh;
-  background: var(--bg-color);
-  color: var(--text-primary);
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 36px 100px rgba(0, 0, 0, 0.95);
+.viewer-top-bar {
   display: flex;
-  flex-direction: column;
-  border: 1px solid var(--border-color);
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 28px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
 }
 
-.modal-media-wrap {
-  position: relative;
-  width: 100%;
-  height: min(65vh, 580px);
-  background: #000;
-  overflow: hidden;
+.viewer-counter {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.viewer-close-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.viewer-close-btn:hover {
+  opacity: 0.6;
+}
+
+.viewer-media-stage {
+  flex: 1;
+  min-height: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px;
+  padding: 24px;
+  position: relative;
 }
 
-.modal-media-wrap img {
-  width: 100%;
-  height: 100%;
+.viewer-media-stage img {
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
-  background: #000;
-  border-radius: 12px;
+  border-radius: 8px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.08);
+  cursor: e-resize;
+  user-select: none;
 }
 
-.modal-media-wrap iframe {
-  width: 100%;
-  height: 100%;
+body.dark-theme .viewer-media-stage img {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+}
+
+.viewer-media-stage iframe {
+  width: min(90vw, 960px);
+  height: min(65vh, 540px);
   border: none;
   border-radius: 12px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.25);
 }
 
-.modal-close-pill {
-  position: absolute;
-  top: 18px;
-  right: 18px;
-  background: rgba(0, 0, 0, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  color: #ffffff;
-  padding: 6px 14px;
-  border-radius: 999px;
+.viewer-bottom-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 28px;
+  border-top: 1px solid var(--border-color);
+}
+
+.viewer-meta-info {
   font-size: 0.72rem;
   font-weight: 700;
-  cursor: pointer;
-  z-index: 30;
-  transition: all 0.2s ease;
-}
-
-.modal-close-pill:hover {
-  background: #ffffff;
-  color: #000000;
-}
-
-.modal-info-bar {
-  padding: 24px 28px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  border-top: 1px solid var(--border-color);
-  gap: 20px;
-}
-
-.modal-title {
-  font-size: 1.4rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: -0.01em;
-  margin-bottom: 6px;
-}
-
-.modal-details {
-  font-size: 0.85rem;
+  letter-spacing: 0.08em;
   color: var(--text-muted);
-  line-height: 1.6;
+  text-transform: uppercase;
+}
+
+.viewer-nav-btn {
+  background: none;
+  border: none;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-primary);
+  cursor: pointer;
+  padding: 6px 14px;
+  border-radius: 4px;
+  transition: opacity 0.2s ease;
+}
+
+.viewer-nav-btn:hover {
+  opacity: 0.6;
 }
 
 /* --------------------------------------------------------------------------
-   6. RESPONSIVE DESIGN (Mobile & Tablets)
+   5. RESPONSIVE BREAKPOINTS
    -------------------------------------------------------------------------- */
-@media (max-width: 900px) {
-  .brand-subtitle {
-    display: none;
-  }
-  .works-table-header, .work-table-row {
-    grid-template-columns: 50px 2.5fr 1.5fr 70px;
-  }
-  .col-format, .row-format {
-    display: none;
-  }
-  .gallery-instruction-text {
-    font-size: 0.65rem;
-  }
-}
-
-@media (max-width: 650px) {
+@media (max-width: 768px) {
   .halvor-nav {
     padding: 0 16px;
   }
-  .nav-center-menu {
-    gap: 12px;
-  }
-  .nav-right-meta {
+  .brand-subtitle {
     display: none;
   }
-  .works-table-header, .work-table-row {
-    grid-template-columns: 40px 1fr 60px;
-    padding: 14px 10px;
+  .halvor-center-watermark {
+    font-size: 0.95rem;
   }
-  .col-cat, .row-cat {
-    display: none;
+  .gallery-instruction-text {
+    font-size: 0.64rem;
+    padding: 0 10px;
   }
-  .modal-media-wrap {
-    height: 280px;
+  .toolbar-actions-row {
+    gap: 10px;
   }
-  .modal-info-bar {
-    flex-direction: column;
-    padding: 16px;
+  .halvor-action-btn {
+    padding: 6px 8px;
+    font-size: 0.68rem;
+  }
+  .viewer-media-stage {
+    padding: 12px;
   }
 }
