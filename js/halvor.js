@@ -58,6 +58,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   // --------------------------------------------------------------------------
   const themeBtn = document.getElementById('theme-toggle');
   let isDarkTheme = localStorage.getItem('halvor-theme') === 'dark';
+  // Ensure default is Halvor's signature Swiss White
+  if (!localStorage.getItem('halvor-theme-v2')) {
+    isDarkTheme = false;
+    localStorage.setItem('halvor-theme-v2', 'true');
+    localStorage.setItem('halvor-theme', 'light');
+  }
 
   function applyTheme(dark) {
     isDarkTheme = dark;
