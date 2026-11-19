@@ -1,6 +1,6 @@
 /**
- * HALVOR 3D SPHERE GALLERY ENGINE (Kanchan Choudhary® Visual Archive)
- * Recreates the exact 3D curved sphere gallery, radial chromatic aberration shader,
+ * HALVOR 3D FLOATING GLOBE & PHOTOGRAPH VIEWER ENGINE
+ * Recreates the exact starting 3D floating globe (sphere of cards),
  * dual-axis inertia orbit physics, card focus zoom, and photograph viewer of
  * https://halvor.framer.website
  */
@@ -66,11 +66,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (themeBtn) themeBtn.textContent = '☀ LIGHT';
       localStorage.setItem('halvor-theme', 'dark');
       if (renderer) renderer.setClearColor(0x07080a, 1);
+      if (scene) scene.fog = new THREE.Fog(0x07080a, 700, 1500);
     } else {
       document.body.classList.remove('dark-theme');
       if (themeBtn) themeBtn.textContent = '☾ DARK';
       localStorage.setItem('halvor-theme', 'light');
       if (renderer) renderer.setClearColor(0xffffff, 1);
+      if (scene) scene.fog = new THREE.Fog(0xffffff, 700, 1500);
     }
     refreshAllCardTextures();
   }
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // --------------------------------------------------------------------------
-  // 4. THREE.JS 3D CURVED SPHERE GALLERY SETUP
+  // 4. THREE.JS 3D FLOATING GLOBE SCENE SETUP
   // --------------------------------------------------------------------------
   const canvas = document.getElementById('sphere-canvas');
   if (!canvas || typeof THREE === 'undefined') {
@@ -89,14 +91,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(48, window.innerWidth / window.innerHeight, 10, 5000);
-  camera.position.set(0, 0, 0);
+  // Atmospheric depth fog to blend back cards naturally
+  scene.fog = new THREE.Fog(isDarkTheme ? 0x07080a : 0xffffff, 700, 1500);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  // Camera placed OUTSIDE the globe at Z = 860 looking AT the 3D sphere!
+  const START_CAMERA_Z = 860;
+  const FOCUS_CAMERA_Z = 490;
+  let targetCameraZ = START_CAMERA_Z;
+
+  const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 10, 4000);
+  camera.position.set(0, 0, START_CAMERA_Z);
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // Offscreen RenderTarget for Post-Processing Radial Chromatic Aberration
+  // RenderTarget for Post-Processing Radial Chromatic Aberration
   let renderTarget = new THREE.WebGLRenderTarget(
     window.innerWidth * Math.min(window.devicePixelRatio, 2),
     window.innerHeight * Math.min(window.devicePixelRatio, 2),
@@ -107,18 +117,17 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   );
 
-  // Post-Processing Scene & Fullscreen Quad
+  // Post-Processing Scene & Fullscreen Quad with Halvor Shader 5
   const postScene = new THREE.Scene();
   const postCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
 
-  // Exact Halvor Shader 5: Radial Chromatic Aberration & Streak Blur
   const postShader = {
     uniforms: {
       tDiffuse: { value: renderTarget.texture },
-      uStrength: { value: 0.08 },
-      uRadius: { value: 0.36 },
+      uStrength: { value: 0.07 },
+      uRadius: { value: 0.38 },
       uSmoothness: { value: 0.28 },
-      uDispersion: { value: 0.35 },
+      uDispersion: { value: 0.32 },
       uMotion: { value: 0.0 },
       uMotionStrength: { value: 0.12 }
     },
@@ -139,12 +148,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       uniform float uMotion;
       uniform float uMotionStrength;
       varying vec2 vUv;
-      const int SAMPLES = 20;
+      const int SAMPLES = 18;
 
       void main() {
         vec2 toCenter = vUv - 0.5;
         float d = length(toCenter);
-        float radius = uRadius * (1.0 - 0.7 * uMotion);
+        float radius = uRadius * (1.0 - 0.65 * uMotion);
         float mask = smoothstep(radius, radius + uSmoothness, d);
         float amount = mask * mask * uStrength + mask * uMotion * uMotionStrength;
 
@@ -157,7 +166,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         float total = 0.0;
         for (int i = 0; i < SAMPLES; i++) {
           float progress = float(i) / float(SAMPLES - 1);
-          float weight = 1.0 - progress * 0.6;
+          float weight = 1.0 - progress * 0.55;
           float scale = 1.0 - amount * progress;
           float spread = uDispersion * amount * progress;
           color.r += texture2D(tDiffuse, 0.5 + toCenter * (scale + spread)).r * weight;
@@ -180,19 +189,22 @@ document.addEventListener('DOMContentLoaded', async () => {
   const postQuad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), postMaterial);
   postScene.add(postQuad);
 
-  // Group containing the sphere of cards
-  const sphereGroup = new THREE.Group();
-  scene.add(sphereGroup);
+  // Group containing the entire 3D Globe of cards
+  const globeGroup = new THREE.Group();
+  scene.add(globeGroup);
 
-  // Geometry dimensions
-  const CARD_WIDTH = 215;
-  const CARD_HEIGHT = 285;
-  const RADIUS = 880;
-  const CORNER_RADIUS = 24; // on 430x570 retina canvas
+  // Globe dimensions matching Halvor's exact spherical proportions
+  const GLOBE_RADIUS = 360;
+  const CARD_WIDTH = 100;
+  const CARD_HEIGHT = 135;
+  const CORNER_RADIUS = 20; // on 360x480 retina texture
 
-  // Creates spherical curved plane geometry conforming to radius and latitude
+  /**
+   * Helper: Generates a curved plane geometry that hugs the spherical curvature
+   * around both longitude and latitude at a given latitude angle.
+   */
   function createSphericalCurvedGeometry(width, height, radius, latDeg) {
-    const geom = new THREE.PlaneGeometry(width, height, 16, 16);
+    const geom = new THREE.PlaneGeometry(width, height, 12, 12);
     const pos = geom.attributes.position;
     const latRad = (latDeg * Math.PI) / 180;
 
@@ -200,13 +212,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       const x = pos.getX(i);
       const y = pos.getY(i);
 
-      const dLon = x / (radius * Math.max(0.2, Math.cos(latRad)));
+      const dLon = x / (radius * Math.max(0.15, Math.cos(latRad)));
       const dLat = y / radius;
       const curLat = latRad + dLat;
 
+      // Project onto sphere surface relative to card center
       const px = radius * Math.cos(curLat) * Math.sin(dLon);
       const py = radius * Math.sin(curLat) - radius * Math.sin(latRad);
-      const pz = radius * (Math.cos(curLat) * Math.cos(dLon) - 1.0);
+      const pz = radius * (Math.cos(curLat) * Math.cos(dLon) - Math.cos(latRad));
 
       pos.setXYZ(i, px, py, pz);
     }
@@ -219,7 +232,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   /**
    * Helper: Paints an uncropped image onto an offscreen canvas
-   * with smooth rounded corners (ctx.roundRect + clip) and subtle border.
+   * with smooth rounded corners (ctx.roundRect + clip) and subtle luxury plate border.
    */
   function paintCardToCanvas(canvasEl, img, isDark) {
     const w = canvasEl.width;
@@ -252,7 +265,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     ctx.fillStyle = isDark ? '#14171d' : '#f4f4f4';
     ctx.fillRect(0, 0, w, h);
 
-    // 3. Draw Image Uncropped (Aspect Ratio strictly preserved with contain fit)
+    // 3. Draw Image Uncropped (Aspect ratio strictly preserved with contain fit)
     if (img && img.complete && img.naturalWidth > 0 && img.naturalHeight > 0) {
       const nw = img.naturalWidth;
       const nh = img.naturalHeight;
@@ -275,12 +288,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       ctx.drawImage(img, drawX, drawY, drawW, drawH);
     } else {
       // Shimmer loading placeholder
-      ctx.fillStyle = isDark ? '#1d212a' : '#eaeaea';
-      ctx.fillRect(w * 0.12, h * 0.12, w * 0.76, h * 0.76);
+      ctx.fillStyle = isDark ? '#1d212a' : '#e6e6e6';
+      ctx.fillRect(w * 0.1, h * 0.1, w * 0.8, h * 0.8);
     }
 
     // 4. Subtle Outer Border
-    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
+    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.09)' : 'rgba(0, 0, 0, 0.06)';
     ctx.lineWidth = 2.5;
     ctx.stroke();
 
@@ -289,8 +302,8 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function createCardTexture(item) {
     const c = document.createElement('canvas');
-    c.width = 430;
-    c.height = 570;
+    c.width = 360;
+    c.height = 480;
 
     const img = new Image();
     img.crossOrigin = 'anonymous';
@@ -320,29 +333,31 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // 3 Spherical Tiers (Top: +24 deg, Middle: 0 deg, Bottom: -24 deg)
-  const totalWorks = works.length;
-  const countMid = Math.ceil(totalWorks / 3);
-  const countTop = Math.floor((totalWorks - countMid) / 2);
-  const countBtm = totalWorks - countMid - countTop;
-
+  // --------------------------------------------------------------------------
+  // 5. ASSEMBLE 65 WORKS ACROSS 5 SPHERICAL BANDS FORMING THE 3D GLOBE
+  // --------------------------------------------------------------------------
+  // 5 Latitude Bands matching Halvor's exact Globe structure
   const tiers = [
-    { latDeg: 23,  y: 335,  count: countTop > 0 ? countTop : 21 },
-    { latDeg: 0,   y: 0,    count: countMid > 0 ? countMid : 23 },
-    { latDeg: -23, y: -335, count: countBtm > 0 ? countBtm : 21 }
+    { latDeg: 46,  count: 8 },   // Top Cap
+    { latDeg: 23,  count: 15 },  // Upper Mid
+    { latDeg: 0,   count: 18 },  // Equator (Center)
+    { latDeg: -23, count: 15 },  // Lower Mid
+    { latDeg: -46, count: 9 }    // Bottom Cap
   ];
 
   let itemIdx = 0;
   tiers.forEach((tier, tierIdx) => {
-    const geom = createSphericalCurvedGeometry(CARD_WIDTH, CARD_HEIGHT, RADIUS, tier.latDeg);
+    const latRad = (tier.latDeg * Math.PI) / 180;
+    const geom = createSphericalCurvedGeometry(CARD_WIDTH, CARD_HEIGHT, GLOBE_RADIUS, tier.latDeg);
     const angleStep = (Math.PI * 2) / tier.count;
+    // Brick pattern offset for alternating bands
     const tierOffset = tierIdx % 2 === 1 ? angleStep * 0.5 : 0;
 
     for (let i = 0; i < tier.count; i++) {
       const item = works[itemIdx % works.length];
       itemIdx++;
 
-      const angle = i * angleStep + tierOffset;
+      const lonRad = i * angleStep + tierOffset;
       const cardTexture = createCardTexture(item);
 
       const material = new THREE.MeshBasicMaterial({
@@ -355,25 +370,27 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       const mesh = new THREE.Mesh(geom, material);
 
-      // Position along sphere
-      mesh.position.x = RADIUS * Math.sin(angle);
-      mesh.position.z = RADIUS * Math.cos(angle);
-      mesh.position.y = tier.y;
+      // Spherical coordinates for outward-facing globe
+      const x = GLOBE_RADIUS * Math.cos(latRad) * Math.sin(lonRad);
+      const y = GLOBE_RADIUS * Math.sin(latRad);
+      const z = GLOBE_RADIUS * Math.cos(latRad) * Math.cos(lonRad);
 
-      // Inward facing toward viewer
-      mesh.rotation.y = angle + Math.PI;
+      mesh.position.set(x, y, z);
+
+      // Orient mesh to face outward from globe center (0,0,0)
+      mesh.lookAt(mesh.position.clone().multiplyScalar(2));
 
       mesh.userData = {
         item: item,
-        angle: angle,
+        lon: lonRad,
+        lat: latRad,
         latDeg: tier.latDeg,
-        y: tier.y,
         tierIdx: tierIdx,
         indexInTier: i,
         globalIdx: cardMeshes.length
       };
 
-      sphereGroup.add(mesh);
+      globeGroup.add(mesh);
       cardMeshes.push(mesh);
     }
   });
@@ -381,7 +398,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   applyTheme(isDarkTheme);
 
   // --------------------------------------------------------------------------
-  // 5. INTERACTION PHYSICS & DUAL-AXIS INERTIA DRAG
+  // 6. INTERACTION PHYSICS & DUAL-AXIS GLOBE ROTATION
   // --------------------------------------------------------------------------
   let isDragging = false;
   let prevPointerX = 0;
@@ -398,8 +415,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   let focusedMesh = null;
   let focusTargetRotY = 0;
   let focusTargetRotX = 0;
-  let focusCameraZ = 0;
-  let targetCameraZ = 0;
 
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
@@ -428,18 +443,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       const deltaY = e.clientY - prevPointerY;
       const moveDist = Math.abs(deltaX) + Math.abs(deltaY);
       dragDistance += moveDist;
-      dragSpeed = Math.min(1.0, dragSpeed + moveDist * 0.003);
+      dragSpeed = Math.min(1.0, dragSpeed + moveDist * 0.0035);
 
       if (!isFocusMode) {
-        targetRotY += deltaX * 0.0026;
-        targetRotX += deltaY * 0.0018;
-        targetRotX = Math.max(-0.35, Math.min(0.35, targetRotX));
+        targetRotY += deltaX * 0.0032;
+        targetRotX += deltaY * 0.0024;
+        // Pitch limits so globe doesn't flip completely upside down
+        targetRotX = Math.max(-0.65, Math.min(0.65, targetRotX));
       }
 
       prevPointerX = e.clientX;
       prevPointerY = e.clientY;
     } else if (!isFocusMode) {
-      // Raycasting for hover state
+      // Raycasting for card hover
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(cardMeshes);
 
@@ -448,7 +464,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (hoveredMesh !== hit) {
           if (hoveredMesh) hoveredMesh.scale.set(1, 1, 1);
           hoveredMesh = hit;
-          hoveredMesh.scale.set(1.035, 1.035, 1.035);
+          hoveredMesh.scale.set(1.04, 1.04, 1.04);
           canvas.style.cursor = 'pointer';
         }
       } else {
@@ -472,7 +488,7 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (intersects.length > 0) {
         const clickedMesh = intersects[0].object;
         if (isFocusMode && focusedMesh === clickedMesh) {
-          // Double-click / re-click on focused frame opens Photograph Viewer
+          // Clicking already-focused card opens full Photograph Viewer
           openViewer(clickedMesh.userData.item);
         } else {
           focusCard(clickedMesh);
@@ -499,17 +515,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   }, { passive: true });
 
   // --------------------------------------------------------------------------
-  // 6. CARD FOCUS / ACTIVE PROJECT MODE
+  // 7. CARD FOCUS & ZOOM ANIMATION
   // --------------------------------------------------------------------------
   function focusCard(mesh) {
     if (!mesh) return;
     isFocusMode = true;
     focusedMesh = mesh;
 
-    // Rotate sphere so targeted card faces camera directly
-    focusTargetRotY = -mesh.userData.angle;
-    focusTargetRotX = -mesh.userData.y * 0.0006;
-    focusCameraZ = 330; // Dolly in
+    // Rotate globe so target card faces straight at camera (0, 0, 1)
+    focusTargetRotY = -mesh.userData.lon;
+    focusTargetRotX = -mesh.userData.lat;
+    targetCameraZ = FOCUS_CAMERA_Z; // Zoom closer to inspect frame
 
     const item = mesh.userData.item;
     currentActiveTitle = item.title;
@@ -526,7 +542,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   function releaseFocus() {
     isFocusMode = false;
     focusedMesh = null;
-    focusCameraZ = 0;
+    targetCameraZ = START_CAMERA_Z; // Zoom out to full globe view!
     targetRotX = 0;
     currentActiveTitle = '';
     updateClock();
@@ -571,7 +587,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // --------------------------------------------------------------------------
-  // 7. FULLSCREEN PHOTOGRAPH VIEWER (Exact to Halvor Viewer)
+  // 8. FULLSCREEN PHOTOGRAPH VIEWER
   // --------------------------------------------------------------------------
   const viewerBackdrop = document.getElementById('halvor-viewer');
   const viewerStage = document.getElementById('viewer-stage');
@@ -680,34 +696,35 @@ document.addEventListener('DOMContentLoaded', async () => {
   });
 
   // --------------------------------------------------------------------------
-  // 8. ANIMATION RENDER LOOP WITH SHADER POST-PROCESSING
+  // 9. ANIMATION RENDER LOOP WITH REAL-TIME GLOBE ORBIT & POST-PROCESSING
   // --------------------------------------------------------------------------
   function animate() {
     requestAnimationFrame(animate);
 
-    // Decay drag speed
+    // Decay drag momentum speed
     dragSpeed *= 0.92;
 
     if (isFocusMode) {
-      rotY += (focusTargetRotY - rotY) * 0.085;
-      rotX += (focusTargetRotX - rotX) * 0.085;
-      targetCameraZ += (focusCameraZ - targetCameraZ) * 0.085;
+      // Smooth lerp to focused card and zoom in
+      rotY += (focusTargetRotY - rotY) * 0.08;
+      rotX += (focusTargetRotX - rotX) * 0.08;
     } else {
-      rotY += (targetRotY - rotY) * 0.075;
-      rotX += (targetRotX - rotX) * 0.075;
-      targetCameraZ += (0 - targetCameraZ) * 0.075;
+      // Freeform momentum orbit
+      rotY += (targetRotY - rotY) * 0.07;
+      rotX += (targetRotX - rotX) * 0.07;
 
-      // Subtle ambient drift when idle
+      // Gentle ambient floating spin when idle
       if (!isDragging) {
-        targetRotY += 0.0003;
+        targetRotY += 0.0004;
       }
     }
 
-    sphereGroup.rotation.y = rotY;
-    sphereGroup.rotation.x = rotX;
-    camera.position.z = targetCameraZ;
+    camera.position.z += (targetCameraZ - camera.position.z) * 0.08;
 
-    // Update Post-Processing Shader Uniforms
+    globeGroup.rotation.y = rotY;
+    globeGroup.rotation.x = rotX;
+
+    // Post-processing dynamic motion blur
     postMaterial.uniforms.uMotion.value = Math.min(1.0, dragSpeed * 2.0);
 
     // 1. Render 3D Scene into RenderTarget
