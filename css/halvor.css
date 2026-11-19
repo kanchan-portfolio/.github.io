@@ -173,6 +173,35 @@ html, body {
   transition: opacity 0.4s ease, visibility 0.4s ease;
 }
 
+/* Iridescent Rainbow Spectral Halo Glow behind 3D Gallery */
+.sphere-glow-backdrop {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(960px, 92vw);
+  height: min(960px, 92vw);
+  transform: translate(-50%, -50%);
+  background: radial-gradient(
+    circle,
+    rgba(255, 235, 205, 0.35) 0%,
+    rgba(215, 245, 255, 0.28) 25%,
+    rgba(235, 220, 255, 0.2) 48%,
+    rgba(255, 255, 255, 0) 72%
+  );
+  filter: blur(50px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+body.dark-theme .sphere-glow-backdrop {
+  background: radial-gradient(
+    circle,
+    rgba(80, 110, 160, 0.28) 0%,
+    rgba(120, 70, 150, 0.2) 35%,
+    rgba(0, 0, 0, 0) 70%
+  );
+}
+
 .halvor-gallery-view:active {
   cursor: grabbing;
 }
@@ -206,12 +235,12 @@ html, body {
   font-weight: 800;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--text-primary);
-  opacity: 0.85;
+  color: #ffffff;
+  mix-blend-mode: difference;
+  opacity: 0.88;
   display: flex;
   align-items: center;
   gap: 12px;
-  mix-blend-mode: difference;
   transition: opacity 0.3s ease;
 }
 

@@ -1,8 +1,8 @@
 /**
- * HALVOR 3D SPHERE GALLERY ENGINE (Kanchan Choudhary® Visual Archive)
- * Fixed uniform card frames, 100% uncropped photos (contain fit),
- * true rounded corners in WebGL via alpha-tested offscreen canvas textures,
- * inertia orbit physics, active frame focus, and fullscreen modal inspection.
+ * HALVOR 3D CURVED GALLERY ENGINE (Kanchan Choudhary® Visual Archive)
+ * Recreates the exact 3D curved gallery, radial chromatic aberration and streak blur shader,
+ * dual-axis inertia orbit physics, active frame focus, and full-resolution uncropped photograph viewer.
+ * Inspired by Halvor Rygg (https://halvor.framer.website)
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -49,10 +49,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   updateClock();
 
   // --------------------------------------------------------------------------
-  // 3. THEME TOGGLE (Dark Universe vs Light Studio)
+  // 3. THEME TOGGLE (Default: Halvor Swiss White)
   // --------------------------------------------------------------------------
   const themeBtn = document.getElementById('theme-toggle');
-  let isDarkTheme = localStorage.getItem('halvor-theme') !== 'light'; // default dark
+  // Default to Halvor's signature Swiss White (#ffffff)
+  let isDarkTheme = localStorage.getItem('halvor-theme') === 'dark';
 
   function applyTheme(dark) {
     isDarkTheme = dark;
@@ -67,7 +68,6 @@ document.addEventListener('DOMContentLoaded', async () => {
       localStorage.setItem('halvor-theme', 'light');
       if (renderer) renderer.setClearColor(0xffffff, 1);
     }
-    // Update card textures background for current theme
     refreshAllCardTextures();
   }
 
@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // --------------------------------------------------------------------------
-  // 4. THREE.JS 3D CURVED CYLINDER / SPHERE GALLERY
+  // 4. THREE.JS 3D CURVED CYLINDER GALLERY & POST-PROCESSING SHADER
   // --------------------------------------------------------------------------
   const canvas = document.getElementById('sphere-canvas');
   if (!canvas || typeof THREE === 'undefined') {
@@ -88,9 +88,93 @@ document.addEventListener('DOMContentLoaded', async () => {
   const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 10, 5000);
   camera.position.set(0, 0, 0);
 
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  // Offscreen RenderTarget for Radial Chromatic Aberration & Prism Streak Blur (Halvor Shader 5)
+  let renderTarget = new THREE.WebGLRenderTarget(
+    window.innerWidth * Math.min(window.devicePixelRatio, 2),
+    window.innerHeight * Math.min(window.devicePixelRatio, 2),
+    {
+      minFilter: THREE.LinearFilter,
+      magFilter: THREE.LinearFilter,
+      format: THREE.RGBAFormat
+    }
+  );
+
+  const postScene = new THREE.Scene();
+  const postCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+
+  // Exact Shader 5 extracted from Halvor:
+  // Tack-sharp in center, radial rainbow chromatic dispersion + anamorphic streak on the sides
+  const postShader = {
+    uniforms: {
+      tDiffuse: { value: renderTarget.texture },
+      uStrength: { value: 0.085 },
+      uRadius: { value: 0.36 },
+      uSmoothness: { value: 0.28 },
+      uDispersion: { value: 0.35 },
+      uMotion: { value: 0.0 },
+      uMotionStrength: { value: 0.14 }
+    },
+    vertexShader: `
+      varying vec2 vUv;
+      void main() {
+        vUv = uv;
+        gl_Position = vec4(position, 1.0);
+      }
+    `,
+    fragmentShader: `
+      precision highp float;
+      uniform sampler2D tDiffuse;
+      uniform float uStrength;
+      uniform float uRadius;
+      uniform float uSmoothness;
+      uniform float uDispersion;
+      uniform float uMotion;
+      uniform float uMotionStrength;
+      varying vec2 vUv;
+      const int SAMPLES = 20;
+
+      void main() {
+        vec2 toCenter = vUv - 0.5;
+        float d = length(toCenter);
+        float radius = uRadius * (1.0 - 0.65 * uMotion);
+        float mask = smoothstep(radius, radius + uSmoothness, d);
+        float amount = mask * mask * uStrength + mask * uMotion * uMotionStrength;
+
+        if (amount <= 0.0) {
+          gl_FragColor = texture2D(tDiffuse, vUv);
+          return;
+        }
+
+        vec3 color = vec3(0.0);
+        float total = 0.0;
+        for (int i = 0; i < SAMPLES; i++) {
+          float progress = float(i) / float(SAMPLES - 1);
+          float weight = 1.0 - progress * 0.55;
+          float scale = 1.0 - amount * progress;
+          float spread = uDispersion * amount * progress;
+          color.r += texture2D(tDiffuse, 0.5 + toCenter * (scale + spread)).r * weight;
+          color.g += texture2D(tDiffuse, 0.5 + toCenter * scale).g * weight;
+          color.b += texture2D(tDiffuse, 0.5 + toCenter * (scale - spread)).b * weight;
+          total += weight;
+        }
+        gl_FragColor = vec4(color / total, 1.0);
+      }
+    `
+  };
+
+  const postMaterial = new THREE.ShaderMaterial({
+    uniforms: postShader.uniforms,
+    vertexShader: postShader.vertexShader,
+    fragmentShader: postShader.fragmentShader,
+    depthTest: false,
+    depthWrite: false
+  });
+  const postQuad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), postMaterial);
+  postScene.add(postQuad);
 
   // Group containing all curved card meshes
   const sphereGroup = new THREE.Group();
@@ -186,7 +270,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
 
     // 4. Subtle Inner Luxury Outline with rounded corner
-    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.14)' : 'rgba(0, 0, 0, 0.09)';
+    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.14)' : 'rgba(0, 0, 0, 0.08)';
     ctx.lineWidth = 3;
     ctx.stroke();
 
@@ -201,7 +285,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     const img = new Image();
     img.crossOrigin = 'anonymous';
 
-    // Initial paint (placeholder matte)
     paintCardToCanvas(c, img, isDarkTheme);
 
     const texture = new THREE.CanvasTexture(c);
@@ -209,7 +292,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     texture.minFilter = THREE.LinearMipmapLinearFilter;
     texture.magFilter = THREE.LinearFilter;
 
-    // Load actual image
     img.onload = () => {
       paintCardToCanvas(c, img, isDarkTheme);
       texture.needsUpdate = true;
@@ -285,7 +367,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Apply initial theme
+  // Apply initial theme (defaults to Swiss White)
   applyTheme(isDarkTheme);
 
   // --------------------------------------------------------------------------
@@ -299,6 +381,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   let targetRotY = 0;
   let targetRotX = 0;
   let dragDistance = 0;
+  let dragSpeed = 0;
 
   // Active Focus Mode State
   let isFocusMode = false;
@@ -319,8 +402,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const focusCatEl = document.getElementById('focus-cat');
 
   function onPointerDown(e) {
-    // Ignore clicks on bottom toolbar buttons
-    if (e.target && e.target.closest('#active-toolbar')) return;
+    if (e.target && (e.target.closest('#active-toolbar') || e.target.closest('#halvor-modal'))) return;
     isDragging = true;
     prevPointerX = e.clientX;
     prevPointerY = e.clientY;
@@ -334,7 +416,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (isDragging) {
       const deltaX = e.clientX - prevPointerX;
       const deltaY = e.clientY - prevPointerY;
-      dragDistance += Math.abs(deltaX) + Math.abs(deltaY);
+      const moveDist = Math.abs(deltaX) + Math.abs(deltaY);
+      dragDistance += moveDist;
+      dragSpeed = Math.min(1.0, dragSpeed + moveDist * 0.0035);
 
       if (!isFocusMode) {
         targetRotY += deltaX * 0.0028;
@@ -368,21 +452,17 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function onPointerUp(e) {
-    if (e.target && e.target.closest('#active-toolbar')) return;
+    if (e.target && (e.target.closest('#active-toolbar') || e.target.closest('#halvor-modal'))) return;
     isDragging = false;
 
-    // Click event (not a drag)
+    // Click event: Focus card AND open modal immediately!
     if (dragDistance < 8) {
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(cardMeshes);
       if (intersects.length > 0) {
         const clickedMesh = intersects[0].object;
-        if (isFocusMode && focusedMesh === clickedMesh) {
-          // Double click / re-click opens modal inspection
-          openModal(clickedMesh.userData.item);
-        } else {
-          focusCard(clickedMesh);
-        }
+        focusCard(clickedMesh);
+        openModal(clickedMesh.userData.item);
       }
     }
   }
@@ -453,6 +533,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       const idx = cardMeshes.indexOf(focusedMesh);
       const prevIdx = (idx - 1 + cardMeshes.length) % cardMeshes.length;
       focusCard(cardMeshes[prevIdx]);
+      if (modalBackdrop && modalBackdrop.classList.contains('is-open')) {
+        openModal(cardMeshes[prevIdx].userData.item);
+      }
     });
   }
 
@@ -462,6 +545,9 @@ document.addEventListener('DOMContentLoaded', async () => {
       const idx = cardMeshes.indexOf(focusedMesh);
       const nextIdx = (idx + 1) % cardMeshes.length;
       focusCard(cardMeshes[nextIdx]);
+      if (modalBackdrop && modalBackdrop.classList.contains('is-open')) {
+        openModal(cardMeshes[nextIdx].userData.item);
+      }
     });
   }
 
@@ -475,26 +561,26 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   // Keyboard navigation
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') {
-      if (modalBackdrop && modalBackdrop.classList.contains('is-open')) {
-        closeModal();
-      } else if (isFocusMode) {
-        releaseFocus();
-      }
-    } else if (e.key === 'ArrowLeft' && isFocusMode) {
-      if (btnPrev) btnPrev.click();
-    } else if (e.key === 'ArrowRight' && isFocusMode) {
-      if (btnNext) btnNext.click();
-    } else if (e.key === 'Enter' && isFocusMode && (!modalBackdrop || !modalBackdrop.classList.contains('is-open'))) {
-      if (btnView) btnView.click();
+    if (modalBackdrop && modalBackdrop.classList.contains('is-open')) {
+      if (e.key === 'Escape') closeModal();
+      if (e.key === 'ArrowRight' && btnNext) btnNext.click();
+      if (e.key === 'ArrowLeft' && btnPrev) btnPrev.click();
+    } else if (isFocusMode) {
+      if (e.key === 'Escape') releaseFocus();
+      if (e.key === 'ArrowRight' && btnNext) btnNext.click();
+      if (e.key === 'ArrowLeft' && btnPrev) btnPrev.click();
+      if (e.key === 'Enter' && btnView) btnView.click();
     }
   });
 
   // --------------------------------------------------------------------------
-  // 7. ANIMATION RENDER LOOP
+  // 7. ANIMATION RENDER LOOP WITH POST-PROCESSING
   // --------------------------------------------------------------------------
   function animate() {
     requestAnimationFrame(animate);
+
+    // Decay drag momentum speed
+    dragSpeed *= 0.92;
 
     if (isFocusMode) {
       // Lerp sphere smoothly to center focused frame
@@ -517,15 +603,30 @@ document.addEventListener('DOMContentLoaded', async () => {
     sphereGroup.rotation.x = rotX;
     camera.position.z = targetCameraZ;
 
+    // Update dynamic chromatic motion blur
+    postMaterial.uniforms.uMotion.value = Math.min(1.0, dragSpeed * 2.0);
+
+    // 1. Render 3D Scene to offscreen RenderTarget
+    renderer.setRenderTarget(renderTarget);
     renderer.render(scene, camera);
+
+    // 2. Render Fullscreen Quad with Radial Chromatic Aberration Shader to Canvas
+    renderer.setRenderTarget(null);
+    renderer.render(postScene, postCamera);
   }
 
   animate();
 
   function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
+    const w = window.innerWidth;
+    const h = window.innerHeight;
+    const pr = Math.min(window.devicePixelRatio, 2);
+
+    camera.aspect = w / h;
     camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    renderer.setSize(w, h);
+    renderTarget.setSize(w * pr, h * pr);
   }
 
   window.addEventListener('resize', onWindowResize);
@@ -574,8 +675,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         `;
       } else {
         modalMediaWrap.innerHTML = `
-          <img src="${item.src}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px; background: #000;" />
+          <img src="${item.src}" alt="${item.title}" id="modal-active-img" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px; background: #000; cursor: e-resize;" title="Click to view next photograph" />
         `;
+        const imgEl = document.getElementById('modal-active-img');
+        if (imgEl) {
+          imgEl.addEventListener('click', () => {
+            if (btnNext) btnNext.click();
+          });
+        }
       }
     }
 

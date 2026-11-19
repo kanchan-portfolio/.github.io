@@ -15,7 +15,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Halvor Gallery Stylesheet -->
-  <link rel="stylesheet" href="css/halvor.css">
+  <link rel="stylesheet" href="css/halvor.css?v=2.5">
 </head>
 <body>
 
@@ -42,6 +42,9 @@
        2. 3D CURVED SPHERE / CYLINDER CANVAS VIEWPORT
        ========================================================================= -->
   <div class="halvor-gallery-view" id="gallery-view">
+    <!-- Iridescent Spectral Rainbow Halo Glow behind the 3D gallery -->
+    <div class="sphere-glow-backdrop" aria-hidden="true"></div>
+
     <canvas id="sphere-canvas"></canvas>
 
     <!-- Center Eye Brand Watermark (Exact to Halvor "HALVOR (◉) RYGG") -->
@@ -105,6 +108,6 @@
 
   <!-- Vendor Three.js & Halvor Gallery Engine -->
   <script src="js/vendor/three.min.js"></script>
-  <script src="js/halvor.js"></script>
+  <script src="js/halvor.js?v=2.5"></script>
 </body>
 </html>
