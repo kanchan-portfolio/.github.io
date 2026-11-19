@@ -9,13 +9,13 @@
   <meta content="The curated 3D visual archive and works gallery of Kanchan Choudhary. High-fashion haute couture, cinematic character narratives, and 4K celebrity masterclasses." property="og:description"/>
   <meta content="assets/slide_10_1.jpg" property="og:image"/>
 
-  <!-- Google Fonts: Plus Jakarta Sans -->
+  <!-- Google Fonts: Plus Jakarta Sans & Newsreader -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <!-- Halvor Gallery Stylesheet -->
-  <link rel="stylesheet" href="css/halvor.css?v=2.2">
+  <link rel="stylesheet" href="css/halvor.css">
 </head>
 <body>
 
@@ -29,8 +29,7 @@
     </div>
 
     <nav class="nav-center-menu" aria-label="Navigation">
-      <button type="button" class="nav-tab-btn active" id="tab-gallery">GALLERY</button>
-      <a href="index.html" class="nav-tab-btn">HOME</a>
+      <a href="index.html" class="nav-tab-btn">Home</a>
     </nav>
 
     <div class="nav-right-meta">
@@ -40,20 +39,17 @@
   </header>
 
   <!-- =========================================================================
-       2. 3D CURVED SPHERE VIEWPORT & GLOW BACKDROP
+       2. 3D CURVED SPHERE / CYLINDER CANVAS VIEWPORT
        ========================================================================= -->
   <div class="halvor-gallery-view" id="gallery-view">
-    <!-- Iridescent Spectral Rainbow Halo Glow behind the sphere -->
-    <div class="sphere-glow-backdrop" aria-hidden="true"></div>
-
     <canvas id="sphere-canvas"></canvas>
 
     <!-- Center Eye Brand Watermark (Exact to Halvor "HALVOR (◉) RYGG") -->
     <div class="halvor-center-watermark" id="center-watermark">
       <span>KANCHAN</span>
       <span class="watermark-eye-icon">
-        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2">
-          <circle cx="12" cy="12" r="3" fill="currentColor"/>
+        <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2.2">
+          <circle cx="12" cy="12" r="3.2" fill="currentColor"/>
           <path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7z"/>
         </svg>
       </span>
@@ -65,52 +61,50 @@
        3. BOTTOM EDITORIAL BAR & ACTIVE PROJECT TOOLBAR
        ========================================================================= -->
   <footer class="halvor-bottom-container" id="halvor-bottom-container">
-    <!-- State A: Default Halvor Instruction Caption -->
+    <!-- State A: Default Instruction Caption -->
     <div class="gallery-instruction-text" id="gallery-instruction">
-      VISUAL DIRECTION, EDITORIAL COUTURE AND CINEMATIC FRAMES FOR DIRECTORS, ACTORS AND MAGAZINES. DRAG TO LOOK AROUND AND CLICK A FRAME TO OPEN IT.
+      COSTUME CURATION, PERIOD NARRATIVES AND CELEBRITY MASTERCLASSES. DRAG TO LOOK AROUND AND CLICK A FRAME TO OPEN IT.
     </div>
 
-    <!-- State B: Active Frame Focus Toolbar (Exact to Halvor Project Controls) -->
+    <!-- State B: Active Frame Focus Toolbar -->
     <div class="halvor-active-toolbar" id="active-toolbar">
-      <div class="toolbar-caption-text">
-        <span class="focus-project-title" id="focus-title">PROJECT TITLE</span>
-        <span class="focus-project-cat" id="focus-cat">PEOPLE &bull; 2024</span>
+      <div class="toolbar-side-group">
+        <button type="button" class="halvor-btn" id="toolbar-btn-prev">&lsaquo; PREVIOUS</button>
       </div>
 
-      <div class="toolbar-actions-row">
-        <button type="button" class="halvor-action-btn" id="toolbar-btn-prev">PREVIOUS</button>
-        <button type="button" class="halvor-action-btn btn-view-project" id="toolbar-btn-view">VIEW PROJECT</button>
-        <button type="button" class="halvor-action-btn" id="toolbar-btn-close">CLOSE</button>
-        <button type="button" class="halvor-action-btn" id="toolbar-btn-next">NEXT</button>
+      <div class="toolbar-center-meta">
+        <span class="focus-project-title" id="focus-title">PROJECT TITLE</span>
+        <span class="focus-project-cat" id="focus-cat">CATEGORY &bull; FORMAT &bull; YEAR</span>
+      </div>
+
+      <div class="toolbar-side-group">
+        <button type="button" class="halvor-btn btn-action-primary" id="toolbar-btn-view">VIEW FULL / PLAY</button>
+        <button type="button" class="halvor-btn" id="toolbar-btn-close">CLOSE [ESC]</button>
+        <button type="button" class="halvor-btn" id="toolbar-btn-next">NEXT &rsaquo;</button>
       </div>
     </div>
   </footer>
 
   <!-- =========================================================================
-       4. FULLSCREEN PHOTOGRAPH VIEWER (Exact to Halvor Photograph Viewer)
+       4. FULLSCREEN INSPECTION MODAL (4K Masterclasses & Stills - Uncropped, Rounded)
        ========================================================================= -->
-  <div class="halvor-viewer-backdrop" id="halvor-viewer" role="dialog" aria-modal="true" aria-label="Photograph viewer">
-    <!-- Top Bar: Counter & Close Button -->
-    <div class="viewer-top-bar">
-      <span class="viewer-counter" id="viewer-counter">1 / 65</span>
-      <button type="button" class="viewer-close-btn" id="viewer-close" aria-label="Close viewer">CLOSE [ESC]</button>
-    </div>
-
-    <!-- Center Stage: Full Uncropped Photograph / Video Player -->
-    <div class="viewer-media-stage" id="viewer-stage">
-      <!-- Injected via JavaScript -->
-    </div>
-
-    <!-- Bottom Bar: Previous / Next Controls -->
-    <div class="viewer-bottom-bar">
-      <button type="button" class="viewer-nav-btn" id="viewer-prev">&lsaquo; PREVIOUS</button>
-      <div class="viewer-meta-info" id="viewer-meta-info">KANCHAN CHOUDHARY ARCHIVE</div>
-      <button type="button" class="viewer-nav-btn" id="viewer-next">NEXT &rsaquo;</button>
+  <div class="halvor-modal-backdrop" id="halvor-modal" role="dialog" aria-modal="true" aria-label="Project Preview">
+    <div class="halvor-modal-window">
+      <button type="button" class="modal-close-pill" id="modal-close" aria-label="Close Preview">CLOSE &times;</button>
+      <div class="modal-media-wrap" id="modal-media-wrap">
+        <!-- Injected via JavaScript -->
+      </div>
+      <div class="modal-info-bar">
+        <div>
+          <h2 class="modal-title" id="modal-title">Project Title</h2>
+          <p class="modal-details" id="modal-details">Metadata and credits</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- Vendor Three.js & Halvor 3D Sphere Engine -->
+  <!-- Vendor Three.js & Halvor Gallery Engine -->
   <script src="js/vendor/three.min.js"></script>
-  <script src="js/halvor.js?v=2.2"></script>
+  <script src="js/halvor.js"></script>
 </body>
 </html>

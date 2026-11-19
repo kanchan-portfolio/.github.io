@@ -1,8 +1,8 @@
 /**
- * HALVOR 3D FLOATING GLOBE & PHOTOGRAPH VIEWER ENGINE
- * Recreates the exact starting 3D floating globe (sphere of cards),
- * dual-axis inertia orbit physics, card focus zoom, and photograph viewer of
- * https://halvor.framer.website
+ * HALVOR 3D SPHERE GALLERY ENGINE (Kanchan Choudhary® Visual Archive)
+ * Fixed uniform card frames, 100% uncropped photos (contain fit),
+ * true rounded corners in WebGL via alpha-tested offscreen canvas textures,
+ * inertia orbit physics, active frame focus, and fullscreen modal inspection.
  */
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -30,11 +30,9 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // --------------------------------------------------------------------------
-  // 2. LIVE CLOCK & HEADER BREADCRUMB
+  // 2. LIVE CLOCK (Mumbai / Asia-Kolkata Time)
   // --------------------------------------------------------------------------
   const clockEl = document.getElementById('live-clock');
-  let currentActiveTitle = '';
-
   function updateClock() {
     if (!clockEl) return;
     const now = new Date();
@@ -42,28 +40,19 @@ document.addEventListener('DOMContentLoaded', async () => {
       timeZone: 'Asia/Kolkata',
       hour: '2-digit',
       minute: '2-digit',
+      second: '2-digit',
       hour12: true
     });
-    if (currentActiveTitle) {
-      clockEl.textContent = `MUMBAI ${timeStr} · ${currentActiveTitle}`;
-    } else {
-      clockEl.textContent = `MUMBAI ${timeStr}`;
-    }
+    clockEl.textContent = `MUMBAI ${timeStr}`;
   }
   setInterval(updateClock, 1000);
   updateClock();
 
   // --------------------------------------------------------------------------
-  // 3. THEME TOGGLE (Default: Halvor Swiss White)
+  // 3. THEME TOGGLE (Dark Universe vs Light Studio)
   // --------------------------------------------------------------------------
   const themeBtn = document.getElementById('theme-toggle');
-  let isDarkTheme = localStorage.getItem('halvor-theme') === 'dark';
-  // Ensure default is Halvor's signature Swiss White
-  if (!localStorage.getItem('halvor-theme-v2')) {
-    isDarkTheme = false;
-    localStorage.setItem('halvor-theme-v2', 'true');
-    localStorage.setItem('halvor-theme', 'light');
-  }
+  let isDarkTheme = localStorage.getItem('halvor-theme') !== 'light'; // default dark
 
   function applyTheme(dark) {
     isDarkTheme = dark;
@@ -71,15 +60,14 @@ document.addEventListener('DOMContentLoaded', async () => {
       document.body.classList.add('dark-theme');
       if (themeBtn) themeBtn.textContent = '☀ LIGHT';
       localStorage.setItem('halvor-theme', 'dark');
-      if (renderer) renderer.setClearColor(0x07080a, 1);
-      if (scene) scene.fog = new THREE.Fog(0x07080a, 900, 1800);
+      if (renderer) renderer.setClearColor(0x050608, 1);
     } else {
       document.body.classList.remove('dark-theme');
       if (themeBtn) themeBtn.textContent = '☾ DARK';
       localStorage.setItem('halvor-theme', 'light');
       if (renderer) renderer.setClearColor(0xffffff, 1);
-      if (scene) scene.fog = new THREE.Fog(0xffffff, 900, 1800);
     }
+    // Update card textures background for current theme
     refreshAllCardTextures();
   }
 
@@ -88,7 +76,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   // --------------------------------------------------------------------------
-  // 4. THREE.JS 3D FLOATING GLOBE SCENE SETUP
+  // 4. THREE.JS 3D CURVED CYLINDER / SPHERE GALLERY
   // --------------------------------------------------------------------------
   const canvas = document.getElementById('sphere-canvas');
   if (!canvas || typeof THREE === 'undefined') {
@@ -97,148 +85,45 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   const scene = new THREE.Scene();
-  // Atmospheric depth fog to blend back cards naturally
-  scene.fog = new THREE.Fog(isDarkTheme ? 0x07080a : 0xffffff, 900, 1800);
+  const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 10, 5000);
+  camera.position.set(0, 0, 0);
 
-  // Camera placed OUTSIDE the globe at Z = 1260 to show the full floating 3D ball/globe!
-  const START_CAMERA_Z = 1260;
-  const FOCUS_CAMERA_Z = 490;
-  let targetCameraZ = START_CAMERA_Z;
-
-  const camera = new THREE.PerspectiveCamera(46, window.innerWidth / window.innerHeight, 10, 4000);
-  camera.position.set(0, 0, START_CAMERA_Z);
-
-  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: 'high-performance' });
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setSize(window.innerWidth, window.innerHeight);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
-  // RenderTarget for Post-Processing Radial Chromatic Aberration
-  let renderTarget = new THREE.WebGLRenderTarget(
-    window.innerWidth * Math.min(window.devicePixelRatio, 2),
-    window.innerHeight * Math.min(window.devicePixelRatio, 2),
-    {
-      minFilter: THREE.LinearFilter,
-      magFilter: THREE.LinearFilter,
-      format: THREE.RGBAFormat
-    }
-  );
+  // Group containing all curved card meshes
+  const sphereGroup = new THREE.Group();
+  scene.add(sphereGroup);
 
-  // Post-Processing Scene & Fullscreen Quad with Halvor Shader 5
-  const postScene = new THREE.Scene();
-  const postCamera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0, 1);
+  // Geometry & Card Dimensions
+  // Fixed uniform portrait frame for all cards
+  const CARD_WIDTH = 220;
+  const CARD_HEIGHT = 310;
+  const RADIUS = 960;
+  const CORNER_RADIUS = 28; // on 440x620 retina canvas -> 14px in 3D
 
-  const postShader = {
-    uniforms: {
-      tDiffuse: { value: renderTarget.texture },
-      uStrength: { value: 0.07 },
-      uRadius: { value: 0.38 },
-      uSmoothness: { value: 0.28 },
-      uDispersion: { value: 0.32 },
-      uMotion: { value: 0.0 },
-      uMotionStrength: { value: 0.12 }
-    },
-    vertexShader: `
-      varying vec2 vUv;
-      void main() {
-        vUv = uv;
-        gl_Position = vec4(position, 1.0);
-      }
-    `,
-    fragmentShader: `
-      precision highp float;
-      uniform sampler2D tDiffuse;
-      uniform float uStrength;
-      uniform float uRadius;
-      uniform float uSmoothness;
-      uniform float uDispersion;
-      uniform float uMotion;
-      uniform float uMotionStrength;
-      varying vec2 vUv;
-      const int SAMPLES = 18;
-
-      void main() {
-        vec2 toCenter = vUv - 0.5;
-        float d = length(toCenter);
-        float radius = uRadius * (1.0 - 0.65 * uMotion);
-        float mask = smoothstep(radius, radius + uSmoothness, d);
-        float amount = mask * mask * uStrength + mask * uMotion * uMotionStrength;
-
-        if (amount <= 0.0) {
-          gl_FragColor = texture2D(tDiffuse, vUv);
-          return;
-        }
-
-        vec3 color = vec3(0.0);
-        float total = 0.0;
-        for (int i = 0; i < SAMPLES; i++) {
-          float progress = float(i) / float(SAMPLES - 1);
-          float weight = 1.0 - progress * 0.55;
-          float scale = 1.0 - amount * progress;
-          float spread = uDispersion * amount * progress;
-          color.r += texture2D(tDiffuse, 0.5 + toCenter * (scale + spread)).r * weight;
-          color.g += texture2D(tDiffuse, 0.5 + toCenter * scale).g * weight;
-          color.b += texture2D(tDiffuse, 0.5 + toCenter * (scale - spread)).b * weight;
-          total += weight;
-        }
-        gl_FragColor = vec4(color / total, 1.0);
-      }
-    `
-  };
-
-  const postMaterial = new THREE.ShaderMaterial({
-    uniforms: postShader.uniforms,
-    vertexShader: postShader.vertexShader,
-    fragmentShader: postShader.fragmentShader,
-    depthTest: false,
-    depthWrite: false
-  });
-  const postQuad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), postMaterial);
-  postScene.add(postQuad);
-
-  // Group containing the entire 3D Globe of cards
-  const globeGroup = new THREE.Group();
-  scene.add(globeGroup);
-
-  // Globe dimensions: exactly calibrated to show the full spherical globe ball
-  const GLOBE_RADIUS = 340;
-  const CARD_WIDTH = 86;
-  const CARD_HEIGHT = 118;
-  const CORNER_RADIUS = 18; // on 344x472 retina texture
-
-  /**
-   * Helper: Generates a curved plane geometry that hugs the spherical curvature
-   * around both longitude and latitude at a given latitude angle.
-   */
-  function createSphericalCurvedGeometry(width, height, radius, latDeg) {
-    const geom = new THREE.PlaneGeometry(width, height, 12, 12);
+  // Creates cylindrical curvature along X so cards wrap seamlessly around radius
+  function createCurvedGeometry(width, height, radius) {
+    const geom = new THREE.PlaneGeometry(width, height, 16, 1);
     const pos = geom.attributes.position;
-    const latRad = (latDeg * Math.PI) / 180;
-
     for (let i = 0; i < pos.count; i++) {
       const x = pos.getX(i);
-      const y = pos.getY(i);
-
-      const dLon = x / (radius * Math.max(0.15, Math.cos(latRad)));
-      const dLat = y / radius;
-      const curLat = latRad + dLat;
-
-      // Project onto sphere surface relative to card center
-      const px = radius * Math.cos(curLat) * Math.sin(dLon);
-      const py = radius * Math.sin(curLat) - radius * Math.sin(latRad);
-      const pz = radius * (Math.cos(curLat) * Math.cos(dLon) - Math.cos(latRad));
-
-      pos.setXYZ(i, px, py, pz);
+      const alpha = x / radius;
+      pos.setX(i, radius * Math.sin(alpha));
+      pos.setZ(i, radius * (Math.cos(alpha) - 1));
     }
     geom.computeVertexNormals();
     return geom;
   }
 
+  const curvedGeometry = createCurvedGeometry(CARD_WIDTH, CARD_HEIGHT, RADIUS);
   const cardMeshes = [];
   const cardTextureHolders = [];
 
   /**
-   * Helper: Paints an uncropped image onto an offscreen canvas
-   * with smooth rounded corners (ctx.roundRect + clip) and subtle luxury plate border.
+   * Helper: Paints an uncropped image onto an offscreen Hi-DPI canvas
+   * with smooth rounded corners (ctx.roundRect + clip) and subtle luxury border.
    */
   function paintCardToCanvas(canvasEl, img, isDark) {
     const w = canvasEl.width;
@@ -267,11 +152,11 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
     ctx.clip();
 
-    // 2. Card Plate Background
-    ctx.fillStyle = isDark ? '#14171d' : '#f4f4f4';
+    // 2. Card Background (Studio Matte Board)
+    ctx.fillStyle = isDark ? '#0d0f13' : '#f2f3f6';
     ctx.fillRect(0, 0, w, h);
 
-    // 3. Draw Image Uncropped (Aspect ratio strictly preserved with contain fit)
+    // 3. Draw Image Uncropped (Aspect Ratio strictly preserved with contain fit)
     if (img && img.complete && img.naturalWidth > 0 && img.naturalHeight > 0) {
       const nw = img.naturalWidth;
       const nh = img.naturalHeight;
@@ -280,11 +165,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       let drawW, drawH, drawX, drawY;
       if (imgRatio > targetRatio) {
+        // Image is wider than 440x620 frame
         drawW = w;
         drawH = w / imgRatio;
         drawX = 0;
         drawY = (h - drawH) / 2;
       } else {
+        // Image is taller than or equal to frame
         drawH = h;
         drawW = h * imgRatio;
         drawX = (w - drawW) / 2;
@@ -293,14 +180,14 @@ document.addEventListener('DOMContentLoaded', async () => {
 
       ctx.drawImage(img, drawX, drawY, drawW, drawH);
     } else {
-      // Shimmer loading placeholder
-      ctx.fillStyle = isDark ? '#1d212a' : '#e6e6e6';
+      // Sleek loading placeholder shimmer
+      ctx.fillStyle = isDark ? '#171a21' : '#e5e7eb';
       ctx.fillRect(w * 0.1, h * 0.1, w * 0.8, h * 0.8);
     }
 
-    // 4. Subtle Outer Border
-    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.09)' : 'rgba(0, 0, 0, 0.06)';
-    ctx.lineWidth = 2.5;
+    // 4. Subtle Inner Luxury Outline with rounded corner
+    ctx.strokeStyle = isDark ? 'rgba(255, 255, 255, 0.14)' : 'rgba(0, 0, 0, 0.09)';
+    ctx.lineWidth = 3;
     ctx.stroke();
 
     ctx.restore();
@@ -308,12 +195,13 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   function createCardTexture(item) {
     const c = document.createElement('canvas');
-    c.width = 360;
-    c.height = 480;
+    c.width = 440; // 2x Retina resolution for razor sharpness
+    c.height = 620;
 
     const img = new Image();
     img.crossOrigin = 'anonymous';
 
+    // Initial paint (placeholder matte)
     paintCardToCanvas(c, img, isDarkTheme);
 
     const texture = new THREE.CanvasTexture(c);
@@ -321,6 +209,7 @@ document.addEventListener('DOMContentLoaded', async () => {
     texture.minFilter = THREE.LinearMipmapLinearFilter;
     texture.magFilter = THREE.LinearFilter;
 
+    // Load actual image
     img.onload = () => {
       paintCardToCanvas(c, img, isDarkTheme);
       texture.needsUpdate = true;
@@ -339,72 +228,68 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // --------------------------------------------------------------------------
-  // 5. ASSEMBLE 65 WORKS ACROSS 5 SPHERICAL BANDS FORMING THE 3D GLOBE
-  // --------------------------------------------------------------------------
-  // 5 Latitude Bands matching Halvor's exact Globe structure
+  // 3 Horizontal Tiers covering all works (Top: +340, Center: 0, Bottom: -340)
+  const totalWorks = works.length;
+  const countMid = Math.ceil(totalWorks / 3);
+  const countTop = Math.floor((totalWorks - countMid) / 2);
+  const countBtm = totalWorks - countMid - countTop;
+
   const tiers = [
-    { latDeg: 46,  count: 8 },   // Top Cap
-    { latDeg: 23,  count: 15 },  // Upper Mid
-    { latDeg: 0,   count: 18 },  // Equator (Center)
-    { latDeg: -23, count: 15 },  // Lower Mid
-    { latDeg: -46, count: 9 }    // Bottom Cap
+    { y: 340,  count: countTop > 0 ? countTop : 21 },
+    { y: 0,    count: countMid > 0 ? countMid : 23 },
+    { y: -340, count: countBtm > 0 ? countBtm : 21 }
   ];
 
   let itemIdx = 0;
   tiers.forEach((tier, tierIdx) => {
-    const latRad = (tier.latDeg * Math.PI) / 180;
-    const geom = createSphericalCurvedGeometry(CARD_WIDTH, CARD_HEIGHT, GLOBE_RADIUS, tier.latDeg);
     const angleStep = (Math.PI * 2) / tier.count;
-    // Brick pattern offset for alternating bands
+    // Brick-pattern offset for alternating tiers
     const tierOffset = tierIdx % 2 === 1 ? angleStep * 0.5 : 0;
 
     for (let i = 0; i < tier.count; i++) {
       const item = works[itemIdx % works.length];
       itemIdx++;
 
-      const lonRad = i * angleStep + tierOffset;
+      const angle = i * angleStep + tierOffset;
       const cardTexture = createCardTexture(item);
 
       const material = new THREE.MeshBasicMaterial({
         map: cardTexture,
         side: THREE.DoubleSide,
         transparent: true,
-        alphaTest: 0.02,
+        alphaTest: 0.05,
         depthWrite: true
       });
 
-      const mesh = new THREE.Mesh(geom, material);
+      const mesh = new THREE.Mesh(curvedGeometry, material);
 
-      // Spherical coordinates for outward-facing globe
-      const x = GLOBE_RADIUS * Math.cos(latRad) * Math.sin(lonRad);
-      const y = GLOBE_RADIUS * Math.sin(latRad);
-      const z = GLOBE_RADIUS * Math.cos(latRad) * Math.cos(lonRad);
+      // Position on cylinder
+      mesh.position.x = RADIUS * Math.sin(angle);
+      mesh.position.z = RADIUS * Math.cos(angle);
+      mesh.position.y = tier.y;
 
-      mesh.position.set(x, y, z);
+      // Face inward towards camera (center 0,0,0)
+      mesh.rotation.y = angle + Math.PI;
 
-      // Orient mesh to face outward from globe center (0,0,0)
-      mesh.lookAt(mesh.position.clone().multiplyScalar(2));
-
+      // Metadata for raycasting and inspection
       mesh.userData = {
         item: item,
-        lon: lonRad,
-        lat: latRad,
-        latDeg: tier.latDeg,
+        angle: angle,
+        y: tier.y,
         tierIdx: tierIdx,
-        indexInTier: i,
-        globalIdx: cardMeshes.length
+        indexInTier: i
       };
 
-      globeGroup.add(mesh);
+      sphereGroup.add(mesh);
       cardMeshes.push(mesh);
     }
   });
 
+  // Apply initial theme
   applyTheme(isDarkTheme);
 
   // --------------------------------------------------------------------------
-  // 6. INTERACTION PHYSICS & DUAL-AXIS GLOBE ROTATION
+  // 5. INTERACTION PHYSICS & ORBIT DRAG
   // --------------------------------------------------------------------------
   let isDragging = false;
   let prevPointerX = 0;
@@ -414,13 +299,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   let targetRotY = 0;
   let targetRotX = 0;
   let dragDistance = 0;
-  let dragSpeed = 0;
 
   // Active Focus Mode State
   let isFocusMode = false;
   let focusedMesh = null;
   let focusTargetRotY = 0;
   let focusTargetRotX = 0;
+  let focusCameraZ = 0;
+  let targetCameraZ = 0;
 
   const raycaster = new THREE.Raycaster();
   const mouse = new THREE.Vector2();
@@ -433,7 +319,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   const focusCatEl = document.getElementById('focus-cat');
 
   function onPointerDown(e) {
-    if (e.target && (e.target.closest('#active-toolbar') || e.target.closest('#halvor-viewer'))) return;
+    // Ignore clicks on bottom toolbar buttons
+    if (e.target && e.target.closest('#active-toolbar')) return;
     isDragging = true;
     prevPointerX = e.clientX;
     prevPointerY = e.clientY;
@@ -447,21 +334,18 @@ document.addEventListener('DOMContentLoaded', async () => {
     if (isDragging) {
       const deltaX = e.clientX - prevPointerX;
       const deltaY = e.clientY - prevPointerY;
-      const moveDist = Math.abs(deltaX) + Math.abs(deltaY);
-      dragDistance += moveDist;
-      dragSpeed = Math.min(1.0, dragSpeed + moveDist * 0.0035);
+      dragDistance += Math.abs(deltaX) + Math.abs(deltaY);
 
       if (!isFocusMode) {
-        targetRotY += deltaX * 0.0032;
-        targetRotX += deltaY * 0.0024;
-        // Pitch limits so globe doesn't flip completely upside down
-        targetRotX = Math.max(-0.65, Math.min(0.65, targetRotX));
+        targetRotY += deltaX * 0.0028;
+        targetRotX += deltaY * 0.002;
+        targetRotX = Math.max(-0.25, Math.min(0.25, targetRotX));
       }
 
       prevPointerX = e.clientX;
       prevPointerY = e.clientY;
     } else if (!isFocusMode) {
-      // Raycasting for card hover
+      // Raycast to hover card
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(cardMeshes);
 
@@ -484,18 +368,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   }
 
   function onPointerUp(e) {
-    if (e.target && (e.target.closest('#active-toolbar') || e.target.closest('#halvor-viewer'))) return;
+    if (e.target && e.target.closest('#active-toolbar')) return;
     isDragging = false;
 
-    // Detect Click vs Drag
-    if (dragDistance < 7) {
+    // Click event (not a drag)
+    if (dragDistance < 8) {
       raycaster.setFromCamera(mouse, camera);
       const intersects = raycaster.intersectObjects(cardMeshes);
       if (intersects.length > 0) {
         const clickedMesh = intersects[0].object;
         if (isFocusMode && focusedMesh === clickedMesh) {
-          // Clicking already-focused card opens full Photograph Viewer
-          openViewer(clickedMesh.userData.item);
+          // Double click / re-click opens modal inspection
+          openModal(clickedMesh.userData.item);
         } else {
           focusCard(clickedMesh);
         }
@@ -521,24 +405,23 @@ document.addEventListener('DOMContentLoaded', async () => {
   }, { passive: true });
 
   // --------------------------------------------------------------------------
-  // 7. CARD FOCUS & ZOOM ANIMATION
+  // 6. FOCUS / ACTIVE FRAME MODE
   // --------------------------------------------------------------------------
   function focusCard(mesh) {
     if (!mesh) return;
     isFocusMode = true;
     focusedMesh = mesh;
 
-    // Rotate globe so target card faces straight at camera (0, 0, 1)
-    focusTargetRotY = -mesh.userData.lon;
-    focusTargetRotX = -mesh.userData.lat;
-    targetCameraZ = FOCUS_CAMERA_Z; // Zoom closer to inspect frame
+    // Calculate rotation Y to align mesh with camera view axis
+    focusTargetRotY = -mesh.userData.angle;
+    // Slight vertical tilt to center active tier
+    focusTargetRotX = -mesh.userData.y * 0.0006;
+    focusCameraZ = 330; // Smooth camera zoom closer
 
+    // Update bottom toolbar
     const item = mesh.userData.item;
-    currentActiveTitle = item.title;
-    updateClock();
-
     if (focusTitleEl) focusTitleEl.textContent = item.title;
-    if (focusCatEl) focusCatEl.textContent = `${item.cat} · ${item.year}`;
+    if (focusCatEl) focusCatEl.textContent = `${item.cat} • ${item.format} • ${item.year}`;
 
     if (instructionEl) instructionEl.classList.add('is-hidden');
     if (activeToolbar) activeToolbar.classList.add('is-active');
@@ -548,10 +431,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   function releaseFocus() {
     isFocusMode = false;
     focusedMesh = null;
-    targetCameraZ = START_CAMERA_Z; // Zoom out to full globe view!
+    focusCameraZ = 0;
     targetRotX = 0;
-    currentActiveTitle = '';
-    updateClock();
 
     if (instructionEl) instructionEl.classList.remove('is-hidden');
     if (activeToolbar) activeToolbar.classList.remove('is-active');
@@ -587,51 +468,93 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (btnView) {
     btnView.addEventListener('click', () => {
       if (focusedMesh && focusedMesh.userData.item) {
-        openViewer(focusedMesh.userData.item);
+        openModal(focusedMesh.userData.item);
       }
     });
   }
 
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      if (modalBackdrop && modalBackdrop.classList.contains('is-open')) {
+        closeModal();
+      } else if (isFocusMode) {
+        releaseFocus();
+      }
+    } else if (e.key === 'ArrowLeft' && isFocusMode) {
+      if (btnPrev) btnPrev.click();
+    } else if (e.key === 'ArrowRight' && isFocusMode) {
+      if (btnNext) btnNext.click();
+    } else if (e.key === 'Enter' && isFocusMode && (!modalBackdrop || !modalBackdrop.classList.contains('is-open'))) {
+      if (btnView) btnView.click();
+    }
+  });
+
   // --------------------------------------------------------------------------
-  // 8. FULLSCREEN PHOTOGRAPH VIEWER
+  // 7. ANIMATION RENDER LOOP
   // --------------------------------------------------------------------------
-  const viewerBackdrop = document.getElementById('halvor-viewer');
-  const viewerStage = document.getElementById('viewer-stage');
-  const viewerCounter = document.getElementById('viewer-counter');
-  const viewerClose = document.getElementById('viewer-close');
-  const viewerPrev = document.getElementById('viewer-prev');
-  const viewerNext = document.getElementById('viewer-next');
-  const viewerMetaInfo = document.getElementById('viewer-meta-info');
+  function animate() {
+    requestAnimationFrame(animate);
 
-  let currentViewerIdx = 0;
+    if (isFocusMode) {
+      // Lerp sphere smoothly to center focused frame
+      rotY += (focusTargetRotY - rotY) * 0.085;
+      rotX += (focusTargetRotX - rotX) * 0.085;
+      targetCameraZ += (focusCameraZ - targetCameraZ) * 0.085;
+    } else {
+      // Freeform inertia lerp
+      rotY += (targetRotY - rotY) * 0.075;
+      rotX += (targetRotX - rotX) * 0.075;
+      targetCameraZ += (0 - targetCameraZ) * 0.075;
 
-  function openViewer(item) {
-    if (!viewerBackdrop) return;
+      // Slow ambient drift when not dragging
+      if (!isDragging) {
+        targetRotY += 0.00035;
+      }
+    }
 
-    let targetIdx = works.findIndex(w => w.src === item.src || w.title === item.title);
-    if (targetIdx === -1) targetIdx = 0;
-    currentViewerIdx = targetIdx;
+    sphereGroup.rotation.y = rotY;
+    sphereGroup.rotation.x = rotX;
+    camera.position.z = targetCameraZ;
 
-    renderViewerItem();
-    viewerBackdrop.classList.add('is-open');
-    document.body.style.overflow = 'hidden';
+    renderer.render(scene, camera);
   }
 
-  function renderViewerItem() {
-    const item = works[currentViewerIdx];
-    if (!item) return;
+  animate();
 
-    if (viewerCounter) {
-      viewerCounter.textContent = `${currentViewerIdx + 1} / ${works.length}`;
+  function onWindowResize() {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  }
+
+  window.addEventListener('resize', onWindowResize);
+
+  // --------------------------------------------------------------------------
+  // 8. FULLSCREEN INSPECTION MODAL (4K Masterclasses, Reels & Stills)
+  // --------------------------------------------------------------------------
+  const modalBackdrop = document.getElementById('halvor-modal');
+  const modalMediaWrap = document.getElementById('modal-media-wrap');
+  const modalTitle = document.getElementById('modal-title');
+  const modalDetails = document.getElementById('modal-details');
+  const modalClose = document.getElementById('modal-close');
+
+  function openModal(item) {
+    if (!modalBackdrop) return;
+
+    if (modalTitle) modalTitle.textContent = item.title;
+    if (modalDetails) {
+      modalDetails.innerHTML = `
+        <strong>Category:</strong> ${item.cat} &bull; 
+        <strong>Format:</strong> ${item.format} &bull; 
+        <strong>Archive Year:</strong> ${item.year}<br>
+        <strong>Costume &amp; Styling:</strong> Kanchan Choudhary &bull; Visual Art Direction
+      `;
     }
 
-    if (viewerMetaInfo) {
-      viewerMetaInfo.textContent = `${item.title} · ${item.cat} · ${item.year}`;
-    }
-
-    if (viewerStage) {
+    if (modalMediaWrap) {
       if (item.videoId) {
-        viewerStage.innerHTML = `
+        modalMediaWrap.innerHTML = `
           <iframe 
             src="https://www.youtube-nocookie.com/embed/${item.videoId}?autoplay=1&rel=0" 
             title="${item.title}" 
@@ -640,7 +563,7 @@ document.addEventListener('DOMContentLoaded', async () => {
           </iframe>
         `;
       } else if (item.reelUrl) {
-        viewerStage.innerHTML = `
+        modalMediaWrap.innerHTML = `
           <iframe 
             src="${item.embedUrl || item.reelUrl + 'embed/'}" 
             title="${item.title}" 
@@ -650,112 +573,28 @@ document.addEventListener('DOMContentLoaded', async () => {
           </iframe>
         `;
       } else {
-        viewerStage.innerHTML = `
-          <img src="${item.src}" alt="${item.title}" id="viewer-active-img" />
+        modalMediaWrap.innerHTML = `
+          <img src="${item.src}" alt="${item.title}" style="width: 100%; height: 100%; object-fit: contain; border-radius: 12px; background: #000;" />
         `;
-        const imgEl = document.getElementById('viewer-active-img');
-        if (imgEl) {
-          imgEl.addEventListener('click', () => {
-            currentViewerIdx = (currentViewerIdx + 1) % works.length;
-            renderViewerItem();
-          });
-        }
       }
     }
+
+    modalBackdrop.classList.add('is-open');
+    document.body.style.overflow = 'hidden';
   }
 
-  function closeViewer() {
-    if (!viewerBackdrop) return;
-    viewerBackdrop.classList.remove('is-open');
-    if (viewerStage) viewerStage.innerHTML = '';
+  function closeModal() {
+    if (!modalBackdrop) return;
+    modalBackdrop.classList.remove('is-open');
+    if (modalMediaWrap) modalMediaWrap.innerHTML = '';
     document.body.style.overflow = '';
   }
 
-  if (viewerClose) viewerClose.addEventListener('click', closeViewer);
-
-  if (viewerPrev) {
-    viewerPrev.addEventListener('click', () => {
-      currentViewerIdx = (currentViewerIdx - 1 + works.length) % works.length;
-      renderViewerItem();
+  if (modalClose) modalClose.addEventListener('click', closeModal);
+  if (modalBackdrop) {
+    modalBackdrop.addEventListener('click', (e) => {
+      if (e.target === modalBackdrop) closeModal();
     });
   }
-
-  if (viewerNext) {
-    viewerNext.addEventListener('click', () => {
-      currentViewerIdx = (currentViewerIdx + 1) % works.length;
-      renderViewerItem();
-    });
-  }
-
-  // Keyboard Navigation
-  document.addEventListener('keydown', (e) => {
-    if (viewerBackdrop && viewerBackdrop.classList.contains('is-open')) {
-      if (e.key === 'Escape') closeViewer();
-      if (e.key === 'ArrowRight') viewerNext && viewerNext.click();
-      if (e.key === 'ArrowLeft') viewerPrev && viewerPrev.click();
-    } else if (isFocusMode) {
-      if (e.key === 'Escape') releaseFocus();
-      if (e.key === 'ArrowRight') btnNext && btnNext.click();
-      if (e.key === 'ArrowLeft') btnPrev && btnPrev.click();
-      if (e.key === 'Enter') btnView && btnView.click();
-    }
-  });
-
-  // --------------------------------------------------------------------------
-  // 9. ANIMATION RENDER LOOP WITH REAL-TIME GLOBE ORBIT & POST-PROCESSING
-  // --------------------------------------------------------------------------
-  function animate() {
-    requestAnimationFrame(animate);
-
-    // Decay drag momentum speed
-    dragSpeed *= 0.92;
-
-    if (isFocusMode) {
-      // Smooth lerp to focused card and zoom in
-      rotY += (focusTargetRotY - rotY) * 0.08;
-      rotX += (focusTargetRotX - rotX) * 0.08;
-    } else {
-      // Freeform momentum orbit
-      rotY += (targetRotY - rotY) * 0.07;
-      rotX += (targetRotX - rotX) * 0.07;
-
-      // Gentle ambient floating spin when idle
-      if (!isDragging) {
-        targetRotY += 0.0004;
-      }
-    }
-
-    camera.position.z += (targetCameraZ - camera.position.z) * 0.08;
-
-    globeGroup.rotation.y = rotY;
-    globeGroup.rotation.x = rotX;
-
-    // Post-processing dynamic motion blur
-    postMaterial.uniforms.uMotion.value = Math.min(1.0, dragSpeed * 2.0);
-
-    // 1. Render 3D Scene into RenderTarget
-    renderer.setRenderTarget(renderTarget);
-    renderer.render(scene, camera);
-
-    // 2. Render Fullscreen Quad with Chromatic Aberration Shader to Canvas
-    renderer.setRenderTarget(null);
-    renderer.render(postScene, postCamera);
-  }
-
-  animate();
-
-  function onWindowResize() {
-    const w = window.innerWidth;
-    const h = window.innerHeight;
-    const pr = Math.min(window.devicePixelRatio, 2);
-
-    camera.aspect = w / h;
-    camera.updateProjectionMatrix();
-
-    renderer.setSize(w, h);
-    renderTarget.setSize(w * pr, h * pr);
-  }
-
-  window.addEventListener('resize', onWindowResize);
 
 });
