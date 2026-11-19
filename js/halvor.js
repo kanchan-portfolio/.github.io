@@ -66,13 +66,13 @@ document.addEventListener('DOMContentLoaded', async () => {
       if (themeBtn) themeBtn.textContent = '☀ LIGHT';
       localStorage.setItem('halvor-theme', 'dark');
       if (renderer) renderer.setClearColor(0x07080a, 1);
-      if (scene) scene.fog = new THREE.Fog(0x07080a, 700, 1500);
+      if (scene) scene.fog = new THREE.Fog(0x07080a, 900, 1800);
     } else {
       document.body.classList.remove('dark-theme');
       if (themeBtn) themeBtn.textContent = '☾ DARK';
       localStorage.setItem('halvor-theme', 'light');
       if (renderer) renderer.setClearColor(0xffffff, 1);
-      if (scene) scene.fog = new THREE.Fog(0xffffff, 700, 1500);
+      if (scene) scene.fog = new THREE.Fog(0xffffff, 900, 1800);
     }
     refreshAllCardTextures();
   }
@@ -92,10 +92,10 @@ document.addEventListener('DOMContentLoaded', async () => {
 
   const scene = new THREE.Scene();
   // Atmospheric depth fog to blend back cards naturally
-  scene.fog = new THREE.Fog(isDarkTheme ? 0x07080a : 0xffffff, 700, 1500);
+  scene.fog = new THREE.Fog(isDarkTheme ? 0x07080a : 0xffffff, 900, 1800);
 
-  // Camera placed OUTSIDE the globe at Z = 860 looking AT the 3D sphere!
-  const START_CAMERA_Z = 860;
+  // Camera placed OUTSIDE the globe at Z = 1260 to show the full floating 3D ball/globe!
+  const START_CAMERA_Z = 1260;
   const FOCUS_CAMERA_Z = 490;
   let targetCameraZ = START_CAMERA_Z;
 
@@ -193,11 +193,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   const globeGroup = new THREE.Group();
   scene.add(globeGroup);
 
-  // Globe dimensions matching Halvor's exact spherical proportions
-  const GLOBE_RADIUS = 360;
-  const CARD_WIDTH = 100;
-  const CARD_HEIGHT = 135;
-  const CORNER_RADIUS = 20; // on 360x480 retina texture
+  // Globe dimensions: exactly calibrated to show the full spherical globe ball
+  const GLOBE_RADIUS = 340;
+  const CARD_WIDTH = 86;
+  const CARD_HEIGHT = 118;
+  const CORNER_RADIUS = 18; // on 344x472 retina texture
 
   /**
    * Helper: Generates a curved plane geometry that hugs the spherical curvature
